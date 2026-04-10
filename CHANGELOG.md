@@ -13,6 +13,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - About page
 - CLAUDE.md with project-specific instructions
 - REVIEW-CONVENTIONS.md for document annotation workflow
+- Custom CSS for neutral theme (black/grey palette, subtle links)
+- Theme override with noindex/nofollow meta tags and robots.txt
+- Interactive Mocks listing page for each project
 
 ### Added — Climate Nudging Project
 - Main research report with findings, design principles, and recommendations
@@ -24,3 +27,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Interactive HTML mock: Session cost ticker (running CO2 estimate with equivalences)
 - Interactive HTML mock: Personal usage dashboard (charts, tips, equivalence picker)
 - Screenshot images of all three mocks
+
+### Changed
+- Rebranded site from "AI Research — Aarhus Kommune" to "ITKdev Research"
+- Replaced green theme with neutral black/grey palette
+- Simplified navigation: sidebar-only, one project expanded at a time
+- Made about page generic for all research projects
+- Added project label at top of each document
