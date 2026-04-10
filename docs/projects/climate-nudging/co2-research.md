@@ -1,3 +1,5 @@
+<small>**Project:** Climate Awareness Nudging</small>
+
 # CO2 and Energy Estimates for LLM Inference
 
 ## Summary

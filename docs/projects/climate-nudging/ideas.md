@@ -1,4 +1,6 @@
-# Climate Awareness Nudging — Ideas
+<small>**Project:** Climate Awareness Nudging</small>
+
+# Nudge Ideas
 
 ## Core Design Principles
 

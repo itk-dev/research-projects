@@ -1,0 +1,32 @@
+/* Subtle link colors */
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #8a9bae;
+  --md-accent-fg-color: #8a9bae;
+}
+
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: #546e7a;
+  --md-accent-fg-color: #546e7a;
+}
+
+/* Tone down admonition info boxes */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: #455a64;
+}
+
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: rgba(69, 90, 100, 0.1);
+}
+
+/* Subtle buttons */
+.md-typeset .md-button {
+  border-color: #666;
+  color: #aaa;
+}
+
+.md-typeset .md-button:hover {
+  border-color: #999;
+  color: #ddd;
+}

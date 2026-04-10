@@ -1,10 +1,12 @@
+---
+title: Climate Awareness for AI Usage
+---
+
+<small>**Project:** Climate Awareness Nudging · **Status:** Draft · **Date:** April 2026</small>
+
 # Climate Awareness for AI Usage
 
 **Research, Findings, and Evaluation**
-
-**Prepared for:** AarhusAI / Aarhus Kommune
-**Date:** April 2026
-**Status:** Draft
 
 ---
 
