@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Climate Awareness — Personal Usage Dashboard Mock</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #171717;
+    color: #e0e0e0;
+    min-height: 100vh;
+  }
+
+  /* ── Mock banner ── */
+  .mock-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #2563eb;
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    z-index: 100;
+  }
+  .mock-banner strong { font-weight: 600; }
+
+  /* ── Layout ── */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 40px;
+    bottom: 0;
+    width: 260px;
+    background: #1a1a1a;
+    border-right: 1px solid #2a2a2a;
+    padding: 20px 0;
+    overflow-y: auto;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #888;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .sidebar-item:hover { background: #222; color: #ccc; }
+  .sidebar-item.active {
+    background: #252525;
+    color: #fff;
+    border-right: 2px solid #4ade80;
+  }
+  .sidebar-item .icon { font-size: 16px; width: 22px; text-align: center; }
+
+  .sidebar-section {
+    padding: 20px 20px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .main {
+    margin-left: 260px;
+    margin-top: 40px;
+    padding: 32px 40px 60px;
+    max-width: 1000px;
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    margin-bottom: 32px;
+  }
+  .page-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f0f0f0;
+    margin-bottom: 6px;
+  }
+  .page-header p {
+    font-size: 14px;
+    color: #777;
+  }
+
+  /* ── Time period tabs ── */
+  .period-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 28px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    padding: 4px;
+    width: fit-content;
+  }
+  .period-tab {
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.15s;
+  }
+  .period-tab:hover { color: #ccc; }
+  .period-tab.active {
+    background: #2a2a2a;
+    color: #fff;
+  }
+
+  /* ── Summary cards ── */
+  .summary-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .card {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .card-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #f0f0f0;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+
+  .card-sub {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+  }
+
+  .card-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    margin-top: 8px;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .card-trend.up { background: rgba(251, 146, 60, 0.12); color: #fb923c; }
+  .card-trend.down { background: rgba(34, 197, 94, 0.12); color: #4ade80; }
+  .card-trend.flat { background: rgba(150, 150, 150, 0.12); color: #999; }
+
+  /* ── Charts ── */
+  .chart-section {
+    margin-bottom: 32px;
+  }
+
+  .chart-section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+
+  .chart-container {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  /* Bar chart */
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 180px;
+    padding-top: 12px;
+  }
+
+  .bar-day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .bar {
+    width: 100%;
+    max-width: 48px;
+    border-radius: 6px 6px 2px 2px;
+    transition: height 0.5s ease;
+    position: relative;
+    cursor: default;
+  }
+  .bar:hover { opacity: 0.85; }
+
+  .bar-label {
+    font-size: 11px;
+    color: #666;
+  }
+
+  .bar-value {
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+  }
+
+  /* Spike marker */
+  .spike-warning {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(251, 146, 60, 0.08);
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    border-radius: 10px;
+    font-size: 12px;
+    color: #fb923c;
+  }
+
+  /* ── Equivalence section ── */
+  .equiv-section {
+    margin-bottom: 32px;
+  }
+
+  .equiv-card {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .equiv-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 140px;
+  }
+
+  .equiv-icons {
+    font-size: 32px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .equiv-label {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+  }
+
+  .equiv-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .equiv-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: #aaa;
+  }
+
+  .equiv-row .equiv-icon { font-size: 18px; width: 28px; text-align: center; }
+  .equiv-row .equiv-text { flex: 1; }
+  .equiv-row .equiv-val {
+    font-variant-numeric: tabular-nums;
+    color: #ccc;
+    font-weight: 500;
+  }
+
+  /* ── Model breakdown ── */
+  .model-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .model-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .model-name {
+    font-size: 13px;
+    color: #aaa;
+    width: 140px;
+    flex-shrink: 0;
+  }
+
+  .model-bar-bg {
+    flex: 1;
+    height: 24px;
+    background: #252525;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .model-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+  }
+
+  .model-pct {
+    font-size: 12px;
+    color: #888;
+    width: 48px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Tips section ── */
+  .tips-section {
+    margin-bottom: 32px;
+  }
+
+  .tip-card {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .tip-icon {
+    font-size: 20px;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .tip-content h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ddd;
+    margin-bottom: 4px;
+  }
+  .tip-content p {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.5;
+  }
+
+  /* ── Preference picker ── */
+  .pref-section {
+    margin-bottom: 32px;
+  }
+
+  .pref-card {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .pref-card p {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .pref-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .pref-option {
+    padding: 8px 16px;
+    background: #252525;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pref-option:hover { border-color: #555; color: #ddd; }
+  .pref-option.active {
+    border-color: #4ade80;
+    color: #4ade80;
+    background: rgba(34, 197, 94, 0.08);
+  }
+</style>
+</head>
+<body>
+
+<div class="mock-banner">
+  <strong>MOCK</strong> — Personal Usage Dashboard for Open WebUI
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-section">Conversations</div>
+  <div class="sidebar-item">
+    <span class="icon">💬</span> New Chat
+  </div>
+  <div class="sidebar-item">
+    <span class="icon">📁</span> All Conversations
+  </div>
+
+  <div class="sidebar-section">Settings</div>
+  <div class="sidebar-item">
+    <span class="icon">👤</span> Profile
+  </div>
+  <div class="sidebar-item">
+    <span class="icon">⚙️</span> Preferences
+  </div>
+  <div class="sidebar-item active">
+    <span class="icon">🍃</span> Climate Dashboard
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+
+  <div class="page-header">
+    <h1>🍃 Your Climate Dashboard</h1>
+    <p>Understanding your AI usage footprint — not to judge, but to inform.</p>
+  </div>
+
+  <!-- Period tabs -->
+  <div class="period-tabs">
+    <button class="period-tab active" onclick="setPeriod(this)">This week</button>
+    <button class="period-tab" onclick="setPeriod(this)">This month</button>
+    <button class="period-tab" onclick="setPeriod(this)">Last 3 months</button>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="summary-cards">
+    <div class="card">
+      <div class="card-label">Conversations</div>
+      <div class="card-value">23</div>
+      <div class="card-sub">across 5 days</div>
+      <div class="card-trend flat">→ typical</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total tokens</div>
+      <div class="card-value">48.2k</div>
+      <div class="card-sub">input + output</div>
+      <div class="card-trend up">↑ 35% vs last week</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Estimated energy</div>
+      <div class="card-value">36 Wh</div>
+      <div class="card-sub">≈ 0.036 kWh</div>
+      <div class="card-trend up">↑ 28% vs last week</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Estimated CO₂</div>
+      <div class="card-value">24g</div>
+      <div class="card-sub">EU average grid</div>
+      <div class="card-trend up">↑ 28% vs last week</div>
+    </div>
+  </div>
+
+  <!-- Daily usage chart -->
+  <div class="chart-section">
+    <h2>Daily usage</h2>
+    <div class="chart-container">
+      <div class="bar-chart" id="barChart">
+        <!-- Mon -->
+        <div class="bar-day">
+          <div class="bar-value">3.2g</div>
+          <div class="bar" style="height:28%; background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);"></div>
+          <div class="bar-label">Mon</div>
+        </div>
+        <!-- Tue -->
+        <div class="bar-day">
+          <div class="bar-value">4.8g</div>
+          <div class="bar" style="height:42%; background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);"></div>
+          <div class="bar-label">Tue</div>
+        </div>
+        <!-- Wed -->
+        <div class="bar-day">
+          <div class="bar-value">2.1g</div>
+          <div class="bar" style="height:18%; background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);"></div>
+          <div class="bar-label">Wed</div>
+        </div>
+        <!-- Thu — spike day -->
+        <div class="bar-day">
+          <div class="bar-value">11.4g</div>
+          <div class="bar" style="height:100%; background: linear-gradient(180deg, #fb923c 0%, #f97316 100%);"></div>
+          <div class="bar-label">Thu</div>
+        </div>
+        <!-- Fri -->
+        <div class="bar-day">
+          <div class="bar-value">2.7g</div>
+          <div class="bar" style="height:24%; background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);"></div>
+          <div class="bar-label">Fri</div>
+        </div>
+        <!-- Sat -->
+        <div class="bar-day">
+          <div class="bar-value">—</div>
+          <div class="bar" style="height:2%; background: #333;"></div>
+          <div class="bar-label">Sat</div>
+        </div>
+        <!-- Sun -->
+        <div class="bar-day">
+          <div class="bar-value">—</div>
+          <div class="bar" style="height:2%; background: #333;"></div>
+          <div class="bar-label">Sun</div>
+        </div>
+      </div>
+      <div class="spike-warning">
+        ⚠️ <span>Thursday was 3.5x your daily average — you had a long code generation session (8 conversations, ~18k tokens).</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Equivalences -->
+  <div class="equiv-section">
+    <h2>What does 24g CO₂ look like?</h2>
+    <div class="equiv-card">
+      <div class="equiv-visual">
+        <div class="equiv-icons">🫖🫖</div>
+        <div class="equiv-label">≈ 1.6 kettles<br>of boiling water</div>
+      </div>
+      <div class="equiv-list">
+        <div class="equiv-row">
+          <span class="equiv-icon">🫖</span>
+          <span class="equiv-text">Boiling a kettle</span>
+          <span class="equiv-val">1.6x</span>
+        </div>
+        <div class="equiv-row">
+          <span class="equiv-icon">🍞</span>
+          <span class="equiv-text">Toasting bread</span>
+          <span class="equiv-val">0.8 slices</span>
+        </div>
+        <div class="equiv-row">
+          <span class="equiv-icon">🚿</span>
+          <span class="equiv-text">Hot shower</span>
+          <span class="equiv-val">16 seconds</span>
+        </div>
+        <div class="equiv-row">
+          <span class="equiv-icon">📧</span>
+          <span class="equiv-text">Emails sent</span>
+          <span class="equiv-val">6 emails</span>
+        </div>
+        <div class="equiv-row">
+          <span class="equiv-icon">🚗</span>
+          <span class="equiv-text">Driving</span>
+          <span class="equiv-val">200 meters</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model breakdown -->
+  <div class="chart-section">
+    <h2>Usage by model</h2>
+    <div class="chart-container">
+      <div class="model-breakdown">
+        <div class="model-row">
+          <span class="model-name">llama3.1:70b</span>
+          <div class="model-bar-bg">
+            <div class="model-bar-fill" style="width:62%; background: linear-gradient(90deg, #4ade80, #22c55e);"></div>
+          </div>
+          <span class="model-pct">62%</span>
+        </div>
+        <div class="model-row">
+          <span class="model-name">llama3.1:8b</span>
+          <div class="model-bar-bg">
+            <div class="model-bar-fill" style="width:24%; background: linear-gradient(90deg, #60a5fa, #3b82f6);"></div>
+          </div>
+          <span class="model-pct">24%</span>
+        </div>
+        <div class="model-row">
+          <span class="model-name">mistral:7b</span>
+          <div class="model-bar-bg">
+            <div class="model-bar-fill" style="width:14%; background: linear-gradient(90deg, #c084fc, #a855f7);"></div>
+          </div>
+          <span class="model-pct">14%</span>
+        </div>
+      </div>
+      <div style="margin-top:14px; font-size:12px; color:#666;">
+        💡 62% of your usage was on the 70B model. For simpler questions, the 8B model uses ~7x less energy.
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="tips-section">
+    <h2>Suggestions based on your usage</h2>
+
+    <div class="tip-card">
+      <div class="tip-icon">📏</div>
+      <div class="tip-content">
+        <h4>You often request long-form output</h4>
+        <p>4 of your conversations this week generated 1000+ word responses. If bullet points work, they use ~60% less tokens. Try asking: "Give me the key points" instead of "Explain in detail."</p>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-icon">🔄</div>
+      <div class="tip-content">
+        <h4>Repeated similar questions on Thursday</h4>
+        <p>You asked 3 variations of the same coding question. Refining one conversation is more efficient than starting fresh each time.</p>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-icon">🎯</div>
+      <div class="tip-content">
+        <h4>Good use of the smaller model</h4>
+        <p>You used llama3.1:8b for quick lookups this week — that's a great fit. It used 7x less energy than the 70B model for similar results.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Equivalence preference -->
+  <div class="pref-section">
+    <h2>Choose your equivalence</h2>
+    <div class="pref-card">
+      <p>Pick the comparison that makes most sense to you. We'll use it throughout the dashboard and in session tickers.</p>
+      <div class="pref-options">
+        <button class="pref-option active" onclick="setPref(this)">🫖 Kettle boils</button>
+        <button class="pref-option" onclick="setPref(this)">🍞 Slices of toast</button>
+        <button class="pref-option" onclick="setPref(this)">🚿 Shower minutes</button>
+        <button class="pref-option" onclick="setPref(this)">📧 Emails sent</button>
+        <button class="pref-option" onclick="setPref(this)">🚗 Meters driven</button>
+        <button class="pref-option" onclick="setPref(this)">💡 LED light hours</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function setPeriod(el) {
+    document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function setPref(el) {
+    document.querySelectorAll('.pref-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
