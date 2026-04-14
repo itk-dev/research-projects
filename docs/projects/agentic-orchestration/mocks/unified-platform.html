@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Orchestration Studio — Unified Platform Mock</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f6f8;
+    color: #1a1a2e;
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── SVG icon system ── */
+  .icon-svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── Mock banner ── */
+  .mock-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #3b5bdb;
+    color: #fff;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 12px;
+    z-index: 200;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 230px;
+    background: #fff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    padding-top: 36px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-brand {
+    padding: 20px 20px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 4px;
+  }
+  .sidebar-brand small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .sidebar-section {
+    padding: 16px 20px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.12s;
+    border-left: 3px solid transparent;
+  }
+  .sidebar-item:hover {
+    background: #f8f9fb;
+    color: #333;
+  }
+  .sidebar-item.active {
+    background: #f0f3ff;
+    color: #3b5bdb;
+    border-left-color: #3b5bdb;
+    font-weight: 500;
+  }
+  .sidebar-item .badge {
+    margin-left: auto;
+    background: #3b5bdb;
+    color: #fff;
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  .sidebar-bottom {
+    margin-top: auto;
+    padding: 16px 20px;
+    border-top: 1px solid #f0f0f0;
+  }
+  .sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #666;
+  }
+  .sidebar-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e8ecf4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #666;
+    font-weight: 600;
+  }
+
+  /* ── Main area ── */
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 36px;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+  }
+  .topbar h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+  .topbar-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .topbar-search {
+    background: #f5f6f8;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 6px 12px 6px 32px;
+    color: #333;
+    font-size: 12px;
+    width: 220px;
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+  }
+  .topbar-search:focus { border-color: #3b5bdb; }
+
+  /* ── Panels ── */
+  .panel {
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+  }
+  .panel.active { display: flex; flex-direction: column; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.12s;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    color: #555;
+  }
+  .btn:hover { border-color: #ccc; color: #333; }
+  .btn.primary {
+    background: #3b5bdb;
+    border-color: #3b5bdb;
+    color: #fff;
+  }
+  .btn.primary:hover { background: #3451c7; }
+
+  /* ── Process Map panel ── */
+  .process-canvas {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 24px;
+    min-height: 400px;
+  }
+
+  /* Process list */
+  .process-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .process-list-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fafbfc;
+  }
+  .process-list-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #444;
+  }
+  .process-list-table tr:hover td {
+    background: #f8f9ff;
+  }
+  .process-list-table tr { cursor: pointer; }
+  .process-list-name {
+    font-weight: 500;
+    color: #1a1a2e;
+  }
+  .process-list-name small {
+    font-weight: 400;
+    color: #aaa;
+    margin-left: 6px;
+  }
+  .process-status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .process-status-dot.active { background: #66bb6a; }
+  .process-status-dot.draft { background: #ccc; }
+  .process-status-dot.paused { background: #ffa726; }
+
+  .process-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3b5bdb;
+    cursor: pointer;
+    margin-bottom: 16px;
+    font-family: inherit;
+    width: fit-content;
+  }
+  .process-back-btn:hover { border-color: #3b5bdb; background: #f0f3ff; }
+
+  .process-view { display: none; }
+  .process-view.active { display: block; }
+
+  .process-canvas-label {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 8px;
+  }
+
+  .bpmn-flow {
+    display: flex;
+    align-items: center;
+    padding: 50px 12px;
+    overflow-x: auto;
+  }
+
+  .bpmn-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .bpmn-shape {
+    width: 124px;
+    height: 60px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    padding: 8px;
+    line-height: 1.3;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .bpmn-shape:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .bpmn-shape.start {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #edf7ed; border: 2px solid #66bb6a; color: #66bb6a;
+  }
+  .bpmn-shape.end {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #fdecea; border: 3px solid #ef5350; color: #ef5350;
+  }
+  .bpmn-shape.task {
+    background: #f8f9fb; border: 1px solid #e0e0e0; color: #444;
+  }
+  .bpmn-shape.task.human {
+    border-color: #3b5bdb; background: #f0f3ff;
+  }
+  .bpmn-shape.task.agent {
+    border-color: #f59e0b; background: #fffbeb;
+  }
+  .bpmn-shape.task.integration {
+    border-color: #06b6d4; background: #ecfeff;
+  }
+  .bpmn-shape.gateway {
+    width: 36px; height: 36px; border-radius: 4px;
+    background: #fffbeb; border: 2px solid #f59e0b; color: #b45309;
+    transform: rotate(45deg); font-size: 13px; font-weight: 700;
+  }
+  .bpmn-shape.gateway span { transform: rotate(-45deg); display: block; }
+
+  .bpmn-type-tag {
+    font-size: 9px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .tag-human { background: #e8edff; color: #3b5bdb; }
+  .tag-agent { background: #fef3c7; color: #b45309; }
+  .tag-integration { background: #cffafe; color: #0e7490; }
+
+  .bpmn-arrow {
+    width: 36px;
+    height: 2px;
+    background: #ccc;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .bpmn-arrow::after {
+    content: '';
+    position: absolute;
+    right: -1px; top: -4px;
+    border: 5px solid transparent;
+    border-left-color: #ccc;
+  }
+
+  .process-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .process-info {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: #f8f9fb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  .process-info-item { display: flex; flex-direction: column; gap: 2px; }
+  .process-info-label { color: #999; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .process-info-value { color: #333; font-weight: 600; }
+
+  /* ── Tasks panel — Kanban ── */
+  .kanban-filters { display: flex; gap: 6px; margin-bottom: 16px; }
+  .kanban-filter {
+    padding: 5px 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    color: #888;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .kanban-filter.active { border-color: #3b5bdb; color: #3b5bdb; background: #f0f3ff; }
+
+  .kanban-board {
+    display: flex;
+    gap: 14px;
+    flex: 1;
+    overflow-x: auto;
+    align-items: flex-start;
+  }
+
+  .kanban-column {
+    min-width: 260px;
+    flex: 1;
+    background: #f0f1f3;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 180px);
+  }
+
+  .kanban-column-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .kanban-count {
+    background: #ddd;
+    color: #666;
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  .kanban-cards {
+    padding: 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+
+  .kanban-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: box-shadow 0.12s, border-color 0.12s;
+  }
+  .kanban-card:hover {
+    border-color: #3b5bdb;
+    box-shadow: 0 2px 8px rgba(59,91,219,0.08);
+  }
+
+  .kanban-card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .kanban-card-meta {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.4;
+  }
+  .kanban-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+  .kanban-tag {
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .kanban-tag.high { background: #fdecea; color: #c62828; }
+  .kanban-tag.medium { background: #fff3e0; color: #e65100; }
+  .kanban-tag.low { background: #e8f5e9; color: #2e7d32; }
+  .kanban-tag.process {
+    background: #f0f3ff;
+    color: #3b5bdb;
+  }
+  .kanban-assignee {
+    margin-left: auto;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #e8ecf4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #666;
+    font-weight: 600;
+  }
+
+  /* ── Task detail view ── */
+  .task-detail { display: none; }
+  .task-detail.active { display: flex; gap: 20px; flex: 1; }
+
+  .task-detail-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .task-detail-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .task-detail-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .task-detail-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+  .task-detail-card .task-detail-process {
+    font-size: 12px;
+    color: #3b5bdb;
+    margin-bottom: 16px;
+  }
+
+  .task-detail-section {
+    margin-bottom: 16px;
+  }
+  .task-detail-section:last-child { margin-bottom: 0; }
+  .task-detail-section h4 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .task-detail-section p {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .task-detail-field {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+  }
+  .task-detail-field:last-child { border-bottom: none; }
+  .task-detail-field-label { color: #999; }
+  .task-detail-field-value { color: #333; font-weight: 500; }
+
+  .task-detail-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .task-ai-draft {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .task-ai-draft h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+  .task-ai-draft .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #f59e0b;
+    background: #fffbeb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .task-ai-draft .draft-content {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    padding: 14px 16px;
+    background: #fafbfc;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    white-space: pre-line;
+  }
+  .task-ai-draft .draft-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .task-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 12px;
+    padding-bottom: 14px;
+    position: relative;
+  }
+  .timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 22px;
+    bottom: 0;
+    width: 1px;
+    background: #e5e7eb;
+  }
+  .timeline-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #f0f3ff;
+    border: 2px solid #e5e7eb;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-dot.done { background: #e8f5e9; border-color: #66bb6a; }
+  .timeline-dot.active { background: #f0f3ff; border-color: #3b5bdb; }
+  .timeline-content {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+  }
+  .timeline-content strong { color: #333; font-weight: 500; }
+  .timeline-content .timeline-time { color: #aaa; font-size: 11px; }
+
+  /* ── Automations panel ── */
+  .automation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .automation-card {
+    padding: 18px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.12s;
+  }
+  .automation-card:hover { border-color: #3b5bdb; }
+  .automation-name { font-size: 14px; font-weight: 500; color: #1a1a2e; }
+  .automation-desc { font-size: 12px; color: #888; margin-top: 6px; line-height: 1.5; }
+  .automation-footer {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 12px; font-size: 11px;
+  }
+  .automation-status { display: flex; align-items: center; gap: 4px; color: #66bb6a; }
+  .automation-status .dot { width: 6px; height: 6px; border-radius: 50%; background: #66bb6a; }
+  .automation-status.error .dot { background: #ef5350; }
+  .automation-status.error { color: #ef5350; }
+  .automation-runs { color: #aaa; margin-left: auto; }
+  .automation-connectors { display: flex; gap: 4px; margin-top: 10px; }
+  .connector-tag {
+    padding: 2px 8px;
+    background: #f5f6f8;
+    border-radius: 4px;
+    font-size: 10px;
+    color: #777;
+  }
+
+  /* ── Dashboard panel ── */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    padding: 18px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  .stat-label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #1a1a2e; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .stat-sub { font-size: 11px; color: #999; margin-top: 4px; }
+  .stat-trend { font-size: 11px; margin-top: 6px; }
+  .stat-trend.up { color: #66bb6a; }
+  .stat-trend.down { color: #ef5350; }
+
+  .chart-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .chart-card {
+    padding: 18px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  .chart-title { font-size: 13px; font-weight: 500; color: #888; margin-bottom: 14px; }
+
+  .mini-bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; }
+  .mini-bar {
+    flex: 1; border-radius: 3px 3px 0 0;
+    background: #3b5bdb; min-height: 4px;
+  }
+  .mini-bar.highlight { background: #f59e0b; }
+  .mini-bar.weekend { background: #e0e0e0; }
+
+  .donut-placeholder {
+    width: 120px; height: 120px; border-radius: 50%;
+    margin: 0 auto; position: relative;
+    background: conic-gradient(#3b5bdb 0% 45%, #06b6d4 45% 72%, #f59e0b 72% 88%, #66bb6a 88% 100%);
+  }
+  .donut-placeholder::after {
+    content: ''; position: absolute; inset: 0;
+    width: 84px; height: 84px; margin: auto;
+    border-radius: 50%; background: #fff;
+  }
+  .donut-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; font-size: 11px; }
+  .donut-legend-item { display: flex; align-items: center; gap: 8px; color: #777; }
+  .donut-legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── AI Assistant panel ── */
+  .assistant-container { display: flex; flex: 1; gap: 0; }
+  .assistant-chat {
+    flex: 1; display: flex; flex-direction: column;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+    overflow: hidden;
+  }
+  .assistant-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+  }
+  .assistant-messages {
+    flex: 1; padding: 20px;
+    display: flex; flex-direction: column; gap: 14px;
+    overflow-y: auto;
+  }
+  .assistant-msg {
+    max-width: 85%; padding: 12px 16px;
+    border-radius: 10px; font-size: 13px; line-height: 1.6;
+  }
+  .assistant-msg.user {
+    align-self: flex-end;
+    background: #3b5bdb; color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .assistant-msg.ai {
+    align-self: flex-start;
+    background: #f5f6f8; color: #333;
+    border: 1px solid #e5e7eb;
+    border-bottom-left-radius: 4px;
+  }
+  .assistant-msg code {
+    background: #e8ecf4; padding: 1px 5px;
+    border-radius: 3px; font-size: 12px; color: #3b5bdb;
+  }
+  .assistant-input-bar {
+    display: flex; gap: 8px; padding: 12px 16px;
+    border-top: 1px solid #f0f0f0; background: #fafbfc;
+  }
+  .assistant-input {
+    flex: 1; background: #fff; border: 1px solid #e5e7eb;
+    border-radius: 8px; padding: 8px 12px; color: #333;
+    font-size: 13px; outline: none;
+  }
+  .assistant-input::placeholder { color: #bbb; }
+  .assistant-input:focus { border-color: #3b5bdb; }
+  .assistant-send {
+    padding: 8px 16px; background: #3b5bdb; border: none;
+    border-radius: 8px; color: #fff; font-size: 12px; cursor: pointer;
+  }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.visible { display: flex; }
+
+  .modal {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px;
+    width: 520px;
+    max-width: 90vw;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .modal h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+  }
+  .modal p {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .modal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .modal-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .modal-option:hover {
+    border-color: #3b5bdb;
+    background: #f8f9ff;
+  }
+  .modal-option-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #f0f3ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #3b5bdb;
+  }
+  .modal-option-text h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+  .modal-option-text p {
+    font-size: 12px;
+    color: #999;
+    margin: 0;
+  }
+
+  .modal-close {
+    display: block;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+  }
+  .modal-close:hover { color: #666; }
+</style>
+</head>
+<body>
+
+<div class="mock-banner">
+  <strong>MOCK</strong> — Agentic Orchestration Studio: Unified Platform (Flowable + n8n + Grafana)
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-brand">
+    Orchestration Studio
+    <small>Aarhus Kommune</small>
+  </div>
+
+  <div class="sidebar-section">Overview</div>
+  <div class="sidebar-item active" onclick="showPanel('dashboard')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    Dashboard
+  </div>
+
+  <div class="sidebar-section">Processes</div>
+  <div class="sidebar-item" onclick="showPanel('processes')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12h4l2-6h4M13 12l2 6h4"/></svg>
+    Process Map
+  </div>
+  <div class="sidebar-item" onclick="showPanel('tasks')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    My Tasks
+    <span class="badge">3</span>
+  </div>
+  <div class="sidebar-item" onclick="showPanel('automations')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Automations
+  </div>
+
+  <div class="sidebar-section">Tools</div>
+  <div class="sidebar-item" onclick="showPanel('assistant')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    AI Assistant
+  </div>
+
+  <div class="sidebar-section">Admin</div>
+  <div class="sidebar-item" onclick="showPanel('operations')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    Operations
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">JP</div>
+      <div>
+        <div style="font-size:12px;color:#333;">Jesper P.</div>
+        <div style="font-size:10px;color:#999;">Process Designer</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <div class="topbar">
+    <h2 id="panelTitle">Dashboard</h2>
+    <div class="topbar-right">
+      <input class="topbar-search" placeholder="Search processes, tasks, automations..." />
+    </div>
+  </div>
+
+  <!-- ====== Process Map ====== -->
+  <div class="panel" id="panel-processes">
+    <div class="process-toolbar">
+      <button class="btn primary" onclick="openModal('process')">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M12 5v14M5 12h14"/></svg>
+        New Process
+      </button>
+      <button class="btn">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        Import BPMN
+      </button>
+      <button class="btn">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Export
+      </button>
+    </div>
+
+    <!-- Process list view -->
+    <div class="process-view active" id="process-list-view">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <table class="process-list-table">
+          <thead>
+            <tr>
+              <th>Process</th>
+              <th>Status</th>
+              <th>Running</th>
+              <th>Completed (month)</th>
+              <th>Avg time</th>
+              <th>Waiting</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="openProcess('parking')">
+              <td><span class="process-list-name">Parking Complaint Handling<small>v2.1</small></span></td>
+              <td><span class="process-status-dot active"></span>Active</td>
+              <td>12</td>
+              <td>87</td>
+              <td>2.4 days</td>
+              <td style="color:#f59e0b;">4</td>
+            </tr>
+            <tr onclick="openProcess('onboarding')">
+              <td><span class="process-list-name">Employee Onboarding<small>v1.3</small></span></td>
+              <td><span class="process-status-dot active"></span>Active</td>
+              <td>3</td>
+              <td>22</td>
+              <td>4.8 days</td>
+              <td style="color:#f59e0b;">2</td>
+            </tr>
+            <tr>
+              <td><span class="process-list-name">Building Permit Processing<small>v3.0</small></span></td>
+              <td><span class="process-status-dot active"></span>Active</td>
+              <td>8</td>
+              <td>134</td>
+              <td>6.2 days</td>
+              <td style="color:#f59e0b;">5</td>
+            </tr>
+            <tr>
+              <td><span class="process-list-name">Invoice Approval<small>v1.1</small></span></td>
+              <td><span class="process-status-dot active"></span>Active</td>
+              <td>24</td>
+              <td>312</td>
+              <td>1.1 days</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="process-list-name">GDPR Data Request<small>v2.0</small></span></td>
+              <td><span class="process-status-dot active"></span>Active</td>
+              <td>1</td>
+              <td>8</td>
+              <td>3.5 days</td>
+              <td style="color:#f59e0b;">1</td>
+            </tr>
+            <tr>
+              <td><span class="process-list-name">Citizen Address Change<small>v1.0</small></span></td>
+              <td><span class="process-status-dot paused"></span>Paused</td>
+              <td>0</td>
+              <td>45</td>
+              <td>0.5 days</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="process-list-name">IT Equipment Request<small>v0.2</small></span></td>
+              <td><span class="process-status-dot draft"></span>Draft</td>
+              <td>0</td>
+              <td>0</td>
+              <td>—</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Process detail: Parking Complaint -->
+    <div class="process-view" id="process-parking">
+      <button class="process-back-btn" onclick="backToList()">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All processes
+      </button>
+      <div class="process-canvas">
+        <div class="process-canvas-label">Parking Complaint Handling — v2.1 (Active)</div>
+        <div class="bpmn-flow">
+          <div class="bpmn-node">
+            <div class="bpmn-shape start">
+              <svg class="icon-svg" viewBox="0 0 24 24" style="width:16px;height:16px;color:#66bb6a;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div style="font-size:10px;color:#999;">Form submitted</div>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task agent">AI: Classify complaint</div>
+            <span class="bpmn-type-tag tag-agent">Agent</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape gateway"><span>X</span></div>
+            <div style="font-size:10px;color:#999;">Severity</div>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task integration">Fetch case from SBSYS</div>
+            <span class="bpmn-type-tag tag-integration">n8n</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task human">Review &amp; decide</div>
+            <span class="bpmn-type-tag tag-human">Human task</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task agent">AI: Draft response</div>
+            <span class="bpmn-type-tag tag-agent">Agent</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task human">Approve response</div>
+            <span class="bpmn-type-tag tag-human">Human task</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task integration">Send via Digital Post</div>
+            <span class="bpmn-type-tag tag-integration">n8n</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape end">
+              <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;color:#ef5350;"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+            </div>
+            <div style="font-size:10px;color:#999;">Closed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-info">
+        <div class="process-info-item">
+          <span class="process-info-label">Status</span>
+          <span class="process-info-value" style="color:#66bb6a;">Active</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Running instances</span>
+          <span class="process-info-value">12</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Avg completion</span>
+          <span class="process-info-value">2.4 days</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Waiting for human</span>
+          <span class="process-info-value" style="color:#f59e0b;">4</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Dependencies</span>
+          <span class="process-info-value">SBSYS, Digital Post, OS2Forms</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Est. time saved / case</span>
+          <span class="process-info-value">45 min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process detail: Employee Onboarding -->
+    <div class="process-view" id="process-onboarding">
+      <button class="process-back-btn" onclick="backToList()">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All processes
+      </button>
+      <div class="process-canvas">
+        <div class="process-canvas-label">Employee Onboarding — v1.3 (Active)</div>
+        <div class="bpmn-flow">
+          <div class="bpmn-node">
+            <div class="bpmn-shape start">
+              <svg class="icon-svg" viewBox="0 0 24 24" style="width:16px;height:16px;color:#66bb6a;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div style="font-size:10px;color:#999;">Manager request</div>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task human">Fill onboarding form</div>
+            <span class="bpmn-type-tag tag-human">Human task</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task human">HR approves hire</div>
+            <span class="bpmn-type-tag tag-human">Human task</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task integration">Create AD account</div>
+            <span class="bpmn-type-tag tag-integration">n8n</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task integration">Provision equipment</div>
+            <span class="bpmn-type-tag tag-integration">n8n</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task agent">AI: Generate welcome pack</div>
+            <span class="bpmn-type-tag tag-agent">Agent</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape gateway"><span>X</span></div>
+            <div style="font-size:10px;color:#999;">Role type</div>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task integration">Assign system access</div>
+            <span class="bpmn-type-tag tag-integration">n8n</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task human">Manager confirms ready</div>
+            <span class="bpmn-type-tag tag-human">Human task</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape task integration">Send welcome email</div>
+            <span class="bpmn-type-tag tag-integration">n8n</span>
+          </div>
+          <div class="bpmn-arrow"></div>
+          <div class="bpmn-node">
+            <div class="bpmn-shape end">
+              <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;color:#ef5350;"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+            </div>
+            <div style="font-size:10px;color:#999;">Onboarded</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-info">
+        <div class="process-info-item">
+          <span class="process-info-label">Status</span>
+          <span class="process-info-value" style="color:#66bb6a;">Active</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Running instances</span>
+          <span class="process-info-value">3</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Avg completion</span>
+          <span class="process-info-value">4.8 days</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Waiting for human</span>
+          <span class="process-info-value" style="color:#f59e0b;">2</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Dependencies</span>
+          <span class="process-info-value">AD / Entra ID, KMD, Email</span>
+        </div>
+        <div class="process-info-item">
+          <span class="process-info-label">Est. time saved / hire</span>
+          <span class="process-info-value">3.5 hours</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Tasks (Kanban) ====== -->
+  <div class="panel" id="panel-tasks">
+    <div class="kanban-filters">
+      <button class="kanban-filter active">My tasks</button>
+      <button class="kanban-filter">All open</button>
+      <button class="kanban-filter">All processes</button>
+    </div>
+
+    <div class="kanban-board">
+      <!-- New -->
+      <div class="kanban-column">
+        <div class="kanban-column-header">
+          New
+          <span class="kanban-count">3</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card">
+            <div class="kanban-card-title">Review parking complaint — N&oslash;rregade 12</div>
+            <div class="kanban-card-meta">High severity &middot; Received 2h ago</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag high">High</span>
+              <span class="kanban-tag process">Parking Complaint</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">Verify address data — Batch import #89</div>
+            <div class="kanban-card-meta">340 records to validate &middot; Received 5h ago</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag low">Low</span>
+              <span class="kanban-tag process">Address Validation</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">HR approval — New hire, Parks Dept.</div>
+            <div class="kanban-card-meta">Manager submitted onboarding form &middot; 1h ago</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag medium">Medium</span>
+              <span class="kanban-tag process">Employee Onboarding</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In Progress -->
+      <div class="kanban-column">
+        <div class="kanban-column-header">
+          In Progress
+          <span class="kanban-count">2</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card" onclick="openTaskDetail()">
+            <div class="kanban-card-title">Approve response — Building permit #4421</div>
+            <div class="kanban-card-meta">AI draft ready for review &middot; Started 30 min ago</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag medium">Medium</span>
+              <span class="kanban-tag process">Building Permit</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">Review GDPR data export request</div>
+            <div class="kanban-card-meta">Citizen data package generated &middot; Needs verification</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag high">High</span>
+              <span class="kanban-tag process">GDPR Request</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Waiting -->
+      <div class="kanban-column">
+        <div class="kanban-column-header">
+          Waiting
+          <span class="kanban-count">2</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card">
+            <div class="kanban-card-title">Confirm equipment ready — New hire IT Dept.</div>
+            <div class="kanban-card-meta">Waiting for IT to provision laptop &middot; 2 days</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag low">Low</span>
+              <span class="kanban-tag process">Employee Onboarding</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">Parking complaint — Awaiting site inspection</div>
+            <div class="kanban-card-meta">External team scheduled for Thursday</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag medium">Medium</span>
+              <span class="kanban-tag process">Parking Complaint</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Done -->
+      <div class="kanban-column">
+        <div class="kanban-column-header">
+          Done
+          <span class="kanban-count">4</span>
+        </div>
+        <div class="kanban-cards">
+          <div class="kanban-card" style="opacity:0.6;">
+            <div class="kanban-card-title">Approve response — Parking #3318</div>
+            <div class="kanban-card-meta">Completed today &middot; Sent via Digital Post</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag process">Parking Complaint</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+          <div class="kanban-card" style="opacity:0.6;">
+            <div class="kanban-card-title">Invoice approval — KMD batch #221</div>
+            <div class="kanban-card-meta">Completed yesterday &middot; 12 invoices approved</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag process">Invoice Approval</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+          <div class="kanban-card" style="opacity:0.6;">
+            <div class="kanban-card-title">Onboarding complete — M. Hansen, Libraries</div>
+            <div class="kanban-card-meta">Completed 2 days ago &middot; Welcome email sent</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag process">Employee Onboarding</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+          <div class="kanban-card" style="opacity:0.6;">
+            <div class="kanban-card-title">Address change — Batch #87 verified</div>
+            <div class="kanban-card-meta">Completed 3 days ago &middot; 280 records</div>
+            <div class="kanban-card-footer">
+              <span class="kanban-tag process">Address Validation</span>
+              <span class="kanban-assignee">JP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task detail view -->
+    <div class="task-detail" id="task-detail-view">
+      <div class="task-detail-main">
+        <button class="process-back-btn" onclick="backToKanban()">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          My Tasks
+        </button>
+
+        <div class="task-detail-card">
+          <h3>Approve response — Building permit #4421</h3>
+          <div class="task-detail-process">Building Permit Processing &middot; Step 6 of 8</div>
+
+          <div class="task-detail-section">
+            <h4>Context</h4>
+            <p>
+              Citizen Lars M. submitted a building permit application for a carport at Skanderborgvej 42. The application has been reviewed by the AI agent, which classified it as a standard residential permit (category B). The case has been matched to the property in KMD and validated against local zoning rules. An AI-drafted response is ready for your approval below.
+            </p>
+          </div>
+
+          <div class="task-detail-section">
+            <h4>AI-Drafted Response</h4>
+          </div>
+        </div>
+
+        <div class="task-ai-draft">
+          <h4>Response to citizen</h4>
+          <span class="ai-badge">
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:12px;height:12px;"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+            AI-generated draft
+          </span>
+          <div class="draft-content">K&aelig;re Lars M.,
+
+Tak for din ans&oslash;gning om byggetilladelse til opf&oslash;relse af carport p&aring; ejendommen Skanderborgvej 42, 8260 Viby J.
+
+Vi har gennemg&aring;et ans&oslash;gningen i henhold til BR18 og lokalplan 1082. Projektet opfylder kravene til afstandsforhold, bebyggelsesprocent og h&oslash;jde.
+
+Din byggetilladelse er hermed godkendt med f&oslash;lgende vilk&aring;r:
+- Byggeriet skal p&aring;begyndes inden 1 &aring;r
+- F&aelig;rdigmelding skal indsendes ved afslutning
+- Byggeriet skal udf&oslash;res i overensstemmelse med det indsendte materiale
+
+Med venlig hilsen
+Byggesagsafdelingen, Aarhus Kommune</div>
+          <div class="draft-actions">
+            <button class="btn primary">Approve &amp; send</button>
+            <button class="btn">Edit draft</button>
+            <button class="btn">Regenerate</button>
+            <button class="btn" style="color:#ef5350;border-color:#ef5350;">Reject</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-detail-sidebar">
+        <div class="task-detail-card">
+          <div class="task-detail-section">
+            <h4>Details</h4>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">Status</span>
+              <span class="task-detail-field-value" style="color:#3b5bdb;">In Progress</span>
+            </div>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">Priority</span>
+              <span class="task-detail-field-value">Medium</span>
+            </div>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">Assigned to</span>
+              <span class="task-detail-field-value">Jesper P.</span>
+            </div>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">Process</span>
+              <span class="task-detail-field-value" style="color:#3b5bdb;cursor:pointer;">Building Permit #4421</span>
+            </div>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">Created</span>
+              <span class="task-detail-field-value">Today, 09:42</span>
+            </div>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">SLA</span>
+              <span class="task-detail-field-value">48h (26h remaining)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-detail-card">
+          <div class="task-detail-section">
+            <h4>Linked systems</h4>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">KMD property</span>
+              <span class="task-detail-field-value" style="color:#3b5bdb;cursor:pointer;">SKB-42-001</span>
+            </div>
+            <div class="task-detail-field">
+              <span class="task-detail-field-label">SBSYS case</span>
+              <span class="task-detail-field-value" style="color:#3b5bdb;cursor:pointer;">2026-04421</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-detail-card">
+          <div class="task-detail-section">
+            <h4>Process timeline</h4>
+            <div class="task-timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot done">
+                  <svg class="icon-svg" viewBox="0 0 24 24" style="width:10px;height:10px;color:#66bb6a;"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <div class="timeline-content">
+                  <strong>Form submitted</strong><br>
+                  <span class="timeline-time">Yesterday, 14:15</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot done">
+                  <svg class="icon-svg" viewBox="0 0 24 24" style="width:10px;height:10px;color:#66bb6a;"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <div class="timeline-content">
+                  <strong>AI classified</strong> — Standard residential (B)<br>
+                  <span class="timeline-time">Yesterday, 14:15</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot done">
+                  <svg class="icon-svg" viewBox="0 0 24 24" style="width:10px;height:10px;color:#66bb6a;"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <div class="timeline-content">
+                  <strong>Zoning check</strong> — Passed<br>
+                  <span class="timeline-time">Yesterday, 14:16</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot done">
+                  <svg class="icon-svg" viewBox="0 0 24 24" style="width:10px;height:10px;color:#66bb6a;"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <div class="timeline-content">
+                  <strong>KMD property matched</strong><br>
+                  <span class="timeline-time">Yesterday, 14:16</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot done">
+                  <svg class="icon-svg" viewBox="0 0 24 24" style="width:10px;height:10px;color:#66bb6a;"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <div class="timeline-content">
+                  <strong>AI drafted response</strong><br>
+                  <span class="timeline-time">Yesterday, 14:17</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot active"></div>
+                <div class="timeline-content">
+                  <strong>Awaiting your approval</strong><br>
+                  <span class="timeline-time">Now</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Automations ====== -->
+  <div class="panel" id="panel-automations">
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button class="btn primary" onclick="openModal('automation')">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M12 5v14M5 12h14"/></svg>
+        New Automation
+      </button>
+      <button class="btn">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        Import
+      </button>
+    </div>
+    <div class="automation-grid">
+      <div class="automation-card">
+        <div class="automation-name">OS2Forms → SBSYS Case Creation</div>
+        <div class="automation-desc">When a form is submitted in OS2Forms, create a case in SBSYS and attach the form data.</div>
+        <div class="automation-connectors">
+          <span class="connector-tag">OS2Forms</span>
+          <span class="connector-tag">SBSYS</span>
+          <span class="connector-tag">Email</span>
+        </div>
+        <div class="automation-footer">
+          <div class="automation-status"><span class="dot"></span> Active</div>
+          <span class="automation-runs">1,247 runs this month</span>
+        </div>
+      </div>
+      <div class="automation-card">
+        <div class="automation-name">Digital Post Dispatch</div>
+        <div class="automation-desc">Send approved responses to citizens via Digital Post. Handles formatting, attachments, and delivery confirmation.</div>
+        <div class="automation-connectors">
+          <span class="connector-tag">Digital Post</span>
+          <span class="connector-tag">SBSYS</span>
+        </div>
+        <div class="automation-footer">
+          <div class="automation-status"><span class="dot"></span> Active</div>
+          <span class="automation-runs">892 runs this month</span>
+        </div>
+      </div>
+      <div class="automation-card">
+        <div class="automation-name">KMD Invoice Reconciliation</div>
+        <div class="automation-desc">Daily reconciliation of invoices between KMD Finance and internal tracking. Flags discrepancies.</div>
+        <div class="automation-connectors">
+          <span class="connector-tag">KMD</span>
+          <span class="connector-tag">PostgreSQL</span>
+          <span class="connector-tag">Slack</span>
+        </div>
+        <div class="automation-footer">
+          <div class="automation-status error"><span class="dot"></span> Error</div>
+          <span class="automation-runs">28 runs &middot; 2 failed</span>
+        </div>
+      </div>
+      <div class="automation-card">
+        <div class="automation-name">Address Validation Batch</div>
+        <div class="automation-desc">Validates citizen addresses against DAWA and enriches records with municipality codes.</div>
+        <div class="automation-connectors">
+          <span class="connector-tag">DAWA API</span>
+          <span class="connector-tag">PostgreSQL</span>
+        </div>
+        <div class="automation-footer">
+          <div class="automation-status"><span class="dot"></span> Active</div>
+          <span class="automation-runs">3 runs this week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Dashboard ====== -->
+  <div class="panel active" id="panel-dashboard">
+    <div class="dashboard-grid">
+      <div class="stat-card">
+        <div class="stat-label">Active processes</div>
+        <div class="stat-value">47</div>
+        <div class="stat-sub">across 8 process types</div>
+        <div class="stat-trend up">↑ 12% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Completed this month</div>
+        <div class="stat-value">312</div>
+        <div class="stat-sub">avg 2.1 days to complete</div>
+        <div class="stat-trend up">↑ 8% faster</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Hours saved</div>
+        <div class="stat-value">234h</div>
+        <div class="stat-sub">approx 6.5 FTE this month</div>
+        <div class="stat-trend up">↑ 18% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pending human tasks</div>
+        <div class="stat-value">14</div>
+        <div class="stat-sub">avg wait: 3.2 hours</div>
+        <div class="stat-trend down">↓ 2h longer than target</div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Process completions per day (last 14 days)</div>
+        <div class="mini-bars">
+          <div class="mini-bar" style="height:45%"></div>
+          <div class="mini-bar" style="height:62%"></div>
+          <div class="mini-bar" style="height:38%"></div>
+          <div class="mini-bar" style="height:71%"></div>
+          <div class="mini-bar" style="height:55%"></div>
+          <div class="mini-bar weekend" style="height:12%"></div>
+          <div class="mini-bar weekend" style="height:8%"></div>
+          <div class="mini-bar" style="height:48%"></div>
+          <div class="mini-bar" style="height:85%"></div>
+          <div class="mini-bar highlight" style="height:100%"></div>
+          <div class="mini-bar" style="height:60%"></div>
+          <div class="mini-bar" style="height:52%"></div>
+          <div class="mini-bar weekend" style="height:15%"></div>
+          <div class="mini-bar weekend" style="height:10%"></div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">By automation type</div>
+        <div class="donut-placeholder"></div>
+        <div class="donut-legend">
+          <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#3b5bdb"></div> Human tasks (45%)</div>
+          <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#06b6d4"></div> Integrations (27%)</div>
+          <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#f59e0b"></div> AI agents (16%)</div>
+          <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#66bb6a"></div> Automated (12%)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== AI Assistant ====== -->
+  <div class="panel" id="panel-assistant">
+    <div class="assistant-container">
+      <div class="assistant-chat">
+        <div class="assistant-header">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:6px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          General assistant — ask about processes, automations, or platform capabilities
+        </div>
+        <div class="assistant-messages">
+          <div class="assistant-msg ai">
+            Welcome! I can help you get started. Here are some things I can do:
+            <br><br>
+            &bull; Explain how a process or automation works<br>
+            &bull; Help you decide between a process or an automation for your use case<br>
+            &bull; Suggest optimizations based on your current dashboard data<br>
+            &bull; Answer questions about available integrations and connectors
+            <br><br>
+            To create a new process or automation, use the buttons in those sections — I'll be there to help with AI-assisted drafting if you choose it.
+          </div>
+          <div class="assistant-msg user">
+            What's the difference between creating a process and an automation?
+          </div>
+          <div class="assistant-msg ai">
+            Good question. A <strong>process</strong> is a multi-step flow that may involve humans, AI agents, and integrations — think of it as the full end-to-end workflow (e.g., handling a complaint from submission to resolution). It's modeled in BPMN and managed by the process engine.
+            <br><br>
+            An <strong>automation</strong> is a technical integration between systems — it moves data, triggers actions, or connects APIs. Automations are the building blocks that processes use. For example, "fetch case from SBSYS" is an automation; "handle parking complaint" is a process that uses that automation.
+            <br><br>
+            If you're unsure which to create, click <strong>+ New Process</strong> or <strong>+ New Automation</strong> and choose "Chat about it" — I'll help you figure out the right approach.
+          </div>
+        </div>
+        <div class="assistant-input-bar">
+          <input class="assistant-input" placeholder="Ask a question about the platform..." />
+          <button class="assistant-send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Operations (Grafana-style) ====== -->
+  <div class="panel" id="panel-operations">
+    <div style="margin-bottom:16px;">
+      <p style="font-size:13px;color:#888;line-height:1.6;max-width:640px;">
+        Operational monitoring for IT administrators. In production, this view links to Grafana dashboards powered by OpenTelemetry metrics and PostgreSQL process data.
+      </p>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="stat-card">
+        <div class="stat-label">Flowable engine</div>
+        <div class="stat-value" style="color:#66bb6a;font-size:20px;">Healthy</div>
+        <div class="stat-sub">Uptime: 34 days</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">n8n workers</div>
+        <div class="stat-value" style="color:#66bb6a;font-size:20px;">3/3 running</div>
+        <div class="stat-sub">Queue depth: 2</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">PostgreSQL</div>
+        <div class="stat-value" style="color:#66bb6a;font-size:20px;">Healthy</div>
+        <div class="stat-sub">Connections: 24/100</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Alerts (24h)</div>
+        <div class="stat-value" style="color:#ffa726;font-size:20px;">1 warning</div>
+        <div class="stat-sub">0 critical</div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">API response time (p95, last 24h)</div>
+        <div class="mini-bars">
+          <div class="mini-bar" style="height:20%"></div>
+          <div class="mini-bar" style="height:22%"></div>
+          <div class="mini-bar" style="height:18%"></div>
+          <div class="mini-bar" style="height:25%"></div>
+          <div class="mini-bar" style="height:21%"></div>
+          <div class="mini-bar" style="height:24%"></div>
+          <div class="mini-bar" style="height:19%"></div>
+          <div class="mini-bar" style="height:23%"></div>
+          <div class="mini-bar" style="height:20%"></div>
+          <div class="mini-bar" style="height:22%"></div>
+          <div class="mini-bar" style="height:18%"></div>
+          <div class="mini-bar highlight" style="height:55%"></div>
+          <div class="mini-bar" style="height:30%"></div>
+          <div class="mini-bar" style="height:22%"></div>
+          <div class="mini-bar" style="height:20%"></div>
+          <div class="mini-bar" style="height:19%"></div>
+          <div class="mini-bar" style="height:21%"></div>
+          <div class="mini-bar" style="height:23%"></div>
+          <div class="mini-bar" style="height:20%"></div>
+          <div class="mini-bar" style="height:22%"></div>
+          <div class="mini-bar" style="height:18%"></div>
+          <div class="mini-bar" style="height:20%"></div>
+          <div class="mini-bar" style="height:22%"></div>
+          <div class="mini-bar" style="height:21%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-top:6px;">
+          <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>Now</span>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Errors by component</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+          <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+            <span style="color:#999;width:60px;">n8n</span>
+            <div style="flex:1;height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden;">
+              <div style="width:18%;height:100%;background:#ffa726;border-radius:4px;"></div>
+            </div>
+            <span style="color:#ffa726;font-weight:500;width:24px;text-align:right;">2</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+            <span style="color:#999;width:60px;">Flowable</span>
+            <div style="flex:1;height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden;">
+              <div style="width:0%;height:100%;background:#66bb6a;border-radius:4px;"></div>
+            </div>
+            <span style="color:#66bb6a;font-weight:500;width:24px;text-align:right;">0</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+            <span style="color:#999;width:60px;">Postgres</span>
+            <div style="flex:1;height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden;">
+              <div style="width:0%;height:100%;background:#66bb6a;border-radius:4px;"></div>
+            </div>
+            <span style="color:#66bb6a;font-weight:500;width:24px;text-align:right;">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:18px;">
+      <div class="chart-title">Recent alerts</div>
+      <table class="process-list-table" style="margin-top:8px;">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Severity</th>
+            <th>Component</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#999;white-space:nowrap;">Today, 11:42</td>
+            <td><span class="kanban-tag medium">Warning</span></td>
+            <td>n8n</td>
+            <td>KMD Invoice Reconciliation failed — connection timeout (retry scheduled)</td>
+          </tr>
+          <tr>
+            <td style="color:#999;white-space:nowrap;">Yesterday, 22:15</td>
+            <td><span class="kanban-tag low" style="background:#e8f5e9;color:#2e7d32;">Resolved</span></td>
+            <td>PostgreSQL</td>
+            <td>Connection pool at 85% — auto-scaled, now at 24%</td>
+          </tr>
+          <tr>
+            <td style="color:#999;white-space:nowrap;">Apr 7, 09:30</td>
+            <td><span class="kanban-tag low" style="background:#e8f5e9;color:#2e7d32;">Resolved</span></td>
+            <td>Flowable</td>
+            <td>Async job executor backlog exceeded threshold — cleared within 5 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:16px;">
+      <a href="#" class="btn" style="text-decoration:none;">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        Open full Grafana dashboard
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ====== New Process Modal ====== -->
+<div class="modal-overlay" id="modal-process">
+  <div class="modal">
+    <h3>New Process</h3>
+    <p>How would you like to create your process?</p>
+    <div class="modal-options">
+      <div class="modal-option" onclick="closeModal('process')">
+        <div class="modal-option-icon">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>Design manually</h4>
+          <p>Open the BPMN editor and build your process flow step by step.</p>
+        </div>
+      </div>
+      <div class="modal-option" onclick="closeModal('process')">
+        <div class="modal-option-icon">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>AI-assisted draft</h4>
+          <p>Describe what you need in plain language. The AI will generate a process draft for you to review and refine.</p>
+        </div>
+      </div>
+      <div class="modal-option" onclick="closeModal('process'); showPanel2('assistant');">
+        <div class="modal-option-icon">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>Chat about it</h4>
+          <p>Not sure yet? Talk to the AI assistant to explore your needs and figure out the best approach.</p>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close" onclick="closeModal('process')">Cancel</button>
+  </div>
+</div>
+
+<!-- ====== New Automation Modal ====== -->
+<div class="modal-overlay" id="modal-automation">
+  <div class="modal">
+    <h3>New Automation</h3>
+    <p>How would you like to create your automation?</p>
+    <div class="modal-options">
+      <div class="modal-option" onclick="closeModal('automation')">
+        <div class="modal-option-icon">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>Build manually</h4>
+          <p>Open the automation editor and connect systems step by step.</p>
+        </div>
+      </div>
+      <div class="modal-option" onclick="closeModal('automation')">
+        <div class="modal-option-icon">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>AI-assisted draft</h4>
+          <p>Describe what systems you need to connect and what should happen. The AI will draft the automation.</p>
+        </div>
+      </div>
+      <div class="modal-option" onclick="closeModal('automation'); showPanel2('assistant');">
+        <div class="modal-option-icon">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>Chat about it</h4>
+          <p>Unsure what kind of automation you need? Talk it through with the AI assistant first.</p>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close" onclick="closeModal('automation')">Cancel</button>
+  </div>
+</div>
+
+<script>
+  function showPanel(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+    const titles = {
+      processes: 'Process Map',
+      tasks: 'My Tasks',
+      automations: 'Automations',
+      dashboard: 'Dashboard',
+      assistant: 'AI Assistant',
+      operations: 'Operations'
+    };
+    document.getElementById('panelTitle').textContent = titles[name] || name;
+  }
+
+  function showPanel2(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    // Find and activate the correct sidebar item
+    document.querySelectorAll('.sidebar-item').forEach(i => {
+      if (i.textContent.trim().replace(/\d/g,'').trim() === {
+        processes: 'Process Map',
+        tasks: 'My Tasks',
+        automations: 'Automations',
+        dashboard: 'Dashboard',
+        assistant: 'AI Assistant'
+      }[name]) i.classList.add('active');
+    });
+    const titles = {
+      processes: 'Process Map',
+      tasks: 'My Tasks',
+      automations: 'Automations',
+      dashboard: 'Dashboard',
+      assistant: 'AI Assistant',
+      operations: 'Operations'
+    };
+    document.getElementById('panelTitle').textContent = titles[name] || name;
+  }
+
+  function openTaskDetail() {
+    document.querySelector('.kanban-board').style.display = 'none';
+    document.querySelector('.kanban-filters').style.display = 'none';
+    document.getElementById('task-detail-view').classList.add('active');
+  }
+
+  function backToKanban() {
+    document.getElementById('task-detail-view').classList.remove('active');
+    document.querySelector('.kanban-board').style.display = 'flex';
+    document.querySelector('.kanban-filters').style.display = 'flex';
+  }
+
+  function openProcess(name) {
+    document.querySelectorAll('.process-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('process-' + name).classList.add('active');
+  }
+
+  function backToList() {
+    document.querySelectorAll('.process-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('process-list-view').classList.add('active');
+  }
+
+  function openModal(type) {
+    document.getElementById('modal-' + type).classList.add('visible');
+  }
+
+  function closeModal(type) {
+    document.getElementById('modal-' + type).classList.remove('visible');
+  }
+
+  // Close modal on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('visible');
+    });
+  });
+</script>
+</body>
+</html>
