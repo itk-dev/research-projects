@@ -21,3 +21,16 @@ This project explores nudging strategies, UI concepts, CO2 estimates, and integr
 - [Interactive UI mocks](projects/climate-nudging/index.md#ui-concepts-and-mocks) (leaf indicator, session ticker, usage dashboard)
 - [Technical integration analysis](projects/climate-nudging/integration.md) for Open WebUI, Claude Code, and API layers
 - [Guidance to hosting providers](projects/climate-nudging/co2-research.md#5-guidance-to-hosting-providers) on data transparency
+
+---
+
+### [Lønforhandlingssystem](projects/salary-negotiation/index.md)
+
+**Status:** Pitch | **Started:** April 2026
+
+Kan vi erstatte Excel-baseret lønforhandling med et struktureret system der trækker data direkte fra SD Løn og FK Organisation, beregner tillæg automatisk, og sikrer fuld sporbarhed i godkendelsesprocessen?
+
+**Key deliverables:**
+
+- [Pitch og løsningsbeskrivelse](projects/salary-negotiation/index.md) — problem, løsning, integrationer og tekniske forudsætninger
+- [Interaktiv prototype](projects/salary-negotiation/mocks.md) — personaleleder, HR-behandling og chefgodkendelse
