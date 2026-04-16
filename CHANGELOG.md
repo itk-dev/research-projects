@@ -28,6 +28,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Interactive HTML mock: Personal usage dashboard (charts, tips, equivalence picker)
 - Screenshot images of all three mocks
 
+### Added — Lønforhandlingssystem Project
+- Pitch document with problem statement, solution overview, user roles, integrations (SD Løn, FK Organisation), technical prerequisites (API, OIDC, datalimiter), and benefits
+- Interactive HTML mock: Salary negotiation workflow with three tabs (personaleleder, HR-behandling, chefgodkendelse)
+- Mocks listing page
+
 ### Changed
 - Rebranded site from "AI Research — Aarhus Kommune" to "ITKdev Research"
 - Replaced green theme with neutral black/grey palette

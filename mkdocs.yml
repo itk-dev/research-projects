@@ -34,6 +34,9 @@ nav:
       - CO2 Research: projects/climate-nudging/co2-research.md
       - Integration Points: projects/climate-nudging/integration.md
       - Interactive Mocks: projects/climate-nudging/mocks.md
+  - Lønforhandlingssystem:
+      - Overview: projects/salary-negotiation/index.md
+      - Interactive Mocks: projects/salary-negotiation/mocks.md
   - About: about.md
 
 markdown_extensions:

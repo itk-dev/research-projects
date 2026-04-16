@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lønforhandlingssystem — Mock</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fb;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    /* Mock banner */
+    .mock-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fef9e7;
+      color: #666;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 12px;
+      z-index: 1000;
+      letter-spacing: 0.3px;
+      border-bottom: 1px solid #f0e6c0;
+    }
+
+    /* App layout */
+    .app-layout {
+      display: flex;
+      height: 100%;
+      padding-top: 32px; /* mock banner height */
+    }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar {
+      width: 240px;
+      min-width: 240px;
+      background: #fff;
+      border-right: 1px solid #e8e8e8;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: width 0.2s, min-width 0.2s;
+      overflow: hidden;
+    }
+
+    .sidebar.collapsed {
+      width: 56px;
+      min-width: 56px;
+    }
+
+    .sidebar.collapsed .sidebar-logo span,
+    .sidebar.collapsed .sidebar-year label,
+    .sidebar.collapsed .sidebar-year select,
+    .sidebar.collapsed .sidebar-section-label,
+    .sidebar.collapsed .nav-item span:not(.nav-icon),
+    .sidebar.collapsed .sidebar-user .user-info {
+      display: none;
+    }
+
+    .sidebar.collapsed .sidebar-logo {
+      justify-content: center;
+      padding: 20px 0 16px;
+    }
+
+    .sidebar.collapsed .sidebar-year {
+      display: none;
+    }
+
+    .sidebar.collapsed .nav-item {
+      justify-content: center;
+      padding: 10px 0;
+      border-left: none;
+    }
+
+    .sidebar.collapsed .nav-item.active {
+      border-left: none;
+      border-right: 3px solid #16a34a;
+    }
+
+    .sidebar.collapsed .sidebar-user {
+      justify-content: center;
+      padding: 16px 0;
+    }
+
+    .sidebar-toggle {
+      position: absolute;
+      bottom: 70px;
+      left: 220px;
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-toggle svg {
+      width: 14px;
+      height: 14px;
+      stroke: #888;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s;
+    }
+
+    .sidebar.collapsed ~ .sidebar-toggle {
+      left: 36px;
+    }
+
+    .sidebar.collapsed ~ .sidebar-toggle svg {
+      transform: rotate(180deg);
+    }
+
+    .sidebar-logo {
+      padding: 20px 20px 16px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-logo .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: #2563eb;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .sidebar-year {
+      padding: 16px 20px 12px;
+    }
+
+    .sidebar-year label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #999;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .sidebar-year select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #e0e0e0;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #fafafa;
+      color: #1a1a1a;
+      cursor: pointer;
+    }
+
+    .sidebar-section-label {
+      padding: 16px 20px 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #999;
+      font-weight: 600;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #555;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      border-left: 3px solid transparent;
+      text-decoration: none;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .nav-item.active {
+      background: rgba(22, 163, 74, 0.08);
+      color: #16a34a;
+      font-weight: 600;
+      border-left-color: #16a34a;
+    }
+
+    .nav-item .nav-icon {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-item .nav-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sidebar-user {
+      padding: 16px 20px;
+      border-top: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-user .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .sidebar-user .user-info {
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .sidebar-user .user-name {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .sidebar-user .user-role {
+      color: #999;
+      font-size: 12px;
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    .main-content {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-header {
+      padding: 20px 28px 16px;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 64px;
+    }
+
+    .main-header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .main-header .subtitle {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .main-body {
+      padding: 24px 28px;
+      flex: 1;
+    }
+
+    /* ========== SUMMARY CARDS ========== */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card {
+      background: #fff;
+      border-radius: 4px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      position: relative;
+    }
+
+    .summary-card .card-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      opacity: 0.35;
+    }
+
+    .summary-card .card-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .summary-card .card-label {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .summary-card .card-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .summary-card .card-sub {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .card-value.green { color: #16a34a; }
+    .card-value.yellow { color: #ca8a04; }
+    .card-value.red { color: #dc2626; }
+    .card-value.blue { color: #2563eb; }
+    .card-value.dark { color: #1a1a1a; }
+
+    /* Budget input */
+    .budget-input-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 14px 20px;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .budget-input-row label {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .budget-input-row input {
+      width: 160px;
+      padding: 7px 10px;
+      border: 1px solid #d0d0d0;
+      border-radius: 3px;
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .budget-input-row .unit {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* ========== TABLE ========== */
+    .table-wrapper {
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      overflow-x: auto;
+    }
+
+    .table-title {
+      padding: 16px 20px 12px;
+      font-size: 15px;
+      font-weight: 700;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-title .title-icon {
+      opacity: 0.4;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .table-title .title-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      background: #fafafa;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: #777;
+      border-bottom: 1px solid #e8e8e8;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f2f2f2;
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tr:hover { background: #fafcff; }
+
+    /* Sticky action column (last col) */
+    th:last-child,
+    td:last-child {
+      position: sticky;
+      right: 0;
+      background: #fff;
+      box-shadow: -2px 0 4px rgba(0,0,0,0.04);
+      z-index: 1;
+    }
+
+    th:last-child {
+      background: #fafafa;
+    }
+
+    tr:hover td:last-child {
+      background: #fafcff;
+    }
+
+    .summary-row td:last-child {
+      background: #fafafa;
+    }
+
+    /* Form inputs in table */
+    table input[type="number"],
+    table input[type="text"] {
+      width: 100%;
+      min-width: 80px;
+      padding: 6px 8px;
+      border: 1px solid #d8d8d8;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+
+    table input[type="number"] { text-align: right; min-width: 100px; }
+    table input[type="text"] { min-width: 140px; }
+
+    table select {
+      padding: 6px 8px;
+      border: 1px solid #d8d8d8;
+      border-radius: 3px;
+      font-size: 13px;
+      background: #fff;
+    }
+
+    .calculated {
+      background: #f0f7ff;
+      font-weight: 600;
+      color: #2563eb;
+      padding: 5px 8px;
+      border-radius: 3px;
+      text-align: right;
+      display: block;
+      width: 100%;
+    }
+
+    .reason-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .reason-indicator .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .reason-indicator .dot.set { background: #16a34a; }
+    .reason-indicator .dot.missing { background: #d0d0d0; }
+
+    .reason-indicator .reason-label { color: #888; }
+    .reason-indicator .reason-label.set { color: #16a34a; }
+
+    .btn-xs {
+      padding: 3px 8px;
+      font-size: 11px;
+      border-radius: 3px;
+    }
+
+    /* Status badges */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-draft { background: #f0f0f0; color: #777; }
+    .badge-submitted { background: #dbeafe; color: #1d4ed8; }
+    .badge-approved { background: #dcfce7; color: #16a34a; }
+    .badge-rejected { background: #fee2e2; color: #dc2626; }
+
+    /* Buttons */
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-success { background: #16a34a; color: #fff; }
+    .btn-danger { background: #dc2626; color: #fff; }
+    .btn-outline {
+      background: #fff;
+      color: #555;
+      border: 1px solid #d0d0d0;
+    }
+    .btn-outline:hover { background: #f5f5f5; }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-group { display: flex; gap: 6px; }
+
+    /* Summary row */
+    .summary-row td {
+      font-weight: 700;
+      background: #fafafa;
+      border-top: 2px solid #e8e8e8;
+    }
+
+    /* Approval header */
+    .approval-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .approval-header .btn { font-size: 13px; padding: 9px 20px; }
+
+    /* Info box */
+    .info-box {
+      background: #f0f6ff;
+      border-left: 3px solid #2563eb;
+      padding: 12px 16px;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #1e40af;
+    }
+
+    /* Read-only value */
+    .readonly-val {
+      color: #333;
+      font-size: 13px;
+    }
+
+    /* Tab content (reusing class for view switching) */
+    .view-content { display: none; }
+    .view-content.active { display: block; }
+
+    /* Legend at bottom */
+    .legend {
+      margin-top: 28px;
+      padding: 16px 20px;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      font-size: 13px;
+      color: #888;
+    }
+
+    .legend h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #aaa;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .legend ul { list-style: none; padding: 0; }
+    .legend li { margin-bottom: 4px; }
+    .legend li::before { content: "\2022\00a0"; color: #ccc; }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      width: 480px;
+      max-width: 90vw;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      animation: modal-in 0.15s ease-out;
+    }
+
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(-12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .modal-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      color: #999;
+      font-size: 18px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .modal-close:hover {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .modal-body {
+      padding: 20px 24px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .modal-body label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .modal-body .employee-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    .modal-body textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 10px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #1a1a1a;
+      resize: vertical;
+      transition: border-color 0.15s;
+    }
+
+    .modal-body textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .modal-body .char-count {
+      text-align: right;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 4px;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 14px 24px 18px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .modal-footer .btn {
+      padding: 8px 20px;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .summary-cards { grid-template-columns: repeat(2, 1fr); }
+      .sidebar { width: 200px; min-width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="mock-banner">
+  <strong>MOCK</strong> — Lønforhandlingssystem for Aarhus Kommune (interaktiv prototype)
+</div>
+
+<div class="app-layout">
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">L</div>
+      Lønforhandling
+    </div>
+
+    <div class="sidebar-year">
+      <label>Forhandlingsår</label>
+      <select id="year-select">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026" selected>2026</option>
+      </select>
+    </div>
+
+    <div class="sidebar-section-label">Visninger</div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-view="personaleleder">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Personaleleder
+      </a>
+      <a class="nav-item" data-view="hr">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span> HR-behandling
+      </a>
+      <a class="nav-item" data-view="godkendelse">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span> Godkendelse
+      </a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="avatar">MH</div>
+      <div class="user-info">
+        <div class="user-name">Maria Hansen</div>
+        <div class="user-role">Personaleleder</div>
+      </div>
+    </div>
+  </aside>
+
+  <button class="sidebar-toggle" id="sidebar-toggle" title="Skjul/vis sidemenu">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main-content">
+
+    <div class="main-header">
+      <div>
+        <h1 id="main-title">Lønforhandling 2026</h1>
+        <div class="subtitle" id="main-subtitle">ITK Udvikling</div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline">Eksportér</button>
+      </div>
+    </div>
+
+    <div class="main-body">
+
+      <!-- ==================== VIEW 1: PERSONALELEDER ==================== -->
+      <div id="view-personaleleder" class="view-content active">
+
+        <div class="budget-input-row">
+          <label for="budget-input">Årets lønbudget:</label>
+          <input type="number" id="budget-input" value="150000" step="1000" min="0">
+          <span class="unit">kr.</span>
+        </div>
+
+        <div class="summary-cards">
+          <div class="summary-card">
+            <span class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg></span>
+            <div class="card-label">Budget</div>
+            <div class="card-value blue" id="budget-total">150.000 kr.</div>
+            <div class="card-sub">Fastsat for 2026</div>
+          </div>
+          <div class="summary-card">
+            <span class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+            <div class="card-label">Indstillet</div>
+            <div class="card-value dark" id="budget-used">0 kr.</div>
+            <div class="card-sub">Samlet indstilling</div>
+          </div>
+          <div class="summary-card">
+            <span class="card-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <div class="card-label">Restbudget</div>
+            <div class="card-value green" id="budget-remaining">150.000 kr.</div>
+            <div class="card-sub">Tilbage at disponere</div>
+          </div>
+          <div class="summary-card">
+            <span class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div class="card-label">Medarbejdere</div>
+            <div class="card-value dark" id="employee-count">8</div>
+            <div class="card-sub">I afdelingen</div>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <div class="table-title">
+            <span class="title-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Medarbejdere og lønindstillinger
+          </div>
+          <table id="personnel-table">
+            <thead>
+              <tr>
+                <th>Medarbejder</th>
+                <th>OK</th>
+                <th>Månedsløn</th>
+                <th>Engang</th>
+                <th>Tillæg (2000)</th>
+                <th>Tillæg (2025)</th>
+                <th>Begrundelse</th>
+                <th>Pri.</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="personnel-body"></tbody>
+            <tfoot>
+              <tr class="summary-row">
+                <td colspan="3" style="text-align: right;">I alt indstillet:</td>
+                <td id="sum-engang" style="text-align: right;">0 kr.</td>
+                <td id="sum-tillaeg-2000" style="text-align: right;">0 kr.</td>
+                <td id="sum-tillaeg-2025" style="text-align: right;">0 kr.</td>
+                <td colspan="4"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==================== VIEW 2: HR-BEHANDLING ==================== -->
+      <div id="view-hr" class="view-content">
+
+        <div class="info-box">
+          HR-konsulenten ser kun medarbejdere der er indstillet af personalelederen (status: Indstillet). Beløb i 2000-tal omregnes automatisk til 2025-tal med omregningsfaktor <strong>1,3742</strong>.
+        </div>
+
+        <div class="table-wrapper">
+          <div class="table-title">
+            <span class="title-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Behandling af indstillinger
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Medarbejder</th>
+                <th>Overenskomst</th>
+                <th>Månedsløn</th>
+                <th>Leder: Engang</th>
+                <th>Leder: Tillæg (2000)</th>
+                <th>Leder: Begrundelse</th>
+                <th>HR: Engang (2025-tal)</th>
+                <th>HR: Tillæg (2000-tal)</th>
+                <th>HR: Tillæg (2025-tal)</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="hr-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==================== VIEW 3: GODKENDELSE ==================== -->
+      <div id="view-godkendelse" class="view-content">
+
+        <div class="approval-header">
+          <div>
+            <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 2px;">Godkendelse af indstillinger</h2>
+            <span class="subtitle">Chef: Peter Andersen</span>
+          </div>
+          <button class="btn btn-success" id="approve-all-btn">Godkend alle</button>
+        </div>
+
+        <div class="info-box">
+          Chefen ser en sammenfatning af alle indstillinger der er behandlet af HR. Herfra godkendes eller afvises de enkelte indstillinger.
+        </div>
+
+        <div class="table-wrapper">
+          <div class="table-title">
+            <span class="title-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span> Indstillinger til godkendelse
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Medarbejder</th>
+                <th>Overenskomst</th>
+                <th>Leder ønsker</th>
+                <th>HR indstiller: Engang</th>
+                <th>HR indstiller: Tillæg (2025)</th>
+                <th>Begrundelse</th>
+                <th>Prioritet</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="approval-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <h3>Om denne prototype</h3>
+        <ul>
+          <li>Data er eksempeldata — i det rigtige system hentes medarbejdere og løn automatisk fra SD Løn og FK Organisation</li>
+          <li>Omregningsfaktor 2000-tal &rarr; 2025-tal: <strong>1,3742</strong> (varierer fra år til år)</li>
+          <li>Prøv at indtaste beløb i "Engangsbetaling" og "Fast tillæg" kolonnerne og se budgettet opdateres i realtid</li>
+          <li>Klik "Send til HR" for at sende en indstilling videre — skift derefter til HR-visningen i sidemenuen</li>
+          <li>Statusser: <span class="badge badge-draft">Kladde</span> <span class="badge badge-submitted">Indstillet</span> <span class="badge badge-approved">Godkendt</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Begrundelse Modal -->
+<div class="modal-overlay" id="reason-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Begrundelse</h3>
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label>Medarbejder</label>
+      <div class="employee-name" id="modal-emp-name"></div>
+      <label for="modal-reason-input">Begrundelse for indstilling</label>
+      <textarea id="modal-reason-input" placeholder="Beskriv baggrunden for indstillingen..."></textarea>
+      <div class="char-count"><span id="modal-char-count">0</span> tegn</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" id="modal-cancel-btn">Annullér</button>
+      <button class="btn btn-primary" id="modal-save-btn">Gem begrundelse</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ========== DATA ==========
+  const CONVERSION_FACTOR = 1.3742;
+
+  const employees = [
+    { id: 1, name: 'Maria Jensen',         agreement: 'AC',  salary: 42500, engang: 8000, tillaeg2000: 5000, reason: 'Særlig indsats i digitaliseringsprojekt', priority: '1', status: 'submitted' },
+    { id: 2, name: 'Lars Pedersen',         agreement: 'HK', salary: 33200, engang: 0, tillaeg2000: 3000, reason: 'Kompetenceudvikling og øget ansvar', priority: '2', status: 'submitted' },
+    { id: 3, name: 'Sofie Nielsen',         agreement: 'FOA', salary: 29800, engang: 4000, tillaeg2000: 2000, reason: 'Varetager ekstra koordineringsopgaver', priority: '2', status: 'draft' },
+    { id: 4, name: 'Anders Christensen',    agreement: 'AC',  salary: 38900, engang: 0, tillaeg2000: 0, reason: '', priority: '', status: 'draft' },
+    { id: 5, name: 'Camilla Rasmussen',     agreement: 'HK', salary: 31400, engang: 0, tillaeg2000: 0, reason: '', priority: '', status: 'draft' },
+    { id: 6, name: 'Thomas Andersen',       agreement: 'AC',  salary: 44100, engang: 0, tillaeg2000: 0, reason: '', priority: '', status: 'draft' },
+    { id: 7, name: 'Mette Larsen',          agreement: 'FOA', salary: 28500, engang: 0, tillaeg2000: 0, reason: '', priority: '', status: 'draft' },
+    { id: 8, name: 'Jonas Sørensen',        agreement: 'HK', salary: 35600, engang: 0, tillaeg2000: 0, reason: '', priority: '', status: 'draft' }
+  ];
+
+  const hrData = {};
+  employees.filter(e => e.status === 'submitted').forEach(e => {
+    hrData[e.id] = { hrEngang: e.engang, hrTillaeg2000: e.tillaeg2000, hrStatus: 'hr-done' };
+  });
+
+  // ========== FORMATTING ==========
+  function formatDKK(n) {
+    if (n === 0 || isNaN(n)) return '0 kr.';
+    return n.toLocaleString('da-DK') + ' kr.';
+  }
+
+  function statusBadge(status) {
+    const map = {
+      'draft':     '<span class="badge badge-draft">Kladde</span>',
+      'submitted': '<span class="badge badge-submitted">Indstillet</span>',
+      'hr-done':   '<span class="badge badge-submitted">HR behandlet</span>',
+      'approved':  '<span class="badge badge-approved">Godkendt</span>',
+      'rejected':  '<span class="badge badge-rejected">Afvist</span>'
+    };
+    return map[status] || status;
+  }
+
+  // ========== VIEW SWITCHING (sidebar nav) ==========
+  const navItems = document.querySelectorAll('.nav-item[data-view]');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(n => n.classList.remove('active'));
+      document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById('view-' + item.dataset.view).classList.add('active');
+
+      if (item.dataset.view === 'hr') renderHR();
+      if (item.dataset.view === 'godkendelse') renderApproval();
+    });
+  });
+
+  // ========== YEAR SWITCHING ==========
+  document.getElementById('year-select').addEventListener('change', (e) => {
+    document.getElementById('main-title').textContent = 'Lønforhandling ' + e.target.value;
+  });
+
+  // ========== VIEW 1: PERSONALELEDER ==========
+  function renderPersonnel() {
+    const tbody = document.getElementById('personnel-body');
+    tbody.innerHTML = '';
+
+    employees.forEach(emp => {
+      const tillaeg2025 = Math.round(emp.tillaeg2000 * CONVERSION_FACTOR);
+      const isEditable = emp.status === 'draft';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${emp.name}</strong></td>
+        <td>${emp.agreement}</td>
+        <td style="text-align:right;">${formatDKK(emp.salary)}</td>
+        <td>
+          <input type="number" value="${emp.engang || ''}" placeholder="0"
+            data-id="${emp.id}" data-field="engang" ${!isEditable ? 'disabled' : ''}>
+        </td>
+        <td>
+          <input type="number" value="${emp.tillaeg2000 || ''}" placeholder="0"
+            data-id="${emp.id}" data-field="tillaeg2000" ${!isEditable ? 'disabled' : ''}>
+        </td>
+        <td>
+          <span class="calculated">${tillaeg2025 ? formatDKK(tillaeg2025) : '\u2014'}</span>
+        </td>
+        <td>
+          ${emp.reason
+            ? `<div class="reason-indicator ${isEditable ? 'clickable' : ''}" title="${emp.reason}" ${isEditable ? `data-reason-edit="${emp.id}" style="cursor:pointer;"` : ''}>
+                <span class="dot set"></span>
+                <span class="reason-label set">Tilf\u00f8jet</span>
+              </div>`
+            : (isEditable
+              ? `<button class="btn btn-outline btn-xs" data-reason="${emp.id}">Tilf\u00f8j</button>`
+              : `<div class="reason-indicator">
+                  <span class="dot missing"></span>
+                  <span class="reason-label">Mangler</span>
+                </div>`
+            )
+          }
+        </td>
+        <td>
+          <select data-id="${emp.id}" data-field="priority" ${!isEditable ? 'disabled' : ''}>
+            <option value="" ${emp.priority === '' ? 'selected' : ''}>\u2014</option>
+            <option value="1" ${emp.priority === '1' ? 'selected' : ''}>1 \u2013 H\u00f8j</option>
+            <option value="2" ${emp.priority === '2' ? 'selected' : ''}>2 \u2013 Middel</option>
+            <option value="3" ${emp.priority === '3' ? 'selected' : ''}>3 \u2013 Lav</option>
+          </select>
+        </td>
+        <td>${statusBadge(emp.status)}</td>
+        <td>
+          ${isEditable
+            ? `<button class="btn btn-primary" data-submit="${emp.id}" ${!emp.reason ? 'disabled title="Tilf\u00f8j begrundelse f\u00f8rst"' : ''}>Send til HR</button>`
+            : ''}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('input', (e) => {
+        const id = parseInt(e.target.dataset.id);
+        const field = e.target.dataset.field;
+        const emp = employees.find(em => em.id === id);
+        if (field === 'engang' || field === 'tillaeg2000') {
+          emp[field] = parseInt(e.target.value) || 0;
+        } else {
+          emp[field] = e.target.value;
+        }
+        updateBudget();
+        renderPersonnel();
+      });
+    });
+
+    tbody.querySelectorAll('[data-reason]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(e.target.dataset.reason);
+        openReasonModal(id);
+      });
+    });
+
+    tbody.querySelectorAll('[data-reason-edit]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        const id = parseInt(e.target.closest('[data-reason-edit]').dataset.reasonEdit);
+        openReasonModal(id);
+      });
+    });
+
+    tbody.querySelectorAll('[data-submit]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(e.target.dataset.submit);
+        const emp = employees.find(em => em.id === id);
+        if (emp.engang === 0 && emp.tillaeg2000 === 0) {
+          alert('Indtast venligst et beløb før du sender til HR.');
+          return;
+        }
+        if (!emp.reason) {
+          alert('Indtast venligst en begrundelse.');
+          return;
+        }
+        if (!emp.priority) {
+          alert('Vælg venligst en prioritet.');
+          return;
+        }
+        emp.status = 'submitted';
+        renderPersonnel();
+        updateBudget();
+      });
+    });
+
+    updateSums();
+  }
+
+  function updateSums() {
+    let sumEngang = 0, sumT2000 = 0, sumT2025 = 0;
+    employees.forEach(emp => {
+      sumEngang += emp.engang || 0;
+      sumT2000 += emp.tillaeg2000 || 0;
+      sumT2025 += Math.round((emp.tillaeg2000 || 0) * CONVERSION_FACTOR);
+    });
+    document.getElementById('sum-engang').textContent = formatDKK(sumEngang);
+    document.getElementById('sum-tillaeg-2000').textContent = formatDKK(sumT2000);
+    document.getElementById('sum-tillaeg-2025').textContent = formatDKK(sumT2025);
+  }
+
+  function updateBudget() {
+    const budgetInput = document.getElementById('budget-input');
+    const budget = parseInt(budgetInput.value) || 0;
+
+    let used = 0;
+    employees.forEach(emp => {
+      used += (emp.engang || 0) + Math.round((emp.tillaeg2000 || 0) * CONVERSION_FACTOR);
+    });
+
+    const remaining = budget - used;
+    const pct = budget > 0 ? remaining / budget : 1;
+
+    document.getElementById('budget-total').textContent = formatDKK(budget);
+    document.getElementById('budget-used').textContent = formatDKK(used);
+
+    const remEl = document.getElementById('budget-remaining');
+    remEl.textContent = formatDKK(remaining);
+    remEl.className = 'card-value';
+    if (remaining < 0) remEl.classList.add('red');
+    else if (pct < 0.2) remEl.classList.add('yellow');
+    else remEl.classList.add('green');
+  }
+
+  document.getElementById('budget-input').addEventListener('input', updateBudget);
+
+  // ========== VIEW 2: HR ==========
+  function renderHR() {
+    const tbody = document.getElementById('hr-body');
+    tbody.innerHTML = '';
+
+    const submitted = employees.filter(e => e.status !== 'draft');
+
+    if (submitted.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color:#999; padding:32px;">Ingen indstillinger modtaget endnu. Personalelederen skal først sende indstillinger.</td></tr>';
+      return;
+    }
+
+    submitted.forEach(emp => {
+      const hr = hrData[emp.id] || { hrEngang: '', hrTillaeg2000: '', hrStatus: 'submitted' };
+      const hrTillaeg2025 = hr.hrTillaeg2000 ? Math.round(hr.hrTillaeg2000 * CONVERSION_FACTOR) : 0;
+      const isEditable = hr.hrStatus !== 'hr-done' && hr.hrStatus !== 'approved';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${emp.name}</strong></td>
+        <td>${emp.agreement}</td>
+        <td style="text-align:right;">${formatDKK(emp.salary)}</td>
+        <td class="readonly-val" style="text-align:right;">${formatDKK(emp.engang)}</td>
+        <td class="readonly-val" style="text-align:right;">${formatDKK(emp.tillaeg2000)}</td>
+        <td class="readonly-val">${emp.reason}</td>
+        <td>
+          <input type="number" value="${hr.hrEngang || ''}" placeholder="0"
+            data-hrid="${emp.id}" data-field="hrEngang" ${!isEditable ? 'disabled' : ''}>
+        </td>
+        <td>
+          <input type="number" value="${hr.hrTillaeg2000 || ''}" placeholder="0"
+            data-hrid="${emp.id}" data-field="hrTillaeg2000" ${!isEditable ? 'disabled' : ''}>
+        </td>
+        <td>
+          <span class="calculated">${hrTillaeg2025 ? formatDKK(hrTillaeg2025) : '\u2014'}</span>
+        </td>
+        <td>${statusBadge(hr.hrStatus || emp.status)}</td>
+        <td>
+          ${isEditable
+            ? `<button class="btn btn-success" data-hrdone="${emp.id}">Færdigbehandlet</button>`
+            : ''}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll('input').forEach(el => {
+      el.addEventListener('input', (e) => {
+        const id = parseInt(e.target.dataset.hrid);
+        const field = e.target.dataset.field;
+        if (!hrData[id]) hrData[id] = { hrEngang: 0, hrTillaeg2000: 0, hrStatus: 'submitted' };
+        hrData[id][field] = parseInt(e.target.value) || 0;
+        renderHR();
+      });
+    });
+
+    tbody.querySelectorAll('[data-hrdone]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(e.target.dataset.hrdone);
+        if (!hrData[id]) hrData[id] = { hrEngang: 0, hrTillaeg2000: 0, hrStatus: 'submitted' };
+        hrData[id].hrStatus = 'hr-done';
+        renderHR();
+      });
+    });
+  }
+
+  // ========== VIEW 3: GODKENDELSE ==========
+  function renderApproval() {
+    const tbody = document.getElementById('approval-body');
+    tbody.innerHTML = '';
+
+    const hrDone = employees.filter(e => {
+      const hr = hrData[e.id];
+      return hr && (hr.hrStatus === 'hr-done' || hr.hrStatus === 'approved' || hr.hrStatus === 'rejected');
+    });
+
+    if (hrDone.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:32px;">Ingen indstillinger er klar til godkendelse. HR skal først færdigbehandle indstillingerne.</td></tr>';
+      return;
+    }
+
+    hrDone.forEach(emp => {
+      const hr = hrData[emp.id];
+      const hrTillaeg2025 = hr.hrTillaeg2000 ? Math.round(hr.hrTillaeg2000 * CONVERSION_FACTOR) : 0;
+      const leaderRequest = `Engang: ${formatDKK(emp.engang)}, Tillæg: ${formatDKK(emp.tillaeg2000)} (2000)`;
+      const isFinal = hr.hrStatus === 'approved' || hr.hrStatus === 'rejected';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${emp.name}</strong></td>
+        <td>${emp.agreement}</td>
+        <td class="readonly-val" style="font-size:12px;">${leaderRequest}</td>
+        <td style="text-align:right;">${formatDKK(hr.hrEngang)}</td>
+        <td style="text-align:right;"><span class="calculated">${formatDKK(hrTillaeg2025)}</span></td>
+        <td class="readonly-val">${emp.reason}</td>
+        <td>
+          <select data-prid="${emp.id}" disabled style="border:none;background:none;">
+            <option ${emp.priority === '1' ? 'selected' : ''}>1 \u2013 H\u00f8j</option>
+            <option ${emp.priority === '2' ? 'selected' : ''}>2 \u2013 Middel</option>
+            <option ${emp.priority === '3' ? 'selected' : ''}>3 \u2013 Lav</option>
+          </select>
+        </td>
+        <td>${statusBadge(hr.hrStatus)}</td>
+        <td>
+          ${!isFinal ? `
+            <div class="btn-group">
+              <button class="btn btn-success" data-approve="${emp.id}">Godkend</button>
+              <button class="btn btn-danger" data-reject="${emp.id}">Afvis</button>
+            </div>
+          ` : ''}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll('[data-approve]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(e.target.dataset.approve);
+        hrData[id].hrStatus = 'approved';
+        employees.find(em => em.id === id).status = 'approved';
+        renderApproval();
+      });
+    });
+
+    tbody.querySelectorAll('[data-reject]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(e.target.dataset.reject);
+        hrData[id].hrStatus = 'rejected';
+        employees.find(em => em.id === id).status = 'rejected';
+        renderApproval();
+      });
+    });
+
+    document.getElementById('approve-all-btn').onclick = () => {
+      hrDone.forEach(emp => {
+        const hr = hrData[emp.id];
+        if (hr.hrStatus === 'hr-done') {
+          hr.hrStatus = 'approved';
+          emp.status = 'approved';
+        }
+      });
+      renderApproval();
+    };
+  }
+
+  // ========== REASON MODAL ==========
+  let modalEmpId = null;
+  const modalOverlay = document.getElementById('reason-modal');
+  const modalInput = document.getElementById('modal-reason-input');
+  const modalEmpName = document.getElementById('modal-emp-name');
+  const modalCharCount = document.getElementById('modal-char-count');
+
+  function openReasonModal(empId) {
+    const emp = employees.find(e => e.id === empId);
+    modalEmpId = empId;
+    modalEmpName.textContent = emp.name;
+    modalInput.value = emp.reason || '';
+    modalCharCount.textContent = modalInput.value.length;
+    modalOverlay.classList.add('open');
+    setTimeout(() => modalInput.focus(), 50);
+  }
+
+  function closeReasonModal() {
+    modalOverlay.classList.remove('open');
+    modalEmpId = null;
+  }
+
+  function saveReason() {
+    if (modalEmpId === null) return;
+    const emp = employees.find(e => e.id === modalEmpId);
+    emp.reason = modalInput.value.trim();
+    closeReasonModal();
+    renderPersonnel();
+  }
+
+  modalInput.addEventListener('input', () => {
+    modalCharCount.textContent = modalInput.value.length;
+  });
+
+  document.getElementById('modal-save-btn').addEventListener('click', saveReason);
+  document.getElementById('modal-cancel-btn').addEventListener('click', closeReasonModal);
+  document.getElementById('modal-close-btn').addEventListener('click', closeReasonModal);
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeReasonModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeReasonModal();
+    if (e.key === 'Enter' && e.ctrlKey && modalOverlay.classList.contains('open')) saveReason();
+  });
+
+  // ========== SIDEBAR TOGGLE ==========
+  document.getElementById('sidebar-toggle').addEventListener('click', () => {
+    document.querySelector('.sidebar').classList.toggle('collapsed');
+  });
+
+  // ========== INIT ==========
+  renderPersonnel();
+  updateBudget();
+</script>
+
+</body>
+</html>
