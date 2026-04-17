@@ -28,7 +28,7 @@ requirements.txt                   # Python dependencies
 ## Conventions
 
 - All content is written in Markdown
-- Interactive mocks are self-contained HTML files (no external dependencies)
+- Interactive mocks are self-contained (no external dependencies). Small mocks use a single HTML file. Larger mocks may split CSS and JS into co-located files with the same base name (e.g. `unified-platform.html`, `.css`, `.js`)
 - Images are PNG screenshots of the mocks
 - Every project document starts with a project label: `<small>**Project:** Project Name</small>`
 - Use MkDocs Material admonitions (`!!! info`, `!!! warning`) for callouts

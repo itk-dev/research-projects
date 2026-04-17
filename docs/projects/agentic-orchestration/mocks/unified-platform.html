@@ -4,906 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agentic Orchestration Studio — Unified Platform Mock</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f5f6f8;
-    color: #1a1a2e;
-    display: flex;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-
-  /* ── SVG icon system ── */
-  .icon-svg {
-    width: 18px;
-    height: 18px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    flex-shrink: 0;
-  }
-
-  /* ── Mock banner ── */
-  .mock-banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: #3b5bdb;
-    color: #fff;
-    text-align: center;
-    padding: 8px 16px;
-    font-size: 12px;
-    z-index: 200;
-  }
-
-  /* ── Sidebar ── */
-  .sidebar {
-    width: 230px;
-    background: #fff;
-    border-right: 1px solid #e5e7eb;
-    display: flex;
-    flex-direction: column;
-    padding-top: 36px;
-    flex-shrink: 0;
-  }
-
-  .sidebar-brand {
-    padding: 20px 20px 16px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #1a1a2e;
-    letter-spacing: -0.02em;
-    border-bottom: 1px solid #f0f0f0;
-    margin-bottom: 4px;
-  }
-  .sidebar-brand small {
-    display: block;
-    font-size: 11px;
-    font-weight: 400;
-    color: #999;
-    margin-top: 2px;
-  }
-
-  .sidebar-section {
-    padding: 16px 20px 6px;
-    font-size: 10px;
-    font-weight: 600;
-    color: #aaa;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 20px;
-    font-size: 13px;
-    color: #666;
-    cursor: pointer;
-    transition: all 0.12s;
-    border-left: 3px solid transparent;
-  }
-  .sidebar-item:hover {
-    background: #f8f9fb;
-    color: #333;
-  }
-  .sidebar-item.active {
-    background: #f0f3ff;
-    color: #3b5bdb;
-    border-left-color: #3b5bdb;
-    font-weight: 500;
-  }
-  .sidebar-item .badge {
-    margin-left: auto;
-    background: #3b5bdb;
-    color: #fff;
-    font-size: 10px;
-    padding: 1px 7px;
-    border-radius: 8px;
-    font-weight: 600;
-  }
-
-  .sidebar-bottom {
-    margin-top: auto;
-    padding: 16px 20px;
-    border-top: 1px solid #f0f0f0;
-  }
-  .sidebar-user {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: #666;
-  }
-  .sidebar-avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #e8ecf4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    color: #666;
-    font-weight: 600;
-  }
-
-  /* ── Main area ── */
-  .main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding-top: 36px;
-    overflow: hidden;
-  }
-
-  .topbar {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 12px 24px;
-    border-bottom: 1px solid #e5e7eb;
-    background: #fff;
-  }
-  .topbar h2 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1a1a2e;
-  }
-  .topbar-right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .topbar-search {
-    background: #f5f6f8;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 6px 12px 6px 32px;
-    color: #333;
-    font-size: 12px;
-    width: 220px;
-    outline: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: 10px center;
-  }
-  .topbar-search:focus { border-color: #3b5bdb; }
-
-  /* ── Panels ── */
-  .panel {
-    display: none;
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px;
-  }
-  .panel.active { display: flex; flex-direction: column; }
-
-  /* ── Buttons ── */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 16px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.12s;
-    border: 1px solid #e0e0e0;
-    background: #fff;
-    color: #555;
-  }
-  .btn:hover { border-color: #ccc; color: #333; }
-  .btn.primary {
-    background: #3b5bdb;
-    border-color: #3b5bdb;
-    color: #fff;
-  }
-  .btn.primary:hover { background: #3451c7; }
-
-  /* ── Process Map panel ── */
-  .process-canvas {
-    flex: 1;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 24px;
-    min-height: 400px;
-  }
-
-  /* Process list */
-  .process-list-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-  .process-list-table th {
-    text-align: left;
-    padding: 10px 14px;
-    font-size: 10px;
-    font-weight: 600;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-bottom: 1px solid #e5e7eb;
-    background: #fafbfc;
-  }
-  .process-list-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid #f0f0f0;
-    color: #444;
-  }
-  .process-list-table tr:hover td {
-    background: #f8f9ff;
-  }
-  .process-list-table tr { cursor: pointer; }
-  .process-list-name {
-    font-weight: 500;
-    color: #1a1a2e;
-  }
-  .process-list-name small {
-    font-weight: 400;
-    color: #aaa;
-    margin-left: 6px;
-  }
-  .process-status-dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    margin-right: 6px;
-  }
-  .process-status-dot.active { background: #66bb6a; }
-  .process-status-dot.draft { background: #ccc; }
-  .process-status-dot.paused { background: #ffa726; }
-
-  .process-back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #3b5bdb;
-    cursor: pointer;
-    margin-bottom: 16px;
-    font-family: inherit;
-    width: fit-content;
-  }
-  .process-back-btn:hover { border-color: #3b5bdb; background: #f0f3ff; }
-
-  .process-view { display: none; }
-  .process-view.active { display: block; }
-
-  .process-canvas-label {
-    font-size: 12px;
-    color: #999;
-    margin-bottom: 8px;
-  }
-
-  .bpmn-flow {
-    display: flex;
-    align-items: center;
-    padding: 50px 12px;
-    overflow-x: auto;
-  }
-
-  .bpmn-node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .bpmn-shape {
-    width: 124px;
-    height: 60px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 500;
-    text-align: center;
-    padding: 8px;
-    line-height: 1.3;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .bpmn-shape:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  }
-
-  .bpmn-shape.start {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: #edf7ed; border: 2px solid #66bb6a; color: #66bb6a;
-  }
-  .bpmn-shape.end {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: #fdecea; border: 3px solid #ef5350; color: #ef5350;
-  }
-  .bpmn-shape.task {
-    background: #f8f9fb; border: 1px solid #e0e0e0; color: #444;
-  }
-  .bpmn-shape.task.human {
-    border-color: #3b5bdb; background: #f0f3ff;
-  }
-  .bpmn-shape.task.agent {
-    border-color: #f59e0b; background: #fffbeb;
-  }
-  .bpmn-shape.task.integration {
-    border-color: #06b6d4; background: #ecfeff;
-  }
-  .bpmn-shape.gateway {
-    width: 36px; height: 36px; border-radius: 4px;
-    background: #fffbeb; border: 2px solid #f59e0b; color: #b45309;
-    transform: rotate(45deg); font-size: 13px; font-weight: 700;
-  }
-  .bpmn-shape.gateway span { transform: rotate(-45deg); display: block; }
-
-  .bpmn-type-tag {
-    font-size: 9px;
-    padding: 1px 7px;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-  .tag-human { background: #e8edff; color: #3b5bdb; }
-  .tag-agent { background: #fef3c7; color: #b45309; }
-  .tag-integration { background: #cffafe; color: #0e7490; }
-
-  .bpmn-arrow {
-    width: 36px;
-    height: 2px;
-    background: #ccc;
-    flex-shrink: 0;
-    position: relative;
-  }
-  .bpmn-arrow::after {
-    content: '';
-    position: absolute;
-    right: -1px; top: -4px;
-    border: 5px solid transparent;
-    border-left-color: #ccc;
-  }
-
-  .process-toolbar {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .process-info {
-    display: flex;
-    gap: 24px;
-    margin-top: 16px;
-    padding: 14px 18px;
-    background: #f8f9fb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    font-size: 12px;
-  }
-  .process-info-item { display: flex; flex-direction: column; gap: 2px; }
-  .process-info-label { color: #999; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
-  .process-info-value { color: #333; font-weight: 600; }
-
-  /* ── Tasks panel — Kanban ── */
-  .kanban-filters { display: flex; gap: 6px; margin-bottom: 16px; }
-  .kanban-filter {
-    padding: 5px 12px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    color: #888;
-    font-size: 12px;
-    cursor: pointer;
-  }
-  .kanban-filter.active { border-color: #3b5bdb; color: #3b5bdb; background: #f0f3ff; }
-
-  .kanban-board {
-    display: flex;
-    gap: 14px;
-    flex: 1;
-    overflow-x: auto;
-    align-items: flex-start;
-  }
-
-  .kanban-column {
-    min-width: 260px;
-    flex: 1;
-    background: #f0f1f3;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    max-height: calc(100vh - 180px);
-  }
-
-  .kanban-column-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .kanban-count {
-    background: #ddd;
-    color: #666;
-    font-size: 10px;
-    padding: 1px 7px;
-    border-radius: 8px;
-    font-weight: 600;
-  }
-
-  .kanban-cards {
-    padding: 0 10px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow-y: auto;
-  }
-
-  .kanban-card {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 12px 14px;
-    cursor: pointer;
-    transition: box-shadow 0.12s, border-color 0.12s;
-  }
-  .kanban-card:hover {
-    border-color: #3b5bdb;
-    box-shadow: 0 2px 8px rgba(59,91,219,0.08);
-  }
-
-  .kanban-card-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: #1a1a2e;
-    margin-bottom: 6px;
-    line-height: 1.4;
-  }
-  .kanban-card-meta {
-    font-size: 11px;
-    color: #999;
-    line-height: 1.4;
-  }
-  .kanban-card-footer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    font-size: 10px;
-  }
-  .kanban-tag {
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-  .kanban-tag.high { background: #fdecea; color: #c62828; }
-  .kanban-tag.medium { background: #fff3e0; color: #e65100; }
-  .kanban-tag.low { background: #e8f5e9; color: #2e7d32; }
-  .kanban-tag.process {
-    background: #f0f3ff;
-    color: #3b5bdb;
-  }
-  .kanban-assignee {
-    margin-left: auto;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #e8ecf4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-    color: #666;
-    font-weight: 600;
-  }
-
-  /* ── Task detail view ── */
-  .task-detail { display: none; }
-  .task-detail.active { display: flex; gap: 20px; flex: 1; }
-
-  .task-detail-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .task-detail-sidebar {
-    width: 280px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .task-detail-card {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 20px;
-  }
-
-  .task-detail-card h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin-bottom: 4px;
-  }
-  .task-detail-card .task-detail-process {
-    font-size: 12px;
-    color: #3b5bdb;
-    margin-bottom: 16px;
-  }
-
-  .task-detail-section {
-    margin-bottom: 16px;
-  }
-  .task-detail-section:last-child { margin-bottom: 0; }
-  .task-detail-section h4 {
-    font-size: 11px;
-    font-weight: 600;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-  }
-  .task-detail-section p {
-    font-size: 13px;
-    color: #444;
-    line-height: 1.6;
-  }
-
-  .task-detail-field {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 13px;
-  }
-  .task-detail-field:last-child { border-bottom: none; }
-  .task-detail-field-label { color: #999; }
-  .task-detail-field-value { color: #333; font-weight: 500; }
-
-  .task-detail-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
-  }
-
-  .task-ai-draft {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 20px;
-  }
-  .task-ai-draft h4 {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin-bottom: 4px;
-  }
-  .task-ai-draft .ai-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 10px;
-    color: #f59e0b;
-    background: #fffbeb;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  .task-ai-draft .draft-content {
-    font-size: 13px;
-    color: #444;
-    line-height: 1.7;
-    padding: 14px 16px;
-    background: #fafbfc;
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
-    white-space: pre-line;
-  }
-  .task-ai-draft .draft-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-  }
-
-  .task-timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .timeline-item {
-    display: flex;
-    gap: 12px;
-    padding-bottom: 14px;
-    position: relative;
-  }
-  .timeline-item:not(:last-child)::before {
-    content: '';
-    position: absolute;
-    left: 10px;
-    top: 22px;
-    bottom: 0;
-    width: 1px;
-    background: #e5e7eb;
-  }
-  .timeline-dot {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #f0f3ff;
-    border: 2px solid #e5e7eb;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .timeline-dot.done { background: #e8f5e9; border-color: #66bb6a; }
-  .timeline-dot.active { background: #f0f3ff; border-color: #3b5bdb; }
-  .timeline-content {
-    font-size: 12px;
-    color: #666;
-    line-height: 1.5;
-  }
-  .timeline-content strong { color: #333; font-weight: 500; }
-  .timeline-content .timeline-time { color: #aaa; font-size: 11px; }
-
-  /* ── Automations panel ── */
-  .automation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 12px;
-  }
-  .automation-card {
-    padding: 18px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: border-color 0.12s;
-  }
-  .automation-card:hover { border-color: #3b5bdb; }
-  .automation-name { font-size: 14px; font-weight: 500; color: #1a1a2e; }
-  .automation-desc { font-size: 12px; color: #888; margin-top: 6px; line-height: 1.5; }
-  .automation-footer {
-    display: flex; align-items: center; gap: 8px;
-    margin-top: 12px; font-size: 11px;
-  }
-  .automation-status { display: flex; align-items: center; gap: 4px; color: #66bb6a; }
-  .automation-status .dot { width: 6px; height: 6px; border-radius: 50%; background: #66bb6a; }
-  .automation-status.error .dot { background: #ef5350; }
-  .automation-status.error { color: #ef5350; }
-  .automation-runs { color: #aaa; margin-left: auto; }
-  .automation-connectors { display: flex; gap: 4px; margin-top: 10px; }
-  .connector-tag {
-    padding: 2px 8px;
-    background: #f5f6f8;
-    border-radius: 4px;
-    font-size: 10px;
-    color: #777;
-  }
-
-  /* ── Dashboard panel ── */
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .stat-card {
-    padding: 18px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-  }
-  .stat-label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
-  .stat-value { font-size: 28px; font-weight: 700; color: #1a1a2e; margin-top: 6px; font-variant-numeric: tabular-nums; }
-  .stat-sub { font-size: 11px; color: #999; margin-top: 4px; }
-  .stat-trend { font-size: 11px; margin-top: 6px; }
-  .stat-trend.up { color: #66bb6a; }
-  .stat-trend.down { color: #ef5350; }
-
-  .chart-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .chart-card {
-    padding: 18px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-  }
-  .chart-title { font-size: 13px; font-weight: 500; color: #888; margin-bottom: 14px; }
-
-  .mini-bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; }
-  .mini-bar {
-    flex: 1; border-radius: 3px 3px 0 0;
-    background: #3b5bdb; min-height: 4px;
-  }
-  .mini-bar.highlight { background: #f59e0b; }
-  .mini-bar.weekend { background: #e0e0e0; }
-
-  .donut-placeholder {
-    width: 120px; height: 120px; border-radius: 50%;
-    margin: 0 auto; position: relative;
-    background: conic-gradient(#3b5bdb 0% 45%, #06b6d4 45% 72%, #f59e0b 72% 88%, #66bb6a 88% 100%);
-  }
-  .donut-placeholder::after {
-    content: ''; position: absolute; inset: 0;
-    width: 84px; height: 84px; margin: auto;
-    border-radius: 50%; background: #fff;
-  }
-  .donut-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; font-size: 11px; }
-  .donut-legend-item { display: flex; align-items: center; gap: 8px; color: #777; }
-  .donut-legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-
-  /* ── AI Assistant panel ── */
-  .assistant-container { display: flex; flex: 1; gap: 0; }
-  .assistant-chat {
-    flex: 1; display: flex; flex-direction: column;
-    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
-    overflow: hidden;
-  }
-  .assistant-header {
-    padding: 14px 18px;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 13px;
-    font-weight: 500;
-    color: #666;
-  }
-  .assistant-messages {
-    flex: 1; padding: 20px;
-    display: flex; flex-direction: column; gap: 14px;
-    overflow-y: auto;
-  }
-  .assistant-msg {
-    max-width: 85%; padding: 12px 16px;
-    border-radius: 10px; font-size: 13px; line-height: 1.6;
-  }
-  .assistant-msg.user {
-    align-self: flex-end;
-    background: #3b5bdb; color: #fff;
-    border-bottom-right-radius: 4px;
-  }
-  .assistant-msg.ai {
-    align-self: flex-start;
-    background: #f5f6f8; color: #333;
-    border: 1px solid #e5e7eb;
-    border-bottom-left-radius: 4px;
-  }
-  .assistant-msg code {
-    background: #e8ecf4; padding: 1px 5px;
-    border-radius: 3px; font-size: 12px; color: #3b5bdb;
-  }
-  .assistant-input-bar {
-    display: flex; gap: 8px; padding: 12px 16px;
-    border-top: 1px solid #f0f0f0; background: #fafbfc;
-  }
-  .assistant-input {
-    flex: 1; background: #fff; border: 1px solid #e5e7eb;
-    border-radius: 8px; padding: 8px 12px; color: #333;
-    font-size: 13px; outline: none;
-  }
-  .assistant-input::placeholder { color: #bbb; }
-  .assistant-input:focus { border-color: #3b5bdb; }
-  .assistant-send {
-    padding: 8px 16px; background: #3b5bdb; border: none;
-    border-radius: 8px; color: #fff; font-size: 12px; cursor: pointer;
-  }
-
-  /* ── Modal ── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.3);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-overlay.visible { display: flex; }
-
-  .modal {
-    background: #fff;
-    border-radius: 14px;
-    padding: 28px;
-    width: 520px;
-    max-width: 90vw;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  }
-  .modal h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin-bottom: 6px;
-  }
-  .modal p {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-
-  .modal-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .modal-option {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.12s;
-  }
-  .modal-option:hover {
-    border-color: #3b5bdb;
-    background: #f8f9ff;
-  }
-  .modal-option-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: #f0f3ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    color: #3b5bdb;
-  }
-  .modal-option-text h4 {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a1a2e;
-    margin-bottom: 2px;
-  }
-  .modal-option-text p {
-    font-size: 12px;
-    color: #999;
-    margin: 0;
-  }
-
-  .modal-close {
-    display: block;
-    margin-top: 16px;
-    text-align: center;
-    font-size: 12px;
-    color: #aaa;
-    cursor: pointer;
-    background: none;
-    border: none;
-    width: 100%;
-  }
-  .modal-close:hover { color: #666; }
-</style>
+<link rel="stylesheet" href="unified-platform.css">
 </head>
 <body>
 
@@ -918,47 +19,61 @@
     <small>Aarhus Kommune</small>
   </div>
 
-  <div class="sidebar-section">Overview</div>
-  <div class="sidebar-item active" onclick="showPanel('dashboard')">
+  <div class="sidebar-section" data-section="overview">Overview</div>
+  <div class="sidebar-item active" data-role="admin,designer,caseworker" onclick="showPanel('dashboard')">
     <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     Dashboard
   </div>
 
-  <div class="sidebar-section">Processes</div>
-  <div class="sidebar-item" onclick="showPanel('processes')">
+  <div class="sidebar-section" data-section="processes">Processes</div>
+  <div class="sidebar-item" data-role="admin,designer" onclick="showPanel('processes')">
     <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12h4l2-6h4M13 12l2 6h4"/></svg>
     Process Map
   </div>
-  <div class="sidebar-item" onclick="showPanel('tasks')">
+  <div class="sidebar-item" data-role="admin,designer,caseworker" onclick="showPanel('tasks')">
     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
     My Tasks
     <span class="badge">3</span>
   </div>
-  <div class="sidebar-item" onclick="showPanel('automations')">
+  <div class="sidebar-item" data-role="admin,designer" onclick="showPanel('automations')">
     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
     Automations
   </div>
 
-  <div class="sidebar-section">Tools</div>
-  <div class="sidebar-item" onclick="showPanel('assistant')">
+  <div class="sidebar-section" data-section="tools">Tools</div>
+  <div class="sidebar-item" data-role="admin,designer,caseworker" onclick="showPanel('assistant')">
     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
     AI Assistant
   </div>
 
-  <div class="sidebar-section">Admin</div>
-  <div class="sidebar-item" onclick="showPanel('operations')">
+  <div class="sidebar-section" data-section="admin">Admin</div>
+  <div class="sidebar-item" data-role="admin" onclick="showPanel('agents')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2a4 4 0 014 4v1a4 4 0 01-8 0V6a4 4 0 014-4zM6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="12" cy="6" r="1" fill="currentColor" stroke="none"/></svg>
+    Agents
+  </div>
+  <div class="sidebar-item" data-role="admin" onclick="showPanel('operations')">
     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
     Operations
+  </div>
+  <div class="sidebar-item" data-role="admin" onclick="showPanel('settings')">
+    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    Settings
   </div>
 
   <div class="sidebar-bottom">
     <div class="sidebar-user">
-      <div class="sidebar-avatar">JP</div>
+      <div class="sidebar-avatar" id="user-avatar">JP</div>
       <div>
-        <div style="font-size:12px;color:#333;">Jesper P.</div>
-        <div style="font-size:10px;color:#999;">Process Designer</div>
+        <div style="font-size:12px;color:#333;" id="user-name">Jesper P.</div>
+        <div style="font-size:10px;color:#999;" id="user-role-label">IT Administrator</div>
       </div>
     </div>
+    <div class="role-switcher-label">View as role</div>
+    <select class="role-switcher" onchange="switchRole(this.value)">
+      <option value="admin" selected>Administrator</option>
+      <option value="designer">Process Designer</option>
+      <option value="caseworker">Caseworker</option>
+    </select>
   </div>
 </div>
 
@@ -1071,7 +186,13 @@
         All processes
       </button>
       <div class="process-canvas">
-        <div class="process-canvas-label">Parking Complaint Handling — v2.1 (Active)</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="process-canvas-label">Parking Complaint Handling — v2.1 (Active)</div>
+          <button class="btn deploy" onclick="openModal('deploy')">
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            Deploy new version
+          </button>
+        </div>
         <div class="bpmn-flow">
           <div class="bpmn-node">
             <div class="bpmn-shape start">
@@ -1130,8 +251,8 @@
           <span class="process-info-value" style="color:#66bb6a;">Active</span>
         </div>
         <div class="process-info-item">
-          <span class="process-info-label">Running instances</span>
-          <span class="process-info-value">12</span>
+          <span class="process-info-label">Running instances (active cases)</span>
+          <span class="process-info-value" style="color:#3b5bdb;cursor:pointer;text-decoration:underline;" onclick="showPanel2('tasks')">12 — view instances</span>
         </div>
         <div class="process-info-item">
           <span class="process-info-label">Avg completion</span>
@@ -1148,6 +269,44 @@
         <div class="process-info-item">
           <span class="process-info-label">Est. time saved / case</span>
           <span class="process-info-value">45 min</span>
+        </div>
+      </div>
+
+      <div class="process-changes-summary">
+        <h4>Changes in v2.1 (vs v2.0)</h4>
+        <div class="change-item added">+ Added step: "AI: Classify complaint" (Agent)</div>
+        <div class="change-item added">+ Added gateway: Severity-based routing</div>
+        <div class="change-item modified">~ Modified step: "Review &amp; decide" — now receives AI classification context</div>
+        <div class="change-item removed">&minus; Removed step: "Manual triage" (replaced by AI classification)</div>
+      </div>
+
+      <div class="process-version-history">
+        <h4>Version History</h4>
+        <div class="version-list">
+          <div class="version-item current">
+            <div class="version-badge">v2.1</div>
+            <div class="version-details">
+              <strong>v2.1 — Current (Active)</strong>
+              <span>Deployed 3 Apr 2026 by Jesper P.</span>
+              <span class="version-note">Added AI classification step, reduced manual triage</span>
+            </div>
+          </div>
+          <div class="version-item">
+            <div class="version-badge">v2.0</div>
+            <div class="version-details">
+              <strong>v2.0</strong>
+              <span>Deployed 12 Feb 2026 by Maria K.</span>
+              <span class="version-note">Integrated SBSYS case fetch, Digital Post dispatch</span>
+            </div>
+          </div>
+          <div class="version-item">
+            <div class="version-badge">v1.0</div>
+            <div class="version-details">
+              <strong>v1.0</strong>
+              <span>Deployed 5 Nov 2025 by Jesper P.</span>
+              <span class="version-note">Initial process — fully manual workflow</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1228,8 +387,8 @@
           <span class="process-info-value" style="color:#66bb6a;">Active</span>
         </div>
         <div class="process-info-item">
-          <span class="process-info-label">Running instances</span>
-          <span class="process-info-value">3</span>
+          <span class="process-info-label">Running instances (active cases)</span>
+          <span class="process-info-value" style="color:#3b5bdb;cursor:pointer;text-decoration:underline;" onclick="showPanel2('tasks')">3 — view instances</span>
         </div>
         <div class="process-info-item">
           <span class="process-info-label">Avg completion</span>
@@ -1568,8 +727,8 @@ Byggesagsafdelingen, Aarhus Kommune</div>
         Import
       </button>
     </div>
-    <div class="automation-grid">
-      <div class="automation-card">
+    <div class="automation-grid" id="automation-grid">
+      <div class="automation-card" onclick="openAutomationDetail()">
         <div class="automation-name">OS2Forms → SBSYS Case Creation</div>
         <div class="automation-desc">When a form is submitted in OS2Forms, create a case in SBSYS and attach the form data.</div>
         <div class="automation-connectors">
@@ -1620,6 +779,88 @@ Byggesagsafdelingen, Aarhus Kommune</div>
         </div>
       </div>
     </div>
+
+    <!-- Automation detail view -->
+    <div class="automation-detail" id="automation-detail-view">
+      <button class="process-back-btn" onclick="backToAutomations()">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All automations
+      </button>
+
+      <div class="automation-detail-header">
+        <h3>OS2Forms &rarr; SBSYS Case Creation</h3>
+        <div class="automation-status"><span class="dot"></span> Active</div>
+      </div>
+
+      <div class="automation-detail-grid">
+        <div class="automation-detail-card">
+          <h4>Description</h4>
+          <p>When a form is submitted in OS2Forms, create a case in SBSYS and attach the form data. Handles field mapping, validation, and error notifications.</p>
+        </div>
+        <div class="automation-detail-card">
+          <h4>Statistics</h4>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Runs this month</span>
+            <span class="task-detail-field-value">1,247</span>
+          </div>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Success rate</span>
+            <span class="task-detail-field-value" style="color:#66bb6a;">99.8%</span>
+          </div>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Avg duration</span>
+            <span class="task-detail-field-value">1.2s</span>
+          </div>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Last run</span>
+            <span class="task-detail-field-value">3 min ago</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="automation-detail-card">
+        <h4>Workflow steps</h4>
+        <div class="automation-step">
+          <span class="automation-step-num">1</span>
+          <strong>Trigger:</strong>&nbsp;OS2Forms webhook — form submission received
+        </div>
+        <div class="automation-step">
+          <span class="automation-step-num">2</span>
+          <strong>Transform:</strong>&nbsp;Map form fields to SBSYS case schema
+        </div>
+        <div class="automation-step">
+          <span class="automation-step-num">3</span>
+          <strong>Validate:</strong>&nbsp;Check required fields (CPR, address, category)
+        </div>
+        <div class="automation-step">
+          <span class="automation-step-num">4</span>
+          <strong>Create:</strong>&nbsp;POST to SBSYS API — create case with attachments
+        </div>
+        <div class="automation-step">
+          <span class="automation-step-num">5</span>
+          <strong>Notify:</strong>&nbsp;Send confirmation email to submitter
+        </div>
+      </div>
+
+      <div class="automation-detail-grid">
+        <div class="automation-detail-card">
+          <h4>Connectors</h4>
+          <div class="automation-connectors" style="margin:0;">
+            <span class="connector-tag">OS2Forms</span>
+            <span class="connector-tag">SBSYS</span>
+            <span class="connector-tag">Email</span>
+          </div>
+        </div>
+        <div class="automation-detail-card">
+          <h4>Actions</h4>
+          <div style="display:flex;gap:8px;">
+            <button class="btn">Edit in n8n</button>
+            <button class="btn">View logs</button>
+            <button class="btn" style="color:#ef5350;border-color:#ef5350;">Disable</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ====== Dashboard ====== -->
@@ -1654,21 +895,36 @@ Byggesagsafdelingen, Aarhus Kommune</div>
     <div class="chart-row">
       <div class="chart-card">
         <div class="chart-title">Process completions per day (last 14 days)</div>
-        <div class="mini-bars">
-          <div class="mini-bar" style="height:45%"></div>
-          <div class="mini-bar" style="height:62%"></div>
-          <div class="mini-bar" style="height:38%"></div>
-          <div class="mini-bar" style="height:71%"></div>
-          <div class="mini-bar" style="height:55%"></div>
-          <div class="mini-bar weekend" style="height:12%"></div>
-          <div class="mini-bar weekend" style="height:8%"></div>
-          <div class="mini-bar" style="height:48%"></div>
-          <div class="mini-bar" style="height:85%"></div>
-          <div class="mini-bar highlight" style="height:100%"></div>
-          <div class="mini-bar" style="height:60%"></div>
-          <div class="mini-bar" style="height:52%"></div>
-          <div class="mini-bar weekend" style="height:15%"></div>
-          <div class="mini-bar weekend" style="height:10%"></div>
+        <div class="chart-with-axis">
+          <div class="y-axis">
+            <span>120</span>
+            <span>90</span>
+            <span>60</span>
+            <span>30</span>
+            <span>0</span>
+          </div>
+          <div class="chart-bars-wrap">
+            <div class="mini-bars">
+              <div class="mini-bar" style="height:45%" data-count="54"></div>
+              <div class="mini-bar" style="height:62%" data-count="74"></div>
+              <div class="mini-bar" style="height:38%" data-count="46"></div>
+              <div class="mini-bar" style="height:71%" data-count="85"></div>
+              <div class="mini-bar" style="height:55%" data-count="66"></div>
+              <div class="mini-bar weekend" style="height:12%" data-count="14"></div>
+              <div class="mini-bar weekend" style="height:8%" data-count="10"></div>
+              <div class="mini-bar" style="height:48%" data-count="58"></div>
+              <div class="mini-bar" style="height:85%" data-count="102"></div>
+              <div class="mini-bar highlight" style="height:100%" data-count="120"></div>
+              <div class="mini-bar" style="height:60%" data-count="72"></div>
+              <div class="mini-bar" style="height:52%" data-count="62"></div>
+              <div class="mini-bar weekend" style="height:15%" data-count="18"></div>
+              <div class="mini-bar weekend" style="height:10%" data-count="12"></div>
+            </div>
+            <div class="x-axis">
+              <span>Ma</span><span>Ti</span><span>On</span><span>To</span><span>Fr</span><span>Lø</span><span>Sø</span>
+              <span>Ma</span><span>Ti</span><span>On</span><span>To</span><span>Fr</span><span>Lø</span><span>Sø</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="chart-card">
@@ -1687,36 +943,379 @@ Byggesagsafdelingen, Aarhus Kommune</div>
   <!-- ====== AI Assistant ====== -->
   <div class="panel" id="panel-assistant">
     <div class="assistant-container">
-      <div class="assistant-chat">
+      <!-- Chat history sidebar -->
+      <div class="chat-history">
+        <div class="chat-history-header">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          My Chats
+        </div>
+        <div class="chat-history-user">
+          <div class="sidebar-avatar">JP</div>
+          Jesper P. &mdash; personal chats
+        </div>
+        <div class="chat-history-list">
+          <div class="chat-history-item active">
+            Process vs automation
+            <div class="chat-history-time">Today, 10:15</div>
+          </div>
+          <div class="chat-history-item">
+            SBSYS integration errors
+            <div class="chat-history-time">Yesterday, 14:30</div>
+          </div>
+          <div class="chat-history-item">
+            Draft parking complaint flow
+            <div class="chat-history-time">Apr 15</div>
+          </div>
+          <div class="chat-history-item">
+            KMD field mapping help
+            <div class="chat-history-time">Apr 12</div>
+          </div>
+          <div class="chat-history-item">
+            How to set up Digital Post
+            <div class="chat-history-time">Apr 10</div>
+          </div>
+        </div>
+        <div class="chat-history-new">+ New chat</div>
+      </div>
+
+      <div class="assistant-chat" style="border-radius:0 10px 10px 0;">
         <div class="assistant-header">
           <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:6px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           General assistant — ask about processes, automations, or platform capabilities
         </div>
         <div class="assistant-messages">
           <div class="assistant-msg ai">
-            Welcome! I can help you get started. Here are some things I can do:
+            Welcome! I can help you with the platform. Here are some things I can do:
             <br><br>
             &bull; Explain how a process or automation works<br>
-            &bull; Help you decide between a process or an automation for your use case<br>
-            &bull; Suggest optimizations based on your current dashboard data<br>
-            &bull; Answer questions about available integrations and connectors
+            &bull; Help you decide between a process or an automation<br>
+            &bull; Suggest optimizations based on your dashboard data<br>
+            &bull; Answer questions about integrations and connectors
             <br><br>
-            To create a new process or automation, use the buttons in those sections — I'll be there to help with AI-assisted drafting if you choose it.
+            I can also <strong>execute skills</strong> directly &mdash; try asking me to:
+            <br>
+            <span class="assistant-skill-btn">/analyze-process Parking Complaint</span>
+            <span class="assistant-skill-btn">/check-status SBSYS</span>
+            <span class="assistant-skill-btn">/draft-automation</span>
+            <span class="assistant-skill-btn">/explain-errors n8n</span>
           </div>
           <div class="assistant-msg user">
-            What's the difference between creating a process and an automation?
+            /analyze-process Parking Complaint Handling
           </div>
           <div class="assistant-msg ai">
-            Good question. A <strong>process</strong> is a multi-step flow that may involve humans, AI agents, and integrations — think of it as the full end-to-end workflow (e.g., handling a complaint from submission to resolution). It's modeled in BPMN and managed by the process engine.
+            <strong>Analysis: Parking Complaint Handling (v2.1)</strong>
             <br><br>
-            An <strong>automation</strong> is a technical integration between systems — it moves data, triggers actions, or connects APIs. Automations are the building blocks that processes use. For example, "fetch case from SBSYS" is an automation; "handle parking complaint" is a process that uses that automation.
+            Running the analysis skill&hellip; Here's what I found:
+
+            <div class="diagram-box">
+              <div style="font-size:11px;color:#999;margin-bottom:4px;">Process flow overview</div>
+              <div class="diagram-flow">
+                <span class="diagram-node" style="background:#edf7ed;border:1px solid #66bb6a;color:#2e7d32;">Start</span>
+                <span class="diagram-arrow">&rarr;</span>
+                <span class="diagram-node" style="background:#fffbeb;border:1px solid #f59e0b;color:#b45309;">AI Classify</span>
+                <span class="diagram-arrow">&rarr;</span>
+                <span class="diagram-node" style="background:#ecfeff;border:1px solid #06b6d4;color:#0e7490;">SBSYS Fetch</span>
+                <span class="diagram-arrow">&rarr;</span>
+                <span class="diagram-node" style="background:#f0f3ff;border:1px solid #3b5bdb;color:#3b5bdb;">Review</span>
+                <span class="diagram-arrow">&rarr;</span>
+                <span class="diagram-node" style="background:#fffbeb;border:1px solid #f59e0b;color:#b45309;">AI Draft</span>
+                <span class="diagram-arrow">&rarr;</span>
+                <span class="diagram-node" style="background:#f0f3ff;border:1px solid #3b5bdb;color:#3b5bdb;">Approve</span>
+                <span class="diagram-arrow">&rarr;</span>
+                <span class="diagram-node" style="background:#fdecea;border:1px solid #ef5350;color:#c62828;">End</span>
+              </div>
+            </div>
+
+            <strong>Key metrics:</strong><br>
+            &bull; 12 active instances, 87 completed this month<br>
+            &bull; Avg completion: 2.4 days (target: 3 days) &mdash; <span style="color:#66bb6a;">within SLA</span><br>
+            &bull; Bottleneck: "Review &amp; decide" step accounts for 68% of total wait time<br>
+            &bull; 4 cases waiting for human review right now
             <br><br>
-            If you're unsure which to create, click <strong>+ New Process</strong> or <strong>+ New Automation</strong> and choose "Chat about it" — I'll help you figure out the right approach.
+            <strong>Suggestion:</strong> The review step could benefit from AI pre-screening. Cases classified as "low severity" could be auto-approved with a confidence threshold, reducing the human review queue by an estimated 40%.
+
+            <span class="code-label">Example: Auto-approve rule (Flowable expression)</span>
+            <pre>${severity == 'low' &amp;&amp; aiConfidence > 0.92}</pre>
+
+            Want me to draft this optimization as a process change?
           </div>
         </div>
         <div class="assistant-input-bar">
-          <input class="assistant-input" placeholder="Ask a question about the platform..." />
+          <input class="assistant-input" placeholder="Ask a question or use /skill-name..." />
           <button class="assistant-send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Agents ====== -->
+  <div class="panel" id="panel-agents">
+    <div class="agent-admin-note">
+      <svg class="icon-svg" viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;"><path d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Agent management is restricted to administrators. Agents have access to connected systems and can perform actions on behalf of users.
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button class="btn primary" onclick="openModal('agent')">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M12 5v14M5 12h14"/></svg>
+        Create Agent
+      </button>
+      <button class="btn">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        Import Template
+      </button>
+    </div>
+
+    <div class="agent-grid" id="agent-grid">
+      <div class="agent-card" onclick="openAgentDetail()" style="cursor:pointer;">
+        <div class="agent-card-header">
+          <div class="agent-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;color:#b45309;"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          </div>
+          <div>
+            <div class="agent-name">Complaint Classifier</div>
+            <div class="agent-role">Classification &amp; routing</div>
+          </div>
+        </div>
+        <div class="agent-desc">Classifies incoming citizen complaints by type and severity. Routes to appropriate department and sets initial priority.</div>
+        <div class="agent-skills">
+          <span class="agent-skill-tag">SBSYS Expert</span>
+          <span class="agent-skill-tag">NLP Classification</span>
+          <span class="agent-skill-tag">Priority Scoring</span>
+        </div>
+        <div class="agent-footer">
+          <span class="dot"></span> Active &middot; Used in 2 processes &middot; 1,340 runs this month
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="agent-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;color:#b45309;"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div>
+            <div class="agent-name">Response Drafter</div>
+            <div class="agent-role">Citizen communication</div>
+          </div>
+        </div>
+        <div class="agent-desc">Drafts formal responses to citizens in Danish, following municipality communication guidelines and legal templates.</div>
+        <div class="agent-skills">
+          <span class="agent-skill-tag">Danish Language</span>
+          <span class="agent-skill-tag">Legal Templates</span>
+          <span class="agent-skill-tag">BR18 Expert</span>
+          <span class="agent-skill-tag">Digital Post Format</span>
+        </div>
+        <div class="agent-footer">
+          <span class="dot"></span> Active &middot; Used in 3 processes &middot; 892 runs this month
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-card-header">
+          <div class="agent-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;color:#b45309;"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+          </div>
+          <div>
+            <div class="agent-name">Onboarding Assistant</div>
+            <div class="agent-role">HR &amp; IT provisioning</div>
+          </div>
+        </div>
+        <div class="agent-desc">Generates personalized welcome packs, coordinates system access provisioning, and ensures all onboarding steps are completed.</div>
+        <div class="agent-skills">
+          <span class="agent-skill-tag">AD / Entra ID</span>
+          <span class="agent-skill-tag">KMD HR</span>
+          <span class="agent-skill-tag">Welcome Pack Gen</span>
+        </div>
+        <div class="agent-footer">
+          <span class="dot"></span> Active &middot; Used in 1 process &middot; 22 runs this month
+        </div>
+      </div>
+
+      <div class="agent-card" style="border-style:dashed;opacity:0.7;">
+        <div class="agent-card-header">
+          <div class="agent-icon" style="background:#f5f6f8;border-color:#ccc;">
+            <svg class="icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;color:#999;"><path d="M12 5v14M5 12h14"/></svg>
+          </div>
+          <div>
+            <div class="agent-name" style="color:#999;">Create new agent</div>
+            <div class="agent-role">Define skills, system access, and behavior</div>
+          </div>
+        </div>
+        <div class="agent-desc">Create an agent with specific expertise and skills. Configure which systems it can access and what actions it can perform.</div>
+        <div class="agent-skills">
+          <span class="agent-skill-tag" style="background:#f0f0f0;color:#999;">+ Add skills</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent detail view -->
+    <div class="automation-detail" id="agent-detail-view">
+      <button class="process-back-btn" onclick="backToAgents()">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All agents
+      </button>
+
+      <div class="automation-detail-header">
+        <div class="agent-icon" style="margin-right:4px;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;color:#b45309;"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        </div>
+        <div>
+          <h3>Complaint Classifier</h3>
+          <div style="font-size:12px;color:#999;">Classification &amp; routing</div>
+        </div>
+        <div class="automation-status" style="margin-left:16px;"><span class="dot"></span> Active</div>
+      </div>
+
+      <div class="automation-detail-grid">
+        <div class="automation-detail-card">
+          <h4>Description</h4>
+          <p>Classifies incoming citizen complaints by type and severity. Routes to the appropriate department and sets initial priority based on content analysis, historical patterns, and regulatory requirements.</p>
+        </div>
+        <div class="automation-detail-card">
+          <h4>Statistics</h4>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Runs this month</span>
+            <span class="task-detail-field-value">1,340</span>
+          </div>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Accuracy</span>
+            <span class="task-detail-field-value" style="color:#66bb6a;">96.2%</span>
+          </div>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Avg response time</span>
+            <span class="task-detail-field-value">0.8s</span>
+          </div>
+          <div class="task-detail-field">
+            <span class="task-detail-field-label">Used in processes</span>
+            <span class="task-detail-field-value">2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="automation-detail-card">
+        <h4>Skills</h4>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fafbfc;border:1px solid #f0f0f0;border-radius:8px;">
+            <span class="agent-skill-tag">SBSYS Expert</span>
+            <span style="font-size:12px;color:#666;">Understands SBSYS case structure, categories, and field mappings</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fafbfc;border:1px solid #f0f0f0;border-radius:8px;">
+            <span class="agent-skill-tag">NLP Classification</span>
+            <span style="font-size:12px;color:#666;">Analyzes complaint text to determine type, severity, and urgency</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fafbfc;border:1px solid #f0f0f0;border-radius:8px;">
+            <span class="agent-skill-tag">Priority Scoring</span>
+            <span style="font-size:12px;color:#666;">Assigns priority based on severity, SLA requirements, and queue depth</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="automation-detail-grid">
+        <div class="automation-detail-card">
+          <h4>System access</h4>
+          <div class="automation-connectors" style="margin:0;">
+            <span class="connector-tag">SBSYS (read/write)</span>
+            <span class="connector-tag">OS2Forms (read)</span>
+            <span class="connector-tag">PostgreSQL (read)</span>
+          </div>
+        </div>
+        <div class="automation-detail-card">
+          <h4>Actions</h4>
+          <div style="display:flex;gap:8px;">
+            <button class="btn">Edit configuration</button>
+            <button class="btn">View logs</button>
+            <button class="btn" style="color:#ef5350;border-color:#ef5350;">Disable</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Settings ====== -->
+  <div class="panel" id="panel-settings">
+    <div class="automation-detail-grid">
+      <div class="automation-detail-card">
+        <h4>Identity Provider (Keycloak)</h4>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Keycloak URL</span>
+          <span class="task-detail-field-value settings-url">https://keycloak.aarhus.dk/auth</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Realm</span>
+          <span class="task-detail-field-value">aarhus-kommune</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Client ID</span>
+          <span class="task-detail-field-value settings-url">orchestration-studio</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Status</span>
+          <span class="task-detail-field-value"><span class="dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#66bb6a;margin-right:4px;"></span> Connected</span>
+        </div>
+      </div>
+
+      <div class="automation-detail-card">
+        <h4>SSO / Federation</h4>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Federation type</span>
+          <span class="task-detail-field-value">SAML 2.0</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Identity provider</span>
+          <span class="task-detail-field-value">Microsoft Entra ID</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Entity ID</span>
+          <span class="task-detail-field-value settings-url" style="font-size:11px;">login.microsoftonline.com/aarhus</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Metadata</span>
+          <span class="task-detail-field-value" style="color:#66bb6a;">Auto-configured</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Status</span>
+          <span class="task-detail-field-value"><span class="dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#66bb6a;margin-right:4px;"></span> Active</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="automation-detail-grid" style="margin-top:16px;">
+      <div class="automation-detail-card">
+        <h4>Role Mapping (AD Groups &rarr; Platform Roles)</h4>
+        <table class="process-list-table" style="margin-top:4px;">
+          <thead>
+            <tr>
+              <th>AD Group</th>
+              <th>Platform Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="settings-url">AAK-IT-Admins</td><td>Administrator</td></tr>
+            <tr><td class="settings-url">AAK-Process-Designers</td><td>Process Designer</td></tr>
+            <tr><td class="settings-url">AAK-Managers</td><td>Manager</td></tr>
+            <tr><td class="settings-url">AAK-Caseworkers</td><td>Caseworker</td></tr>
+            <tr><td class="settings-url">AAK-Leadership</td><td>Manager (read-only)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="automation-detail-card">
+        <h4>Session Management</h4>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Session timeout</span>
+          <span class="task-detail-field-value">8 hours</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Idle timeout</span>
+          <span class="task-detail-field-value">30 minutes</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Max concurrent sessions</span>
+          <span class="task-detail-field-value">3 per user</span>
+        </div>
+        <div class="task-detail-field">
+          <span class="task-detail-field-label">Remember me</span>
+          <span class="task-detail-field-value">Enabled (14 days)</span>
         </div>
       </div>
     </div>
@@ -1755,35 +1354,46 @@ Byggesagsafdelingen, Aarhus Kommune</div>
 
     <div class="chart-row">
       <div class="chart-card">
-        <div class="chart-title">API response time (p95, last 24h)</div>
-        <div class="mini-bars">
-          <div class="mini-bar" style="height:20%"></div>
-          <div class="mini-bar" style="height:22%"></div>
-          <div class="mini-bar" style="height:18%"></div>
-          <div class="mini-bar" style="height:25%"></div>
-          <div class="mini-bar" style="height:21%"></div>
-          <div class="mini-bar" style="height:24%"></div>
-          <div class="mini-bar" style="height:19%"></div>
-          <div class="mini-bar" style="height:23%"></div>
-          <div class="mini-bar" style="height:20%"></div>
-          <div class="mini-bar" style="height:22%"></div>
-          <div class="mini-bar" style="height:18%"></div>
-          <div class="mini-bar highlight" style="height:55%"></div>
-          <div class="mini-bar" style="height:30%"></div>
-          <div class="mini-bar" style="height:22%"></div>
-          <div class="mini-bar" style="height:20%"></div>
-          <div class="mini-bar" style="height:19%"></div>
-          <div class="mini-bar" style="height:21%"></div>
-          <div class="mini-bar" style="height:23%"></div>
-          <div class="mini-bar" style="height:20%"></div>
-          <div class="mini-bar" style="height:22%"></div>
-          <div class="mini-bar" style="height:18%"></div>
-          <div class="mini-bar" style="height:20%"></div>
-          <div class="mini-bar" style="height:22%"></div>
-          <div class="mini-bar" style="height:21%"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-top:6px;">
-          <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>Now</span>
+        <div class="chart-title">API response time (95th percentile, last 24h)</div>
+        <div class="chart-with-axis">
+          <div class="y-axis">
+            <span>500ms</span>
+            <span>375ms</span>
+            <span>250ms</span>
+            <span>125ms</span>
+            <span>0</span>
+          </div>
+          <div class="chart-bars-wrap">
+            <div class="mini-bars">
+              <div class="mini-bar" style="height:20%" data-count="100ms"></div>
+              <div class="mini-bar" style="height:22%" data-count="110ms"></div>
+              <div class="mini-bar" style="height:18%" data-count="90ms"></div>
+              <div class="mini-bar" style="height:25%" data-count="125ms"></div>
+              <div class="mini-bar" style="height:21%" data-count="105ms"></div>
+              <div class="mini-bar" style="height:24%" data-count="120ms"></div>
+              <div class="mini-bar" style="height:19%" data-count="95ms"></div>
+              <div class="mini-bar" style="height:23%" data-count="115ms"></div>
+              <div class="mini-bar" style="height:20%" data-count="100ms"></div>
+              <div class="mini-bar" style="height:22%" data-count="110ms"></div>
+              <div class="mini-bar" style="height:18%" data-count="90ms"></div>
+              <div class="mini-bar highlight" style="height:55%" data-count="275ms"></div>
+              <div class="mini-bar" style="height:30%" data-count="150ms"></div>
+              <div class="mini-bar" style="height:22%" data-count="110ms"></div>
+              <div class="mini-bar" style="height:20%" data-count="100ms"></div>
+              <div class="mini-bar" style="height:19%" data-count="95ms"></div>
+              <div class="mini-bar" style="height:21%" data-count="105ms"></div>
+              <div class="mini-bar" style="height:23%" data-count="115ms"></div>
+              <div class="mini-bar" style="height:20%" data-count="100ms"></div>
+              <div class="mini-bar" style="height:22%" data-count="110ms"></div>
+              <div class="mini-bar" style="height:18%" data-count="90ms"></div>
+              <div class="mini-bar" style="height:20%" data-count="100ms"></div>
+              <div class="mini-bar" style="height:22%" data-count="110ms"></div>
+              <div class="mini-bar" style="height:21%" data-count="105ms"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-top:6px;padding-left:6px;">
+              <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>Now</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="chart-card">
@@ -1857,6 +1467,7 @@ Byggesagsafdelingen, Aarhus Kommune</div>
   </div>
 </div>
 
+<!-- Modals -->
 <!-- ====== New Process Modal ====== -->
 <div class="modal-overlay" id="modal-process">
   <div class="modal">
@@ -1933,84 +1544,66 @@ Byggesagsafdelingen, Aarhus Kommune</div>
   </div>
 </div>
 
-<script>
-  function showPanel(name) {
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-    document.getElementById('panel-' + name).classList.add('active');
-    event.currentTarget.classList.add('active');
-    const titles = {
-      processes: 'Process Map',
-      tasks: 'My Tasks',
-      automations: 'Automations',
-      dashboard: 'Dashboard',
-      assistant: 'AI Assistant',
-      operations: 'Operations'
-    };
-    document.getElementById('panelTitle').textContent = titles[name] || name;
-  }
+<!-- ====== New Agent Modal ====== -->
+<div class="modal-overlay" id="modal-agent">
+  <div class="modal">
+    <h3>Create Agent</h3>
+    <p>How would you like to create your agent?</p>
+    <div class="modal-options">
+      <div class="modal-option" onclick="closeModal('agent')">
+        <div class="modal-option-icon" style="background:#fffbeb;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;color:#b45309;"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>Configure manually</h4>
+          <p>Define the agent's name, role, skills, and system access step by step.</p>
+        </div>
+      </div>
+      <div class="modal-option" onclick="closeModal('agent')">
+        <div class="modal-option-icon" style="background:#fffbeb;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;color:#b45309;"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>AI-assisted setup</h4>
+          <p>Describe what the agent should do and which systems it needs. The AI will suggest a configuration.</p>
+        </div>
+      </div>
+      <div class="modal-option" onclick="closeModal('agent'); showPanel2('assistant');">
+        <div class="modal-option-icon" style="background:#fffbeb;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;color:#b45309;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="modal-option-text">
+          <h4>Chat about it</h4>
+          <p>Not sure what skills the agent needs? Discuss your use case with the AI assistant first.</p>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close" onclick="closeModal('agent')">Cancel</button>
+  </div>
+</div>
 
-  function showPanel2(name) {
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-    document.getElementById('panel-' + name).classList.add('active');
-    // Find and activate the correct sidebar item
-    document.querySelectorAll('.sidebar-item').forEach(i => {
-      if (i.textContent.trim().replace(/\d/g,'').trim() === {
-        processes: 'Process Map',
-        tasks: 'My Tasks',
-        automations: 'Automations',
-        dashboard: 'Dashboard',
-        assistant: 'AI Assistant'
-      }[name]) i.classList.add('active');
-    });
-    const titles = {
-      processes: 'Process Map',
-      tasks: 'My Tasks',
-      automations: 'Automations',
-      dashboard: 'Dashboard',
-      assistant: 'AI Assistant',
-      operations: 'Operations'
-    };
-    document.getElementById('panelTitle').textContent = titles[name] || name;
-  }
+<!-- ====== Deploy Confirmation Modal ====== -->
+<div class="modal-overlay" id="modal-deploy">
+  <div class="modal">
+    <h3>Deploy to Production</h3>
+    <p>You are about to deploy <strong>Parking Complaint Handling v2.2</strong> to production. This will replace the currently active version (v2.1).</p>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:6px;">Deployment notes</label>
+      <textarea style="width:100%;height:60px;border:1px solid #e5e7eb;border-radius:8px;padding:8px 12px;font-size:12px;font-family:inherit;color:#333;resize:vertical;" placeholder="Describe what changed in this version..."></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#666;cursor:pointer;">
+        <input type="checkbox" checked style="accent-color:#3b5bdb;" />
+        Notify process stakeholders (3 people)
+      </label>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button class="btn" onclick="closeModal('deploy')">Cancel</button>
+      <button class="btn deploy" onclick="closeModal('deploy')">Confirm &amp; Deploy</button>
+    </div>
+  </div>
+</div>
 
-  function openTaskDetail() {
-    document.querySelector('.kanban-board').style.display = 'none';
-    document.querySelector('.kanban-filters').style.display = 'none';
-    document.getElementById('task-detail-view').classList.add('active');
-  }
-
-  function backToKanban() {
-    document.getElementById('task-detail-view').classList.remove('active');
-    document.querySelector('.kanban-board').style.display = 'flex';
-    document.querySelector('.kanban-filters').style.display = 'flex';
-  }
-
-  function openProcess(name) {
-    document.querySelectorAll('.process-view').forEach(v => v.classList.remove('active'));
-    document.getElementById('process-' + name).classList.add('active');
-  }
-
-  function backToList() {
-    document.querySelectorAll('.process-view').forEach(v => v.classList.remove('active'));
-    document.getElementById('process-list-view').classList.add('active');
-  }
-
-  function openModal(type) {
-    document.getElementById('modal-' + type).classList.add('visible');
-  }
-
-  function closeModal(type) {
-    document.getElementById('modal-' + type).classList.remove('visible');
-  }
-
-  // Close modal on overlay click
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) overlay.classList.remove('visible');
-    });
-  });
-</script>
+<script src="unified-platform.js"></script>
 </body>
 </html>
