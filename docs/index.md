@@ -34,3 +34,19 @@ Kan vi erstatte Excel-baseret lønforhandling med et struktureret system der tr�
 
 - [Pitch og løsningsbeskrivelse](projects/salary-negotiation/index.md) — problem, løsning, integrationer og tekniske forudsætninger
 - [Interaktiv prototype](projects/salary-negotiation/mocks.md) — personaleleder, HR-behandling og chefgodkendelse
+
+---
+
+### [Agentic Orchestration Studio](projects/agentic-orchestration/index.md)
+
+**Status:** Draft | **Started:** April 2026
+
+Can we build a shared, open-source platform for mapping, automating, orchestrating, and measuring business processes across Aarhus Kommune?
+
+Inspired by TwoDay's commercial AOS, this project researches the open-source landscape and proposes an architecture for a self-hosted orchestration platform covering AI agents, RPA, workflow automation, and human-in-the-loop.
+
+**Key deliverables:**
+
+- [Open source landscape analysis](projects/agentic-orchestration/open-source-landscape.md) across 5 tool categories
+- [Architecture options](projects/agentic-orchestration/architecture.md) — full and minimal composed stacks
+- [Considerations](projects/agentic-orchestration/considerations.md) — roles, security, OS2, funding

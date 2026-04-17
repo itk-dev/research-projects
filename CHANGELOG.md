@@ -33,6 +33,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Interactive HTML mock: Salary negotiation workflow with three tabs (personaleleder, HR-behandling, chefgodkendelse)
 - Mocks listing page
 
+### Added — Agentic Orchestration Studio Project
+- Main research report with pitch, problem statement, and recommendations
+- Open source landscape analysis across 5 categories (orchestration, BPM, agents, RPA, integration)
+- Feature comparison matrix of 15+ open-source tools
+- Two architecture options: full composed stack and minimal viable stack
+- Considerations document covering roles, security, OS2Forms, scalability, and funding
+- Denmark/OS2 public sector alignment analysis
+
 ### Changed
 - Rebranded site from "AI Research — Aarhus Kommune" to "ITKdev Research"
 - Replaced green theme with neutral black/grey palette

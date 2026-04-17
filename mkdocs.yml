@@ -37,6 +37,12 @@ nav:
   - Lønforhandlingssystem:
       - Overview: projects/salary-negotiation/index.md
       - Interactive Mocks: projects/salary-negotiation/mocks.md
+  - Agentic Orchestration Studio:
+      - Overview: projects/agentic-orchestration/index.md
+      - Open Source Landscape: projects/agentic-orchestration/open-source-landscape.md
+      - Architecture Options: projects/agentic-orchestration/architecture.md
+      - Considerations: projects/agentic-orchestration/considerations.md
+      - Interactive Mocks: projects/agentic-orchestration/mocks.md
   - About: about.md
 
 markdown_extensions:
