@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — WCAG Contrast Checker Project
+- Color contrast accessibility tool for analyzing WCAG AA/AAA compliance
+- Interactive prototype with CSV upload, manual input, and Danish municipal sample palettes
+
+### Added — Deltag Aarhus Projekttidslinje Project
+- Interactive citizen engagement timeline for "Stationspladsen i Hjortshøj"
+- Responsive vertical/horizontal layout with milestone navigation
+
+### Added — Book Aarhus Project
+- Resource booking application prototype for rooms and facilities in Aarhus Kommune
+- Search, filtering, favorites, and responsive room cards
+
 ### Added — deltag.aarhus.dk Project
 - Hearing detail page prototype for Aarhus Kommune's citizen participation platform
 - Interactive mock with 784 simulated hearing responses, filtering, sorting, MitID login, submission form

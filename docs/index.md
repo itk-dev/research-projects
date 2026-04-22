@@ -22,4 +22,16 @@ features:
     details: Prototype af en høringsdetalje-side til Aarhus Kommunes borgerdeltagelsesplatform — med 784 simulerede høringssvar, MitID-login og variantskift.
     link: /projects/deltag-aarhus/
     linkText: View project
+  - title: WCAG Contrast Checker
+    details: Accessibility tool for analyzing color contrast ratios against WCAG AA/AAA standards. Upload CSV, add colors manually, or test with Danish municipal palettes.
+    link: /projects/wcag-contrast-checker/
+    linkText: View project
+  - title: Deltag Aarhus — Projekttidslinje
+    details: Interaktiv tidslinjeskabelon til borgerinddragelsesprojekter. Demonstrerer forløbet for "Stationspladsen i Hjortshøj" med milepæle fra 2023 til 2027.
+    link: /projects/deltag-aarhus-timeline/
+    linkText: View project
+  - title: Book Aarhus
+    details: Prototype af en responsiv bookingapplikation til lokaler og faciliteter i Aarhus Kommune med søgning, filtrering og favoritter.
+    link: /projects/book-aarhus/
+    linkText: View project
 ---
