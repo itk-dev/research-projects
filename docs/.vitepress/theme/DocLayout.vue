@@ -1,6 +1,7 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
 import PasswordGate from './PasswordGate.vue'
+import HomeFeatures from './HomeFeatures.vue'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 
@@ -8,6 +9,7 @@ const { Layout } = DefaultTheme
 const { frontmatter, page } = useData()
 
 const isProtected = computed(() => !!frontmatter.value.protected)
+const isHome = computed(() => frontmatter.value.layout === 'home')
 
 const lastUpdated = computed(() => {
   if (!page.value.lastUpdated) return null
@@ -38,6 +40,9 @@ const hasInfo = computed(() => frontmatter.value.authors?.length || lastUpdated.
           <strong>Last updated:</strong> {{ lastUpdated }}
         </span>
       </div>
+    </template>
+    <template #home-features-before>
+      <HomeFeatures v-if="isHome" />
     </template>
   </Layout>
 </template>
