@@ -12,5 +12,5 @@ Interaktive HTML-prototyper der demonstrerer den foreslåede løsning. Åbn dem 
 
 ---
 
-**<a href="/projects/salary-negotiation/mocks/salary-negotiation.html" target="_blank">Lønforhandling — Komplet workflow ↗</a>**
+**<a href="/research-projects/projects/salary-negotiation/mocks/salary-negotiation.html" target="_blank">Lønforhandling — Komplet workflow ↗</a>**
 Personalelederens hovedvisning med budgetoverblik, medarbejdertabel med løndata, indstillingsformular med engangsbeløb, fast tillæg, begrundelse og prioritet. Restbudgettet opdateres automatisk. Skift mellem faner for at se HR-behandling og chefgodkendelse.
