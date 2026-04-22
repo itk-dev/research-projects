@@ -1,0 +1,49 @@
+/* Info Box — blue highlighted information panel with header and body */
+
+.info-box {
+  max-width: 787px;
+  margin: 0 auto 48px;
+  padding-inline: 116px;
+  max-width: var(--container-max);
+}
+
+.info-box__header {
+  background: var(--blue-200);
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  min-height: 67px;
+  border-radius: 4px 4px 0 0;
+}
+
+.info-box__title {
+  font-family: var(--font-family-inter);
+  font-size: 20px;
+  font-weight: var(--fw-semibold);
+  color: var(--black);
+}
+
+.info-box__body {
+  background: var(--blue-50);
+  padding: 32px;
+  border-radius: 0 0 4px 4px;
+}
+
+.info-box__body p {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-base);
+  line-height: 24px;
+}
+
+.info-box__body a {
+  color: var(--black);
+  display: block;
+  line-height: 24px;
+}
+
+@media (max-width: 1200px) {
+  .info-box {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}

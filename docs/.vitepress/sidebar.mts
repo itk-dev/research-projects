@@ -37,11 +37,23 @@ const agenticOrchestration: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const deltagAarhus: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'deltag.aarhus.dk',
+    items: [
+      { text: 'Overview', link: '/projects/deltag-aarhus/' },
+      { text: 'Redaktionelt indhold', link: '/projects/deltag-aarhus/editor-content-requirements' },
+      { text: 'Interactive Mocks', link: '/projects/deltag-aarhus/mocks' },
+    ],
+  },
+]
+
 export function sidebar(): DefaultTheme.Sidebar {
   return {
     '/projects/climate-nudging/': climateNudging,
     '/projects/salary-negotiation/': salaryNegotiation,
     '/projects/agentic-orchestration/': agenticOrchestration,
+    '/projects/deltag-aarhus/': deltagAarhus,
   }
 }
 

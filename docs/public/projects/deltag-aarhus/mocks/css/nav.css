@@ -1,0 +1,153 @@
+/* Navigation — main site navigation bar with logo, links, search, and compact scroll variant */
+
+.nav {
+  position: sticky;
+  /* Offset below the mock banner (28px tall) */
+  top: 28px;
+  /* Above content, below modals (1000) */
+  z-index: 100;
+  background: var(--white);
+  box-shadow: var(--shadow-nav);
+  padding: 18px 36px 24px;
+  display: flex;
+  justify-content: center;
+  transition: padding 0.3s ease;
+}
+
+.nav__inner {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: var(--container-max);
+}
+
+.nav__logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
+
+.nav__logo img {
+  transition: height 0.3s ease;
+}
+
+.nav__logo svg {
+  height: 40px;
+  width: auto;
+}
+
+.nav__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  transition: gap 0.3s ease;
+}
+
+.nav__sub-menu {
+  display: flex;
+  gap: 24px;
+  overflow: hidden;
+  max-height: 24px;
+  opacity: 1;
+  transition: max-height 0.3s ease, opacity 0.2s ease, margin 0.3s ease;
+}
+
+/* Compact nav on scroll */
+.nav--compact {
+  padding: 8px 36px 12px;
+}
+
+.nav--compact .nav__logo img {
+  height: 40px;
+}
+
+.nav--compact .nav__inner {
+  align-items: center;
+}
+
+.nav--compact .nav__right {
+  gap: 0;
+}
+
+.nav--compact .nav__sub-menu {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+.nav--compact .nav__link--active::after {
+  bottom: -19px;
+}
+
+.nav__sub-link {
+  font-size: var(--fs-small);
+  color: var(--text-primary);
+  text-decoration: none;
+  padding-bottom: 3px;
+}
+
+.nav__sub-link:hover {
+  color: var(--text-link);
+}
+
+.nav__main-menu {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav__link {
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav__link:hover {
+  color: var(--petroleum);
+}
+
+.nav__link--active {
+  color: var(--petroleum);
+}
+
+.nav__link--active::after {
+  content: "";
+  position: absolute;
+  /* Aligns indicator with bottom edge of full nav */
+  bottom: -26px;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--petroleum);
+}
+
+.nav__divider {
+  width: 1px;
+  height: 18px;
+  background: var(--gray-300);
+}
+
+.nav__search {
+  color: var(--petroleum);
+  font-size: 18px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .nav__main-menu {
+    display: none;
+  }
+
+  .nav__sub-menu {
+    display: none;
+  }
+}

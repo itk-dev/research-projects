@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — deltag.aarhus.dk Project
+- Hearing detail page prototype for Aarhus Kommune's citizen participation platform
+- Interactive mock with 784 simulated hearing responses, filtering, sorting, MitID login, submission form
+- Variant switching between open and closed hearing states
+- Statistics (SVG line chart, category breakdown), interactive map, glossary tooltips
+- Editor content requirements document (redaktionelt indhold)
+
 ### Changed
 - Migrated from MkDocs + Material theme to VitePress
 - Adopted ITK Dev brand colors (teal/cyan) replacing neutral black/grey palette

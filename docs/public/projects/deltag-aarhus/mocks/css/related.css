@@ -1,0 +1,169 @@
+/* Related — related activities section with activity cards */
+
+.related-section {
+  background: var(--gray-100);
+  padding: 56px 0;
+}
+
+.related-section__title {
+  font-size: var(--fs-teaser);
+  font-weight: var(--fw-bold);
+  margin-bottom: 32px;
+}
+
+.related-section__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: 116px;
+}
+
+.related-section__grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: 116px;
+}
+
+/* Activity Card */
+.activity-card {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: box-shadow var(--transition-card-in);
+  position: relative;
+}
+
+.activity-card:hover {
+  box-shadow: var(--shadow-card);
+  color: var(--text-primary);
+}
+
+.activity-card__image {
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.activity-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-card-out);
+}
+
+.activity-card:hover .activity-card__image img {
+  transform: scale(1.07);
+}
+
+.activity-card__date-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: var(--white);
+  width: 59px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 15px 14px;
+}
+
+.activity-card__date-day {
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  text-align: center;
+}
+
+.activity-card__date-month {
+  font-size: var(--fs-small);
+  text-align: center;
+}
+
+.activity-card__body {
+  padding: 32px 29px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.activity-card__type {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--petroleum);
+  letter-spacing: 0.1px;
+}
+
+.activity-card__title {
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  line-height: 26px;
+  letter-spacing: 0.2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.activity-card__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-card__detail-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-350);
+  font-size: var(--fs-small);
+}
+
+.activity-card__detail-row:last-child {
+  border-bottom: none;
+}
+
+.activity-card__detail-row i {
+  width: 25px;
+  text-align: center;
+  color: var(--petroleum);
+  font-size: 20px;
+}
+
+.activity-card__arrow {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--text-primary);
+  font-size: var(--fs-small);
+}
+
+@media (max-width: 1200px) {
+  .related-section {
+    padding-inline: 40px;
+  }
+}
+
+@media (max-width: 960px) {
+  .related-section__grid {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .related-section__title {
+    padding-left: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .activity-card {
+    width: 100%;
+  }
+}

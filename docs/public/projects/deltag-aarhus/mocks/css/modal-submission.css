@@ -1,0 +1,116 @@
+/* Modal Submission — høringssvar submission form */
+
+.submission-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.submission-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.submission-form__label {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.submission-form__input,
+.submission-form__select,
+.submission-form__textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  background: var(--white);
+}
+
+.submission-form__input:read-only {
+  background: var(--gray-100);
+  color: var(--gray-650);
+}
+
+.submission-form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submission-form__input:focus,
+.submission-form__select:focus,
+.submission-form__textarea:focus {
+  outline: 2px solid var(--petroleum);
+  outline-offset: -1px;
+  border-color: var(--petroleum);
+}
+
+.submission-form__hint {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-xs);
+  color: var(--gray-650);
+  font-style: italic;
+}
+
+.submission-form__notice {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--gray-100);
+  border-radius: 4px;
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--gray-650);
+}
+
+.submission-form__notice i {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--gray-400);
+}
+
+.submission-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+}
+
+.submission-form__submit {
+  padding: 10px 32px;
+}
+
+/* Success state shown after mock submission */
+.submission-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.submission-success__icon {
+  font-size: 48px;
+  color: #2e7d32;
+}
+
+.submission-success__title {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-teaser);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+}
+
+.submission-success__text {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--gray-650);
+  max-width: 400px;
+}

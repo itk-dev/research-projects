@@ -1,0 +1,41 @@
+/* Modal Decision — decision modal with related document links */
+
+.decision-modal__links {
+  border-top: 1px solid var(--gray-200);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.decision-modal__links-title {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 4px;
+}
+
+.decision-modal__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--gray-100);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  transition: background var(--transition-fast);
+}
+
+.decision-modal__link:hover {
+  background: var(--gray-200);
+}
+
+.decision-modal__link i {
+  color: var(--petroleum);
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}

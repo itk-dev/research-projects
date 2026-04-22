@@ -1,0 +1,111 @@
+/* Design tokens from deltag.aarhus.dk design system.
+   This file contains only custom properties — no component styles.
+   Inter is the UI font (cards, modals, stats, pagination).
+   The base font-family (Arial stack) is used for body/prose text.
+   Breakpoints: 1200px (tablet), 960px (small tablet), 640px (mobile). */
+
+:root {
+  /* Brand */
+  --petroleum: #008486;
+  --petroleum-100: #e5eef0;
+  --petroleum-200: #cfe0e2;
+  --petroleum-300: #b2dada;
+  --petroleum-400: #8fcfcf;
+  --petroleum-800: #3d6d6d;
+  --petroleum-900: #2a4a4a;
+  --petroleum-muted: #467176;
+
+  /* Grayscale */
+  --white: #fff;
+  --gray-50: #f6f6f6;
+  --gray-100: #f5f5f5;
+  --gray-200: #eaeaea;
+  --gray-300: #e6e6e6;
+  --gray-350: #dfdfdf;
+  --gray-400: #d6d6d6;
+  --gray-500: #9d9d9d;
+  --gray-600: #858585;
+  --gray-650: #666;
+  --gray-700: #525252;
+  --gray-800: #444;
+  --gray-900: #333;
+  --black: #1a1a1a;
+
+  /* Accent */
+  --pink: #ee0043;
+  --blue: #3661d8;
+  --blue-50: #eff6ff;
+  --blue-100: #ebeffb;
+  --blue-200: #bfdbfe;
+  --purple: #673ab7;
+  --green: #008850;
+  --yellow: #ffe13d;
+  --yellow-50: #fffbeb;
+  --yellow-100: #fef3c7;
+  --orange: #ff5f31;
+  --red: #d32f2f;
+
+  /* Neutral Warm */
+  --peach-100: #f7f0e8;
+  --peach-200: #e8dfd4;
+  --peach-700: #7a6f64;
+
+  /* Semantic */
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-700);
+  --text-muted: var(--gray-500);
+  --text-inverse: var(--white);
+  --text-link: var(--petroleum);
+  --text-link-hover: var(--petroleum-800);
+
+  --bg-primary: var(--white);
+  --bg-secondary: var(--gray-50);
+  --bg-tertiary: var(--gray-200);
+
+  --border-default: var(--gray-300);
+  --border-strong: var(--gray-900);
+  --border-subtle: var(--gray-200);
+
+  /* Typography */
+  --font-family: arial, -apple-system, blinkmacsystemfont, "Segoe UI", roboto,
+    "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --font-family-inter: "Inter", var(--font-family);
+
+  --fs-display: 4rem;
+  --fs-h1: 2.2rem;
+  --fs-teaser: 1.625rem;
+  --fs-h2: 1.4rem;
+  --fs-lead: 1.3rem;
+  --fs-large: 1.25rem;
+  --fs-h3: 1.2rem;
+  --fs-h4: 1.1rem;
+  --fs-base: 1rem;
+  --fs-small: 0.875rem;
+  --fs-xs: 0.75rem;
+
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  --lh-body: 1.5;
+  --lh-heading: 1.4;
+
+  /* Spacing */
+  --spacer: 1rem;
+
+  /* Shadows */
+  --shadow-card: 0 0.25rem 1rem rgb(0 0 0 / 16%);
+  --shadow-nav: 0 2px 10px rgb(0 0 0 / 30%);
+  --shadow-medium: 0 0 2px rgb(0 0 0 / 2%), 1px 3px 16px rgb(0 0 0 / 8%);
+
+  /* Layout */
+  --container-max: 1352px;
+  --container-padding: 124px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease-in;
+  --transition-card-in: 200ms ease;
+  --transition-card-out: 400ms ease;
+}

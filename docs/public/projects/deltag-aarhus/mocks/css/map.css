@@ -1,0 +1,24 @@
+/* Map — embedded map section with bordered container */
+
+.map-box-section {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 116px 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.map-box {
+  width: 100%;
+  height: 450px;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+}
+
+@media (max-width: 1200px) {
+  .map-box-section {
+    padding-inline: 40px;
+  }
+}
