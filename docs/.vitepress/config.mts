@@ -7,6 +7,7 @@ export default withMermaid(
     title: 'ITKdev Research',
     description: 'Research projects from ITKdev',
 
+    base: '/research-projects/',
     lang: 'da-DK',
     srcDir: '.',
     outDir: '../_site',

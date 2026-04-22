@@ -105,7 +105,7 @@ The leaf indicator is a small icon in the chat input area that changes color bas
 
 **Behavior:** Updates in real-time as the user types. Hovering shows a tooltip with estimated impact and an everyday equivalence.
 
-<a href="/projects/climate-nudging/mocks/leaf-indicator.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
+<a href="/research-projects/projects/climate-nudging/mocks/leaf-indicator.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
 
 ![Leaf indicator mock](images/leaf-indicator-mock.png)
 
@@ -120,7 +120,7 @@ A running cost estimate displayed in the top bar of the chat interface. Shows cu
 - Expandable detail panel on hover
 - Everyday equivalences that scale with usage
 
-<a href="/projects/climate-nudging/mocks/session-cost-ticker.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
+<a href="/research-projects/projects/climate-nudging/mocks/session-cost-ticker.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
 
 ![Session cost ticker mock](images/session-cost-ticker.png)
 
@@ -137,7 +137,7 @@ A dedicated dashboard page showing the user's AI usage over time, with charts, e
 - Contextual tips based on actual usage patterns
 - User preference picker for equivalence units (kettle boils, toast, shower minutes, etc.)
 
-<a href="/projects/climate-nudging/mocks/usage-dashboard.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
+<a href="/research-projects/projects/climate-nudging/mocks/usage-dashboard.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
 
 ![Usage dashboard mock](images/usage-dashboard.png)
 
