@@ -53,3 +53,8 @@
 .VPFeature .VPImage {
   filter: opacity(0.6);
 }
+
+/* Hide default VPHomeFeatures — replaced by custom HomeFeatures component */
+.VPHomeFeatures {
+  display: none !important;
+}

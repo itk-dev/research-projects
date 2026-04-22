@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- "Last edited" dates on home page project cards, sourced from git commit timestamps
+- Custom HomeFeatures component replacing default VitePress feature cards
+- Build-time data loader for project git timestamps
+
 ### Added — WCAG Contrast Checker Project
 - Color contrast accessibility tool for analyzing WCAG AA/AAA compliance
 - Interactive prototype with CSV upload, manual input, and Danish municipal sample palettes
