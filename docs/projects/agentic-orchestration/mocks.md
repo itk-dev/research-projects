@@ -6,7 +6,7 @@ Interactive HTML prototypes demonstrating the proposed platform. Open them to tr
 
 ---
 
-**<a href="/projects/agentic-orchestration/mocks/unified-platform.html" target="_blank">Unified Platform ↗</a>**
+**<a href="/research-projects/projects/agentic-orchestration/mocks/unified-platform.html" target="_blank">Unified Platform ↗</a>**
 A mock of the full orchestration studio showing how Flowable, n8n, and Grafana can feel like a single seamless platform. Click through eight views in the sidebar:
 
 ### Overview

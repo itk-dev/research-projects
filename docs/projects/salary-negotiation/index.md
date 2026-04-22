@@ -110,7 +110,7 @@ Systemet bygger på en række integrationer og sikkerhedsmekanismer:
 
 Den interaktive prototype viser hele arbejdsgangen: personalelederens budgetoverblik og indstillingsformular, HR-behandling, og chefgodkendelse — samlet i ét overblik med tre faneblade.
 
-<a href="/projects/salary-negotiation/mocks/salary-negotiation.html" class="mock-button" target="_blank">Interaktiv prototype ↗</a>
+<a href="/research-projects/projects/salary-negotiation/mocks/salary-negotiation.html" class="mock-button" target="_blank">Interaktiv prototype ↗</a>
 
 ---
 
