@@ -28,7 +28,7 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME:?}.rule=Host(`${COMPOSE_DOMAIN:?}`)"
 
   node:
-    image: node:24-alpine
+    image: node:22-alpine
     command: sh -c "npm install && npx vitepress dev docs --host 0.0.0.0"
     working_dir: /app
     networks:
