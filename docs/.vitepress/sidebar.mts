@@ -1,0 +1,52 @@
+import type { DefaultTheme } from 'vitepress'
+
+const climateNudging: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Climate Awareness Nudging',
+    items: [
+      { text: 'Overview', link: '/projects/climate-nudging/' },
+      { text: 'Nudge Ideas', link: '/projects/climate-nudging/ideas' },
+      { text: 'CO2 Research', link: '/projects/climate-nudging/co2-research' },
+      { text: 'Integration Points', link: '/projects/climate-nudging/integration' },
+      { text: 'Interactive Mocks', link: '/projects/climate-nudging/mocks' },
+    ],
+  },
+]
+
+const salaryNegotiation: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Lønforhandlingssystem',
+    items: [
+      { text: 'Overview', link: '/projects/salary-negotiation/' },
+      { text: 'Estimeringsnotat', link: '/projects/salary-negotiation/estimeringsnotat' },
+      { text: 'Interactive Mocks', link: '/projects/salary-negotiation/mocks' },
+    ],
+  },
+]
+
+const agenticOrchestration: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Agentic Orchestration Studio',
+    items: [
+      { text: 'Overview', link: '/projects/agentic-orchestration/' },
+      { text: 'Open Source Landscape', link: '/projects/agentic-orchestration/open-source-landscape' },
+      { text: 'Architecture Options', link: '/projects/agentic-orchestration/architecture' },
+      { text: 'Considerations', link: '/projects/agentic-orchestration/considerations' },
+      { text: 'Interactive Mocks', link: '/projects/agentic-orchestration/mocks' },
+    ],
+  },
+]
+
+export function sidebar(): DefaultTheme.Sidebar {
+  return {
+    '/projects/climate-nudging/': climateNudging,
+    '/projects/salary-negotiation/': salaryNegotiation,
+    '/projects/agentic-orchestration/': agenticOrchestration,
+  }
+}
+
+export function nav(): DefaultTheme.NavItem[] {
+  return [
+    { text: 'About', link: '/about' },
+  ]
+}

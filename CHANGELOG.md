@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- Migrated from MkDocs + Material theme to VitePress
+- Adopted ITK Dev brand colors (teal/cyan) replacing neutral black/grey palette
+- Restructured project to follow ITK Dev documentation site conventions
+- Added Docker dev environment with Nginx + Traefik (docker-compose.yml)
+- Added Taskfile.yml for dev/build/lint automation
+- Added client-side password gate component for protecting individual projects
+- Added VitePress home layout with hero and project feature cards
+- Moved interactive mock HTML files to docs/public/ (served as raw static assets)
+- Replaced MkDocs admonitions (!!! info/warning) with VitePress custom containers (::: info/warning)
+- Replaced MkDocs Material button syntax with HTML mock-button links
+- Updated GitHub Actions to use Node.js + VitePress instead of Python + MkDocs
+- Added PR build verification workflow
+
 ### Added
 - MkDocs site with Material theme for publishing research as GitHub Pages
 - GitHub Actions workflow for automatic deployment on push to main

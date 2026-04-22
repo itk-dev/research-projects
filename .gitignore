@@ -1,13 +1,10 @@
-# MkDocs build output
-site/
+# VitePress build output
+_site/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
 
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.venv/
-venv/
-env/
+# Node
+node_modules/
 
 # OS
 .DS_Store

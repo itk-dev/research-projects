@@ -1,5 +1,8 @@
 ---
 title: Lønforhandlingssystem
+protected: true
+passwordHash: "9bf67668583e1070cfecddfca89e1e67fcd583dfb43c3ea79ec63ecf598136ae"
+passwordGroup: "salary-negotiation"
 ---
 
 <small>**Project:** Lønforhandlingssystem · **Status:** Pitch · **Date:** April 2026</small>
@@ -21,8 +24,9 @@ Lønforhandlinger i Aarhus Kommune kører i dag via Excel-ark der sendes frem og
 - **Ingen sporbarhed** — Det er uklart hvem der har godkendt hvad og hvornår
 - **Ingen automatisk opfølgning** — Når forhandlingen er afsluttet, tastes resultatet manuelt ind i SD Løn
 
-!!! warning "Eksempel fra hverdagen"
-    En personaleleder sender et Excel-ark med 25 medarbejdere til HR. HR retter i arket og sender det retur. Personalelederne har i mellemtiden lavet ændringer i deres lokale kopi. Resultat: to versioner, ingen ved hvilken der er korrekt.
+::: warning Eksempel fra hverdagen
+En personaleleder sender et Excel-ark med 25 medarbejdere til HR. HR retter i arket og sender det retur. Personalelederne har i mellemtiden lavet ændringer i deres lokale kopi. Resultat: to versioner, ingen ved hvilken der er korrekt.
+:::
 
 ---
 
@@ -65,14 +69,17 @@ Et webbaseret system der erstatter Excel med en struktureret arbejdsgang. System
 
 ## Integrationer
 
-!!! info "SD Løn"
-    Systemet integrerer med SD Løn for at hente nuværende løndata (månedsløn, tillæg, overenskomst) og for at sende godkendte lønændringer retur efter afsluttet forhandling.
+::: info SD Løn
+Systemet integrerer med SD Løn for at hente nuværende løndata (månedsløn, tillæg, overenskomst) og for at sende godkendte lønændringer retur efter afsluttet forhandling.
+:::
 
-!!! info "FK Organisation (KOMBIT)"
-    Medarbejderlisten pr. afdeling hentes fra FK Organisation via KOMBITs Rammearkitektur, så personalelederen automatisk ser sine medarbejdere uden manuel indtastning.
+::: info FK Organisation (KOMBIT)
+Medarbejderlisten pr. afdeling hentes fra FK Organisation via KOMBITs Rammearkitektur, så personalelederen automatisk ser sine medarbejdere uden manuel indtastning.
+:::
 
-!!! info "Omregningsfaktor"
-    Årligt fastsatte omregningsfaktorer fra 2000-niveau til aktuelt niveau vedligeholdes i systemet og anvendes til automatisk beregning af tillæg.
+::: info Omregningsfaktor
+Årligt fastsatte omregningsfaktorer fra 2000-niveau til aktuelt niveau vedligeholdes i systemet og anvendes til automatisk beregning af tillæg.
+:::
 
 ---
 
@@ -103,7 +110,7 @@ Systemet bygger på en række integrationer og sikkerhedsmekanismer:
 
 Den interaktive prototype viser hele arbejdsgangen: personalelederens budgetoverblik og indstillingsformular, HR-behandling, og chefgodkendelse — samlet i ét overblik med tre faneblade.
 
-[Interaktiv prototype :material-open-in-new:](mocks/salary-negotiation.html){ .md-button }
+<a href="/projects/salary-negotiation/mocks/salary-negotiation.html" class="mock-button" target="_blank">Interaktiv prototype ↗</a>
 
 ---
 
