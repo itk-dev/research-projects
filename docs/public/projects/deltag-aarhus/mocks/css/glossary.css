@@ -1,0 +1,55 @@
+/* Glossary — inline term definitions with tooltip popups */
+
+.glossary-term {
+  position: relative;
+  display: inline;
+  border-bottom: 1px dashed var(--petroleum);
+}
+
+.glossary-term__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--petroleum);
+  font-size: 14px;
+  padding: 0 2px;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.glossary-term__icon:hover {
+  color: var(--petroleum-800);
+}
+
+.glossary-term__tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1px solid var(--border-default);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+  padding: 16px;
+  width: 320px;
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  color: var(--text-primary);
+  z-index: 100;
+  border-radius: 8px;
+}
+
+.glossary-term__tooltip a {
+  display: block;
+  margin-top: 8px;
+  color: var(--petroleum);
+  font-weight: var(--fw-semibold);
+}
+
+.glossary-term--open > .glossary-term__tooltip {
+  display: block;
+}

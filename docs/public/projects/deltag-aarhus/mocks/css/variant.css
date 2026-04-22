@@ -1,0 +1,69 @@
+/* Variant — conditional styles toggled by body.variant--open / body.variant--closed */
+
+/* In the open variant the decision banner is hidden, so the hearing header
+   overlaps the hero image directly — matching the closed variant's visual weight. */
+body.variant--open .hearing-header {
+  margin-top: -50px;
+}
+
+/* Tooltip on disabled submit button (closed variant) */
+.btn-primary-wrapper {
+  position: relative;
+  margin-left: auto;
+}
+
+.btn-primary__tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  background: var(--gray-800);
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  padding: 10px 14px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.btn-primary__tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 24px;
+  border: 6px solid transparent;
+  border-top-color: var(--gray-800);
+}
+
+.btn-primary:disabled {
+  background: var(--gray-400);
+  border-color: var(--gray-400);
+  color: var(--gray-600);
+  cursor: not-allowed;
+}
+
+.btn-primary:disabled:hover {
+  background: var(--gray-400);
+  color: var(--gray-600);
+}
+
+.btn-primary:disabled:hover + .btn-primary__tooltip,
+.btn-primary:disabled:focus + .btn-primary__tooltip {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .btn-primary-wrapper {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .btn-primary__tooltip {
+    white-space: normal;
+    width: 260px;
+    right: 0;
+  }
+}

@@ -1,0 +1,126 @@
+/* Modal Horingssvar — hearing response modal with stats, comments section, and show-more button */
+
+.modal__stats {
+  display: flex;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-200);
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  color: var(--text-primary);
+}
+
+.modal__stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal__stat i {
+  color: var(--gray-600);
+}
+
+/* Interactive like stat (open variant) */
+.modal__stat--interactive:hover {
+  color: var(--petroleum);
+}
+
+.modal__stat--liked {
+  color: var(--petroleum);
+}
+
+.modal__comments-section {
+  border-top: 1px solid var(--gray-200);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal__comments-title {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+}
+
+.modal__comment {
+  padding: 16px;
+  background: var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__comment-author {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+}
+
+.modal__comment-date {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-xs);
+  color: var(--gray-650);
+}
+
+.modal__comment-text {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  line-height: 20px;
+}
+
+.modal__comments-show-more {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--petroleum);
+  background: none;
+  border: 1px solid var(--petroleum);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  align-self: center;
+}
+
+.modal__comments-show-more:hover {
+  background: var(--petroleum);
+  color: var(--white);
+}
+
+/* Comment form (open variant only) */
+.modal__comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-200);
+  margin-top: 8px;
+}
+
+.modal__comment-form-label {
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+}
+
+.modal__comment-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: var(--fs-small);
+  resize: vertical;
+}
+
+.modal__comment-input:focus {
+  outline: 2px solid var(--petroleum);
+  outline-offset: -1px;
+  border-color: var(--petroleum);
+}
+
+.modal__comment-submit {
+  align-self: flex-end;
+  padding: 8px 20px;
+}

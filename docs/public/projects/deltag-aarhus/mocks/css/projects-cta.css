@@ -1,0 +1,77 @@
+/* Projects CTA — call-to-action section with background image and text card */
+
+.projects-cta {
+  background-color: var(--blue-100);
+  background-size: cover;
+  background-position: center;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-cta__inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  max-width: 1400px;
+  width: 100%;
+  padding: 48px 120px;
+}
+
+.projects-cta__text-box {
+  background: var(--white);
+  border-radius: 6px;
+  padding: 60px 61px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 630px;
+  flex-shrink: 0;
+}
+
+.projects-cta__label {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.projects-cta__title {
+  font-size: 40px;
+  font-weight: var(--fw-bold);
+  line-height: 48px;
+}
+
+.projects-cta__desc {
+  font-size: var(--fs-base);
+  line-height: 24px;
+}
+
+.projects-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--petroleum);
+  color: var(--white);
+  font-size: 15px;
+  padding: 12px 30px;
+  border-radius: 2px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  width: 264px;
+  height: 48px;
+  transition: background var(--transition-fast);
+}
+
+.projects-cta__button:hover {
+  background: var(--petroleum-800);
+  color: var(--white);
+}
+
+@media (max-width: 960px) {
+  .projects-cta__inner {
+    flex-direction: column;
+    padding: 48px 24px;
+  }
+}

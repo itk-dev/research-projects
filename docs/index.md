@@ -18,4 +18,8 @@ features:
     details: Can we build a shared, open-source platform for mapping, automating, orchestrating, and measuring business processes?
     link: /projects/agentic-orchestration/
     linkText: View project
+  - title: deltag.aarhus.dk
+    details: Prototype af en høringsdetalje-side til Aarhus Kommunes borgerdeltagelsesplatform — med 784 simulerede høringssvar, MitID-login og variantskift.
+    link: /projects/deltag-aarhus/
+    linkText: View project
 ---

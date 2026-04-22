@@ -1,0 +1,100 @@
+/* Body Section — main content area with two-column grid layout and contact card sidebar */
+
+.body-section {
+  max-width: var(--container-max);
+  /* Edge-aware centering; switches to margin: 0 auto at 960px when sidebar stacks */
+  margin: 0 max(40px, calc((100% - var(--container-max)) / 2));
+  padding: 48px 116px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+}
+
+.body-section__content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.body-section__text {
+  font-size: var(--fs-base);
+  line-height: 24px;
+}
+
+.body-section__text p + p {
+  margin-top: 16px;
+}
+
+.body-section__dates {
+  display: flex;
+  gap: 32px;
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-base);
+  color: #474747;
+}
+
+.body-section__dates strong {
+  color: var(--black);
+  font-weight: var(--fw-regular);
+}
+
+/* Contact Card */
+.contact-card {
+  background: var(--petroleum-100);
+  border-bottom: 2px solid var(--petroleum-200);
+  border-radius: 3px;
+  padding: 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 340px;
+  align-self: start;
+}
+
+.contact-card__department {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--petroleum);
+}
+
+.contact-card__name {
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+}
+
+.contact-card__details {
+  font-size: var(--fs-base);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  line-height: 1.5;
+}
+
+.contact-card__details a {
+  color: var(--text-primary);
+}
+
+@media (max-width: 1200px) {
+  .body-section {
+    padding: 48px 40px 0;
+  }
+}
+
+@media (max-width: 960px) {
+  .body-section {
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+    padding: 32px 40px 0;
+  }
+
+  .contact-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .body-section {
+    padding: 32px 16px 0;
+  }
+}

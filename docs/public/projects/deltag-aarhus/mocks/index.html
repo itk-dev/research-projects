@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forslag til Lokalplan nr. 1237 — Vindmøller ved Vosnæs | deltag.aarhus.dk</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <!-- Design tokens and base -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <!-- Components (in DOM order) -->
+  <link rel="stylesheet" href="css/mock-banner.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/decision-banner.css">
+  <link rel="stylesheet" href="css/hearing-header.css">
+  <link rel="stylesheet" href="css/body-section.css">
+  <link rel="stylesheet" href="css/materials.css">
+  <link rel="stylesheet" href="css/horingssvar.css">
+  <link rel="stylesheet" href="css/statistics.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/info-box.css">
+  <link rel="stylesheet" href="css/related.css">
+  <link rel="stylesheet" href="css/projects-cta.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/modal-horingssvar.css">
+  <link rel="stylesheet" href="css/modal-material.css">
+  <link rel="stylesheet" href="css/modal-decision.css">
+  <link rel="stylesheet" href="css/glossary.css">
+  <link rel="stylesheet" href="css/variant.css">
+  <link rel="stylesheet" href="css/modal-mitid.css">
+  <link rel="stylesheet" href="css/modal-submission.css">
+</head>
+<body>
+
+  <!-- Mock Banner -->
+  <div class="mock-banner">
+    Dette er en mock — ikke den rigtige side.
+    <a href="https://github.com/itk-dev/deltag.aarhus.dk_mocks" class="mock-banner__link">Se kildekode</a>
+    <span class="mock-banner__divider" aria-hidden="true">|</span>
+    <span class="mock-banner__variants">Variant:
+      <a href="?variant=open" class="mock-banner__link mock-banner__link--variant" data-variant="open">Åben</a>
+      <a href="?variant=closed" class="mock-banner__link mock-banner__link--variant" data-variant="closed">Afsluttet</a>
+    </span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Hovednavigation">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="deltag.aarhus.dk - Forside">
+        <img src="AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune" width="121" height="62">
+      </a>
+      <div class="nav__right">
+        <div class="nav__sub-menu">
+          <a href="#" class="nav__sub-link">Om borgerinddragelse</a>
+          <a href="#" class="nav__sub-link">Nyhedsbrev</a>
+        </div>
+        <div class="nav__main-menu">
+          <a href="#" class="nav__link">Dialoger</a>
+          <a href="#" class="nav__link nav__link--active" aria-current="page">Høringer</a>
+          <a href="#" class="nav__link">Afgørelser</a>
+          <a href="#" class="nav__link">Aktiviteter</a>
+          <a href="#" class="nav__link">Projekter</a>
+          <span class="nav__divider" aria-hidden="true"></span>
+          <button class="nav__search" aria-label="Søg">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Image -->
+  <section class="hero" aria-label="Billede af høringsområde">
+    <img class="hero__image" src="hero-moeller.png" alt="Vindmøller i dansk landskab ved Vosnæs">
+  </section>
+
+  <!-- Decision Banner -->
+  <div class="decision-banner" role="alert">
+    <p class="decision-banner__title">Afgørelse</p>
+    <p class="decision-banner__text">
+      Ved byrådsmødet onsdag d. 28. maj 2025 blev forslaget godkendt til offentlig høring.
+      <a href="#" class="decision-banner__link" id="open-decision-modal">Læs hele afgørelsen</a>
+    </p>
+  </div>
+
+  <!-- Hearing Header -->
+  <header class="hearing-header">
+    <span class="hearing-header__label">Høring</span>
+    <div class="hearing-header__content">
+      <div class="hearing-header__main">
+        <h1 class="hearing-header__title">Forslag til Lokalplan nr. 1237 med miljøvurderingsrapport — Vindmøller ved Vosnæs</h1>
+        <p class="hearing-header__lead">Planen udlægger området til tekniske anlæg og giver mulighed for opstilling af tre vindmøller med en totalhøjde på op til 150 meter samt tilhørende arbejdsarealer, veje og nettilslutningsanlæg.</p>
+      </div>
+      <aside class="hearing-header__sidebar" aria-label="Høringsdetaljer">
+        <div class="hearing-header__meta-item">
+          <div class="hearing-header__meta-label">
+            <i class="fa-regular fa-circle-dot" aria-hidden="true"></i>
+            <span>Status</span>
+          </div>
+          <div class="hearing-header__meta-value" id="hearing-status-badge">Afsluttet</div>
+        </div>
+        <div class="hearing-header__meta-item">
+          <div class="hearing-header__meta-label">
+            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+            <span>Svarfrist</span>
+          </div>
+          <div class="hearing-header__meta-value" id="hearing-deadline-value">14. august 2025</div>
+        </div>
+        <div class="hearing-header__meta-item">
+          <div class="hearing-header__meta-label">
+            <i class="fa-regular fa-circle-dot" aria-hidden="true"></i>
+            <span>Type</span>
+          </div>
+          <div class="hearing-header__meta-value">Lokalplan</div>
+        </div>
+        <div class="hearing-header__meta-item">
+          <div class="hearing-header__meta-label">
+            <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+            <span>Projekt</span>
+          </div>
+          <div class="hearing-header__meta-value">
+            <a href="#" class="hearing-header__meta-link">Grøn energi i Aarhus</a>
+          </div>
+        </div>
+        <div class="hearing-header__meta-item">
+          <div class="hearing-header__meta-label">
+            <i class="fa-solid fa-hashtag" aria-hidden="true"></i>
+            <span>ID</span>
+          </div>
+          <div class="hearing-header__meta-value">12937</div>
+        </div>
+      </aside>
+    </div>
+    <p class="hearing-header__tags">Lokalplan, Miljøvurdering, Vosnæs, Grøn energi</p>
+  </header>
+
+  <!-- Body Content -->
+  <div class="body-section">
+    <div class="body-section__content">
+      <div class="body-section__text">
+        <p><span class="glossary-term" data-glossary="hoering">Høringen<button class="glossary-term__icon" aria-label="Forklaring af høring"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">En høring er en periode hvor borgere, organisationer og myndigheder kan komme med kommentarer og forslag til et bestemt planforslag, før det vedtages endeligt. <a href="#">Læs mere om høringer</a></span></span> vedrører Forslag til Lokalplan nr. 1237 med tilhørende miljøvurderingsrapport for opstilling af vindmøller ved Vosnæs nord for Aarhus. Bemærk at høringssvar først gennemgås efter endt høringsfrist.</p>
+      </div>
+      <div class="body-section__text">
+        <p>Aarhus Kommune har udarbejdet forslag til lokalplan for Vosnæs-området samt tillæg nr. 169 til <span class="glossary-term" data-glossary="kommuneplan">Kommuneplan 2017<button class="glossary-term__icon" aria-label="Forklaring af Kommuneplan 2017"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">Kommuneplanen er kommunens overordnede plan for arealanvendelse de næste 12 år. Den sætter rammerne for hvad der må bygges hvor. <a href="#">Læs mere om kommuneplanen</a></span></span>. Der er gennemført en samlet <span class="glossary-term" data-glossary="miljoevurdering">miljøvurdering<button class="glossary-term__icon" aria-label="Forklaring af miljøvurdering"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">En miljøvurdering er en systematisk vurdering af, hvordan et planforslag eller projekt påvirker miljøet — fx natur, støj, landskab og menneskers sundhed. Den er lovpligtig ved væsentlig miljøpåvirkning. <a href="#">Læs mere om miljøvurdering</a></span></span> for alle planer og projekter i området.</p>
+        <p>Planerne kan ses på Aarhus Lokalplanportal samt fysisk på Dokk1 Hovedbibliotek fra den 5. juni 2025. Lokalplanen udlægger området til <span class="glossary-term" data-glossary="tekniske-anlaeg">tekniske anlæg<button class="glossary-term__icon" aria-label="Forklaring af tekniske anlæg"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">Tekniske anlæg dækker over installationer som vindmøller, solcelleanlæg, transformerstationer og lignende infrastruktur, der er nødvendig for energiforsyning og teknisk drift. <a href="#">Læs mere om tekniske anlæg</a></span></span> og muliggør opstilling af tre vindmøller med en totalhøjde på op til 150 meter.</p>
+      </div>
+
+      <div class="body-section__dates">
+        <span>Svarfrist: <strong id="body-deadline">14. august 2025</strong></span>
+        <span>Slettedato: <strong id="body-delete-date">14. august 2025</strong></span>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="body-section__sidebar">
+      <div class="contact-card">
+        <span class="contact-card__department">Planafdelingen</span>
+        <h3 class="contact-card__name">Teknik og Miljø</h3>
+        <div class="contact-card__details">
+          <div>
+            <p>Karen Blixens Boulevard 7</p>
+            <p>8220 Brabrand</p>
+          </div>
+          <p>Telefon: <a href="tel:89402000">89 40 20 00</a></p>
+          <p><a href="mailto:teknikogmiljoe@aarhus.dk">teknikogmiljoe@aarhus.dk</a></p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Materials -->
+  <section class="materials-section" aria-label="Materialer">
+    <h2 class="materials__heading">Materialer (4)</h2>
+    <div class="materials__list">
+      <a href="#" class="materials__item" id="material-lokalplan" data-material="lokalplan">
+        <span class="materials__item-name">Forslag til Lokalplan nr. 1237 og kommuneplantillæg</span>
+        <span class="materials__item-meta">
+          <span class="materials__item-preview-badge"><i class="fa-solid fa-eye" aria-hidden="true"></i> Forhåndsvisning</span>
+          <span class="materials__item-size">(PDF - 2.4 mb.)</span>
+          <i class="fa-solid fa-file-pdf materials__item-icon" aria-hidden="true"></i>
+        </span>
+      </a>
+      <a href="#" class="materials__item">
+        <span class="materials__item-name">Miljøvurderingsrapport</span>
+        <span class="materials__item-meta">
+          <span class="materials__item-size">(PDF - 8.7 mb.)</span>
+          <i class="fa-solid fa-file-pdf materials__item-icon" aria-hidden="true"></i>
+        </span>
+      </a>
+      <a href="#" class="materials__item">
+        <span class="materials__item-name">Ikke-teknisk resumé af miljøvurdering</span>
+        <span class="materials__item-meta">
+          <span class="materials__item-size">(PDF - 1.2 mb.)</span>
+          <i class="fa-solid fa-file-pdf materials__item-icon" aria-hidden="true"></i>
+        </span>
+      </a>
+      <a href="#" class="materials__item">
+        <span class="materials__item-name">Forslag til §25-tilladelse til vindmølleprojekt</span>
+        <span class="materials__item-meta">
+          <span class="materials__item-size">(PDF - 0.8 mb.)</span>
+          <i class="fa-solid fa-file-pdf materials__item-icon" aria-hidden="true"></i>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Horingssvar Section (full width) -->
+  <section class="horingssvar-section" id="horingssvar" aria-label="Høringssvar">
+    <div class="horingssvar-section__header">
+      <h2 class="horingssvar-section__title">Høringssvar (<span id="horingssvar-count">784</span>)</h2>
+    </div>
+    <div class="horingssvar-section__controls">
+      <div class="dropdown" data-dropdown="sort">
+        <button class="dropdown__button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dropdown__button-text">Flest kommentarer</span>
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown__menu" role="listbox">
+          <button class="dropdown__item" role="option" data-value="likes">Flest synes om</button>
+          <button class="dropdown__item" role="option" data-value="newest">Nyeste først</button>
+          <button class="dropdown__item" role="option" data-value="oldest">Ældste først</button>
+          <button class="dropdown__item dropdown__item--active" role="option" aria-selected="true" data-value="comments">Flest kommentarer</button>
+        </div>
+      </div>
+
+      <div class="dropdown" data-dropdown="category">
+        <button class="dropdown__button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dropdown__button-text">Alle kategorier</span>
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown__menu" role="listbox">
+          <button class="dropdown__item dropdown__item--active" role="option" aria-selected="true" data-value="all">Alle kategorier</button>
+          <button class="dropdown__item" role="option" data-value="miljoe">Miljø/Natur</button>
+          <button class="dropdown__item" role="option" data-value="stoej">Støj/Sundhed</button>
+          <button class="dropdown__item" role="option" data-value="landskab">Landskab/Visuel</button>
+          <button class="dropdown__item" role="option" data-value="proces">Proces/Andet</button>
+        </div>
+      </div>
+
+      <div class="btn-primary-wrapper">
+        <button class="btn-primary" id="submit-horingssvar-btn" disabled aria-describedby="submit-tooltip">Skriv et høringssvar</button>
+        <span class="btn-primary__tooltip" id="submit-tooltip" role="tooltip">Svarfristen er overskredet — der kan ikke længere indsendes høringssvar eller kommentarer.</span>
+      </div>
+    </div>
+
+    <div class="horingssvar-grid" id="horingssvar-grid" aria-label="Liste af høringssvar">
+      <!-- Cards inserted by JS -->
+    </div>
+
+    <div class="horingssvar-pagination">
+      <span class="horingssvar-pagination__count" id="pagination-count">Viser 1 - 16</span>
+      <button class="horingssvar-pagination__show-all" id="show-all-btn">Vis alle</button>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="statistics-section" aria-label="Statistik">
+    <h2 class="statistics-section__heading">Statistik</h2>
+    <div class="statistics">
+      <div class="statistics__header">
+        <p class="statistics__title">Indkomne høringssvar over tid</p>
+        <p class="statistics__subtitle">Antal svar per uge i høringsperioden (5. jun – 14. aug 2025)</p>
+      </div>
+      <div class="line-chart" role="img" aria-label="Linjediagram over indkomne høringssvar per uge">
+        <div class="line-chart__y-axis" aria-hidden="true">
+          <span>120</span><span>90</span><span>60</span><span>30</span><span>0</span>
+        </div>
+        <div class="line-chart__area">
+          <svg class="line-chart__svg" viewBox="0 0 840 200" preserveAspectRatio="none">
+            <!-- Grid lines -->
+            <line x1="0" y1="0" x2="840" y2="0" stroke="#e6e6e6" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="50" x2="840" y2="50" stroke="#e6e6e6" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="100" x2="840" y2="100" stroke="#e6e6e6" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="150" x2="840" y2="150" stroke="#e6e6e6" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="200" x2="840" y2="200" stroke="#e6e6e6" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <!-- Area fill -->
+            <path d="M0,178 L84,162 L168,133 L252,100 L336,83 L420,50 L504,67 L588,33 L672,17 L756,8 L840,42 L840,200 L0,200 Z"
+                  fill="rgba(54,97,216,0.1)"/>
+            <!-- Line -->
+            <path d="M0,178 L84,162 L168,133 L252,100 L336,83 L420,50 L504,67 L588,33 L672,17 L756,8 L840,42"
+                  fill="none" stroke="#3661d8" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+            <!-- Data points — weekly totals across 10-week hearing period -->
+            <circle cx="0" cy="178" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 23: 18 svar</title></circle>
+            <circle cx="84" cy="162" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 24: 32 svar</title></circle>
+            <circle cx="168" cy="133" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 25: 56 svar</title></circle>
+            <circle cx="252" cy="100" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 26: 82 svar</title></circle>
+            <circle cx="336" cy="83" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 27: 96 svar (efter borgermøde)</title></circle>
+            <circle cx="420" cy="50" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 28: 124 svar</title></circle>
+            <circle cx="504" cy="67" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 29: 110 svar</title></circle>
+            <circle cx="588" cy="33" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 30: 138 svar</title></circle>
+            <circle cx="672" cy="17" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 31: 152 svar (peak)</title></circle>
+            <circle cx="756" cy="8" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 32: 159 svar (deadline-uge)</title></circle>
+          </svg>
+          <div class="line-chart__x-axis" aria-hidden="true">
+            <span>5. jun</span><span>19. jun</span><span>3. jul</span><span>17. jul</span><span>31. jul</span><span>14. aug</span>
+          </div>
+        </div>
+      </div>
+      <div class="statistics__footer">
+        <div class="statistics__legend">
+          <div class="statistics__legend-color" aria-hidden="true"></div>
+          <span>Indkomne svar per uge</span>
+        </div>
+        <span class="statistics__total">Total: 784 svar</span>
+      </div>
+    </div>
+
+    <div class="statistics">
+      <div class="statistics__header">
+        <p class="statistics__title">Fordeling på kategorier</p>
+        <p class="statistics__subtitle">Antal høringssvar fordelt på kategori</p>
+      </div>
+      <div class="category-chart" role="img" aria-label="Vandret søjlediagram over høringssvar per kategori">
+        <div class="category-chart__row">
+          <span class="category-chart__label">Miljø/Natur</span>
+          <div class="category-chart__bar-track">
+            <div class="category-chart__bar" style="width: 32%;" title="Miljø/Natur: 251 svar"></div>
+          </div>
+          <span class="category-chart__value">251</span>
+        </div>
+        <div class="category-chart__row">
+          <span class="category-chart__label">Støj/Sundhed</span>
+          <div class="category-chart__bar-track">
+            <div class="category-chart__bar category-chart__bar--green" style="width: 28%;" title="Støj/Sundhed: 219 svar"></div>
+          </div>
+          <span class="category-chart__value">219</span>
+        </div>
+        <div class="category-chart__row">
+          <span class="category-chart__label">Landskab/Visuel</span>
+          <div class="category-chart__bar-track">
+            <div class="category-chart__bar category-chart__bar--petroleum" style="width: 22%;" title="Landskab/Visuel: 172 svar"></div>
+          </div>
+          <span class="category-chart__value">172</span>
+        </div>
+        <div class="category-chart__row">
+          <span class="category-chart__label">Proces/Andet</span>
+          <div class="category-chart__bar-track">
+            <div class="category-chart__bar category-chart__bar--orange" style="width: 18%;" title="Proces/Andet: 142 svar"></div>
+          </div>
+          <span class="category-chart__value">142</span>
+        </div>
+      </div>
+      <div class="statistics__footer">
+        <div class="category-chart__legend">
+          <span class="category-chart__legend-item"><span class="category-chart__legend-color"></span> Miljø/Natur</span>
+          <span class="category-chart__legend-item"><span class="category-chart__legend-color category-chart__legend-color--green"></span> Støj/Sundhed</span>
+          <span class="category-chart__legend-item"><span class="category-chart__legend-color category-chart__legend-color--petroleum"></span> Landskab/Visuel</span>
+          <span class="category-chart__legend-item"><span class="category-chart__legend-color category-chart__legend-color--orange"></span> Proces/Andet</span>
+        </div>
+        <span class="statistics__total">Total: 784 svar</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="map-box-section" aria-label="Kort over området">
+    <div class="statistics">
+      <div class="statistics__header">
+        <p class="statistics__title">Geografisk fordeling af høringssvar</p>
+        <p class="statistics__subtitle">Kortet viser hvor høringssvarene kommer fra. Større cirkler angiver flere svar fra området.</p>
+      </div>
+      <div class="map-box" id="map"></div>
+    </div>
+  </section>
+
+  <!-- Info Box -->
+  <div class="info-box">
+    <div class="info-box__header">
+      <h3 class="info-box__title">Mere viden om vindenergi og lokalplaner</h3>
+    </div>
+    <div class="info-box__body">
+      <p>På aarhus.dk har vi samlet viden om vindmølleprojekter og lokalplanprocessen. Se bl.a. disse sider.</p>
+      <a href="#">Vindenergi i Aarhus Kommune</a>
+      <a href="#">Hvad er en lokalplan</a>
+      <a href="#">Miljøvurdering af planer og projekter</a>
+    </div>
+  </div>
+
+  <!-- Related Activities -->
+  <section class="related-section" aria-label="Relaterede aktiviteter">
+    <div class="related-section__grid">
+      <h2 class="related-section__title" style="width: 100%;">Denne høring relaterer sig til disse aktiviteter</h2>
+      <a href="#" class="activity-card">
+        <div class="activity-card__image">
+          <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=430&h=240&fit=crop" alt="Vindmøller i landskab">
+          <div class="activity-card__date-badge">
+            <span class="activity-card__date-day">19</span>
+            <span class="activity-card__date-month">JUN</span>
+          </div>
+        </div>
+        <div class="activity-card__body">
+          <span class="activity-card__type">Aktivitet</span>
+          <h3 class="activity-card__title">Borgermøde om vindmøller ved Vosnæs — Vejlby-Risskov Hallen</h3>
+          <div class="activity-card__details">
+            <div class="activity-card__detail-row">
+              <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+              <span>Torsdag d. 19. juni 2025, kl. 17:30–20:30</span>
+            </div>
+            <div class="activity-card__detail-row">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <span>Vejlby-Risskov Hallen, Aarhus</span>
+            </div>
+          </div>
+          <div class="activity-card__arrow">
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="activity-card">
+        <div class="activity-card__image">
+          <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=430&h=240&fit=crop" alt="Grøn energi">
+        </div>
+        <div class="activity-card__body">
+          <span class="activity-card__type">Projekt</span>
+          <h3 class="activity-card__title">Grøn energi i Aarhus</h3>
+          <div class="activity-card__details">
+            <div class="activity-card__detail-row">
+              <i class="fa-solid fa-tags" aria-hidden="true"></i>
+              <span>Klimahandling, Vedvarende energi, Vindkraft</span>
+            </div>
+          </div>
+          <div class="activity-card__arrow">
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Projects CTA -->
+  <section class="projects-cta" style="background-image: url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1600&h=700&fit=crop');" aria-label="Igangværende projekter">
+    <div class="projects-cta__inner">
+      <div class="projects-cta__text-box">
+        <span class="projects-cta__label">Aarhus projekter</span>
+        <h2 class="projects-cta__title">Igangværende projekter i Aarhus</h2>
+        <p class="projects-cta__desc">Se hvilke projekter der aktuelt er igang og som du kan bidrage til som borger i Aarhus Kommune</p>
+        <a href="#" class="projects-cta__button">Se igangværende projekter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__col">
+        <h3 class="footer__col-title">Aarhus Kommune</h3>
+        <p class="footer__text">Aarhus Kommune</p>
+        <p class="footer__text">Rådhuset<br>Rådhuspladsen 2</p>
+        <p class="footer__text">8000 Aarhus C</p>
+        <p class="footer__phone">TLF. 89 40 20 00</p>
+        <p class="footer__text" style="margin-top: 16px;">CVR-nummer: 55133018</p>
+        <div class="footer__logo">
+          <img src="AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune" height="55">
+        </div>
+      </div>
+      <div class="footer__col">
+        <h3 class="footer__col-title">Deltag Aarhus</h3>
+        <p class="footer__text">Spørgsmål vedrørende Deltag Aarhus deltag.aarhus.dk bedes rettes til planlægningsteam på:</p>
+        <p class="footer__text" style="margin-top: 16px;">E-mail: deltag@aarhus.dk</p>
+        <p class="footer__phone">TLF. 89 40 20 00</p>
+      </div>
+      <div class="footer__col"></div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__bottom-links">
+        <a href="#">Om dette site</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">Privatlivspolitik</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-title"></h2>
+        <button class="modal__close" aria-label="Luk">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="modal__meta">
+          <span class="modal__meta-item">
+            <i class="fa-regular fa-user" aria-hidden="true"></i>
+            <span id="modal-author"></span>
+          </span>
+          <span class="modal__meta-item">
+            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+            <span id="modal-date"></span>
+          </span>
+        </div>
+        <div class="modal__description" id="modal-description"></div>
+        <div class="modal__stats">
+          <span class="modal__stat">
+            <i class="fa-regular fa-comment" aria-hidden="true"></i>
+            <span id="modal-comments-count"></span>
+          </span>
+          <span class="modal__stat">
+            <i class="fa-regular fa-thumbs-up" aria-hidden="true"></i>
+            <span id="modal-likes-count"></span>
+          </span>
+        </div>
+        <div class="modal__comments-section" id="modal-comments">
+          <h3 class="modal__comments-title">Kommentarer</h3>
+          <!-- Comments inserted by JS -->
+        </div>
+      </div>
+      <div class="modal__nav">
+        <button class="modal__nav-btn" id="modal-prev" aria-label="Forrige høringssvar">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          Forrige
+        </button>
+        <span class="modal__nav-counter" id="modal-counter"></span>
+        <button class="modal__nav-btn" id="modal-next" aria-label="Næste høringssvar">
+          Næste
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Material Document Modal -->
+  <div class="modal-overlay" id="material-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="material-modal-title" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="material-modal-title">Forslag til Lokalplan nr. 1237 — Vindmøller ved Vosnæs</h2>
+        <button class="modal__close" id="material-modal-close" aria-label="Luk">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="material-modal__actions">
+          <a href="#" class="material-modal__action-btn" target="_blank">
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            Åbn på ny side
+          </a>
+          <a href="#" class="material-modal__action-btn" download>
+            <i class="fa-solid fa-download" aria-hidden="true"></i>
+            Download PDF
+          </a>
+        </div>
+        <div class="material-modal__content">
+          <h3>1. Lokalplanens formål</h3>
+          <p>Lokalplanen har til formål at muliggøre opstilling af tre vindmøller med en totalhøjde på op til 150 meter ved Vosnæs, nord for Aarhus. Planen udlægger området til tekniske anlæg og fastlægger bestemmelser om vindmøllernes placering, dimensioner og tilhørende infrastruktur.</p>
+
+          <h3>2. Område og zonestatus</h3>
+          <p>Lokalplanområdet omfatter et areal på ca. 45 ha beliggende ved Vosnæs i det nordøstlige Aarhus. Området er i dag overvejende landbrugsjord med spredt beplantning. Området afgrænses mod nord og øst af Kalø Vig, mod syd af Studstrup og mod vest af landbrugsarealer.</p>
+
+          <h3>3. Vindmøllernes omfang og placering</h3>
+          <p>Der kan opstilles op til tre vindmøller med en navhøjde på ca. 90 meter og en rotordiameter på ca. 120 meter, svarende til en totalhøjde på op til 150 meter. Vindmøllerne placeres på en øst-vest-gående linje med en indbyrdes afstand på minimum 400 meter.</p>
+          <p>Vindmøllerne skal fremstå i ensartet lysgrå farve uden reflekterende overflader. Advarselslys skal være rødt og af behovsstyret type i henhold til gældende regler.</p>
+
+          <h3>4. Vej- og tilslutningsforhold</h3>
+          <p>Vejadgang til vindmølleområdet sker fra eksisterende landevej via forstærkede markveje. Der etableres arbejdsarealer ved hver vindmølle på ca. 2.500 m² til kranopstilling og serviceformål. Nettilslutning sker via jordkabler til nærmeste transformerstation.</p>
+
+          <h3>5. Støjforhold</h3>
+          <p>Vindmøllerne skal overholde de gældende støjgrænser på 42 dB(A) ved nærmeste beboelse i det åbne land og 37 dB(A) ved nærmeste beboelse i boligområder. Den lavfrekvente støj indendørs må ikke overstige 20 dB(A) ved nabobeboelser.</p>
+
+          <h3>6. Natur og landskab</h3>
+          <p>Der skal gennemføres afværgeforanstaltninger for at beskytte flagermus og fugle. Vindmøllerne skal stoppes i perioder med høj flagermusaktivitet. Eksisterende beplantning og levende hegn skal bevares i videst muligt omfang. Der etableres en skovrejsningskompensation svarende til det berørte areal.</p>
+
+          <h3>7. Skyggekast og visuelle forhold</h3>
+          <p>Skyggekastet på nabobeboelser må ikke overstige 10 timer reelt per år. Vindmøllerne skal udstyres med skyggekastprogrammer, der automatisk stopper driften ved overskridelse. Visualiseringer fra udvalgte synspunkter indgår i miljørapporten.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Modal -->
+  <div class="modal-overlay" id="decision-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="decision-modal-title" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="decision-modal-title">Afgørelse — Lokalplan nr. 1237</h2>
+        <button class="modal__close" id="decision-modal-close" aria-label="Luk">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="modal__meta">
+          <span class="modal__meta-item">
+            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+            <span>28. maj 2025</span>
+          </span>
+          <span class="modal__meta-item">
+            <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+            <span>Byrådsmøde</span>
+          </span>
+        </div>
+        <div class="modal__description">
+          <p>Byrådet godkendte onsdag den 28. maj 2025 Forslag til Lokalplan nr. 1237 med miljøvurderingsrapport — Vindmøller ved Vosnæs — samt tillæg nr. 169 til Kommuneplan 2017 til offentlig høring.</p>
+          <p>Lokalplanen muliggør opstilling af tre vindmøller med en totalhøjde på op til 150 meter ved Vosnæs nord for Aarhus. Der er udarbejdet en samlet miljøvurdering for planer og projekter i området.</p>
+          <p>I høringsperioden indkom 784 høringssvar. De primære bekymringer vedrørte støjgener, landskabspåvirkning, truede arter og ejendomsværdier. Byrådet har i sin behandling taget stilling til alle indkomne bemærkninger.</p>
+        </div>
+        <div class="decision-modal__links">
+          <h3 class="decision-modal__links-title">Dokumenter og optagelser</h3>
+          <a href="#" class="decision-modal__link">
+            <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+            <span>Referat fra byrådsmødet d. 28. maj 2025 (PDF - 0.3 mb)</span>
+          </a>
+          <a href="#" class="decision-modal__link">
+            <i class="fa-solid fa-video" aria-hidden="true"></i>
+            <span>Se video fra byrådsmødet (punkt 8: Lokalplan 1237)</span>
+          </a>
+          <a href="#" class="decision-modal__link">
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+            <span>Endelig lokalplan nr. 1237 — vedtaget version (PDF - 2.4 mb)</span>
+          </a>
+          <a href="#" class="decision-modal__link">
+            <i class="fa-solid fa-comments" aria-hidden="true"></i>
+            <span>Hvidbog med behandling af 784 høringssvar (PDF - 3.1 mb)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MitID Login Modal -->
+  <div class="modal-overlay" id="mitid-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="mitid-modal-title" hidden>
+    <div class="modal modal--mitid">
+      <div class="modal__header">
+        <h2 class="modal__title" id="mitid-modal-title">Log ind med MitID</h2>
+        <button class="modal__close" id="mitid-modal-close" aria-label="Luk">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="mitid-flow">
+          <div class="mitid-flow__logo">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <span class="mitid-flow__logo-text">MitID</span>
+          </div>
+          <p class="mitid-flow__description">Bekræft din identitet for at indsende et høringssvar til Aarhus Kommune.</p>
+          <div class="mitid-flow__field">
+            <label for="mitid-userid" class="mitid-flow__label">Bruger-ID</label>
+            <input type="text" id="mitid-userid" class="mitid-flow__input" value="JensenMaria42" readonly>
+          </div>
+          <p class="mitid-flow__hint">Godkend med MitID-app eller kodeviser</p>
+          <button class="mitid-flow__approve" id="mitid-approve-btn" type="button">Godkend</button>
+          <p class="mitid-flow__note">Dette er en mock — ingen rigtig MitID-godkendelse sker.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Høringssvar Submission Form Modal -->
+  <div class="modal-overlay" id="submission-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="submission-modal-title" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="submission-modal-title">Indsend høringssvar</h2>
+        <button class="modal__close" id="submission-modal-close" aria-label="Luk">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <form class="submission-form" id="submission-form">
+          <div class="submission-form__field">
+            <label for="submission-category" class="submission-form__label">Kategori</label>
+            <select id="submission-category" class="submission-form__select" required>
+              <option value="">Vælg kategori...</option>
+              <option value="miljoe">Miljø/Natur</option>
+              <option value="stoej">Støj/Sundhed</option>
+              <option value="landskab">Landskab/Visuel</option>
+              <option value="proces">Proces/Andet</option>
+            </select>
+          </div>
+          <div class="submission-form__field">
+            <label for="submission-name" class="submission-form__label">Dit navn</label>
+            <input type="text" id="submission-name" class="submission-form__input" value="Maria Jensen" readonly>
+            <span class="submission-form__hint">Udfyldt automatisk via MitID</span>
+          </div>
+          <div class="submission-form__field">
+            <label for="submission-title" class="submission-form__label">Titel</label>
+            <input type="text" id="submission-title" class="submission-form__input" required placeholder="Giv dit høringssvar en titel...">
+          </div>
+          <div class="submission-form__field">
+            <label for="submission-body" class="submission-form__label">Dit høringssvar</label>
+            <textarea id="submission-body" class="submission-form__textarea" rows="8" required placeholder="Beskriv dine synspunkter, bekymringer eller forslag vedrørende planen..."></textarea>
+          </div>
+          <div class="submission-form__notice">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <p>Alle høringssvar er omfattet af offentlighedsloven. Dit navn og høringssvar vil blive offentliggjort i forbindelse med byrådets politiske behandling.</p>
+          </div>
+          <div class="submission-form__actions">
+            <button type="submit" class="btn-primary submission-form__submit">Indsend høringssvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Data and state -->
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <!-- Components -->
+  <script src="js/horingssvar.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/modal-horingssvar.js"></script>
+  <script src="js/modal-material.js"></script>
+  <script src="js/modal-decision.js"></script>
+  <script src="js/dropdown.js"></script>
+  <script src="js/glossary.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/compact-nav.js"></script>
+  <script src="js/variant.js"></script>
+  <script src="js/modal-mitid.js"></script>
+  <script src="js/modal-submission.js"></script>
+  <!-- Orchestrator (must be last) -->
+  <script src="js/main.js"></script>
+</body>
+</html>
