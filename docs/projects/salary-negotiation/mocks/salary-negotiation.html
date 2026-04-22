@@ -48,84 +48,7 @@
       display: flex;
       flex-direction: column;
       height: 100%;
-      transition: width 0.2s, min-width 0.2s;
       overflow: hidden;
-    }
-
-    .sidebar.collapsed {
-      width: 56px;
-      min-width: 56px;
-    }
-
-    .sidebar.collapsed .sidebar-logo span,
-    .sidebar.collapsed .sidebar-year label,
-    .sidebar.collapsed .sidebar-year select,
-    .sidebar.collapsed .sidebar-section-label,
-    .sidebar.collapsed .nav-item span:not(.nav-icon),
-    .sidebar.collapsed .sidebar-user .user-info {
-      display: none;
-    }
-
-    .sidebar.collapsed .sidebar-logo {
-      justify-content: center;
-      padding: 20px 0 16px;
-    }
-
-    .sidebar.collapsed .sidebar-year {
-      display: none;
-    }
-
-    .sidebar.collapsed .nav-item {
-      justify-content: center;
-      padding: 10px 0;
-      border-left: none;
-    }
-
-    .sidebar.collapsed .nav-item.active {
-      border-left: none;
-      border-right: 3px solid #16a34a;
-    }
-
-    .sidebar.collapsed .sidebar-user {
-      justify-content: center;
-      padding: 16px 0;
-    }
-
-    .sidebar-toggle {
-      position: absolute;
-      bottom: 70px;
-      left: 220px;
-      width: 24px;
-      height: 24px;
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      transition: left 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .sidebar-toggle svg {
-      width: 14px;
-      height: 14px;
-      stroke: #888;
-      stroke-width: 2;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: transform 0.2s;
-    }
-
-    .sidebar.collapsed ~ .sidebar-toggle {
-      left: 36px;
-    }
-
-    .sidebar.collapsed ~ .sidebar-toggle svg {
-      transform: rotate(180deg);
     }
 
     .sidebar-logo {
@@ -780,10 +703,125 @@
       font-size: 13px;
     }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .summary-cards { grid-template-columns: repeat(2, 1fr); }
-      .sidebar { width: 200px; min-width: 200px; }
+    /* ========== MOBILE TOPBAR ========== */
+    .mobile-topbar {
+      display: none;
+    }
+
+    .sidebar-overlay {
+      display: none;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .mobile-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 32px; /* below mock banner */
+        left: 0;
+        right: 0;
+        height: 48px;
+        padding: 0 16px;
+        background: #fff;
+        border-bottom: 1px solid #e8e8e8;
+        z-index: 90;
+      }
+
+      .hamburger-btn {
+        width: 36px;
+        height: 36px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: background 0.15s;
+      }
+
+      .hamburger-btn:hover {
+        background: #f0f0f0;
+      }
+
+      .hamburger-btn svg {
+        width: 22px;
+        height: 22px;
+        stroke: #333;
+        stroke-width: 2;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .mobile-topbar-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      .mobile-topbar-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #e8e8e8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+        color: #666;
+      }
+
+      .app-layout {
+        padding-top: 80px; /* mock banner 32px + topbar 48px */
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 200;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: none;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 16px rgba(0,0,0,0.12);
+      }
+
+      .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 150;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+
+      .sidebar-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .main-body {
+        padding: 16px;
+      }
+
+      .main-header {
+        padding: 16px;
+      }
     }
 
     /* ========== EXPANDABLE HISTORY ROW ========== */
@@ -930,10 +968,19 @@
   <strong>MOCK</strong> — Lønforhandlingssystem for Aarhus Kommune (interaktiv prototype)
 </div>
 
+<header class="mobile-topbar">
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="Åbn menu">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <span class="mobile-topbar-title">Lønforhandling</span>
+  <div class="mobile-topbar-avatar">MH</div>
+</header>
+
 <div class="app-layout">
 
   <!-- ========== SIDEBAR ========== -->
   <aside class="sidebar">
+
     <div class="sidebar-logo">
       <div class="logo-icon">L</div>
       Lønforhandling
@@ -971,9 +1018,7 @@
     </div>
   </aside>
 
-  <button class="sidebar-toggle" id="sidebar-toggle" title="Skjul/vis sidemenu">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
   <!-- ========== MAIN ========== -->
   <main class="main-content">
@@ -1648,9 +1693,30 @@
     if (e.key === 'Enter' && e.ctrlKey && modalOverlay.classList.contains('open')) saveReason();
   });
 
-  // ========== SIDEBAR TOGGLE ==========
-  document.getElementById('sidebar-toggle').addEventListener('click', () => {
-    document.querySelector('.sidebar').classList.toggle('collapsed');
+  // ========== MOBILE HAMBURGER NAV ==========
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+
+  hamburgerBtn.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar on mobile when a nav item is clicked
+  navItems.forEach(item => {
+    item.addEventListener('click', closeSidebar);
   });
 
   // ========== INIT ==========
