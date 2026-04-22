@@ -1,0 +1,806 @@
+/* ==========================================================================
+   Aarhus Kommune — Opkraevningsoverblik Mockup
+   CSS Custom Properties + BEM naming + WCAG 2.1 AA
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary: #003C50;
+    --color-primary-light: #F5F5F0;
+    --color-success: #0B6E4F;
+    --color-success-bg: #E8F5E9;
+    --color-warning: #B8860B;
+    --color-warning-bg: #FFF8E1;
+    --color-danger: #C62828;
+    --color-danger-bg: #FFEBEE;
+    --color-muted: #546E7A;
+    --color-muted-bg: #ECEFF1;
+    --color-text: #222;
+    --color-text-secondary: #666;
+    --color-text-light: #888;
+    --color-border: #ddd;
+    --color-bg: #F5F5F0;
+    --color-white: #fff;
+    --font-family: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --max-width: 960px;
+    --radius: 10px;
+    --radius-lg: 12px;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --focus-ring: 0 0 0 3px rgba(0, 60, 80, 0.4);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 1000;
+    padding: 12px 24px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Focus indicators */
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    box-shadow: var(--focus-ring);
+    outline: none;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.header__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header__logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: var(--color-primary);
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.header__kommune {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 2px;
+}
+
+.header__title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.header__user {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.header__user-name {
+    opacity: 0.8;
+}
+
+.header__logout {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.header__logout:hover {
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   Main content
+   ========================================================================== */
+
+.main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 28px 24px 60px;
+    width: 100%;
+    flex: 1;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 20px 24px;
+    margin-top: auto;
+}
+
+.footer__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   Status Banner
+   ========================================================================== */
+
+.status-banner {
+    border: 2px solid;
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.status-banner__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.status-banner__content {
+    flex: 1;
+}
+
+.status-banner__label {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.status-banner__desc {
+    font-size: 15px;
+    color: #333;
+}
+
+.status-banner__amount {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.status-banner__amount-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 2px;
+}
+
+.status-banner__amount-value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.tabs__list {
+    display: flex;
+    gap: 0;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.tabs__tab {
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.tabs__tab--active {
+    font-weight: 700;
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.tabs__tab:hover {
+    color: var(--color-primary);
+}
+
+.tabs__panel--hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   Filter Bar
+   ========================================================================== */
+
+.filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-bar__btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    background: var(--color-white);
+    color: #333;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.filter-bar__btn:hover {
+    border-color: var(--color-primary);
+}
+
+.filter-bar__btn--active {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* ==========================================================================
+   Charge List & Cards
+   ========================================================================== */
+
+.charge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.charge-list__empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-secondary);
+}
+
+.charge-card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s;
+    cursor: pointer;
+}
+
+.charge-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.charge-card__info {
+    flex: 1;
+}
+
+.charge-card__type {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-text);
+    margin-bottom: 4px;
+}
+
+.charge-card__meta {
+    font-size: 13px;
+    color: var(--color-text-light);
+}
+
+.charge-card__amount {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-right: 12px;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   Charge Badge
+   ========================================================================== */
+
+.charge-badge {
+    padding: 5px 14px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.charge-badge--large {
+    padding: 8px 20px;
+    font-size: 15px;
+}
+
+/* ==========================================================================
+   History
+   ========================================================================== */
+
+.history {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow);
+}
+
+.history__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 4px;
+}
+
+.history__subtitle {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin: 0 0 24px;
+}
+
+.history__chart {
+    margin-bottom: 24px;
+    height: 320px;
+}
+
+.history__arrears {
+    margin-top: 24px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.history__arrears-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 12px;
+}
+
+.history__arrears-list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.arrears-badge {
+    background: var(--color-danger-bg);
+    border: 1px solid #FFCDD2;
+    border-radius: 8px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.arrears-badge__year {
+    font-weight: 600;
+    color: var(--color-danger);
+}
+
+.arrears-badge__amount {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.history__no-arrears {
+    color: var(--color-success);
+    font-weight: 500;
+}
+
+.history__table-toggle {
+    margin-top: 24px;
+}
+
+.history__table-toggle summary {
+    font-size: 14px;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   History Table
+   ========================================================================== */
+
+.history-table {
+    width: 100%;
+    margin-top: 12px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.history-table thead tr {
+    border-bottom: 2px solid var(--color-border);
+}
+
+.history-table th {
+    text-align: left;
+    padding: 8px 12px;
+    color: #444;
+    font-weight: 600;
+}
+
+.history-table td {
+    padding: 8px 12px;
+}
+
+.history-table tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+/* ==========================================================================
+   Charge Detail
+   ========================================================================== */
+
+.charge-detail {
+    max-width: 640px;
+}
+
+.charge-detail__back {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+}
+
+.charge-detail__back:hover {
+    text-decoration: underline;
+}
+
+.charge-detail__card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid;
+}
+
+.charge-detail__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.charge-detail__title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.charge-detail__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.charge-detail__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.charge-detail__row:last-child {
+    border-bottom: none;
+}
+
+.charge-detail__row dt {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.charge-detail__row dd {
+    font-weight: 600;
+}
+
+.charge-detail__amount {
+    font-size: 20px;
+    color: var(--color-text);
+}
+
+/* ==========================================================================
+   Login
+   ========================================================================== */
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 40px 24px;
+}
+
+.login__card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    max-width: 420px;
+    width: 100%;
+}
+
+.login__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.login__subtitle {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login__hint {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.login__hint summary {
+    cursor: pointer;
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.login__test-users {
+    list-style: none;
+    margin: 8px 0;
+}
+
+.login__test-users li {
+    padding: 4px 0;
+}
+
+.login__test-users code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   Form elements
+   ========================================================================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.form-input {
+    padding: 10px 14px;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+}
+
+.form-input:focus {
+    border-color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.15s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn--primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn--full {
+    width: 100%;
+}
+
+/* ==========================================================================
+   Utility classes
+   ========================================================================== */
+
+.text-right { text-align: right; }
+.text-danger { color: var(--color-danger); }
+.text-success { color: var(--color-success); }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .header__inner {
+        flex-wrap: wrap;
+    }
+
+    .header__user {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 8px;
+    }
+
+    .status-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .status-banner__amount {
+        text-align: center;
+    }
+
+    .charge-card {
+        flex-wrap: wrap;
+    }
+
+    .charge-card__amount {
+        margin-right: 0;
+    }
+
+    .charge-detail__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        padding: 16px;
+    }
+
+    .tabs__tab {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .filter-bar__btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .status-banner__label {
+        font-size: 18px;
+    }
+
+    .status-banner__amount-value {
+        font-size: 22px;
+    }
+
+    .login__card {
+        padding: 24px;
+    }
+}

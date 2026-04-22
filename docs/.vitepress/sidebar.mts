@@ -78,6 +78,16 @@ const bookAarhus: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const opkraevningsoverblik: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Opkrævningsoverblik',
+    items: [
+      { text: 'Overview', link: '/projects/opkraevningsoverblik/' },
+      { text: 'Interactive Mocks', link: '/projects/opkraevningsoverblik/mocks' },
+    ],
+  },
+]
+
 export function sidebar(): DefaultTheme.Sidebar {
   return {
     '/projects/climate-nudging/': climateNudging,
@@ -87,6 +97,7 @@ export function sidebar(): DefaultTheme.Sidebar {
     '/projects/wcag-contrast-checker/': wcagContrastChecker,
     '/projects/deltag-aarhus-timeline/': deltagAarhusTimeline,
     '/projects/book-aarhus/': bookAarhus,
+    '/projects/opkraevningsoverblik/': opkraevningsoverblik,
   }
 }
 
