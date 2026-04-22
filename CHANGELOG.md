@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Opkrævningsoverblik Project
+- Consolidated municipal charges overview prototype for Aarhus Kommune citizens
+- Interactive mock with login, dashboard, status indicator, charge list, filtering, and 5-year history chart
+
 ### Added
 - "Last edited" dates on home page project cards, sourced from git commit timestamps
 - Custom HomeFeatures component replacing default VitePress feature cards

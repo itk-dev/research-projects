@@ -34,4 +34,8 @@ features:
     details: Prototype af en responsiv bookingapplikation til lokaler og faciliteter i Aarhus Kommune med søgning, filtrering og favoritter.
     link: /projects/book-aarhus/
     linkText: View project
+  - title: Opkrævningsoverblik
+    details: Samlet overblik over kommunale opkrævninger med statusindikator, opkrævningsliste, filtrering og 5-års historisk udvikling.
+    link: /projects/opkraevningsoverblik/
+    linkText: View project
 ---
