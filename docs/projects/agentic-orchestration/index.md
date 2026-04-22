@@ -75,8 +75,9 @@ Measuring the effect — dashboards showing process throughput, error rates, tim
 
 ## The Open-Source Opportunity
 
-!!! info "Full analysis"
+::: info Full analysis
 See the [Open Source Landscape](open-source-landscape.md) for detailed tool-by-tool evaluation.
+:::
 
 ### Key finding
 
@@ -139,8 +140,9 @@ Most process mapping tools assume the user already knows what the process should
 
 ## Recommended Architecture
 
-!!! info "Full details"
+::: info Full details
 See [Architecture Options](architecture.md) for detailed stack descriptions.
+:::
 
 ### Option A: Full composed stack
 
@@ -190,8 +192,9 @@ The risk is development effort and maintenance. A phased approach (start minimal
 
 ## Open Questions
 
-!!! info "Full details"
+::: info Full details
 See [Considerations](considerations.md) for all open questions and discussion points.
+:::
 
 Key questions to resolve:
 

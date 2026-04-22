@@ -18,8 +18,9 @@ Open questions and areas that need clarification before moving from research to 
 | **Caseworkers**            | Task inbox (human-in-the-loop), process status    | Phase 1   |
 | **Municipal leadership**   | Strategic overview, aggregate business value      | Phase 3   |
 
-!!! warning "Open question"
+::: warning Open question
 The platform's UI complexity depends entirely on this answer. If only IT uses it, we can be more technical. If process owners need to model processes themselves, we need a polished visual modeler.
+:::
 
 ---
 
@@ -35,11 +36,12 @@ The platform's UI complexity depends entirely on this answer. If only IT uses it
 | Caseworker       |      No       |         No         |     Yes      |     Limited     |  No   |
 | Manager          |      No       |         No         |      No      |       Yes       |  No   |
 
-!!! warning "Open questions"
-    - How does this map to existing municipal AD groups?
-    - Should permissions be per-process or global?
-    - Who approves deploying a new automation to production?
-    - Do we need an approval workflow for process changes themselves?
+::: warning Open questions
+- How does this map to existing municipal AD groups?
+- Should permissions be per-process or global?
+- Who approves deploying a new automation to production?
+- Do we need an approval workflow for process changes themselves?
+:::
 
 ---
 
@@ -56,8 +58,9 @@ The platform's UI complexity depends entirely on this answer. If only IT uses it
 | **Email (Exchange)**            | Notifications, task routing | n8n email connector                     |
 | **Existing RPA bots**           | Current automations         | Robot Framework migration or API bridge |
 
-!!! warning "Open question"
+::: warning Open question
 What other systems are critical? We need an inventory of systems currently involved in automated processes.
+:::
 
 ---
 
@@ -81,8 +84,9 @@ What other systems are critical? We need an inventory of systems currently invol
 - Danish public sector security requirements (ISO 27001, ISAE 3402?)
 - Data retention and right-to-deletion in process logs
 
-!!! warning "Open question"
+::: warning Open question
 A security review must happen before any prototype handles real data. The PoC should use synthetic data only.
+:::
 
 ---
 

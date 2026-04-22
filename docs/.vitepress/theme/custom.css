@@ -1,0 +1,55 @@
+/*
+ * ITK Development brand colors (from logo):
+ *   Teal:       #007BA6  rgb(0,123,166)
+ *   Cyan:       #00B5C9  rgb(0,181,201)
+ *   Blue:       #00A5CD  rgb(0,165,205)
+ *   Dark green: #008D3D  rgb(0,141,61)
+ *   Lime:       #89BD23  rgb(137,189,35)
+ *   Sage:       #73BC99  rgb(115,188,153)
+ *   Red:        #E44930  rgb(228,73,48)
+ */
+
+:root {
+  --vp-c-brand-1: #007BA6;
+  --vp-c-brand-2: #00698E;
+  --vp-c-brand-3: #005876;
+  --vp-c-brand-soft: rgba(0, 123, 166, 0.14);
+
+  --vp-c-tip-1: #008D3D;
+  --vp-c-tip-2: rgba(0, 141, 61, 0.16);
+  --vp-c-tip-3: rgba(0, 141, 61, 0.08);
+  --vp-c-tip-soft: rgba(0, 141, 61, 0.14);
+}
+
+.dark {
+  --vp-c-brand-1: #00B5C9;
+  --vp-c-brand-2: #00A5CD;
+  --vp-c-brand-3: #007BA6;
+  --vp-c-brand-soft: rgba(0, 181, 201, 0.14);
+}
+
+.project-label {
+  font-size: 0.85em;
+  color: var(--vp-c-text-2);
+  margin-bottom: 8px;
+}
+
+.mock-button {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 6px;
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.mock-button:hover {
+  background-color: var(--vp-c-brand-1);
+  color: #fff;
+}
+
+.VPFeature .VPImage {
+  filter: opacity(0.6);
+}

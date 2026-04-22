@@ -39,8 +39,9 @@ The goal is not to reduce AI usage. The goal is to help users make **informed ch
 
 ## What We Know About AI's Climate Impact
 
-!!! info "Full research"
-    See the complete [CO2 Research](co2-research.md) document for detailed findings and sources.
+::: info Full research
+See the complete [CO2 Research](co2-research.md) document for detailed findings and sources.
+:::
 
 ### The headline numbers
 
@@ -63,8 +64,9 @@ For an individual user, the CO2 from AI queries is small compared to daily activ
 
 ## Nudging Strategies
 
-!!! info "Full ideas list"
-    See the complete [Nudge Ideas](ideas.md) document for all 17 ideas with details.
+::: info Full ideas list
+See the complete [Nudge Ideas](ideas.md) document for all 17 ideas with details.
+:::
 
 ### Pre-request nudges
 - **Leaf indicator** — visual prompt complexity hint (see [Mock 1](#mock-1-leaf-indicator))
@@ -103,7 +105,7 @@ The leaf indicator is a small icon in the chat input area that changes color bas
 
 **Behavior:** Updates in real-time as the user types. Hovering shows a tooltip with estimated impact and an everyday equivalence.
 
-[Interactive prototype :material-open-in-new:](mocks/leaf-indicator.html){ .md-button }
+<a href="/projects/climate-nudging/mocks/leaf-indicator.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
 
 ![Leaf indicator mock](images/leaf-indicator-mock.png)
 
@@ -118,7 +120,7 @@ A running cost estimate displayed in the top bar of the chat interface. Shows cu
 - Expandable detail panel on hover
 - Everyday equivalences that scale with usage
 
-[Interactive prototype :material-open-in-new:](mocks/session-cost-ticker.html){ .md-button }
+<a href="/projects/climate-nudging/mocks/session-cost-ticker.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
 
 ![Session cost ticker mock](images/session-cost-ticker.png)
 
@@ -135,7 +137,7 @@ A dedicated dashboard page showing the user's AI usage over time, with charts, e
 - Contextual tips based on actual usage patterns
 - User preference picker for equivalence units (kettle boils, toast, shower minutes, etc.)
 
-[Interactive prototype :material-open-in-new:](mocks/usage-dashboard.html){ .md-button }
+<a href="/projects/climate-nudging/mocks/usage-dashboard.html" class="mock-button" target="_blank">Interactive prototype ↗</a>
 
 ![Usage dashboard mock](images/usage-dashboard.png)
 
@@ -143,8 +145,9 @@ A dedicated dashboard page showing the user's AI usage over time, with charts, e
 
 ## Integration Points
 
-!!! info "Full technical details"
-    See the complete [Integration Points](integration.md) document.
+::: info Full technical details
+See the complete [Integration Points](integration.md) document.
+:::
 
 ### Open WebUI
 - **Pipelines** for backend logic (token counting, cost estimation, pattern detection)
@@ -165,8 +168,9 @@ A dedicated dashboard page showing the user's AI usage over time, with charts, e
 
 ## Guidance to Hosting Providers
 
-!!! info "Full research"
-    See [CO2 Research — Guidance to Hosting Providers](co2-research.md#5-guidance-to-hosting-providers) for the complete list.
+::: info Full research
+See [CO2 Research — Guidance to Hosting Providers](co2-research.md#5-guidance-to-hosting-providers) for the complete list.
+:::
 
 ### The ask
 

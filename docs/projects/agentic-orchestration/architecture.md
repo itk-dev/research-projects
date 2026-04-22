@@ -87,8 +87,9 @@ Maximum flexibility. Covers all four capabilities (Map, Automate, Orchestrate, A
 
 Fastest path to a working platform. Three components covering the core needs.
 
-!!! info "See the mock"
-    The [Unified Platform mock](mocks/unified-platform.html) demonstrates how these three components can feel like a single seamless platform.
+::: info See the mock
+The <a href="/projects/agentic-orchestration/mocks/unified-platform.html" target="_blank">Unified Platform mock ↗</a> demonstrates how these three components can feel like a single seamless platform.
+:::
 
 ### Components
 

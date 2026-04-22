@@ -1,0 +1,45 @@
+version: "3"
+
+# https://taskfile.dev/usage/#env-files
+dotenv: [".env.local", ".env"]
+
+vars:
+  # https://taskfile.dev/reference/templating/
+  BASE_URL: '{{.TASK_BASE_URL | default .COMPOSE_SERVER_DOMAIN | default .COMPOSE_DOMAIN | default "http://research.local.itkdev.dk"}}'
+  DOCKER_COMPOSE: '{{.TASK_DOCKER_COMPOSE | default "docker compose"}}'
+
+tasks:
+  default:
+    cmds:
+      - task --list-all
+    silent: true
+
+  dev:
+    desc: "Start development server"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} up --detach"
+
+  build:
+    desc: "Build static site"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} run --rm node sh -c 'npm install && npx vitepress build docs'"
+
+  open:
+    cmds:
+      - open {{ .BASE_URL }}
+    silent: true
+
+  lint:apply:
+    desc: "Apply coding standards for Markdown"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} run --rm markdownlint markdownlint '**/*.md' --fix"
+
+  lint:check:
+    desc: "Check coding standards for Markdown"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} run --rm markdownlint markdownlint '**/*.md'"
+
+  lint:yaml:
+    desc: "Check coding standards for YAML"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} run --rm prettier '**/*.{yml,yaml}' --check"

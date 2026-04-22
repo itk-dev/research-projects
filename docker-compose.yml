@@ -1,0 +1,57 @@
+networks:
+  frontend:
+    external: true
+  app:
+    driver: bridge
+    internal: false
+
+services:
+  nginx:
+    image: nginxinc/nginx-unprivileged:alpine
+    networks:
+      - app
+      - frontend
+    depends_on:
+      - node
+    ports:
+      - "8080"
+    volumes:
+      - ./.docker/templates:/etc/nginx/templates:ro
+      - ./.docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./:/app:delegated
+    environment:
+      NGINX_PORT: 8080
+      NGINX_PROXY_SERVICE: ${COMPOSE_PROJECT_NAME:?}-node-1:5173
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=frontend"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME:?}.rule=Host(`${COMPOSE_DOMAIN:?}`)"
+
+  node:
+    image: node:24-alpine
+    command: sh -c "npm install && npx vitepress dev docs --host 0.0.0.0"
+    working_dir: /app
+    networks:
+      - app
+    ports:
+      - "5173"
+    volumes:
+      - ./:/app:delegated
+      - node_modules:/app/node_modules
+
+  markdownlint:
+    image: itkdev/markdownlint
+    profiles:
+      - dev
+    volumes:
+      - ./:/md
+
+  prettier:
+    image: jauderho/prettier
+    profiles:
+      - dev
+    volumes:
+      - ./:/work
+
+volumes:
+  node_modules:
