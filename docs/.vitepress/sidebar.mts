@@ -48,12 +48,45 @@ const deltagAarhus: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const wcagContrastChecker: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'WCAG Contrast Checker',
+    items: [
+      { text: 'Overview', link: '/projects/wcag-contrast-checker/' },
+      { text: 'Interactive Mocks', link: '/projects/wcag-contrast-checker/mocks' },
+    ],
+  },
+]
+
+const deltagAarhusTimeline: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Deltag Aarhus — Projekttidslinje',
+    items: [
+      { text: 'Overview', link: '/projects/deltag-aarhus-timeline/' },
+      { text: 'Interactive Mocks', link: '/projects/deltag-aarhus-timeline/mocks' },
+    ],
+  },
+]
+
+const bookAarhus: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Book Aarhus',
+    items: [
+      { text: 'Overview', link: '/projects/book-aarhus/' },
+      { text: 'Interactive Mocks', link: '/projects/book-aarhus/mocks' },
+    ],
+  },
+]
+
 export function sidebar(): DefaultTheme.Sidebar {
   return {
     '/projects/climate-nudging/': climateNudging,
     '/projects/salary-negotiation/': salaryNegotiation,
     '/projects/agentic-orchestration/': agenticOrchestration,
     '/projects/deltag-aarhus/': deltagAarhus,
+    '/projects/wcag-contrast-checker/': wcagContrastChecker,
+    '/projects/deltag-aarhus-timeline/': deltagAarhusTimeline,
+    '/projects/book-aarhus/': bookAarhus,
   }
 }
 
