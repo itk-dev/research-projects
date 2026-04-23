@@ -10,44 +10,61 @@ Research publishing site for ITKdev, built with VitePress and deployed to GitHub
 ## Structure
 
 ```
-docs/                                    # VitePress source content root
-docs/.vitepress/config.mts               # Site config (title, nav, search, meta)
-docs/.vitepress/sidebar.mts              # Sidebar and nav definitions
-docs/.vitepress/theme/index.ts           # Custom theme entry
-docs/.vitepress/theme/custom.css         # ITK Dev brand colors + custom styles
-docs/.vitepress/theme/DocLayout.vue      # Layout with author info + password gate
-docs/.vitepress/theme/PasswordGate.vue   # Client-side password protection component
-docs/.vitepress/theme/usePasswordAuth.ts # Auth composable (SHA-256 + sessionStorage)
-docs/index.md                            # Landing page (VitePress home layout)
-docs/about.md                            # About ITKdev Research
-docs/public/robots.txt                   # SEO control (noindex)
-docs/public/projects/<name>/mocks/       # Interactive HTML prototypes (static assets)
-docs/projects/<project-name>/            # Each research project
-  index.md                               # Main report
-  mocks.md                               # Mocks listing page
-  images/                                # Screenshots and figures
-package.json                             # Node dependencies
-docker-compose.yml                       # Docker dev environment
-Taskfile.yml                             # Task automation (dev, build, lint)
-.github/workflows/deploy.yml             # Auto-deploy on push to main
-.github/workflows/verify_build.yml       # PR build verification
+docs/                                        # VitePress source content root
+docs/.vitepress/config.mts                   # Site config (title, nav, search, base path, meta)
+docs/.vitepress/sidebar.mts                  # Sidebar and nav definitions per project
+docs/.vitepress/theme/index.ts               # Custom theme entry (extends default)
+docs/.vitepress/theme/custom.css             # ITK Dev brand colors + custom styles
+docs/.vitepress/theme/DocLayout.vue          # Layout with author info, password gate, custom home features
+docs/.vitepress/theme/PasswordGate.vue       # Client-side password protection component
+docs/.vitepress/theme/HomeFeatures.vue       # Custom home page feature cards with "Last edited" dates
+docs/.vitepress/theme/projectDates.data.js   # Build-time data loader — reads git timestamps per project
+docs/index.md                                # Landing page (VitePress home layout with feature cards)
+docs/about.md                                # About ITKdev Research
+docs/public/robots.txt                       # SEO control (noindex)
+docs/public/projects/<name>/mocks/           # Interactive HTML prototypes (static assets)
+docs/projects/<project-name>/                # Each research project
+  index.md                                   # Main report / overview
+  mocks.md                                   # Mocks listing page
+  images/                                    # Screenshots and figures (optional)
+package.json                                 # Node dependencies (VitePress + Mermaid)
+.nvmrc                                       # Node version pin (22 LTS)
+docker-compose.yml                           # Docker dev environment (Node + Nginx + Traefik)
+Taskfile.yml                                 # Task automation (dev, build, lint)
+.github/workflows/deploy.yml                 # Auto-deploy on push to main
+.github/workflows/verify_build.yml           # PR build verification
 ```
+
+## Current projects
+
+| Folder | Project | Protected |
+|--------|---------|-----------|
+| `climate-nudging` | Climate Awareness Nudging | No |
+| `salary-negotiation` | Lønforhandlingssystem | Yes |
+| `agentic-orchestration` | Agentic Orchestration Studio | No |
+| `deltag-aarhus` | deltag.aarhus.dk | No |
+| `wcag-contrast-checker` | WCAG Contrast Checker | No |
+| `deltag-aarhus-timeline` | Deltag Aarhus — Projekttidslinje | No |
+| `book-aarhus` | Book Aarhus | No |
+| `opkraevningsoverblik` | Opkrævningsoverblik | No |
 
 ## Conventions
 
 - All content is written in Markdown
-- Interactive mocks are self-contained HTML files stored in `docs/public/projects/<name>/mocks/` so VitePress serves them as raw static assets
-- Images are PNG screenshots stored alongside project markdown in `images/`
-- Every project document starts with a project label: `<small>**Project:** Project Name</small>`
+- Interactive mocks are self-contained HTML files in `docs/public/projects/<name>/mocks/` — VitePress serves them as raw static assets without processing
+- Every project document starts with: `<small>**Project:** Project Name</small>`
 - Use VitePress custom containers for callouts: `::: info Title` / `::: warning Title`
-- Mock links use absolute paths from the public root: `/projects/<name>/mocks/file.html`
-- Mock buttons use the `mock-button` CSS class: `<a href="..." class="mock-button" target="_blank">Text ↗</a>`
+- Mock links must include the base path prefix and open in a new tab:
+  ```html
+  <a href="/research-projects/projects/<name>/mocks/file.html" class="mock-button" target="_blank">Text ↗</a>
+  ```
 - Theme uses ITK Dev brand colors (teal/cyan) with dark/light mode
 - Site has `noindex, nofollow` meta tags and `robots.txt` to prevent crawling
+- Home page feature cards automatically show "Last edited" dates from git history
 
 ## Password-protecting a project
 
-Add frontmatter to any markdown file to require a password:
+Add frontmatter to every markdown file in the project:
 
 ```yaml
 ---
@@ -59,27 +76,29 @@ passwordGroup: "project-name"
 
 Generate the hash: `echo -n "your-password" | shasum -a 256 | cut -d ' ' -f 1`
 
-Pages sharing the same `passwordGroup` only prompt once per browser session.
+Pages sharing the same `passwordGroup` only prompt once per browser session. The password gate hides the sidebar and outline while locked.
 
-**Note:** This is client-side protection only. Content is in the HTML source. Adequate for casual access control, not for sensitive data.
+**Note:** Client-side protection only. Content is in the HTML source. Adequate for casual access control, not for sensitive data.
 
 ## Adding a new research project
 
 1. Create `docs/projects/<project-name>/` with at least an `index.md`
 2. Add `<small>**Project:** Project Name</small>` at the top of each document
-3. Add the project sidebar and nav entries in `docs/.vitepress/sidebar.mts`
-4. Add a feature card on `docs/index.md` (VitePress features array in frontmatter)
+3. Add a sidebar section in `docs/.vitepress/sidebar.mts`
+4. Add a feature card in `docs/index.md` frontmatter (the `link` field must match the sidebar path — the `projectDates.data.js` loader uses it to look up git timestamps)
 5. If the project has mocks:
    - Create a `mocks.md` listing page in the project folder
    - Place mock HTML files in `docs/public/projects/<project-name>/mocks/`
-   - Link to mocks with absolute paths: `/projects/<project-name>/mocks/file.html`
+   - Link to mocks with the base path prefix: `/research-projects/projects/<name>/mocks/file.html`
+   - Use `target="_blank"` on all mock links to bypass VitePress's client-side router
+6. Update `CHANGELOG.md`
 
 ## Building locally
 
 ### With Docker (recommended)
 
 ```bash
-task dev      # Start dev server via Docker + Traefik
+task dev      # Start dev server via Docker + Traefik at http://research.local.itkdev.dk
 task build    # Build static site
 task open     # Open in browser
 ```
@@ -87,6 +106,7 @@ task open     # Open in browser
 ### Without Docker
 
 ```bash
+nvm use       # Switch to Node 22 (from .nvmrc)
 npm install
 npm run docs:dev      # Dev server at http://localhost:5173
 npm run docs:build    # Build to _site/
