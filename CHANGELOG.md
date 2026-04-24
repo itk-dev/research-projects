@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Design System (v1)
+- Opt-in design system at `docs/public/design-system/v1/` — plain CSS + tokens using ITK Dev teal/cyan brand palette
+- Tokens for colors, typography (Inter), spacing, radii, shadows, transitions
+- Components: buttons, badges, cards, form inputs, tables, modal, sidebar nav, stat cards, alerts
+- Live playground at `/research-projects/design-system/v1/playground.html`
+- VitePress documentation pages (Overview, Tokens, Components, Usage) and top-nav entry
+
+### Changed — Design System (v1.1, aarhus.dk relation + data viz)
+- Added aarhus-inspired pink accent (`#ee0043`) and coral (`#ff5f31`), pastel surface utilities (mint, cream, pale-blue, pale-pink, pale-aqua, coral), and `--ds-radius-pill` / `--ds-radius-2xl`
+- Warmed body background to `#f5f4f2` and text to `#202423` to harmonize with aarhus.dk without copying it
+- New component variants: `btn-accent`, `btn-pill`, `card-soft`, `hero`, `quick-link`, `sparkline`
+- New viz helpers at `design-system/v1/viz/` — Chart.js theme (palette defaults), Leaflet theme CSS, `dsMakePin` / `dsHeatmap` / `dsCluster` overlay helpers
+- New docs pages: `/projects/design-system/diagrams` (Mermaid examples) and `/projects/design-system/data-viz` (Chart.js, Leaflet, sparklines)
+- Playground expanded with pastel swatches, pill/accent buttons, hero banner, quick-link tiles, three themed Chart.js charts, a Leaflet map with pins + heatmap, and sparklines in a table
+
 ### Added — Opkrævningsoverblik Project
 - Consolidated municipal charges overview prototype for Aarhus Kommune citizens
 - Interactive mock with login, dashboard, status indicator, charge list, filtering, and 5-year history chart

@@ -88,6 +88,20 @@ const opkraevningsoverblik: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const designSystem: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Design System',
+    items: [
+      { text: 'Overview', link: '/projects/design-system/' },
+      { text: 'Tokens', link: '/projects/design-system/tokens' },
+      { text: 'Components', link: '/projects/design-system/components' },
+      { text: 'Diagrams', link: '/projects/design-system/diagrams' },
+      { text: 'Data viz', link: '/projects/design-system/data-viz' },
+      { text: 'Usage', link: '/projects/design-system/usage' },
+    ],
+  },
+]
+
 export function sidebar(): DefaultTheme.Sidebar {
   return {
     '/projects/climate-nudging/': climateNudging,
@@ -98,11 +112,13 @@ export function sidebar(): DefaultTheme.Sidebar {
     '/projects/deltag-aarhus-timeline/': deltagAarhusTimeline,
     '/projects/book-aarhus/': bookAarhus,
     '/projects/opkraevningsoverblik/': opkraevningsoverblik,
+    '/projects/design-system/': designSystem,
   }
 }
 
 export function nav(): DefaultTheme.NavItem[] {
   return [
+    { text: 'Design System', link: '/projects/design-system/' },
     { text: 'About', link: '/about' },
   ]
 }

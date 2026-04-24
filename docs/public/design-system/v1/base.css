@@ -1,0 +1,121 @@
+/* ITK Dev Design System — Base styles (v1)
+   Scoped under .ds to avoid leaking into hosts that opt in partially. */
+
+.ds,
+.ds *,
+.ds *::before,
+.ds *::after {
+  box-sizing: border-box;
+}
+
+.ds {
+  font-family: var(--ds-font-family);
+  font-size: var(--ds-fs-base);
+  line-height: var(--ds-lh-body);
+  color: var(--ds-text-primary);
+  background-color: var(--ds-bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.ds h1,
+.ds h2,
+.ds h3,
+.ds h4,
+.ds h5,
+.ds h6 {
+  margin: 0 0 var(--ds-space-3);
+  font-weight: var(--ds-fw-bold);
+  line-height: var(--ds-lh-snug);
+  color: var(--ds-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.ds h1 { font-size: var(--ds-fs-4xl); line-height: var(--ds-lh-tight); font-weight: var(--ds-fw-black); letter-spacing: -0.02em; }
+.ds h2 { font-size: var(--ds-fs-3xl); letter-spacing: -0.015em; }
+.ds h3 { font-size: var(--ds-fs-2xl); }
+.ds h4 { font-size: var(--ds-fs-xl); }
+.ds h5 { font-size: var(--ds-fs-lg); }
+.ds h6 { font-size: var(--ds-fs-base); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.ds p { margin: 0 0 var(--ds-space-4); }
+
+.ds a {
+  color: var(--ds-text-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--ds-transition-fast);
+}
+
+.ds a:hover { color: var(--ds-text-link-hover); }
+
+.ds small { font-size: var(--ds-fs-sm); color: var(--ds-text-muted); }
+
+.ds code,
+.ds kbd,
+.ds pre,
+.ds samp {
+  font-family: var(--ds-font-family-mono);
+  font-size: 0.9em;
+}
+
+.ds code {
+  padding: 0.1em 0.35em;
+  background: var(--ds-bg-subtle);
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds pre {
+  margin: 0 0 var(--ds-space-4);
+  padding: var(--ds-space-4);
+  background: var(--ds-bg-inverse);
+  color: var(--ds-text-inverse);
+  border-radius: var(--ds-radius-md);
+  overflow-x: auto;
+}
+
+.ds pre code { padding: 0; background: transparent; color: inherit; }
+
+.ds hr {
+  border: 0;
+  border-top: 1px solid var(--ds-border-subtle);
+  margin: var(--ds-space-5) 0;
+}
+
+.ds img,
+.ds svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.ds :focus-visible {
+  outline: none;
+  box-shadow: var(--ds-shadow-focus);
+  border-radius: var(--ds-radius-sm);
+}
+
+/* Layout primitives */
+.ds .ds-container {
+  max-width: var(--ds-container-max);
+  margin-inline: auto;
+  padding-inline: var(--ds-space-4);
+}
+
+.ds .ds-stack > * + * { margin-top: var(--ds-space-4); }
+.ds .ds-stack-sm > * + * { margin-top: var(--ds-space-2); }
+.ds .ds-stack-lg > * + * { margin-top: var(--ds-space-6); }
+
+.ds .ds-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3);
+  align-items: center;
+}
+
+.ds .ds-grid {
+  display: grid;
+  gap: var(--ds-space-4);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
