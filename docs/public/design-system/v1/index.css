@@ -1,0 +1,9 @@
+/* ITK Dev Design System — v1
+   Single-file entry point. Opt in from a prototype with:
+     <link rel="stylesheet" href="/research-projects/design-system/v1/index.css">
+   Then wrap your UI in a .ds container:
+     <div class="ds"> ... </div> */
+
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./components.css");

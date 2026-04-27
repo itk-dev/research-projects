@@ -23,6 +23,8 @@ docs/index.md                                # Landing page (VitePress home layo
 docs/about.md                                # About ITKdev Research
 docs/public/robots.txt                       # SEO control (noindex)
 docs/public/projects/<name>/mocks/           # Interactive HTML prototypes (static assets)
+docs/public/design-system/v1/                # Shared opt-in design system (tokens + components)
+docs/projects/design-system/                 # Design system documentation pages
 docs/projects/<project-name>/                # Each research project
   index.md                                   # Main report / overview
   mocks.md                                   # Mocks listing page
@@ -61,6 +63,20 @@ Taskfile.yml                                 # Task automation (dev, build, lint
 - Theme uses ITK Dev brand colors (teal/cyan) with dark/light mode
 - Site has `noindex, nofollow` meta tags and `robots.txt` to prevent crawling
 - Home page feature cards automatically show "Last edited" dates from git history
+
+## Design system (opt-in)
+
+Shared visual language for new prototypes. Lives at `docs/public/design-system/v1/` and is served as static assets.
+
+- **Opt in** from a mock's HTML:
+  ```html
+  <link rel="stylesheet" href="/research-projects/design-system/v1/index.css">
+  <div class="ds"> ... </div>
+  ```
+- **Scope**: all classes are nested under `.ds` to prevent leakage.
+- **Versioning**: pinned at `v1/`; breaking changes ship as `v2/` without touching `v1/`.
+- **Docs**: see `/projects/design-system/` (Overview, Tokens, Components, Usage) and the live playground at `/research-projects/design-system/v1/playground.html`.
+- **Do not retrofit** existing prototypes. Skip the system for prototypes that mimic an external product (`deltag-aarhus`) or test other palettes (`wcag-contrast-checker`).
 
 ## Password-protecting a project
 

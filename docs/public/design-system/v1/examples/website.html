@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eksempel: Offentlig webside — ITK Dev Design System</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../index.css">
+<style>
+  body { margin: 0; background: var(--ds-bg-surface); }
+
+  /* Demo chrome — only shown in the design-system playground context */
+  .demo-chrome { background: linear-gradient(135deg, #007ba6, #00b5c9); padding: 10px 24px; }
+  .demo-chrome-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .demo-chrome-label {
+    color: #fff; opacity: 0.9; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .demo-chrome nav { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+  .demo-chrome nav a {
+    display: inline-block; padding: 6px 14px; font-size: 13px; font-weight: 500;
+    color: #fff; text-decoration: none;
+    background: rgba(255, 255, 255, 0.14); border-radius: 9999px;
+  }
+  .demo-chrome nav a:hover { background: rgba(255, 255, 255, 0.26); color: #fff; }
+  .demo-chrome nav a.is-active { background: #fff; color: var(--ds-color-primary); }
+
+  /* Site topbar */
+  .site-topbar {
+    background: var(--ds-bg-surface);
+    border-bottom: 1px solid var(--ds-border-subtle);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .site-topbar-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: 18px 32px;
+    display: flex; align-items: center; gap: 32px;
+  }
+  .site-brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 800; color: var(--ds-text-primary);
+    text-decoration: none; font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+  .site-brand span { color: var(--ds-color-accent); }
+  .site-brand .ds-icon { color: var(--ds-color-primary); width: 28px; height: 28px; }
+  .site-nav {
+    display: flex; gap: 28px; margin-left: auto;
+    font-size: 15px; font-weight: 600;
+  }
+  .site-nav a { color: var(--ds-text-primary); text-decoration: none; }
+  .site-nav a:hover { color: var(--ds-color-primary); }
+
+  /* Full-bleed hero */
+  .fb-hero {
+    background: linear-gradient(135deg, #ebeffb 0%, #f1dede 100%);
+    padding: 96px 32px 112px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fb-hero-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+  .fb-hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; background: #fff;
+    border-radius: 9999px; font-size: 13px; font-weight: 600;
+    color: var(--ds-color-accent);
+    margin-bottom: 24px;
+    box-shadow: var(--ds-shadow-sm);
+  }
+  .ds .fb-hero h1 {
+    margin: 0 0 20px;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.02;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    max-width: 14ch;
+  }
+  .ds .fb-hero h1 em { font-style: normal; color: var(--ds-color-primary); }
+  .fb-hero p {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    color: var(--ds-text-secondary);
+    max-width: 52ch;
+    margin: 0 0 32px;
+    line-height: 1.5;
+  }
+  .fb-hero-search {
+    display: flex; gap: 8px;
+    max-width: 640px;
+    background: #fff;
+    padding: 6px;
+    border-radius: 9999px;
+    box-shadow: var(--ds-shadow-md);
+  }
+  .fb-hero-search .input {
+    flex: 1;
+    border: 0; background: transparent; box-shadow: none;
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  .fb-hero-search .input:focus { box-shadow: none; }
+  .fb-hero-search .btn { border-radius: 9999px; padding: 12px 28px; }
+
+  /* Hero decorative blobs */
+  .fb-hero::before,
+  .fb-hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .fb-hero::before {
+    width: 420px; height: 420px;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 181, 201, 0.35), transparent 70%);
+    top: -120px; right: -80px;
+  }
+  .fb-hero::after {
+    width: 320px; height: 320px;
+    background: radial-gradient(circle at 60% 60%, rgba(238, 0, 67, 0.18), transparent 70%);
+    bottom: -140px; left: 10%;
+  }
+
+  /* Page wrap */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 72px 32px; }
+
+  /* Section header */
+  .section-head {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    gap: 16px; margin-bottom: 32px;
+  }
+  .section-head h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .section-head a {
+    font-size: 15px; font-weight: 600;
+    color: var(--ds-color-primary);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .section-head a:hover { gap: 10px; }
+
+  /* Quick links grid — bigger on wide screens */
+  .ql-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .ql-grid .quick-link {
+    padding: 24px;
+    border-radius: var(--ds-radius-xl);
+    border: 1px solid var(--ds-border-subtle);
+    background: var(--ds-bg-surface);
+  }
+  .ql-grid .quick-link-icon {
+    background: var(--ds-color-primary-soft);
+    color: var(--ds-color-primary);
+    width: 52px; height: 52px;
+  }
+  .ql-grid .quick-link-icon .ds-icon { width: 26px; height: 26px; }
+  .ql-grid .quick-link-title { font-size: 17px; font-weight: 700; }
+  .ql-grid .quick-link:nth-child(3n+2) .quick-link-icon {
+    background: var(--ds-color-accent-soft);
+    color: var(--ds-color-accent);
+  }
+  .ql-grid .quick-link:nth-child(3n+3) .quick-link-icon {
+    background: var(--ds-surface-mint);
+    color: var(--ds-green-700);
+  }
+
+  /* News grid */
+  .news-grid {
+    display: grid; gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .news-card {
+    display: flex; flex-direction: column;
+    background: var(--ds-bg-surface);
+    border-radius: var(--ds-radius-xl);
+    text-decoration: none; color: inherit;
+    overflow: hidden;
+    border: 1px solid var(--ds-border-subtle);
+    transition: transform var(--ds-transition), box-shadow var(--ds-transition);
+  }
+  .news-card:hover { transform: translateY(-3px); box-shadow: var(--ds-shadow-lg); color: inherit; }
+  .news-card .cover {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--c1, #007ba6), var(--c2, #00b5c9));
+    position: relative;
+  }
+  .news-card:nth-child(2) .cover { --c1: #ee0043; --c2: #ff5f31; }
+  .news-card:nth-child(3) .cover { --c1: #008d3d; --c2: #89bd23; }
+  .news-card .cover .badge { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,0.95); color: var(--ds-text-primary); }
+  .news-card .body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .news-card .meta { font-size: 12px; color: var(--ds-text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .news-card h3 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
+  .news-card p { margin: 0; color: var(--ds-text-secondary); font-size: 15px; }
+
+  /* Campaign strip — full-bleed */
+  .campaign {
+    background: var(--ds-surface-pale-pink);
+    padding: 72px 32px;
+    margin-top: 96px;
+  }
+  .campaign-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
+  }
+  .campaign .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ds-color-accent); margin-bottom: 16px; }
+  .ds .campaign h2 {
+    margin: 0 0 16px;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .campaign p { font-size: 17px; color: var(--ds-text-secondary); margin: 0 0 24px; max-width: 48ch; }
+  .campaign-visual {
+    aspect-ratio: 4 / 3;
+    background: radial-gradient(circle at 30% 30%, #ee0043, #b80134);
+    border-radius: var(--ds-radius-xl);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+  }
+  .campaign-visual .ds-icon { width: 140px; height: 140px; }
+  @media (max-width: 800px) { .campaign-inner { grid-template-columns: 1fr; } }
+
+  /* Stats strip */
+  .stats-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .ds .stat-value { font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 800; letter-spacing: -0.02em; }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 0;
+    padding: 72px 32px 32px;
+    background: var(--ds-bg-inverse);
+    color: var(--ds-gray-300);
+  }
+  .site-footer-inner { max-width: 1280px; margin: 0 auto; }
+  .site-footer-grid {
+    display: grid; gap: 48px;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    margin-bottom: 48px;
+  }
+  @media (max-width: 800px) { .site-footer-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); } }
+  .site-footer h4 { color: #fff; font-size: 15px; font-weight: 700; margin: 0 0 16px; }
+  .site-footer ul { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+  .site-footer li { margin-bottom: 10px; }
+  .site-footer a { color: var(--ds-gray-300); text-decoration: none; }
+  .site-footer a:hover { color: #fff; }
+  .site-footer .brand-lg {
+    font-size: 28px; font-weight: 800; color: #fff;
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .site-footer .brand-lg span { color: var(--ds-color-accent); }
+  .site-footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid var(--ds-gray-700);
+    font-size: 13px;
+    color: var(--ds-gray-500);
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+</style>
+</head>
+<body class="ds">
+
+<div class="demo-chrome">
+  <div class="demo-chrome-inner">
+    <span class="demo-chrome-label">Design system eksempel</span>
+    <nav>
+      <a href="../playground.html">Components</a>
+      <a href="./website.html" class="is-active">Webpage</a>
+      <a href="./app.html">App dashboard</a>
+    </nav>
+  </div>
+</div>
+
+<header class="site-topbar">
+  <div class="site-topbar-inner">
+    <a href="#" class="site-brand">
+      <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#building"/></svg>
+      ITK<span>dev</span>
+    </a>
+    <nav class="site-nav">
+      <a href="#">Borger</a>
+      <a href="#">Erhverv</a>
+      <a href="#">Politik</a>
+      <a href="#">Aktuelt</a>
+      <a href="#">Kontakt</a>
+    </nav>
+    <button class="btn btn-secondary btn-sm btn-pill">Log ind</button>
+  </div>
+</header>
+
+<!-- Full-bleed hero -->
+<section class="fb-hero">
+  <div class="fb-hero-inner">
+    <span class="fb-hero-eyebrow">
+      <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#leaf"/></svg>
+      Nyt: Klimaplan 2030
+    </span>
+    <h1>Aarhus &mdash; <em>for alle,</em> af os alle.</h1>
+    <p>Find services, høringer, arrangementer og aktuelle sager &mdash; samlet ét sted. Giv din mening til kende og vær med til at forme byen.</p>
+    <div class="fb-hero-search">
+      <input class="input" type="search" placeholder="Søg i kommunens services…">
+      <button class="btn btn-primary">
+        <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#search"/></svg>
+        Søg
+      </button>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- Quick links -->
+  <section>
+    <div class="section-head">
+      <h2>Populære services</h2>
+      <a href="#">
+        Se alle
+        <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#arrow-right"/></svg>
+      </a>
+    </div>
+    <div class="ql-grid">
+      <a class="quick-link" href="#">
+        <span class="quick-link-icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#car"/></svg></span>
+        <span class="quick-link-title">Parkering</span>
+        <span class="quick-link-desc">Zoner og tilladelser</span>
+      </a>
+      <a class="quick-link" href="#">
+        <span class="quick-link-icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#school"/></svg></span>
+        <span class="quick-link-title">Skole &amp; dagtilbud</span>
+        <span class="quick-link-desc">Indskrivning og SFO</span>
+      </a>
+      <a class="quick-link" href="#">
+        <span class="quick-link-icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#vote"/></svg></span>
+        <span class="quick-link-title">Borgerinddragelse</span>
+        <span class="quick-link-desc">Høringer og projekter</span>
+      </a>
+      <a class="quick-link" href="#">
+        <span class="quick-link-icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#alert"/></svg></span>
+        <span class="quick-link-title">Akut hjælp</span>
+        <span class="quick-link-desc">Krisecenter, vagtlæge</span>
+      </a>
+      <a class="quick-link" href="#">
+        <span class="quick-link-icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#calendar-check"/></svg></span>
+        <span class="quick-link-title">Book tid</span>
+        <span class="quick-link-desc">Borgerservice og pas</span>
+      </a>
+      <a class="quick-link" href="#">
+        <span class="quick-link-icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#trash"/></svg></span>
+        <span class="quick-link-title">Affald &amp; genbrug</span>
+        <span class="quick-link-desc">Tømning og pladser</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- News grid -->
+  <section style="margin-top: 96px;">
+    <div class="section-head">
+      <h2>Aktuelt</h2>
+      <a href="#">
+        Alle nyheder
+        <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#arrow-right"/></svg>
+      </a>
+    </div>
+    <div class="news-grid">
+      <a class="news-card" href="#">
+        <div class="cover"><span class="badge">Åben høring</span></div>
+        <div class="body">
+          <span class="meta">Borgerinddragelse · 22. apr 2026</span>
+          <h3>Ny høring: Fremtidens byrum i Aarhus C</h3>
+          <p>Giv din mening om planerne for det nye byrum omkring rutebilstationen. Høringen løber frem til 15. maj.</p>
+        </div>
+      </a>
+      <a class="news-card" href="#">
+        <div class="cover"><span class="badge">Delmål opnået</span></div>
+        <div class="body">
+          <span class="meta">Klima · 18. apr 2026</span>
+          <h3>Kommunens CO₂-regnskab 2025</h3>
+          <p>Samlet udledning er faldet 12% sammenlignet med året før. Læs rapporten og se delmål for 2030.</p>
+        </div>
+      </a>
+      <a class="news-card" href="#">
+        <div class="cover"><span class="badge">Kalender</span></div>
+        <div class="body">
+          <span class="meta">Kultur · 14. apr 2026</span>
+          <h3>Sommerens gratis arrangementer</h3>
+          <p>Fra sankthansbål til friluftskoncerter &mdash; her er programmet for hele byen.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <section style="margin-top: 96px;">
+    <div class="section-head">
+      <h2>Kommunen i tal</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-label">Indbyggere</div>
+        <div class="stat-value">355.094</div>
+        <div class="stat-trend stat-trend-up">
+          <svg class="ds-icon" aria-hidden="true" style="transform: rotate(-45deg);"><use href="../icons.svg#arrow-right"/></svg>
+          0.8% vs 2024
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Aktive høringer</div>
+        <div class="stat-value">12</div>
+        <div class="stat-trend" style="color: var(--ds-color-accent);">3 slutter i denne uge</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">CO₂ pr. indbygger</div>
+        <div class="stat-value">4.2 t</div>
+        <div class="stat-trend stat-trend-down">
+          <svg class="ds-icon" aria-hidden="true" style="transform: rotate(45deg);"><use href="../icons.svg#arrow-right"/></svg>
+          12% vs 2024
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Åbne sager</div>
+        <div class="stat-value">2.418</div>
+        <div class="stat-trend stat-trend-up">
+          <svg class="ds-icon" aria-hidden="true" style="transform: rotate(-45deg);"><use href="../icons.svg#arrow-right"/></svg>
+          4%
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Full-bleed campaign -->
+<section class="campaign">
+  <div class="campaign-inner">
+    <div>
+      <div class="eyebrow">Kampagne · maj 2026</div>
+      <h2>Cykl til arbejde &mdash; vind præmier.</h2>
+      <p>Deltag i maj-udfordringen og tæl dine kilometer. Bliv en del af en bevægelse, der gør Aarhus grønnere og sundere.</p>
+      <a href="#" class="btn btn-accent btn-pill btn-lg">
+        Tilmeld dig nu
+        <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#arrow-right"/></svg>
+      </a>
+    </div>
+    <div class="campaign-visual">
+      <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#bike"/></svg>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-grid">
+      <div>
+        <div class="brand-lg">ITK<span>dev</span></div>
+        <p style="color: var(--ds-gray-300); font-size: 14px; margin: 0 0 16px; max-width: 32ch;">Design system eksempel for forskningsprojekter i Aarhus Kommune.</p>
+      </div>
+      <div>
+        <h4>Borger</h4>
+        <ul>
+          <li><a href="#">Flytning</a></li>
+          <li><a href="#">Pas og kørekort</a></li>
+          <li><a href="#">Skole og dagtilbud</a></li>
+          <li><a href="#">Affald</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Politik</h4>
+        <ul>
+          <li><a href="#">Byrådet</a></li>
+          <li><a href="#">Dagsordener</a></li>
+          <li><a href="#">Høringer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>Rådhuspladsen 2<br>8000 Aarhus C</li>
+          <li>+45 89 40 20 00</li>
+          <li><a href="#">kontakt@itkdev.dk</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer-bottom">
+      <span>© ITKdev · Design system eksempel</span>
+      <span>Dette er en prototype, ikke en officiel side.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eksempel: Admin app — ITK Dev Design System</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../index.css">
+<style>
+  body { margin: 0; background: var(--ds-bg-page); min-height: 100vh; }
+
+  /* Demo chrome — shown only in the design-system playground context */
+  .demo-chrome {
+    background: linear-gradient(135deg, #007ba6, #00b5c9);
+    padding: 10px 24px;
+  }
+  .demo-chrome-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .demo-chrome-label {
+    color: #fff;
+    opacity: 0.9;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .demo-chrome nav { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+  .demo-chrome nav a {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
+  }
+  .demo-chrome nav a:hover { background: rgba(255, 255, 255, 0.26); color: #fff; }
+  .demo-chrome nav a.is-active { background: #fff; color: var(--ds-color-primary); }
+
+  .app-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: calc(100vh - 44px);
+  }
+
+  /* Sidebar */
+  .app-sidebar {
+    background: var(--ds-bg-surface);
+    border-right: 1px solid var(--ds-border-subtle);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .app-sidebar .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 12px 16px;
+    font-weight: 700;
+    color: var(--ds-text-primary);
+    text-decoration: none;
+    font-size: var(--ds-fs-lg);
+    border-bottom: 1px solid var(--ds-border-subtle);
+    margin-bottom: 12px;
+  }
+  .app-sidebar .brand-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--ds-radius-md);
+    background: linear-gradient(135deg, var(--ds-color-primary), var(--ds-cyan-400));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .app-sidebar .user {
+    margin-top: auto;
+    padding: 12px;
+    border-radius: var(--ds-radius-md);
+    background: var(--ds-bg-subtle);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .app-sidebar .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--ds-color-accent);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: var(--ds-fs-sm);
+  }
+  .app-sidebar .user-info { font-size: var(--ds-fs-sm); line-height: 1.3; }
+  .app-sidebar .user-info strong { display: block; color: var(--ds-text-primary); }
+  .app-sidebar .user-info span { color: var(--ds-text-muted); font-size: var(--ds-fs-xs); }
+
+  /* Main */
+  .app-main { display: flex; flex-direction: column; min-width: 0; }
+  .app-topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 32px;
+    background: var(--ds-bg-surface);
+    border-bottom: 1px solid var(--ds-border-subtle);
+  }
+  .app-topbar .crumbs {
+    font-size: var(--ds-fs-sm);
+    color: var(--ds-text-muted);
+  }
+  .app-topbar .crumbs strong { color: var(--ds-text-primary); }
+  .app-topbar .spacer { flex: 1; }
+
+  .app-content { padding: 32px; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .page-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .page-head h1 { margin: 0; font-size: var(--ds-fs-3xl); }
+  .page-head p { margin: 4px 0 0; color: var(--ds-text-muted); }
+
+  .stats-row {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .two-col {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 2fr 1fr;
+  }
+  @media (max-width: 900px) {
+    .app-shell { grid-template-columns: 1fr; }
+    .app-sidebar { display: none; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .chart-card { padding: 20px; min-height: 280px; }
+  .chart-card canvas { max-height: 220px; }
+
+  .activity li {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    align-items: start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--ds-border-subtle);
+    list-style: none;
+  }
+  .activity ul { padding: 0; margin: 0; }
+  .activity li:last-child { border-bottom: 0; }
+  .activity .icon {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--ds-color-primary-soft);
+    color: var(--ds-color-primary);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: var(--ds-fs-sm);
+  }
+  .activity .icon.accent  { background: var(--ds-color-accent-soft); color: var(--ds-color-accent); }
+  .activity .icon.success { background: var(--ds-color-success-soft); color: var(--ds-color-success); }
+  .activity .icon.warning { background: var(--ds-color-warning-soft); color: var(--ds-color-warning); }
+  .activity .text { font-size: var(--ds-fs-sm); }
+  .activity .text strong { display: block; color: var(--ds-text-primary); }
+  .activity .text span { color: var(--ds-text-muted); }
+  .activity .time { font-size: var(--ds-fs-xs); color: var(--ds-text-muted); white-space: nowrap; }
+</style>
+</head>
+<body class="ds">
+
+<div class="demo-chrome">
+  <div class="demo-chrome-inner">
+    <span class="demo-chrome-label">Design system eksempel</span>
+    <nav>
+      <a href="../playground.html">Components</a>
+      <a href="./website.html">Webpage</a>
+      <a href="./app.html" class="is-active">App dashboard</a>
+    </nav>
+  </div>
+</div>
+
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <aside class="app-sidebar">
+    <a href="#" class="brand">
+      <span class="brand-mark">I</span>
+      ITKdev
+    </a>
+
+    <div class="sidebar-section">Oversigt</div>
+    <a class="sidebar-item is-active" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#dashboard"/></svg> Dashboard</a>
+    <a class="sidebar-item" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#inbox"/></svg> Indbakke <span class="badge badge-primary" style="margin-left: auto;">4</span></a>
+
+    <div class="sidebar-section">Arbejde</div>
+    <a class="sidebar-item" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#folder"/></svg> Sager</a>
+    <a class="sidebar-item" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#vote"/></svg> Høringer</a>
+    <a class="sidebar-item" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#calendar"/></svg> Bookinger</a>
+    <a class="sidebar-item" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#users"/></svg> Borgere</a>
+
+    <div class="sidebar-section">System</div>
+    <a class="sidebar-item" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#chart"/></svg> Rapporter</a>
+    <a class="sidebar-item" href="#"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#settings"/></svg> Indstillinger</a>
+
+    <div class="user">
+      <span class="avatar">JP</span>
+      <div class="user-info">
+        <strong>Jesper Pedersen</strong>
+        <span>Administrator</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="app-main">
+
+    <!-- Topbar -->
+    <header class="app-topbar">
+      <div class="crumbs">Oversigt / <strong>Dashboard</strong></div>
+      <div class="spacer"></div>
+      <input class="input" type="search" placeholder="Søg sager, borgere, høringer…" style="max-width: 320px;">
+      <button class="btn btn-ghost btn-sm" aria-label="Notifikationer">
+        <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#bell"/></svg>
+      </button>
+      <button class="btn btn-primary btn-sm">
+        <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#plus"/></svg>
+        Ny sag
+      </button>
+    </header>
+
+    <!-- Content -->
+    <main class="app-content">
+
+      <div class="page-head">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Velkommen tilbage, Jesper. Her er et overblik over aktuelle sager.</p>
+        </div>
+        <div class="ds-cluster">
+          <select class="select" style="width: auto;">
+            <option>Denne uge</option>
+            <option>Denne måned</option>
+            <option>Dette kvartal</option>
+          </select>
+          <button class="btn btn-secondary btn-sm">
+            <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#export"/></svg>
+            Eksportér
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <section class="stats-row">
+        <div class="stat">
+          <div class="stat-label">Åbne sager</div>
+          <div class="stat-value">248</div>
+          <div class="stat-trend stat-trend-up">▲ 12% vs sidste uge</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Behandlingstid</div>
+          <div class="stat-value">4.2 d</div>
+          <div class="stat-trend stat-trend-down">▼ 0.6 d</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Borgertilfredshed</div>
+          <div class="stat-value">92%</div>
+          <div class="stat-trend stat-trend-up">▲ 3%</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Aktive høringer</div>
+          <div class="stat-value">12</div>
+          <div class="stat-trend" style="color: var(--ds-color-accent);">3 slutter i uge 17</div>
+        </div>
+      </section>
+
+      <!-- Two column: chart + activity -->
+      <section class="two-col">
+        <div class="card chart-card">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;">
+            <strong>Sagsbehandling — sidste 6 uger</strong>
+            <span class="badge badge-success">På plan</span>
+          </div>
+          <canvas id="app-chart"></canvas>
+        </div>
+
+        <div class="card activity">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;">
+            <strong>Seneste aktivitet</strong>
+            <a href="#" style="font-size: var(--ds-fs-sm); text-decoration: none;">Alle →</a>
+          </div>
+          <ul>
+            <li>
+              <span class="icon success"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#check"/></svg></span>
+              <span class="text"><strong>Sag #4821 lukket</strong><span>Byggesag, Trøjborg</span></span>
+              <span class="time">5 min</span>
+            </li>
+            <li>
+              <span class="icon accent"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#edit"/></svg></span>
+              <span class="text"><strong>Ny kommentar</strong><span>Høring: Byrum i Aarhus C</span></span>
+              <span class="time">22 min</span>
+            </li>
+            <li>
+              <span class="icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#inbox"/></svg></span>
+              <span class="text"><strong>3 nye sager modtaget</strong><span>Via kontaktformular</span></span>
+              <span class="time">1 t</span>
+            </li>
+            <li>
+              <span class="icon warning"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#alert"/></svg></span>
+              <span class="text"><strong>Høring udløber snart</strong><span>Klimaplan 2030 — 2 dage</span></span>
+              <span class="time">3 t</span>
+            </li>
+            <li>
+              <span class="icon"><svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#user"/></svg></span>
+              <span class="text"><strong>Ny borger oprettet</strong><span>Flyttemelding godkendt</span></span>
+              <span class="time">I går</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Table -->
+      <section class="card" style="padding: 0; overflow: hidden;">
+        <div style="padding: 16px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--ds-border-subtle);">
+          <strong>Seneste sager</strong>
+          <span class="badge">248 i alt</span>
+          <div style="margin-left: auto;" class="ds-cluster">
+            <input class="input" type="search" placeholder="Filtrér…" style="width: 180px;">
+            <button class="btn btn-ghost btn-sm" aria-label="Mere">
+              <svg class="ds-icon" aria-hidden="true"><use href="../icons.svg#more"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="table-wrap" style="border: 0; border-radius: 0;">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Emne</th>
+                <th>Borger</th>
+                <th>Status</th>
+                <th>Trend</th>
+                <th style="text-align: right;">Frist</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>#4821</code></td>
+                <td>Byggesag — ombygning</td>
+                <td>Lars Hansen</td>
+                <td><span class="badge badge-success">Lukket</span></td>
+                <td>
+                  <svg class="sparkline" viewBox="0 0 80 24" preserveAspectRatio="none" style="color: var(--ds-color-success);">
+                    <path class="sparkline-area" d="M0,16 L10,14 L20,12 L30,10 L40,8 L50,6 L60,5 L70,4 L80,2 L80,24 L0,24 Z"/>
+                    <path d="M0,16 L10,14 L20,12 L30,10 L40,8 L50,6 L60,5 L70,4 L80,2"/>
+                  </svg>
+                </td>
+                <td style="text-align: right;"><small>—</small></td>
+              </tr>
+              <tr>
+                <td><code>#4820</code></td>
+                <td>Høring: Byrum Aarhus C</td>
+                <td>—</td>
+                <td><span class="badge badge-primary">Åben</span></td>
+                <td>
+                  <svg class="sparkline" viewBox="0 0 80 24" preserveAspectRatio="none">
+                    <path class="sparkline-area" d="M0,20 L10,18 L20,14 L30,12 L40,10 L50,6 L60,4 L70,3 L80,2 L80,24 L0,24 Z"/>
+                    <path d="M0,20 L10,18 L20,14 L30,12 L40,10 L50,6 L60,4 L70,3 L80,2"/>
+                  </svg>
+                </td>
+                <td style="text-align: right;">15. maj</td>
+              </tr>
+              <tr>
+                <td><code>#4819</code></td>
+                <td>Flyttemelding</td>
+                <td>Mette Sørensen</td>
+                <td><span class="badge badge-warning">Afventer dok.</span></td>
+                <td>
+                  <svg class="sparkline" viewBox="0 0 80 24" preserveAspectRatio="none" style="color: var(--ds-color-warning);">
+                    <path class="sparkline-area" d="M0,6 L10,10 L20,8 L30,12 L40,11 L50,14 L60,13 L70,15 L80,14 L80,24 L0,24 Z"/>
+                    <path d="M0,6 L10,10 L20,8 L30,12 L40,11 L50,14 L60,13 L70,15 L80,14"/>
+                  </svg>
+                </td>
+                <td style="text-align: right;">26. apr</td>
+              </tr>
+              <tr>
+                <td><code>#4818</code></td>
+                <td>Parkeringstilladelse</td>
+                <td>Ali Mahmoud</td>
+                <td><span class="badge">Ny</span></td>
+                <td>
+                  <svg class="sparkline" viewBox="0 0 80 24" preserveAspectRatio="none" style="color: var(--ds-color-accent);">
+                    <path class="sparkline-area" d="M0,12 L10,10 L20,14 L30,8 L40,12 L50,6 L60,10 L70,4 L80,7 L80,24 L0,24 Z"/>
+                    <path d="M0,12 L10,10 L20,14 L30,8 L40,12 L50,6 L60,10 L70,4 L80,7"/>
+                  </svg>
+                </td>
+                <td style="text-align: right;">30. apr</td>
+              </tr>
+              <tr>
+                <td><code>#4817</code></td>
+                <td>Klage — renovation</td>
+                <td>Sofia Berg</td>
+                <td><span class="badge badge-danger">Eskaleret</span></td>
+                <td>
+                  <svg class="sparkline" viewBox="0 0 80 24" preserveAspectRatio="none" style="color: var(--ds-color-danger);">
+                    <path class="sparkline-area" d="M0,18 L10,16 L20,14 L30,10 L40,8 L50,6 L60,5 L70,3 L80,2 L80,24 L0,24 Z"/>
+                    <path d="M0,18 L10,16 L20,14 L30,10 L40,8 L50,6 L60,5 L70,3 L80,2"/>
+                  </svg>
+                </td>
+                <td style="text-align: right;">I dag</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Chart.js + ITK theme -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7"></script>
+<script src="../viz/chart-theme.js"></script>
+<script>
+  new Chart(document.getElementById("app-chart"), {
+    type: "line",
+    data: {
+      labels: ["Uge 12", "Uge 13", "Uge 14", "Uge 15", "Uge 16", "Uge 17"],
+      datasets: [
+        { label: "Modtaget", data: [82, 91, 76, 94, 108, 102], fill: true },
+        { label: "Lukket",   data: [68, 82, 70, 88, 96, 104],  fill: true },
+      ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: { y: { beginAtZero: true } },
+    },
+  });
+</script>
+
+</body>
+</html>
