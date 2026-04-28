@@ -28,6 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - New docs pages: `/projects/design-system/diagrams` (Mermaid examples) and `/projects/design-system/data-viz` (Chart.js, Leaflet, sparklines)
 - Playground expanded with pastel swatches, pill/accent buttons, hero banner, quick-link tiles, three themed Chart.js charts, a Leaflet map with pins + heatmap, and sparklines in a table
 
+### Added — Roboway Project
+- Robot fleet management prototype for Aarhus Kommune ("Last Mile" / autonomous delivery robots)
+- Single-page mock with seven views: dashboard, live Leaflet map, fleet overview, zone admin, incidents, analytics, and operator portal — DA/EN toggle, responsive
+
 ### Added — Opkrævningsoverblik Project
 - Consolidated municipal charges overview prototype for Aarhus Kommune citizens
 - Interactive mock with login, dashboard, status indicator, charge list, filtering, and 5-year history chart
