@@ -38,4 +38,8 @@ features:
     details: Samlet overblik over kommunale opkrævninger med statusindikator, opkrævningsliste, filtrering og 5-års historisk udvikling.
     link: /projects/opkraevningsoverblik/
     linkText: View project
+  - title: Roboway
+    details: Kommunal platform til styring og overvågning af autonome robotflåder i Aarhus — med livekort, zoneadministration, hændelseshåndtering og operatørportal.
+    link: /projects/roboway/
+    linkText: View project
 ---
