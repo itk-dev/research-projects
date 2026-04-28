@@ -49,6 +49,7 @@ Taskfile.yml                                 # Task automation (dev, build, lint
 | `deltag-aarhus-timeline` | Deltag Aarhus — Projekttidslinje | No |
 | `book-aarhus` | Book Aarhus | No |
 | `opkraevningsoverblik` | Opkrævningsoverblik | No |
+| `roboway` | Roboway | No |
 
 ## Conventions
 
