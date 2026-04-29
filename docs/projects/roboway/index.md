@@ -75,6 +75,27 @@ En ruteoptimerings-tabel viser seks aktive ruter med oprindelig vs. optimeret ti
 
 ---
 
+## Uafklarede spørgsmål
+
+Prototypen er et visuelt diskussionsgrundlag — ikke en implementeringsklar løsning. Inden et reelt system kan bygges, skal en række afhængigheder, ubekendte og forudsætninger afklares. 
+
+Punkterne nedenfor er tænkt som udgangspunkt for samtalen og er på ingen måde udtømmende.
+
+### Robotterne og operatørerne
+
+- **Robotternes kapabilitet er ukendt.** Prototypen antager realtidstelemetri (position, batteri, status, hastighed) og fjernkommandoer (stop, omdirigering). Hvilke robotter taler vi reelt om, og hvad kan de levere? Hvilke API'er, protokoller og opdateringsfrekvenser understøtter de?
+- **Standard for operatørintegration findes ikke.** Skal kommunen definere en fælles snitflade (datamodel, autentifikation, fejlhåndtering), eller skal platformen oversætte fra hver enkelt operatørs format?
+- **Kommandoveje og overstyring.** Kan kommunen reelt stoppe eller omdirigere en robot via platformen, eller går al kontrol gennem operatøren? Hvad er svartider og fallback ved forbindelsestab?
+- **Sikkerhed og ansvar.** Hvem hæfter ved hændelser — operatøren, kommunen, robotproducenten? Hvilken rolle spiller platformens data ved efterforskning?
+
+### Datagrundlag
+
+- **Geodata og zoner.** Hvor kommer zonedefinitioner fra? Hvem opdaterer dem, og hvordan distribueres ændringer til operatørerne?
+- **Byforhold (live feed).** Vejarbejde, arrangementer, vejr, midlertidige restriktioner — hvilke kilder leverer disse, og er datakvalitet og opdateringsfrekvens tilstrækkelig til ruteoptimering?
+- **Compliance-regler.** Hvad er det juridiske grundlag for hastighedsgrænser, zonekrav m.v.? Hvem definerer reglerne, og hvordan håndhæves de teknisk?
+
+---
+
 ## Interaktiv prototype
 
 <a href="/research-projects/projects/roboway/mocks/index.html" class="mock-button" target="_blank">Åbn prototypen ↗</a>
