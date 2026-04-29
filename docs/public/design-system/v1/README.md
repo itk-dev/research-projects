@@ -25,6 +25,10 @@ prototypes that mix this with Tailwind or another framework.
   (`ds-container`, `ds-stack`, `ds-cluster`, `ds-grid`).
 - **components.css** — buttons, badges, cards, form inputs, tables, modals,
   sidebar nav, stat cards, alerts.
+- **mock-banner.css** + **mock-banner.js** — shared "this is a mock"
+  banner. Loaded standalone (not part of `index.css`) so any prototype
+  can use it, whether or not it opts into `.ds`. CI fails if a prototype
+  HTML under `docs/public/projects/` doesn't reference the script.
 - **playground.html** — live gallery of every component.
 
 ## Playground

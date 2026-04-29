@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lønforhandlingssystem — Mock</title>
+  <link rel="stylesheet" href="/research-projects/design-system/v1/mock-banner.css">
+  <script src="/research-projects/design-system/v1/mock-banner.js" defer
+          data-banner-text="MOCK — Lønforhandlingssystem for Aarhus Kommune (interaktiv prototype)"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -16,27 +19,10 @@
       line-height: 1.5;
     }
 
-    /* Mock banner */
-    .mock-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: #fef9e7;
-      color: #666;
-      text-align: center;
-      padding: 8px 16px;
-      font-size: 12px;
-      z-index: 1000;
-      letter-spacing: 0.3px;
-      border-bottom: 1px solid #f0e6c0;
-    }
-
     /* App layout */
     .app-layout {
       display: flex;
       height: 100%;
-      padding-top: 32px; /* mock banner height */
     }
 
     /* ========== SIDEBAR ========== */
@@ -963,10 +949,6 @@
   </style>
 </head>
 <body>
-
-<div class="mock-banner">
-  <strong>MOCK</strong> — Lønforhandlingssystem for Aarhus Kommune (interaktiv prototype)
-</div>
 
 <header class="mobile-topbar">
   <button class="hamburger-btn" id="hamburger-btn" aria-label="Åbn menu">

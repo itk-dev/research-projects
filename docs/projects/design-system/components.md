@@ -237,3 +237,30 @@ a stat. Tint by setting `color` on the parent (or via
   <path d="M0,18 L10,14 L20,16 L30,8 L40,10 L50,4 L60,6 L70,2 L80,3"/>
 </svg>
 ```
+
+## Mock banner
+
+A shared "this is a mock" banner that every research prototype is
+expected to load. Lives outside `.ds` so prototypes that opt out of the
+design system can still use it. The companion script auto-injects the
+markup and reserves 32 px of `padding-top` on `<body>`.
+
+```html
+<link rel="stylesheet" href="/research-projects/design-system/v1/mock-banner.css">
+<script src="/research-projects/design-system/v1/mock-banner.js" defer></script>
+```
+
+Override the text with `data-banner-text`:
+
+```html
+<script src="/research-projects/design-system/v1/mock-banner.js" defer
+        data-banner-text="MOCK — Custom prototype label"></script>
+```
+
+The default text is `"Dette er en mock-up, ikke det rigtige eller endelige produkt."`
+
+A CI check (`npm run lint:mocks`) verifies that every HTML file under
+`docs/public/projects/` references the script. If a prototype
+deliberately uses a different banner — for example one that mimics an
+external product's staging warning — add its path to the `ALLOWLIST` in
+`scripts/check-mock-banners.mjs`.

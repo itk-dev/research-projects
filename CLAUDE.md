@@ -108,6 +108,7 @@ Pages sharing the same `passwordGroup` only prompt once per browser session. The
    - Place mock HTML files in `docs/public/projects/<project-name>/mocks/`
    - Link to mocks with the base path prefix: `/research-projects/projects/<name>/mocks/file.html`
    - Use `target="_blank"` on all mock links to bypass VitePress's client-side router
+   - Include the shared mock banner in each HTML file (CI enforces this — see `docs/projects/design-system/components.md` → "Mock banner")
 6. Update `CHANGELOG.md`
 
 ## Building locally
