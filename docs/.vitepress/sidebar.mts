@@ -88,6 +88,16 @@ const opkraevningsoverblik: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const roboway: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Roboway',
+    items: [
+      { text: 'Overview', link: '/projects/roboway/' },
+      { text: 'Interactive Mocks', link: '/projects/roboway/mocks' },
+    ],
+  },
+]
+
 const designSystem: DefaultTheme.SidebarItem[] = [
   {
     text: 'Design System',
@@ -112,6 +122,7 @@ export function sidebar(): DefaultTheme.Sidebar {
     '/projects/deltag-aarhus-timeline/': deltagAarhusTimeline,
     '/projects/book-aarhus/': bookAarhus,
     '/projects/opkraevningsoverblik/': opkraevningsoverblik,
+    '/projects/roboway/': roboway,
     '/projects/design-system/': designSystem,
   }
 }
