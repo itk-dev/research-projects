@@ -10,9 +10,17 @@
 
 Borgere i Aarhus Kommune modtager opkrævninger for en række kommunale ydelser — ejendomsskat, daginstitution, renovation m.fl. Disse oplysninger er i dag spredt over flere systemer og kanaler, hvilket gør det svært for borgere at få et samlet overblik over hvad de skylder, hvad der er betalt, og hvad der er på vej.
 
+Borgerservice har desuden et behov for at borgeren kan se *hvordan* gebyrerne er beregnet — ikke blot beløbet. Det giver gennemsigtighed og gør det muligt at opdage fejl i fx BBR-registreringen.
+
+::: info Pitch
+Forslaget om en BBR-baseret beregner pitches af Lene for Finn **tirsdag 5. maj 2026**.
+:::
+
 ## Formål
 
 Formålet er at skabe ét samlet overblik hvor borgere hurtigt og intuitivt kan se alle deres kommunale opkrævninger — både den aktuelle status og udviklingen over tid. Overblikket skal skabe gennemsigtighed og gøre det nemt at forstå sin økonomiske situation i forhold til kommunen.
+
+Hertil kommer en **beregningsfunktion** der ud fra BBR-træk viser hvordan kommunale bidrag fremkommer, og som lader borgeren simulere hvordan ændringer (tilbygning, ny brændeovn osv.) påvirker beløbet.
 
 **Succeskriterium:** Borgeren kan danne sig et overblik over sin samlede status og eventuelle restancer på under ét minut — uden vejledning.
 
@@ -49,6 +57,26 @@ Indikatoren bruger kombination af farve, ikon og tekst for tilgængelighed.
 - Mulighed for at se udviklingen per ydelsestype
 - Tydelig markering af perioder med restancer
 
+### Beregningsfunktion (BBR)
+
+En ny "Beregner"-fane viser hvordan fire kommunale bidrag fremkommer, baseret på automatisk hentede BBR-oplysninger:
+
+- **Rottebekæmpelse** — fast gebyr pr. ejendom + sats pr. bebygget m² (halveret sats over 250 m²)
+- **Renovation** — grundgebyr + tillæg pr. boligbygning afhængig af type
+- **Skorstensfejer** — fast beløb pr. registreret ildsted
+- **Ejendomsskat (grundskyld)** — promille af grundværdi
+
+Hver beregning vises som et kort med totalbeløb og en linje-for-linje opdeling af hvordan beløbet er fremkommet.
+
+**BBR-felterne er redigerbare**, så borgeren kan:
+- Rette en forkert BBR-registrering og se hvordan opkrævningen ændres
+- Simulere "hvad-hvis"-scenarier (fx tilbygning, ny brændeovn, ændret grundværdi) — totalen og delta-en mod den nuværende BBR-værdi opdateres live
+- Nulstille ændringer pr. felt eller for hele BBR-panelet
+
+::: warning Demo-takster
+Satserne i prototypen er fiktive demo-værdier baseret på offentligt tilgængelige niveauer for 2025/2026. Den endelige opkrævning afgøres af kommunens takstblad og BBR-registreringen.
+:::
+
 ---
 
 ## Krav
@@ -65,4 +93,4 @@ Indikatoren bruger kombination af farve, ikon og tekst for tilgængelighed.
 
 <a href="/research-projects/projects/opkraevningsoverblik/mocks/index.html" class="mock-button" target="_blank">Åbn prototypen ↗</a>
 
-Vælg en testbruger for at se forskellige statuser (alt i orden, kommende forfald, restance).
+Vælg en testbruger for at se forskellige statuser (alt i orden, kommende forfald, restance). Brug fanen "Beregner" for at se hvordan BBR-baserede gebyrer beregnes — og leg med felterne for at se hvad-hvis-effekter live.
