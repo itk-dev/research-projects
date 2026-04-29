@@ -34,7 +34,8 @@
   margin-bottom: 8px;
 }
 
-.mock-button {
+.mock-button,
+.vp-doc a.mock-button {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid var(--vp-c-brand-1);
@@ -45,9 +46,11 @@
   transition: background-color 0.2s, color 0.2s;
 }
 
-.mock-button:hover {
+.mock-button:hover,
+.vp-doc a.mock-button:hover {
   background-color: var(--vp-c-brand-1);
   color: #fff;
+  text-decoration: none;
 }
 
 .VPFeature .VPImage {
