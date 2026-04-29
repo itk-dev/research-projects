@@ -26,8 +26,12 @@ function formatDate(isoString) {
   })
 }
 
-function stripTags(html) {
-  return (html || '').replace(/<[^>]*>/g, '')
+function sortKey(title) {
+  // Strip HTML tags and any leading non-letter characters (emoji, punctuation,
+  // whitespace) so decorative prefixes like "🔒 " don't affect ordering.
+  return (title || '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/^[^\p{L}]+/u, '')
 }
 
 const features = computed(() => {
@@ -58,7 +62,7 @@ const features = computed(() => {
     case 'alpha-desc': {
       const dir = sort.value === 'alpha-asc' ? 1 : -1
       sorted.sort((a, b) =>
-        dir * stripTags(a.title).localeCompare(stripTags(b.title), 'da')
+        dir * sortKey(a.title).localeCompare(sortKey(b.title), 'da')
       )
       break
     }
