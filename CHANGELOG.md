@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed — Project "Last edited" dates on the deployed site
+- GitHub Actions workflows (`deploy.yml`, `verify_build.yml`) now check out the full git history (`fetch-depth: 0`) so the `projectDates` data loader can read the per-project last-commit timestamp. Previously the shallow clone caused every project card to show the same date.
+
+### Added — Sortable project cards on the home page
+- `HomeFeatures.vue` now renders a sort control with four options: `Last edited ↓ / ↑` and `Alphabetically ↓ / ↑`. Default sort is newest-first by last edited; projects without a known timestamp sort last.
+
 ### Added — Shared mock banner
 - New shared mock banner under `docs/public/design-system/v1/mock-banner.{css,js}` — auto-injects a "this is a mock" strip across the top of every prototype, with optional `data-banner-text` override
 - CI check `npm run lint:mocks` (wired into `.github/workflows/verify_build.yml`) fails the build if a prototype HTML file under `docs/public/projects/` doesn't reference the shared banner; allowlist supported for deliberate exceptions (currently `deltag-aarhus`)
