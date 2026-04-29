@@ -12,10 +12,6 @@ Borgere i Aarhus Kommune modtager opkrævninger for en række kommunale ydelser 
 
 Borgerservice har desuden et behov for at borgeren kan se *hvordan* gebyrerne er beregnet — ikke blot beløbet. Det giver gennemsigtighed og gør det muligt at opdage fejl i fx BBR-registreringen.
 
-::: info Pitch
-Forslaget om en BBR-baseret beregner pitches af Lene for Finn **tirsdag 5. maj 2026**.
-:::
-
 ## Formål
 
 Formålet er at skabe ét samlet overblik hvor borgere hurtigt og intuitivt kan se alle deres kommunale opkrævninger — både den aktuelle status og udviklingen over tid. Overblikket skal skabe gennemsigtighed og gøre det nemt at forstå sin økonomiske situation i forhold til kommunen.
