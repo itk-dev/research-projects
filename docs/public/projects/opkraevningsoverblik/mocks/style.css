@@ -47,22 +47,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 32px;
-}
-
-.mock-banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: #fef9e7;
-    color: #666;
-    text-align: center;
-    padding: 8px 16px;
-    font-size: 12px;
-    z-index: 1000;
-    letter-spacing: 0.3px;
-    border-bottom: 1px solid #f0e6c0;
 }
 
 /* ==========================================================================
