@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Shared mock banner
+- New shared mock banner under `docs/public/design-system/v1/mock-banner.{css,js}` — auto-injects a "this is a mock" strip across the top of every prototype, with optional `data-banner-text` override
+- CI check `npm run lint:mocks` (wired into `.github/workflows/verify_build.yml`) fails the build if a prototype HTML file under `docs/public/projects/` doesn't reference the shared banner; allowlist supported for deliberate exceptions (currently `deltag-aarhus`)
+- Migrated all eight prototypes (opkraevningsoverblik, salary-negotiation, climate-nudging × 3, agentic-orchestration, book-aarhus, deltag-aarhus-timeline, wcag-contrast-checker) onto the shared component, removing six per-prototype banner copies
+
 ### Added — Opkrævningsoverblik BBR-beregner
 - New "Beregner" tab in the Opkrævningsoverblik prototype that calculates four BBR-driven municipal fees: rottebekæmpelse (with the >250 m² rate split), renovation, skorstensfejer, and ejendomsskat (grundskyld)
 - Editable mock-BBR data (grundareal, grundværdi, bygninger med type/m²/ildsteder) per test user with per-field reset and live recalculation
