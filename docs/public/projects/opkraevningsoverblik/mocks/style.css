@@ -47,6 +47,22 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 32px;
+}
+
+.mock-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fef9e7;
+    color: #666;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 12px;
+    z-index: 1000;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid #f0e6c0;
 }
 
 /* ==========================================================================
@@ -722,6 +738,13 @@ input:focus-visible {
     color: var(--color-white);
 }
 
+.btn--secondary {
+    background: var(--color-white);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 10px 22px;
+}
+
 .btn--full {
     width: 100%;
 }
@@ -802,5 +825,407 @@ input:focus-visible {
 
     .login__card {
         padding: 24px;
+    }
+}
+
+/* ==========================================================================
+   Beregner-fane (BBR-baseret)
+   ========================================================================== */
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.calculator__intro {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+}
+
+.calculator__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.calculator__desc {
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+}
+
+.calculator__disclaimer {
+    font-size: 13px;
+    color: var(--color-text-light);
+    background: var(--color-warning-bg);
+    padding: 10px 14px;
+    border-radius: 6px;
+    border-left: 3px solid var(--color-warning);
+}
+
+.calculator__disclaimer strong {
+    color: var(--color-warning);
+}
+
+/* BBR-panel ----------------------------------------------------------------- */
+
+.bbr-panel {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+}
+
+.bbr-panel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.bbr-panel__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+}
+
+.bbr-panel__meta {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.bbr-badge {
+    display: inline-block;
+    background: #E1F2F7;
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid #B5DCE7;
+    white-space: nowrap;
+}
+
+.bbr-panel__subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+}
+
+.bbr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.bbr-bygninger {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.bbr-bygning {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.bbr-bygning__header {
+    margin-bottom: 8px;
+}
+
+.bbr-bygning__num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.bbr-bygning .bbr-field + .bbr-field {
+    margin-top: 8px;
+}
+
+.bbr-field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bbr-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.bbr-field input,
+.bbr-field select {
+    padding: 8px 10px;
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--color-white);
+    color: var(--color-text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.bbr-field input:focus,
+.bbr-field select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+}
+
+.bbr-field--changed input,
+.bbr-field--changed select {
+    border-color: var(--color-warning);
+    background: #FFFEF5;
+}
+
+.bbr-field--changed::before {
+    content: 'Ændret';
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-warning);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.bbr-field__reset {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-warning);
+    font-size: 16px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+.bbr-field__reset:hover {
+    background: var(--color-warning-bg);
+}
+
+.bbr-field__reset:focus-visible {
+    outline: 2px solid var(--color-warning);
+}
+
+/* Hvad-hvis-chips ----------------------------------------------------------- */
+
+.bbr-whatif {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+}
+
+.bbr-whatif__label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-right: 4px;
+}
+
+.bbr-chip {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.bbr-chip:hover {
+    background: #E1F2F7;
+    border-color: var(--color-primary);
+}
+
+.bbr-chip:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.bbr-chip--reset {
+    background: transparent;
+    color: var(--color-text-secondary);
+    margin-left: auto;
+}
+
+/* Beregningskort ------------------------------------------------------------ */
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.calc-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    border-top: 4px solid var(--color-muted);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s;
+}
+
+.calc-card--highlight {
+    box-shadow: 0 0 0 3px var(--color-primary), var(--shadow);
+}
+
+.calc-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.calc-card__title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.calc-card__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.calc-card__total {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.calc-card__total-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.calc-card__total-period {
+    font-size: 13px;
+    color: var(--color-text-light);
+}
+
+.calc-card__delta {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: var(--color-muted-bg);
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+    align-self: flex-start;
+}
+
+.calc-card__delta--up {
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+}
+
+.calc-card__delta--down {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.calc-card__lines {
+    list-style: none;
+    margin: 0;
+    padding: 12px 0 0;
+    border-top: 1px dashed var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.calc-card__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.calc-card__line-label {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-text);
+}
+
+.calc-card__line-note {
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-top: 2px;
+}
+
+.calc-card__line-amount {
+    font-weight: 600;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+/* "Se beregning"-link i charge-detail -------------------------------------- */
+
+.charge-detail__calc-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+}
+
+.charge-detail__calc-hint {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 480px) {
+    .calc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bbr-grid,
+    .bbr-bygninger {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-card__total-value {
+        font-size: 24px;
     }
 }

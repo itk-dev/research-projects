@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Opkrævningsoverblik BBR-beregner
+- New "Beregner" tab in the Opkrævningsoverblik prototype that calculates four BBR-driven municipal fees: rottebekæmpelse (with the >250 m² rate split), renovation, skorstensfejer, and ejendomsskat (grundskyld)
+- Editable mock-BBR data (grundareal, grundværdi, bygninger med type/m²/ildsteder) per test user with per-field reset and live recalculation
+- "Hvad-hvis" scenario chips: add carport (30 m²), install brændeovn, expand bolig (+25 m²), reset all
+- "Se beregning →" link from each charge detail view that switches to the calculator and highlights the relevant card
+- New `skorstensfejer` charge type added to the chargeTypes registry and to Anders/Lars test data
+
 ### Added — Design System (v1)
 - Opt-in design system at `docs/public/design-system/v1/` — plain CSS + tokens using ITK Dev teal/cyan brand palette
 - Tokens for colors, typography (Inter), spacing, radii, shadows, transitions
