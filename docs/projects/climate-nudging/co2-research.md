@@ -30,6 +30,10 @@ The single most important finding: **estimates in the literature disagree by up 
 
 Ritchie calculated that 10 ChatGPT queries/day for a UK resident equals ~0.03% of daily electricity use. Abstaining from 50,000 queries (~14 years at 10/day) saves less CO2 than everyday actions like recycling. However, she distinguishes individual footprint from aggregate industry impact — the concern is systemic growth, not individual queries.
 
+### Measurement tools
+
+[**Carbontracker**](https://carbontracker.info/) (Anthony, Kanding & Selvan, 2020) is the most established open-source tool for measuring and predicting the carbon footprint of ML workloads. It samples hardware power draw and combines it with regional grid carbon intensity to produce real-time and predicted-total emissions estimates, with low overhead via separate threads. It supports Intel CPUs, NVIDIA GPUs and Apple silicon, ships as both a CLI and a Python library, and includes log-parsing helpers for third-party integration. Originally created at the University of Copenhagen and now maintained there with EU Horizon Europe support, the original paper has been cited 470+ times. Carbontracker is aimed at training workloads; applying it to inference is straightforward in principle but, as section 5 notes, requires hosting providers to expose the underlying telemetry.
+
 ---
 
 ## 2. Per-Query Estimates by Model
@@ -184,3 +188,4 @@ Google claims 33x reduction in energy per median prompt over 12 months. But tota
 10. "How Hungry is AI? Benchmarking Energy, Water, and Carbon Footprint" (2025). [arXiv:2505.09598](https://arxiv.org/html/2505.09598v1)
 11. "Why transparency matters for sustainable data centers" (2025). iScience. [Paper](https://www.cell.com/iscience/fulltext/S2589-0042(25)01966-2)
 12. Federation of American Scientists. "Measuring AI's Energy Footprint." [Report](https://fas.org/publication/measuring-and-standardizing-ais-energy-footprint/)
+13. Anthony, L. F. W., Kanding, B. & Selvan, R. (2020). "Carbontracker: Tracking and Predicting the Carbon Footprint of Training Deep Learning Models." [arXiv:2007.03051](https://arxiv.org/abs/2007.03051) · [Project site](https://carbontracker.info/)

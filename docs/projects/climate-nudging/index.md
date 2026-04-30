@@ -55,6 +55,7 @@ See the complete [CO2 Research](co2-research.md) document for detailed findings 
 - No major AI provider publishes per-query energy data
 - Reasoning models can use 70x+ more energy than simple models
 - Efficiency improves, but total demand grows faster (Jevons' Paradox)
+- Open-source measurement tools exist for ML training (e.g. [carbontracker](https://carbontracker.info/), University of Copenhagen) but are not adopted by major hosting providers for inference, so per-query numbers remain estimated rather than measured
 
 ### Honest framing
 

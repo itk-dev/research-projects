@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Carbontracker reference in Climate Awareness Nudging
+- Reference [carbontracker.info](https://carbontracker.info/) in `co2-research.md` (new "Measurement tools" subsection + sources entry), `integration.md` (API/proxy layer), and `index.md` ("What makes it hard")
+
 ### Fixed — Project "Last edited" dates on the deployed site
 - GitHub Actions workflows (`deploy.yml`, `verify_build.yml`) now check out the full git history (`fetch-depth: 0`) so the `projectDates` data loader can read the per-project last-commit timestamp. Previously the shallow clone caused every project card to show the same date.
 
