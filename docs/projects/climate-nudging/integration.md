@@ -79,6 +79,8 @@ For organizations running their own AI gateway (like AarhusAI), a proxy layer ca
 4. **Apply rate-based nudges** — if a user exceeds a threshold, add a gentle note to the next response
 5. **Detect organizational patterns** — like AI-generated-text-to-AI-summarize chains
 
+For self-hosted inference where the gateway sits on the same machines as the GPUs, [carbontracker](https://carbontracker.info/) is a natural fit for the measurement layer: it samples real hardware power draw and combines it with regional grid carbon intensity, replacing bottom-up token-based estimates with measured energy. Wrap inference calls with the Python library or run the CLI alongside the workload, then attach the resulting per-request energy/CO2 to the response headers proposed in [CO2 Research § 5](co2-research.md#5-guidance-to-hosting-providers). For hosted models (OpenAI, Anthropic, etc.) carbontracker can't reach the hardware, so estimates remain the only option until providers expose telemetry themselves.
+
 ### Shared components
 
 Regardless of frontend, these components are reusable:
