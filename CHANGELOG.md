@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Dansk Viden til Dansk AI Project
+- National publication-corpus prototype for Danish public-sector knowledge collection feeding Danish AI training data, with a clear split between an open publication catalogue and a curated, rights-cleared training data bank
+- Single-page mock with seven views: forsiden, login/registrering, upload med simuleret AI-katalogisering, søgning med facetter, publikationsdetalje, favoritter og samlinger med base64-pakkede delelinks — bruger `localStorage` som backend
+
 ### Added — Carbontracker reference in Climate Awareness Nudging
 - Reference [carbontracker.info](https://carbontracker.info/) in `co2-research.md` (new "Measurement tools" subsection + sources entry), `integration.md` (API/proxy layer), and `index.md` ("What makes it hard")
 

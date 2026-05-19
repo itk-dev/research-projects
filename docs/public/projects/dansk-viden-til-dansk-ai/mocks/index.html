@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dansk Viden til Dansk AI – prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="/research-projects/design-system/v1/mock-banner.css">
+  <script src="/research-projects/design-system/v1/mock-banner.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Spring til indhold</a>
+
+  <header class="site-header">
+    <div class="container-wide header-row">
+      <a href="#/" class="brand" aria-label="Til forsiden">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span class="brand-text">
+          <span class="brand-name">Dansk Viden</span>
+          <span class="brand-sub">til dansk AI · prototype</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Vis menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <nav class="site-nav" id="primary-nav" aria-label="Hovedmenu">
+        <a href="#/search">Katalog</a>
+        <a href="#/upload" data-auth-required>Upload</a>
+        <a href="#/uploads" data-auth-required>Mine uploads</a>
+        <a href="#/favorites" data-auth-required>Favoritter</a>
+        <a href="#/collections" data-auth-required>Samlinger</a>
+      </nav>
+
+      <div class="user-area" id="user-area"></div>
+    </div>
+  </header>
+
+  <main id="main" class="container-wide" tabindex="-1">
+    <div id="view-root" class="view-root" aria-live="polite"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container-wide footer-row">
+      <p class="footer-meta">Prototype · ikke produktion · alt gemmes lokalt i din browser</p>
+      <a href="#/" class="footer-link">Om projektet</a>
+    </div>
+  </footer>
+
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+
+  <script src="data/seed-publications.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
