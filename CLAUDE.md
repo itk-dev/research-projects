@@ -50,6 +50,7 @@ Taskfile.yml                                 # Task automation (dev, build, lint
 | `book-aarhus` | Book Aarhus | No |
 | `opkraevningsoverblik` | Opkrævningsoverblik | No |
 | `roboway` | Roboway | No |
+| `dansk-viden-til-dansk-ai` | Dansk Viden til Dansk AI | No |
 
 ## Conventions
 

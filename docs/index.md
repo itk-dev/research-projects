@@ -42,4 +42,8 @@ features:
     details: Kommunal platform til styring og overvågning af autonome robotflåder i Aarhus — med livekort, zoneadministration, hændelseshåndtering og operatørportal.
     link: /projects/roboway/
     linkText: View project
+  - title: Dansk Viden til Dansk AI
+    details: Fælles offentlig service til indsamling og deling af danske publikationer som grundlag for dansk AI — med AI-katalogisering, syv rettighedsniveauer og delbare samlinger.
+    link: /projects/dansk-viden-til-dansk-ai/
+    linkText: View project
 ---

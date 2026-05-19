@@ -98,6 +98,16 @@ const roboway: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const danskVidenTilDanskAi: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Dansk Viden til Dansk AI',
+    items: [
+      { text: 'Overview', link: '/projects/dansk-viden-til-dansk-ai/' },
+      { text: 'Interactive Mocks', link: '/projects/dansk-viden-til-dansk-ai/mocks' },
+    ],
+  },
+]
+
 const designSystem: DefaultTheme.SidebarItem[] = [
   {
     text: 'Design System',
@@ -123,6 +133,7 @@ export function sidebar(): DefaultTheme.Sidebar {
     '/projects/book-aarhus/': bookAarhus,
     '/projects/opkraevningsoverblik/': opkraevningsoverblik,
     '/projects/roboway/': roboway,
+    '/projects/dansk-viden-til-dansk-ai/': danskVidenTilDanskAi,
     '/projects/design-system/': designSystem,
   }
 }
