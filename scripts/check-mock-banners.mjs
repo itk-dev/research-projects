@@ -17,6 +17,7 @@ const REQUIRED_MARKER = 'mock-banner.js';
 
 const ALLOWLIST = new Set([
   'docs/public/projects/deltag-aarhus/mocks/index.html',
+  'docs/public/projects/deltag-aarhus/mocks/uniparken/index.html',
 ]);
 
 async function* walk(dir) {

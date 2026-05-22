@@ -8,3 +8,6 @@ Interaktive HTML-prototyper der demonstrerer den foreslåede høringsdetalje-sid
 
 **<a href="/research-projects/projects/deltag-aarhus/mocks/index.html" target="_blank">Høringsdetalje — Vindmøller ved Vosnæs ↗</a>**
 Komplet høringsdetalje-side med 784 simulerede høringssvar, filtrering, sortering, MitID-login, indsendelsesformular, statistik, kort, ordforklaringer og afgørelsesmodal. Skift mellem åben og afsluttet variant via mock-banneret.
+
+**<a href="/research-projects/projects/deltag-aarhus/mocks/uniparken/index.html" target="_blank">Høringsdetalje — Solceller i Universitetsparken ↗</a>**
+Samme høringsdetalje-skabelon anvendt på en anden sag: forslag om at placere et solcelleanlæg på fællesplænen i Universitetsparken. Genbruger CSS- og JS-komponenterne fra Vosnæs-prototypen via et per-mock config-lag, så indhold, datasæt og kortcentrum kan udskiftes uden at duplikere koden.
