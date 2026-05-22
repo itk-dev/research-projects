@@ -1,11 +1,13 @@
 window.DeltagMock = window.DeltagMock || {};
 var DM = window.DeltagMock;
+DM.datasets = DM.datasets || {};
 
 /* ==========================================================================
    Mock Data — Vindmøller ved Vosnæs
    ========================================================================== */
 
-DM.horingssvarData = [
+DM.datasets.vosnaes = {
+  staticItems: [
   {
     id: 1,
     title: "Støjgener fra vindmøller truer beboernes sundhed",
@@ -349,16 +351,10 @@ DM.horingssvarData = [
       { author: "Mikkel Skov", date: "14. aug 2025", text: "784 høringssvar og overvældende modstand. Lyt til borgerne!" }
     ]
   }
-];
+  ],
 
-/* ==========================================================================
-   Mock Data Generator
-   ========================================================================== */
 
-DM.generateMockData = function(baseData, totalCount) {
-  if (baseData.length >= totalCount) return baseData;
-
-  var titles = [
+  seedTitles: [
     "Støjgenerne er uacceptable for naboer", "Beskyt det bevaringsværdige landskab",
     "Flagermus og fugle trues af vindmøller", "Ejendomsværdierne vil falde markant",
     "Vindressourcen er for lav på denne placering", "Skyggekast rammer vores boliger",
@@ -379,9 +375,9 @@ DM.generateMockData = function(baseData, totalCount) {
     "Iskast fra møller udgør en sikkerhedsrisiko", "Nattemørket ødelægges af lys",
     "Energistyrelsen fraråder denne type placering", "Vores børn kan ikke lege udenfor",
     "Lokal modstand bør respekteres", "Vi bakker op om grøn omstilling — men ikke her"
-  ];
+  ],
 
-  var descriptions = [
+  seedDescriptions: [
     "Vi er dybt bekymrede over konsekvenserne af vindmøller så tæt på beboelse. Støj, skyggekast og visuel påvirkning vil forringe vores livskvalitet markant.",
     "Vosnæs-området er udpeget som bevaringsværdigt og bør beskyttes mod industrielle anlæg. Vindmøller hører ikke hjemme i dette landskab.",
     "Kommunen bør undersøge alternative placeringer grundigt, inden der træffes beslutning om vindmøller ved Vosnæs. Havnen eller industriområder er bedre egnet.",
@@ -392,9 +388,9 @@ DM.generateMockData = function(baseData, totalCount) {
     "Klimaeffekten af tre vindmøller er minimal i det store billede. Investeringen ville give mere CO2-reduktion brugt på andre tiltag.",
     "Børnenes trivsel og sundhed bør veje tungt i beslutningen. Skoler og institutioner i nærområdet vil blive påvirket.",
     "Lokal turisme og erhvervsliv vil lide skade. Vosnæs og Kalø Vig er kendt for sin naturskønhed, ikke for industrianlæg."
-  ];
+  ],
 
-  var authors = [
+  seedAuthors: [
     "Maria Jensen", "Thomas Pedersen", "Birgit Rasmussen", "Henrik Christensen",
     "Camilla Thomsen", "Lars Winding", "Rasmus Bloch", "Niels Eriksen",
     "Susanne Krog", "Erik Bak", "Vibeke Frost", "Jørgen Dam",
@@ -407,11 +403,9 @@ DM.generateMockData = function(baseData, totalCount) {
     "Stine Brink", "Tine Holm", "Ida Kvist", "Martin Rye",
     "Gitte Skou", "Mikkel Skov", "Sven Nielsen", "Hanne Juhl",
     "Anders Berg", "Sofie Gram", "Camilla Frost", "Henrik Berg"
-  ];
+  ],
 
-  var categories = ["miljoe", "stoej", "landskab", "proces"];
-
-  var commentTexts = [
+  seedCommentTexts: [
     "Helt enig. Vindmøllerne vil ødelægge vores nærområde.", "Det bør undersøges nærmere af uafhængige eksperter.",
     "Vi har lignende erfaringer fra andre vindmølleprojekter.", "Godt formuleret. Håber politikerne lytter denne gang.",
     "Der er brug for handling mod dette projekt.", "Kan kun støtte dette synspunkt fuldt ud.",
@@ -420,16 +414,25 @@ DM.generateMockData = function(baseData, totalCount) {
     "Politikerne bør komme ud og se forholdene med egne øjne.", "Naturen ved Vosnæs er uerstattelig.",
     "Grøn omstilling skal ikke ske på bekostning af borgerne.", "Vi skal finde alternativer der ikke ødelægger landskabet.",
     "Tak for at bringe dette op. Vi tænker det samme i vores husstand."
-  ];
+  ]
+};
+
+/* ==========================================================================
+   Mock Data Generator
+   ========================================================================== */
+
+DM.generateMockData = function(dataset, totalCount) {
+  var baseData = dataset.staticItems;
+  if (baseData.length >= totalCount) return baseData.slice();
+
+  var titles = dataset.seedTitles;
+  var descriptions = dataset.seedDescriptions;
+  var authors = dataset.seedAuthors;
+  var commentTexts = dataset.seedCommentTexts;
+  var categories = ["miljoe", "stoej", "landskab", "proces"];
 
   var months = ["januar", "februar", "marts", "april", "maj", "juni",
     "juli", "august", "september", "oktober", "november", "december"];
-
-  /* Location suffixes for title variation */
-  var locations = [
-    "Vosnæs", "Studstrup", "Skødstrup", "Løgten", "Risskov",
-    "Hjortshøj", "Lystrup", "Rønde", "Hornslet", "Mørke"
-  ];
 
   /* Seeded PRNG for reproducible mock data — same seed always produces the same items */
   function seededRandom(seed) {
@@ -481,8 +484,7 @@ DM.generateMockData = function(baseData, totalCount) {
   return result;
 };
 
-// Generate and append mock data to reach 784 total
-DM.horingssvarData.push.apply(
-  DM.horingssvarData,
-  DM.generateMockData(DM.horingssvarData, 784).slice(DM.horingssvarData.length)
-);
+/* Select active dataset and expose 784-item dataset under the canonical name
+   the rest of the app reads. Per-mock config.dataset selects which dataset. */
+var activeDataset = DM.datasets[DM.config.dataset];
+DM.horingssvarData = DM.generateMockData(activeDataset, 784);

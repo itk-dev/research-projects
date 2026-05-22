@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forslag til Lokalplan nr. 1237 — Vindmøller ved Vosnæs | deltag.aarhus.dk</title>
+  <title>Forslag til Lokalplan nr. 1245 — Solceller i Universitetsparken | deltag.aarhus.dk</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,31 +11,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <!-- Design tokens and base -->
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
   <!-- Components (in DOM order) -->
-  <link rel="stylesheet" href="css/mock-banner.css">
-  <link rel="stylesheet" href="css/nav.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/decision-banner.css">
-  <link rel="stylesheet" href="css/hearing-header.css">
-  <link rel="stylesheet" href="css/body-section.css">
-  <link rel="stylesheet" href="css/materials.css">
-  <link rel="stylesheet" href="css/horingssvar.css">
-  <link rel="stylesheet" href="css/statistics.css">
-  <link rel="stylesheet" href="css/map.css">
-  <link rel="stylesheet" href="css/info-box.css">
-  <link rel="stylesheet" href="css/related.css">
-  <link rel="stylesheet" href="css/projects-cta.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/modal.css">
-  <link rel="stylesheet" href="css/modal-horingssvar.css">
-  <link rel="stylesheet" href="css/modal-material.css">
-  <link rel="stylesheet" href="css/modal-decision.css">
-  <link rel="stylesheet" href="css/glossary.css">
-  <link rel="stylesheet" href="css/variant.css">
-  <link rel="stylesheet" href="css/modal-mitid.css">
-  <link rel="stylesheet" href="css/modal-submission.css">
+  <link rel="stylesheet" href="../css/mock-banner.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/hero.css">
+  <link rel="stylesheet" href="../css/decision-banner.css">
+  <link rel="stylesheet" href="../css/hearing-header.css">
+  <link rel="stylesheet" href="../css/body-section.css">
+  <link rel="stylesheet" href="../css/materials.css">
+  <link rel="stylesheet" href="../css/horingssvar.css">
+  <link rel="stylesheet" href="../css/statistics.css">
+  <link rel="stylesheet" href="../css/map.css">
+  <link rel="stylesheet" href="../css/info-box.css">
+  <link rel="stylesheet" href="../css/related.css">
+  <link rel="stylesheet" href="../css/projects-cta.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/modal.css">
+  <link rel="stylesheet" href="../css/modal-horingssvar.css">
+  <link rel="stylesheet" href="../css/modal-material.css">
+  <link rel="stylesheet" href="../css/modal-decision.css">
+  <link rel="stylesheet" href="../css/glossary.css">
+  <link rel="stylesheet" href="../css/variant.css">
+  <link rel="stylesheet" href="../css/modal-mitid.css">
+  <link rel="stylesheet" href="../css/modal-submission.css">
 </head>
 <body>
 
@@ -54,7 +54,7 @@
   <nav class="nav" aria-label="Hovednavigation">
     <div class="nav__inner">
       <a href="#" class="nav__logo" aria-label="deltag.aarhus.dk - Forside">
-        <img src="AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune" width="121" height="62">
+        <img src="../AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune" width="121" height="62">
       </a>
       <div class="nav__right">
         <div class="nav__sub-menu">
@@ -78,14 +78,14 @@
 
   <!-- Hero Image -->
   <section class="hero" aria-label="Billede af høringsområde">
-    <img class="hero__image" src="hero-moeller.png" alt="Vindmøller i dansk landskab ved Vosnæs">
+    <img class="hero__image" src="hero-solceller-unipark.png" alt="Solcelleanlæg på fællesplænen i Universitetsparken set fra Hovedbygningen">
   </section>
 
   <!-- Decision Banner -->
   <div class="decision-banner" role="alert">
     <p class="decision-banner__title">Afgørelse</p>
     <p class="decision-banner__text">
-      Ved byrådsmødet onsdag d. 28. maj 2025 blev forslaget godkendt til offentlig høring.
+      Ved byrådsmødet onsdag d. 17. juni 2026 blev forslaget godkendt til offentlig høring.
       <a href="#" class="decision-banner__link" id="open-decision-modal">Læs hele afgørelsen</a>
     </p>
   </div>
@@ -95,8 +95,8 @@
     <span class="hearing-header__label">Høring</span>
     <div class="hearing-header__content">
       <div class="hearing-header__main">
-        <h1 class="hearing-header__title">Forslag til Lokalplan nr. 1237 med miljøvurderingsrapport — Vindmøller ved Vosnæs</h1>
-        <p class="hearing-header__lead">Planen udlægger området til tekniske anlæg og giver mulighed for opstilling af tre vindmøller med en totalhøjde på op til 150 meter samt tilhørende arbejdsarealer, veje og nettilslutningsanlæg.</p>
+        <h1 class="hearing-header__title">Forslag til Lokalplan nr. 1245 med miljøvurderingsrapport — Solceller i Universitetsparken</h1>
+        <p class="hearing-header__lead">Planen udlægger ca. 8 hektar på fællesplænen syd for Hovedbygningen til et solcelleanlæg samt tilhørende transformerstation, kabeltracé og servicearealer. Anlægget skal indpasses i parkens landskabelige struktur og bevare bevaringsværdige træer.</p>
       </div>
       <aside class="hearing-header__sidebar" aria-label="Høringsdetaljer">
         <div class="hearing-header__meta-item">
@@ -111,7 +111,7 @@
             <i class="fa-regular fa-calendar" aria-hidden="true"></i>
             <span>Svarfrist</span>
           </div>
-          <div class="hearing-header__meta-value" id="hearing-deadline-value">14. august 2025</div>
+          <div class="hearing-header__meta-value" id="hearing-deadline-value">22. august 2026</div>
         </div>
         <div class="hearing-header__meta-item">
           <div class="hearing-header__meta-label">
@@ -126,7 +126,7 @@
             <span>Projekt</span>
           </div>
           <div class="hearing-header__meta-value">
-            <a href="#" class="hearing-header__meta-link">Grøn energi i Aarhus</a>
+            <a href="#" class="hearing-header__meta-link">Solenergi på kommunale arealer</a>
           </div>
         </div>
         <div class="hearing-header__meta-item">
@@ -134,27 +134,27 @@
             <i class="fa-solid fa-hashtag" aria-hidden="true"></i>
             <span>ID</span>
           </div>
-          <div class="hearing-header__meta-value">12937</div>
+          <div class="hearing-header__meta-value">13412</div>
         </div>
       </aside>
     </div>
-    <p class="hearing-header__tags">Lokalplan, Miljøvurdering, Vosnæs, Grøn energi</p>
+    <p class="hearing-header__tags">Lokalplan, Miljøvurdering, Universitetsparken, Solceller, Grøn energi, Kulturarv</p>
   </header>
 
   <!-- Body Content -->
   <div class="body-section">
     <div class="body-section__content">
       <div class="body-section__text">
-        <p><span class="glossary-term" data-glossary="hoering">Høringen<button class="glossary-term__icon" aria-label="Forklaring af høring"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">En høring er en periode hvor borgere, organisationer og myndigheder kan komme med kommentarer og forslag til et bestemt planforslag, før det vedtages endeligt. <a href="#">Læs mere om høringer</a></span></span> vedrører Forslag til Lokalplan nr. 1237 med tilhørende miljøvurderingsrapport for opstilling af vindmøller ved Vosnæs nord for Aarhus. Bemærk at høringssvar først gennemgås efter endt høringsfrist.</p>
+        <p><span class="glossary-term" data-glossary="hoering">Høringen<button class="glossary-term__icon" aria-label="Forklaring af høring"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">En høring er en periode hvor borgere, organisationer og myndigheder kan komme med kommentarer og forslag til et bestemt planforslag, før det vedtages endeligt. <a href="#">Læs mere om høringer</a></span></span> vedrører Forslag til Lokalplan nr. 1245 med tilhørende miljøvurderingsrapport for etablering af et solcelleanlæg på fællesplænen i Universitetsparken, Aarhus. Bemærk at høringssvar først gennemgås efter endt høringsfrist.</p>
       </div>
       <div class="body-section__text">
-        <p>Aarhus Kommune har udarbejdet forslag til lokalplan for Vosnæs-området samt tillæg nr. 169 til <span class="glossary-term" data-glossary="kommuneplan">Kommuneplan 2017<button class="glossary-term__icon" aria-label="Forklaring af Kommuneplan 2017"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">Kommuneplanen er kommunens overordnede plan for arealanvendelse de næste 12 år. Den sætter rammerne for hvad der må bygges hvor. <a href="#">Læs mere om kommuneplanen</a></span></span>. Der er gennemført en samlet <span class="glossary-term" data-glossary="miljoevurdering">miljøvurdering<button class="glossary-term__icon" aria-label="Forklaring af miljøvurdering"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">En miljøvurdering er en systematisk vurdering af, hvordan et planforslag eller projekt påvirker miljøet — fx natur, støj, landskab og menneskers sundhed. Den er lovpligtig ved væsentlig miljøpåvirkning. <a href="#">Læs mere om miljøvurdering</a></span></span> for alle planer og projekter i området.</p>
-        <p>Planerne kan ses på Aarhus Lokalplanportal samt fysisk på Dokk1 Hovedbibliotek fra den 5. juni 2025. Lokalplanen udlægger området til <span class="glossary-term" data-glossary="tekniske-anlaeg">tekniske anlæg<button class="glossary-term__icon" aria-label="Forklaring af tekniske anlæg"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">Tekniske anlæg dækker over installationer som vindmøller, solcelleanlæg, transformerstationer og lignende infrastruktur, der er nødvendig for energiforsyning og teknisk drift. <a href="#">Læs mere om tekniske anlæg</a></span></span> og muliggør opstilling af tre vindmøller med en totalhøjde på op til 150 meter.</p>
+        <p>Aarhus Kommune har i samarbejde med Aarhus Universitet udarbejdet forslag til lokalplan for et område inden for Universitetsparken samt tillæg nr. 187 til <span class="glossary-term" data-glossary="kommuneplan">Kommuneplan 2017<button class="glossary-term__icon" aria-label="Forklaring af Kommuneplan 2017"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">Kommuneplanen er kommunens overordnede plan for arealanvendelse de næste 12 år. Den sætter rammerne for hvad der må bygges hvor. <a href="#">Læs mere om kommuneplanen</a></span></span>. Der er gennemført en samlet <span class="glossary-term" data-glossary="miljoevurdering">miljøvurdering<button class="glossary-term__icon" aria-label="Forklaring af miljøvurdering"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">En miljøvurdering er en systematisk vurdering af, hvordan et planforslag eller projekt påvirker miljøet — fx natur, støj, landskab og menneskers sundhed. Den er lovpligtig ved væsentlig miljøpåvirkning. <a href="#">Læs mere om miljøvurdering</a></span></span> for alle planer og projekter i området, herunder en konsekvensvurdering af parkens kulturhistoriske og rekreative værdi.</p>
+        <p>Planerne kan ses på Aarhus Lokalplanportal samt fysisk på Dokk1 Hovedbibliotek og i Stakladen fra den 11. juli 2026. Lokalplanen udlægger ca. 8 hektar af fællesplænen til <span class="glossary-term" data-glossary="tekniske-anlaeg">tekniske anlæg<button class="glossary-term__icon" aria-label="Forklaring af tekniske anlæg"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></button><span class="glossary-term__tooltip">Tekniske anlæg dækker over installationer som vindmøller, solcelleanlæg, transformerstationer og lignende infrastruktur, der er nødvendig for energiforsyning og teknisk drift. <a href="#">Læs mere om tekniske anlæg</a></span></span> og muliggør etablering af et bygherrespecifikt solcelleanlæg med en panelhøjde på op til 2,5 meter samt en tilhørende transformerstation.</p>
       </div>
 
       <div class="body-section__dates">
-        <span>Svarfrist: <strong id="body-deadline">14. august 2025</strong></span>
-        <span>Slettedato: <strong id="body-delete-date">14. august 2025</strong></span>
+        <span>Svarfrist: <strong id="body-deadline">22. august 2026</strong></span>
+        <span>Slettedato: <strong id="body-delete-date">22. august 2026</strong></span>
       </div>
     </div>
 
@@ -180,7 +180,7 @@
     <h2 class="materials__heading">Materialer (4)</h2>
     <div class="materials__list">
       <a href="#" class="materials__item" id="material-lokalplan" data-material="lokalplan">
-        <span class="materials__item-name">Forslag til Lokalplan nr. 1237 og kommuneplantillæg</span>
+        <span class="materials__item-name">Forslag til Lokalplan nr. 1245 og kommuneplantillæg</span>
         <span class="materials__item-meta">
           <span class="materials__item-preview-badge"><i class="fa-solid fa-eye" aria-hidden="true"></i> Forhåndsvisning</span>
           <span class="materials__item-size">(PDF - 2.4 mb.)</span>
@@ -202,7 +202,7 @@
         </span>
       </a>
       <a href="#" class="materials__item">
-        <span class="materials__item-name">Forslag til §25-tilladelse til vindmølleprojekt</span>
+        <span class="materials__item-name">Forslag til §50-tilladelse efter naturbeskyttelsesloven (træfældning og terræn)</span>
         <span class="materials__item-meta">
           <span class="materials__item-size">(PDF - 0.8 mb.)</span>
           <i class="fa-solid fa-file-pdf materials__item-icon" aria-hidden="true"></i>
@@ -266,7 +266,7 @@
     <div class="statistics">
       <div class="statistics__header">
         <p class="statistics__title">Indkomne høringssvar over tid</p>
-        <p class="statistics__subtitle">Antal svar per uge i høringsperioden (5. jun – 14. aug 2025)</p>
+        <p class="statistics__subtitle">Antal svar per uge i høringsperioden (11. jul – 22. aug 2026)</p>
       </div>
       <div class="line-chart" role="img" aria-label="Linjediagram over indkomne høringssvar per uge">
         <div class="line-chart__y-axis" aria-hidden="true">
@@ -287,19 +287,19 @@
             <path d="M0,178 L84,162 L168,133 L252,100 L336,83 L420,50 L504,67 L588,33 L672,17 L756,8 L840,42"
                   fill="none" stroke="#3661d8" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
             <!-- Data points — weekly totals across 10-week hearing period -->
-            <circle cx="0" cy="178" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 23: 18 svar</title></circle>
-            <circle cx="84" cy="162" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 24: 32 svar</title></circle>
-            <circle cx="168" cy="133" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 25: 56 svar</title></circle>
-            <circle cx="252" cy="100" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 26: 82 svar</title></circle>
-            <circle cx="336" cy="83" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 27: 96 svar (efter borgermøde)</title></circle>
-            <circle cx="420" cy="50" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 28: 124 svar</title></circle>
-            <circle cx="504" cy="67" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 29: 110 svar</title></circle>
-            <circle cx="588" cy="33" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 30: 138 svar</title></circle>
-            <circle cx="672" cy="17" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 31: 152 svar (peak)</title></circle>
-            <circle cx="756" cy="8" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>Uge 32: 159 svar (deadline-uge)</title></circle>
+            <circle cx="0" cy="178" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>11.–17. jul (uge 28): 18 svar</title></circle>
+            <circle cx="84" cy="162" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>18.–24. jul (uge 29): 32 svar</title></circle>
+            <circle cx="168" cy="133" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>25.–31. jul (uge 30): 56 svar</title></circle>
+            <circle cx="252" cy="100" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>1.–4. aug (uge 31, første halvdel): 82 svar</title></circle>
+            <circle cx="336" cy="83" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>5.–7. aug (uge 31, anden halvdel): 96 svar</title></circle>
+            <circle cx="420" cy="50" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>8.–10. aug (uge 32, første halvdel): 124 svar (efter borgermøde)</title></circle>
+            <circle cx="504" cy="67" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>11.–14. aug (uge 32, anden halvdel): 110 svar</title></circle>
+            <circle cx="588" cy="33" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>15.–17. aug (uge 33, første halvdel): 138 svar</title></circle>
+            <circle cx="672" cy="17" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>18.–20. aug (uge 33, anden halvdel): 152 svar (peak)</title></circle>
+            <circle cx="756" cy="8" r="3" fill="#3661d8" vector-effect="non-scaling-stroke"><title>21.–22. aug (uge 34): 159 svar (deadline-uge)</title></circle>
           </svg>
           <div class="line-chart__x-axis" aria-hidden="true">
-            <span>5. jun</span><span>19. jun</span><span>3. jul</span><span>17. jul</span><span>31. jul</span><span>14. aug</span>
+            <span>11. jul</span><span>18. jul</span><span>25. jul</span><span>1. aug</span><span>15. aug</span><span>22. aug</span>
           </div>
         </div>
       </div>
@@ -373,11 +373,11 @@
   <!-- Info Box -->
   <div class="info-box">
     <div class="info-box__header">
-      <h3 class="info-box__title">Mere viden om vindenergi og lokalplaner</h3>
+      <h3 class="info-box__title">Mere viden om solenergi og lokalplaner</h3>
     </div>
     <div class="info-box__body">
-      <p>På aarhus.dk har vi samlet viden om vindmølleprojekter og lokalplanprocessen. Se bl.a. disse sider.</p>
-      <a href="#">Vindenergi i Aarhus Kommune</a>
+      <p>På aarhus.dk har vi samlet viden om solcelleprojekter på kommunale og fælles arealer samt om lokalplanprocessen. Se bl.a. disse sider.</p>
+      <a href="#">Solenergi på offentlige arealer i Aarhus Kommune</a>
       <a href="#">Hvad er en lokalplan</a>
       <a href="#">Miljøvurdering af planer og projekter</a>
     </div>
@@ -389,23 +389,23 @@
       <h2 class="related-section__title" style="width: 100%;">Denne høring relaterer sig til disse aktiviteter</h2>
       <a href="#" class="activity-card">
         <div class="activity-card__image">
-          <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=430&h=240&fit=crop" alt="Vindmøller i landskab">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=430&h=240&fit=crop" alt="Solcelleanlæg i grønt område">
           <div class="activity-card__date-badge">
-            <span class="activity-card__date-day">19</span>
-            <span class="activity-card__date-month">JUN</span>
+            <span class="activity-card__date-day">07</span>
+            <span class="activity-card__date-month">AUG</span>
           </div>
         </div>
         <div class="activity-card__body">
           <span class="activity-card__type">Aktivitet</span>
-          <h3 class="activity-card__title">Borgermøde om vindmøller ved Vosnæs — Vejlby-Risskov Hallen</h3>
+          <h3 class="activity-card__title">Borgermøde om solceller i Universitetsparken — Stakladen</h3>
           <div class="activity-card__details">
             <div class="activity-card__detail-row">
               <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-              <span>Torsdag d. 19. juni 2025, kl. 17:30–20:30</span>
+              <span>Torsdag d. 7. august 2026, kl. 17:00–18:30</span>
             </div>
             <div class="activity-card__detail-row">
               <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-              <span>Vejlby-Risskov Hallen, Aarhus</span>
+              <span>Stakladen, Universitetsparken, Aarhus</span>
             </div>
           </div>
           <div class="activity-card__arrow">
@@ -420,11 +420,11 @@
         </div>
         <div class="activity-card__body">
           <span class="activity-card__type">Projekt</span>
-          <h3 class="activity-card__title">Grøn energi i Aarhus</h3>
+          <h3 class="activity-card__title">Solenergi på kommunale arealer</h3>
           <div class="activity-card__details">
             <div class="activity-card__detail-row">
               <i class="fa-solid fa-tags" aria-hidden="true"></i>
-              <span>Klimahandling, Vedvarende energi, Vindkraft</span>
+              <span>Klimahandling, Vedvarende energi, Solceller</span>
             </div>
           </div>
           <div class="activity-card__arrow">
@@ -458,7 +458,7 @@
         <p class="footer__phone">TLF. 89 40 20 00</p>
         <p class="footer__text" style="margin-top: 16px;">CVR-nummer: 55133018</p>
         <div class="footer__logo">
-          <img src="AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune" height="55">
+          <img src="../AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune" height="55">
         </div>
       </div>
       <div class="footer__col">
@@ -530,7 +530,7 @@
   <div class="modal-overlay" id="material-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="material-modal-title" hidden>
     <div class="modal">
       <div class="modal__header">
-        <h2 class="modal__title" id="material-modal-title">Forslag til Lokalplan nr. 1237 — Vindmøller ved Vosnæs</h2>
+        <h2 class="modal__title" id="material-modal-title">Forslag til Lokalplan nr. 1245 — Solceller i Universitetsparken</h2>
         <button class="modal__close" id="material-modal-close" aria-label="Luk">
           <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
@@ -548,26 +548,26 @@
         </div>
         <div class="material-modal__content">
           <h3>1. Lokalplanens formål</h3>
-          <p>Lokalplanen har til formål at muliggøre opstilling af tre vindmøller med en totalhøjde på op til 150 meter ved Vosnæs, nord for Aarhus. Planen udlægger området til tekniske anlæg og fastlægger bestemmelser om vindmøllernes placering, dimensioner og tilhørende infrastruktur.</p>
+          <p>Lokalplanen har til formål at muliggøre etablering af et solcelleanlæg på ca. 8 hektar i den sydlige del af Universitetsparken, Aarhus. Planen udlægger arealet til tekniske anlæg og fastlægger bestemmelser om panelernes højde, materialer, placering, kabeltracé og indpasning i parkens landskabelige struktur.</p>
 
           <h3>2. Område og zonestatus</h3>
-          <p>Lokalplanområdet omfatter et areal på ca. 45 ha beliggende ved Vosnæs i det nordøstlige Aarhus. Området er i dag overvejende landbrugsjord med spredt beplantning. Området afgrænses mod nord og øst af Kalø Vig, mod syd af Studstrup og mod vest af landbrugsarealer.</p>
+          <p>Lokalplanområdet omfatter ca. 8 ha af Universitetsparkens fællesplæne syd for Hovedbygningen (1410-1414) og afgrænses mod nord af parkens stiforløb, mod øst af eksisterende egelund, mod syd af kollegierne i Trøjborg-kvarteret og mod vest af parkeringspladsen ved bygning 1422. Arealet er i dag åbent græsareal i universitetsejet zone.</p>
 
-          <h3>3. Vindmøllernes omfang og placering</h3>
-          <p>Der kan opstilles op til tre vindmøller med en navhøjde på ca. 90 meter og en rotordiameter på ca. 120 meter, svarende til en totalhøjde på op til 150 meter. Vindmøllerne placeres på en øst-vest-gående linje med en indbyrdes afstand på minimum 400 meter.</p>
-          <p>Vindmøllerne skal fremstå i ensartet lysgrå farve uden reflekterende overflader. Advarselslys skal være rødt og af behovsstyret type i henhold til gældende regler.</p>
+          <h3>3. Solcelleanlæggets omfang og udformning</h3>
+          <p>Der kan etableres solcellepaneler i samlet rækkestruktur med en maksimal højde på 2,5 meter over terræn. Paneler skal være matt-belagte med antirefleksiv overflade og må ikke gives reflekterende farver. Anlægget skal indpasses så det følger plænens naturlige bølgeform, og ingen panelrækker må placeres tættere end 10 m på bevaringsværdige træer.</p>
+          <p>Der opføres én transformerstation med en grundplan på ca. 60 m² og en højde på maks. 4 m. Transformeren skal være afskærmet med beplantning i overensstemmelse med C.F. Møllers oprindelige beplantningsplan.</p>
 
           <h3>4. Vej- og tilslutningsforhold</h3>
-          <p>Vejadgang til vindmølleområdet sker fra eksisterende landevej via forstærkede markveje. Der etableres arbejdsarealer ved hver vindmølle på ca. 2.500 m² til kranopstilling og serviceformål. Nettilslutning sker via jordkabler til nærmeste transformerstation.</p>
+          <p>Servicekøretøjer tilgår anlægget via eksisterende stier og ad et nyt forstærket spor langs den østlige parkgrænse. Anlægget tilsluttes elnettet via jordkabler ført langs den eksisterende kabelkorridor under stien syd for bygning 1410. Der må ikke etableres nye permanente veje gennem parken.</p>
 
-          <h3>5. Støjforhold</h3>
-          <p>Vindmøllerne skal overholde de gældende støjgrænser på 42 dB(A) ved nærmeste beboelse i det åbne land og 37 dB(A) ved nærmeste beboelse i boligområder. Den lavfrekvente støj indendørs må ikke overstige 20 dB(A) ved nabobeboelser.</p>
+          <h3>5. Lys- og refleksionsforhold</h3>
+          <p>Glasoverflader skal være forsynet med antireflektiv belægning. Belysning ved transformerstation skal være behovsstyret, nedadrettet, og slukket mellem kl. 22 og kl. 06 i perioden 1. april – 30. september. En refleksionsanalyse for de syd-vendte auditorier (bygning 1410-1414) skal foreligge inden ibrugtagning.</p>
 
-          <h3>6. Natur og landskab</h3>
-          <p>Der skal gennemføres afværgeforanstaltninger for at beskytte flagermus og fugle. Vindmøllerne skal stoppes i perioder med høj flagermusaktivitet. Eksisterende beplantning og levende hegn skal bevares i videst muligt omfang. Der etableres en skovrejsningskompensation svarende til det berørte areal.</p>
+          <h3>6. Natur, kulturarv og landskab</h3>
+          <p>Bevaringsværdige træer markeret på lokalplanens kortbilag 3 skal bevares. Højest 12 træer må fældes, og hvert fældet træ skal kompenseres ved nyplantning i forholdet 1:3 inden for parken. Eksisterende ledelinjer for flagermus skal beskyttes, og DCE skal udarbejde en biodiversitetsmonitering forud for og 5 år efter ibrugtagning.</p>
 
-          <h3>7. Skyggekast og visuelle forhold</h3>
-          <p>Skyggekastet på nabobeboelser må ikke overstige 10 timer reelt per år. Vindmøllerne skal udstyres med skyggekastprogrammer, der automatisk stopper driften ved overskridelse. Visualiseringer fra udvalgte synspunkter indgår i miljørapporten.</p>
+          <h3>7. Rekreativ brug og særlige forhold</h3>
+          <p>Eksisterende rekreativ brug af plænen til Park-festen, Kapsejladsen og fakultets-arrangementer skal kunne fortsætte i et udlagt eventområde på minimum 4 ha umiddelbart nord for solcelleanlægget. Aarhus Kommune og Aarhus Universitet udarbejder en samarbejdsaftale om sambrug af arealerne.</p>
         </div>
       </div>
     </div>
@@ -577,7 +577,7 @@
   <div class="modal-overlay" id="decision-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="decision-modal-title" hidden>
     <div class="modal">
       <div class="modal__header">
-        <h2 class="modal__title" id="decision-modal-title">Afgørelse — Lokalplan nr. 1237</h2>
+        <h2 class="modal__title" id="decision-modal-title">Afgørelse — Lokalplan nr. 1245</h2>
         <button class="modal__close" id="decision-modal-close" aria-label="Luk">
           <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
@@ -586,7 +586,7 @@
         <div class="modal__meta">
           <span class="modal__meta-item">
             <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-            <span>28. maj 2025</span>
+            <span>17. juni 2026</span>
           </span>
           <span class="modal__meta-item">
             <i class="fa-solid fa-landmark" aria-hidden="true"></i>
@@ -594,23 +594,23 @@
           </span>
         </div>
         <div class="modal__description">
-          <p>Byrådet godkendte onsdag den 28. maj 2025 Forslag til Lokalplan nr. 1237 med miljøvurderingsrapport — Vindmøller ved Vosnæs — samt tillæg nr. 169 til Kommuneplan 2017 til offentlig høring.</p>
-          <p>Lokalplanen muliggør opstilling af tre vindmøller med en totalhøjde på op til 150 meter ved Vosnæs nord for Aarhus. Der er udarbejdet en samlet miljøvurdering for planer og projekter i området.</p>
-          <p>I høringsperioden indkom 784 høringssvar. De primære bekymringer vedrørte støjgener, landskabspåvirkning, truede arter og ejendomsværdier. Byrådet har i sin behandling taget stilling til alle indkomne bemærkninger.</p>
+          <p>Byrådet godkendte onsdag den 17. juni 2026 Forslag til Lokalplan nr. 1245 med miljøvurderingsrapport — Solceller i Universitetsparken — samt tillæg nr. 187 til Kommuneplan 2017 til offentlig høring.</p>
+          <p>Lokalplanen muliggør etablering af et solcelleanlæg på ca. 8 hektar af Universitetsparkens fællesplæne med en panelhøjde på op til 2,5 meter samt tilhørende transformerstation. Der er udarbejdet en samlet miljøvurdering for planer og projekter i området, herunder en konsekvensvurdering af parkens kulturhistoriske og rekreative værdi.</p>
+          <p>I høringsperioden indkom 784 høringssvar. De primære bekymringer vedrørte parkens kulturhistoriske værdi, tab af rekreativt areal, biodiversitet og borgerinddragelsesprocessen. Byrådet har i sin behandling taget stilling til alle indkomne bemærkninger.</p>
         </div>
         <div class="decision-modal__links">
           <h3 class="decision-modal__links-title">Dokumenter og optagelser</h3>
           <a href="#" class="decision-modal__link">
             <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
-            <span>Referat fra byrådsmødet d. 28. maj 2025 (PDF - 0.3 mb)</span>
+            <span>Referat fra byrådsmødet d. 17. juni 2026 (PDF - 0.3 mb)</span>
           </a>
           <a href="#" class="decision-modal__link">
             <i class="fa-solid fa-video" aria-hidden="true"></i>
-            <span>Se video fra byrådsmødet (punkt 8: Lokalplan 1237)</span>
+            <span>Se video fra byrådsmødet (punkt 12: Lokalplan 1245)</span>
           </a>
           <a href="#" class="decision-modal__link">
             <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
-            <span>Endelig lokalplan nr. 1237 — vedtaget version (PDF - 2.4 mb)</span>
+            <span>Endelig lokalplan nr. 1245 — vedtaget version (PDF - 2.7 mb)</span>
           </a>
           <a href="#" class="decision-modal__link">
             <i class="fa-solid fa-comments" aria-hidden="true"></i>
@@ -639,7 +639,7 @@
           <p class="mitid-flow__description">Bekræft din identitet for at indsende et høringssvar til Aarhus Kommune.</p>
           <div class="mitid-flow__field">
             <label for="mitid-userid" class="mitid-flow__label">Bruger-ID</label>
-            <input type="text" id="mitid-userid" class="mitid-flow__input" value="JensenMaria42" readonly>
+            <input type="text" id="mitid-userid" class="mitid-flow__input" value="HolmMarie92" readonly>
           </div>
           <p class="mitid-flow__hint">Godkend med MitID-app eller kodeviser</p>
           <button class="mitid-flow__approve" id="mitid-approve-btn" type="button">Godkend</button>
@@ -672,7 +672,7 @@
           </div>
           <div class="submission-form__field">
             <label for="submission-name" class="submission-form__label">Dit navn</label>
-            <input type="text" id="submission-name" class="submission-form__input" value="Maria Jensen" readonly>
+            <input type="text" id="submission-name" class="submission-form__input" value="Marie Holm" readonly>
             <span class="submission-form__hint">Udfyldt automatisk via MitID</span>
           </div>
           <div class="submission-form__field">
@@ -696,25 +696,38 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <!-- Per-mock config (must load before data.js so DM.config.dataset is set) -->
-  <script src="js/config.js"></script>
+  <!-- Per-mock config override: must be set before js/config.js runs -->
+  <script>
+    window.DeltagMock = {
+      config: {
+        planNumber: "1245",
+        hearingTitle: "Solceller i Universitetsparken",
+        deadlines: { open: "21. september 2026", closed: "22. august 2026" },
+        map: { center: [56.171, 10.201], zoom: 14 },
+        dataset: "uniparken"
+      }
+    };
+  </script>
+  <script src="../js/config.js"></script>
+  <!-- Uniparken dataset registers DM.datasets.uniparken before data.js consumes it -->
+  <script src="../js/data-uniparken.js"></script>
   <!-- Data and state -->
-  <script src="js/data.js"></script>
-  <script src="js/state.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/state.js"></script>
   <!-- Components -->
-  <script src="js/horingssvar.js"></script>
-  <script src="js/modal.js"></script>
-  <script src="js/modal-horingssvar.js"></script>
-  <script src="js/modal-material.js"></script>
-  <script src="js/modal-decision.js"></script>
-  <script src="js/dropdown.js"></script>
-  <script src="js/glossary.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/compact-nav.js"></script>
-  <script src="js/variant.js"></script>
-  <script src="js/modal-mitid.js"></script>
-  <script src="js/modal-submission.js"></script>
+  <script src="../js/horingssvar.js"></script>
+  <script src="../js/modal.js"></script>
+  <script src="../js/modal-horingssvar.js"></script>
+  <script src="../js/modal-material.js"></script>
+  <script src="../js/modal-decision.js"></script>
+  <script src="../js/dropdown.js"></script>
+  <script src="../js/glossary.js"></script>
+  <script src="../js/map.js"></script>
+  <script src="../js/compact-nav.js"></script>
+  <script src="../js/variant.js"></script>
+  <script src="../js/modal-mitid.js"></script>
+  <script src="../js/modal-submission.js"></script>
   <!-- Orchestrator (must be last) -->
-  <script src="js/main.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>

@@ -77,6 +77,7 @@ Se [Redaktionelt indhold — Høringsdetalje side](editor-content-requirements.m
 
 ## Interaktiv prototype
 
-<a href="/research-projects/projects/deltag-aarhus/mocks/index.html" class="mock-button" target="_blank">Åbn prototypen ↗</a>
+<a href="/research-projects/projects/deltag-aarhus/mocks/index.html" class="mock-button" target="_blank">Åbn Vosnæs-prototypen ↗</a>
+<a href="/research-projects/projects/deltag-aarhus/mocks/uniparken/index.html" class="mock-button" target="_blank">Åbn Universitetsparken-prototypen ↗</a>
 
-Prøv at skifte mellem åben og afsluttet variant via linkene i det blå mock-banner øverst.
+Prøv at skifte mellem åben og afsluttet variant via linkene i det blå mock-banner øverst. De to prototyper bruger samme høringsdetalje-skabelon — kun indhold, datasæt og kort er forskelligt — for at vise at samme komponenter understøtter meget forskellige høringer.

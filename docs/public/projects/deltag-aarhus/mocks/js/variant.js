@@ -8,6 +8,7 @@ var DM = window.DeltagMock;
 DM.initVariant = function() {
   var state = DM.state;
   var isOpen = state.variant === "open";
+  var deadline = isOpen ? DM.config.deadlines.open : DM.config.deadlines.closed;
 
   /* Body class drives CSS-only visibility rules in variant.css */
   document.body.classList.add(isOpen ? "variant--open" : "variant--closed");
@@ -27,17 +28,17 @@ DM.initVariant = function() {
   /* Deadline display — show future date when open */
   var deadlineValue = document.getElementById("hearing-deadline-value");
   if (deadlineValue) {
-    deadlineValue.textContent = isOpen ? "14. oktober 2025" : "14. august 2025";
+    deadlineValue.textContent = deadline;
   }
 
   var bodyDeadline = document.getElementById("body-deadline");
   if (bodyDeadline) {
-    bodyDeadline.textContent = isOpen ? "14. oktober 2025" : "14. august 2025";
+    bodyDeadline.textContent = deadline;
   }
 
   var bodyDeleteDate = document.getElementById("body-delete-date");
   if (bodyDeleteDate) {
-    bodyDeleteDate.textContent = isOpen ? "14. oktober 2025" : "14. august 2025";
+    bodyDeleteDate.textContent = deadline;
   }
 
   /* Submit button — disabled when closed, active when open */
