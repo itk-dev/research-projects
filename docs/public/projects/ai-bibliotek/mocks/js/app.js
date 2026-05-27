@@ -124,6 +124,7 @@ function wireNavToggle() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  auth.seedDemoUsers();
   wireNavToggle();
   renderUserArea();
   renderAuthGuardedLinks();

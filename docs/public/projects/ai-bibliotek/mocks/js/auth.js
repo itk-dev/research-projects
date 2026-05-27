@@ -11,6 +11,13 @@ function fakeHash(input) {
   return `h${h.toString(36)}`;
 }
 
+/* Ready-made demo logins shown on the login screen so reviewers can try the
+   gated flows without registering. Plaintext passwords are intentional here. */
+export const DEMO_USERS = [
+  { id: "demo-aarhus", name: "Mette Sørensen", organization: "Aarhus Kommune", email: "mette@aarhus.dk", password: "demo1234" },
+  { id: "demo-odense", name: "Jonas Holm", organization: "Odense Kommune", email: "jonas@odense.dk", password: "demo1234" }
+];
+
 export const auth = {
   currentUser() {
     const session = store.getSession();
@@ -56,5 +63,24 @@ export const auth = {
 
   logout() {
     store.setSession(null);
+  },
+
+  /* Idempotent: inserts any demo user whose email isn't already present. */
+  seedDemoUsers() {
+    const users = store.getUsers();
+    let changed = false;
+    for (const d of DEMO_USERS) {
+      if (users.some(u => u.email === d.email)) continue;
+      users.push({
+        id: d.id,
+        email: d.email,
+        name: d.name,
+        organization: d.organization,
+        passwordHash: fakeHash(d.password),
+        createdAt: new Date().toISOString()
+      });
+      changed = true;
+    }
+    if (changed) store.setUsers(users);
   }
 };

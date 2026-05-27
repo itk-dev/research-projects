@@ -1,5 +1,5 @@
 import { el, clear, navigate, toast } from "../util.js";
-import { auth } from "../auth.js";
+import { auth, DEMO_USERS } from "../auth.js";
 
 export function render(root, query = {}) {
   clear(root);
@@ -23,7 +23,9 @@ export function render(root, query = {}) {
     card.appendChild(tabs);
 
     if (mode === "login") {
-      card.appendChild(loginForm());
+      const form = loginForm();
+      card.appendChild(form);
+      card.appendChild(demoUsersBox(form));
     } else {
       card.appendChild(registerForm());
     }
@@ -57,6 +59,29 @@ function loginForm() {
       el("input", { type: "password", name: "password", required: true, autocomplete: "current-password" })
     ]),
     el("button", { class: "btn", type: "submit" }, "Log ind")
+  ]);
+}
+
+/* Prototype-only: ready-made logins. Clicking one fills the form fields. */
+function demoUsersBox(form) {
+  const fill = (email, password) => {
+    form.querySelector('input[name="email"]').value = email;
+    form.querySelector('input[name="password"]').value = password;
+  };
+
+  return el("div", { class: "demo-users" }, [
+    el("p", { class: "demo-users-head" }, "Prototype – prøv med en testbruger"),
+    ...DEMO_USERS.map(d =>
+      el("button", {
+        type: "button",
+        class: "demo-user",
+        onclick: () => fill(d.email, d.password)
+      }, [
+        el("span", { class: "demo-user-name" }, `${d.name} · ${d.organization}`),
+        el("span", { class: "demo-user-cred" }, `${d.email} / ${d.password}`)
+      ])
+    ),
+    el("p", { class: "hint demo-users-foot" }, "Klik en bruger for at udfylde felterne.")
   ]);
 }
 
