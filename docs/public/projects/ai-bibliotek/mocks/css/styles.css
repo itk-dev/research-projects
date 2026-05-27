@@ -1,7 +1,7 @@
 /* AI Bibliotek – prototype styles */
 
 :root {
-  --color-bg: #f4efe7;
+  --color-bg: #ffffff;
   --color-surface: #ffffff;
   --color-surface-2: #fbf9f5;
   --color-border: #e3ddd1;
@@ -1003,16 +1003,6 @@ input:focus, textarea:focus, select:focus {
   font-variation-settings: "opsz" 36, "SOFT" 100;
 }
 .detail-main .resume-block { font-size: 1.05rem; line-height: 1.65; }
-.detail-main .resume-block > p:first-of-type::first-letter {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 3.6rem;
-  line-height: 0.9;
-  float: left;
-  padding: 6px 10px 0 0;
-  color: var(--color-accent-deep);
-  font-variation-settings: "opsz" 144, "SOFT" 50;
-}
 .detail-main h2 { margin-top: var(--space-6); }
 .detail-main h3 { margin-top: var(--space-5); }
 
