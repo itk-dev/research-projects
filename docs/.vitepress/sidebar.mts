@@ -108,6 +108,17 @@ const danskVidenTilDanskAi: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const aiBibliotek: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'AI Bibliotek',
+    items: [
+      { text: 'Overview', link: '/projects/ai-bibliotek/' },
+      { text: 'Estimeringsnotat', link: '/projects/ai-bibliotek/estimeringsnotat' },
+      { text: 'Interactive Mocks', link: '/projects/ai-bibliotek/mocks' },
+    ],
+  },
+]
+
 const designSystem: DefaultTheme.SidebarItem[] = [
   {
     text: 'Design System',
@@ -134,6 +145,7 @@ export function sidebar(): DefaultTheme.Sidebar {
     '/projects/opkraevningsoverblik/': opkraevningsoverblik,
     '/projects/roboway/': roboway,
     '/projects/dansk-viden-til-dansk-ai/': danskVidenTilDanskAi,
+    '/projects/ai-bibliotek/': aiBibliotek,
     '/projects/design-system/': designSystem,
   }
 }

@@ -46,4 +46,8 @@ features:
     details: Fælles offentlig service til indsamling og deling af danske publikationer som grundlag for dansk AI — med AI-katalogisering, syv rettighedsniveauer og delbare samlinger.
     link: /projects/dansk-viden-til-dansk-ai/
     linkText: View project
+  - title: AI Bibliotek
+    details: Fælles bibliotek hvor danske myndigheder kan dele og hjemtage AI-assistenter — med katalog, søgning, modelkort, vidensopskrift og versioneret JSON-eksport, så lokale use cases kan skaleres nationalt.
+    link: /projects/ai-bibliotek/
+    linkText: View project
 ---

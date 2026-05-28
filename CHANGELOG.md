@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — AI Bibliotek Project
+- Prototype for a shared library where Danish public authorities publish and "hjemtage" (take home) AI assistants — initially OpenWebUI-based — so local use cases can scale nationally
+- Single-page mock adapted from the Dansk Viden til Dansk AI SPA: self-signup, katalog with search and facets (kommune, sprogmodel, rammeværk, datafølsomhed), assistant detail with modelkort/readme/vidensopskrift and versioned JSON export, plus a "del assistent" flow — `localStorage` backend, teal primary color
+- Report (`index.md`), estimeringsnotat with phased estimate and a drift/driftsomkostninger note, and mocks listing
+
 ### Added — Solceller i Universitetsparken hearing detail mock (deltag-aarhus)
 - Second interactive prototype for deltag.aarhus.dk under `docs/public/projects/deltag-aarhus/mocks/uniparken/` — Lokalplan nr. 1245 om et solcelleanlæg på Universitetsparkens fællesplæne, med samme funktionalitet som Vosnæs-prototypen (784 høringssvar, åben/afsluttet variant, alle modaler, kort, statistik)
 - Introduced a per-mock config layer (`mocks/js/config.js` + per-mock `window.DeltagMock.config` override) so plan number, deadlines, map center/clusters and active dataset are swappable without duplicating shared CSS/JS. The Vosnæs mock continues to use the file's defaults.

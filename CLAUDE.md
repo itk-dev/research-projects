@@ -51,6 +51,7 @@ Taskfile.yml                                 # Task automation (dev, build, lint
 | `opkraevningsoverblik` | Opkrævningsoverblik | No |
 | `roboway` | Roboway | No |
 | `dansk-viden-til-dansk-ai` | Dansk Viden til Dansk AI | No |
+| `ai-bibliotek` | AI Bibliotek | No |
 
 ## Conventions
 
