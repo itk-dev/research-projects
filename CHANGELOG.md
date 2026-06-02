@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — Real PDF links in Vosnæs hearing detail mock (deltag-aarhus)
+- The four materials in the Vosnæs prototype (`mocks/index.html`) now link to the actual public PDFs (Forslag til Lokalplan nr. 1237, Miljøvurderingsrapport, Ikke-teknisk resumé, Forslag til §25-tilladelse), opening in a new tab. The lokalplan preview modal's "Åbn på ny side" and "Download PDF" buttons point at the live `plandata.dk` document.
+
 ### Added — AI Bibliotek Project
 - Prototype for a shared library where Danish public authorities publish and "hjemtage" (take home) AI assistants — initially OpenWebUI-based — so local use cases can scale nationally
 - Single-page mock adapted from the Dansk Viden til Dansk AI SPA: self-signup, katalog with search and facets (kommune, sprogmodel, rammeværk, datafølsomhed), assistant detail with modelkort/readme/vidensopskrift and versioned JSON export, plus a "del assistent" flow — `localStorage` backend, teal primary color
