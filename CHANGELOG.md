@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — Whitelisted municipality sign-up (ai-bibliotek)
+- Sign-up's "Myndighed eller organisation" field is now a select limited to whitelisted municipalities, and registration enforces that the email domain matches the selected municipality's domain (shared `MUNICIPALITIES` list in `auth.js`)
+- Documented the intended access model in `index.md`: whitelisted email domains, account verification via email link on sign-up, and a per-domain admin who can delete and promote users (these remain design intent — the `localStorage` mock does not implement them)
+
 ### Changed — Real PDF links in Vosnæs hearing detail mock (deltag-aarhus)
 - The four materials in the Vosnæs prototype (`mocks/index.html`) now link to the actual public PDFs (Forslag til Lokalplan nr. 1237, Miljøvurderingsrapport, Ikke-teknisk resumé, Forslag til §25-tilladelse), opening in a new tab. The lokalplan preview modal's "Åbn på ny side" and "Download PDF" buttons point at the live `plandata.dk` document.
 
