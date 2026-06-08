@@ -35,6 +35,16 @@ Hero med søgefelt, kort introduktion og statistik (antal assistenter, deltagend
 
 Simpel brugerflade hvor en medarbejder kan oprette en konto (i første omgang opret sig selv) eller logge ind. Brugere gemmes i `localStorage`. Ingen reel auth — kun til demoformål.
 
+I prototypen vælges **myndighed** fra en dropdown (kun whitelistede myndigheder), og registrering kræver, at e-mailen ligger på den valgte myndigheds domæne. Det illustrerer den tiltænkte adgangsmodel:
+
+- **Whitelistet domæne** — kun medarbejdere med en arbejdsmail på et whitelistet domæne (fx `@aarhus.dk`) kan oprette sig. Domænet er adgangsporten; nye myndigheder optages ved at få deres domæne tilføjet til listen.
+- **Verifikation ved oprettelse** — den nye bruger bekræfter sin konto via et link sendt til e-mailen, før kontoen aktiveres.
+- **Domæne-admin** — for hvert domæne udpeges en bruger som **admin** med rettigheder til at **slette** brugere og **forfremme** andre brugere (herunder til admin) inden for samme domæne.
+
+::: info Prototype
+Selve verifikationsflowet, admin-rollen og brugeradministrationen er kun beskrevet som tiltænkt model — prototypen simulerer dem ikke. Mocken håndhæver dog whitelisten og domæne-matchet ved oprettelse.
+:::
+
 ### Katalog og søgning
 
 Fritekstsøgning kombineret med facetter: **oprindelseskommune, sprogmodel, rammeværk** (i dag OpenWebUI) og **datafølsomhed** (almindelige personoplysninger / fortrolige / personfølsomme). Resultater vises som kort med badges.
@@ -81,6 +91,10 @@ Prototypen er et diskussionsgrundlag, ikke en implementeringsklar løsning. En r
 ### Hvad må udstilles åbent — og hvad skal bag login?
 
 I prototypen er **kataloget offentligt at browse**, mens det at **dele og eksportere** kræver login. Det er en antagelse, ikke en beslutning. Skal selve eksistensen af en assistent (navn, formål, kommune) være åben, mens JSON og modelkort er bag login? Eller skal hele biblioteket være lukket for ikke-myndigheder?
+
+### Hvem styrer whitelisten og admin-rollen?
+
+Adgang gives via whitelistede e-mail-domæner. Hvem godkender, at et nyt domæne (en ny myndighed) optages? Og hvem udpeger den første admin for et domæne, før der overhovedet er en admin til at forfremme andre? Der skal tages stilling til både onboarding af nye myndigheder og den indledende rolletildeling.
 
 ### Hvad er der i JSON-filerne?
 

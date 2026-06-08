@@ -1,5 +1,5 @@
 import { el, clear, navigate, toast } from "../util.js";
-import { auth, DEMO_USERS } from "../auth.js";
+import { auth, DEMO_USERS, MUNICIPALITIES } from "../auth.js";
 
 export function render(root, query = {}) {
   clear(root);
@@ -106,11 +106,18 @@ function registerForm() {
     ]),
     el("label", { class: "field" }, [
       "Myndighed eller organisation",
-      el("input", { type: "text", name: "organization", placeholder: "f.eks. Aarhus Kommune", autocomplete: "organization" })
+      el("select", { name: "organization", required: true }, [
+        el("option", { value: "", disabled: true, selected: true }, "Vælg myndighed …"),
+        ...MUNICIPALITIES.map(m =>
+          el("option", { value: m.name }, `${m.name} (${m.domain})`)
+        )
+      ]),
+      el("span", { class: "hint" }, "Kun whitelistede myndigheder. Kontakt os for at få din myndighed tilføjet.")
     ]),
     el("label", { class: "field" }, [
       "E-mail",
-      el("input", { type: "email", name: "email", required: true, autocomplete: "email" })
+      el("input", { type: "email", name: "email", required: true, autocomplete: "email" }),
+      el("span", { class: "hint" }, "Skal være din arbejdsmail på myndighedens domæne (f.eks. @aarhus.dk).")
     ]),
     el("label", { class: "field" }, [
       "Adgangskode",

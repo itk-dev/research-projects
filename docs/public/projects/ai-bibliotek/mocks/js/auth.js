@@ -18,6 +18,19 @@ export const DEMO_USERS = [
   { id: "demo-odense", name: "Jonas Holm", organization: "Odense Kommune", email: "jonas@odense.dk", password: "demo1234" }
 ];
 
+/* Whitelisted myndigheder. Only employees with an email on a municipality's
+   domain may register — this list drives both the sign-up select and the
+   domain check in register(). In a real system the whitelist is the gate;
+   here it just makes the rule tangible in the prototype. */
+export const MUNICIPALITIES = [
+  { name: "Aarhus Kommune", domain: "aarhus.dk" },
+  { name: "Odense Kommune", domain: "odense.dk" },
+  { name: "Københavns Kommune", domain: "kk.dk" },
+  { name: "Aalborg Kommune", domain: "aalborg.dk" },
+  { name: "Vejle Kommune", domain: "vejle.dk" },
+  { name: "Randers Kommune", domain: "randers.dk" }
+];
+
 export const auth = {
   currentUser() {
     const session = store.getSession();
@@ -32,6 +45,14 @@ export const auth = {
     }
     if (password.length < 4) {
       throw new Error("Adgangskoden skal være mindst 4 tegn.");
+    }
+    const muni = MUNICIPALITIES.find(m => m.name === organization?.trim());
+    if (!muni) {
+      throw new Error("Vælg en myndighed fra listen.");
+    }
+    const domain = email.split("@")[1] || "";
+    if (domain !== muni.domain) {
+      throw new Error(`E-mailen skal være en @${muni.domain}-adresse for ${muni.name}.`);
     }
     const users = store.getUsers();
     if (users.some(u => u.email === email)) {
