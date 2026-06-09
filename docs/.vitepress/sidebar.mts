@@ -119,6 +119,17 @@ const aiBibliotek: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const skabelonloesning: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Fælles Skabelonløsning',
+    items: [
+      { text: 'Overview', link: '/projects/skabelonloesning/' },
+      { text: 'Estimeringsnotat', link: '/projects/skabelonloesning/estimeringsnotat' },
+      { text: 'Interactive Mocks', link: '/projects/skabelonloesning/mocks' },
+    ],
+  },
+]
+
 const designSystem: DefaultTheme.SidebarItem[] = [
   {
     text: 'Design System',
@@ -146,6 +157,7 @@ export function sidebar(): DefaultTheme.Sidebar {
     '/projects/roboway/': roboway,
     '/projects/dansk-viden-til-dansk-ai/': danskVidenTilDanskAi,
     '/projects/ai-bibliotek/': aiBibliotek,
+    '/projects/skabelonloesning/': skabelonloesning,
     '/projects/design-system/': designSystem,
   }
 }

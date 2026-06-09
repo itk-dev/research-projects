@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Fælles Skabelonløsning Project
+- Analysis and proposal for an open source alternative to DynamicTemplate (DSG Scenario 3) — built on open standards (ODF/DOCX/PDF) and shareable via OS2, addressing Aarhus Kommune's 2.464 templates and 10.000+ phrases
+- Report (`index.md`) with background, eight core components, a Mermaid architecture diagram, open-standards landscape, the team's two caveats (glidende overgang + komplekse skabeloner) as a warning callout, open questions and success criteria
+- Estimeringsnotat with a phased hour estimate (Fase 0 afklaring → 1 POC → 2 MVP → 3 fuld løsning), a dedicated Claude Code-acceleration section explaining where the estimate is reduced (and where it is not), and a drift/economics note
+- Interactive admin-interface mock (`docs/public/projects/skabelonloesning/mocks/index.html`) visualising skabelonregister, frasebibliotek, a template detail with kolofon data and a complex guided input-flow (macro replacement), and a simulated dokumentmotor preview — design-system opt-in, client-side only
+
 ### Changed — Whitelisted municipality sign-up (ai-bibliotek)
 - Sign-up's "Myndighed eller organisation" field is now a select limited to whitelisted municipalities, and registration enforces that the email domain matches the selected municipality's domain (shared `MUNICIPALITIES` list in `auth.js`)
 - Documented the intended access model in `index.md`: whitelisted email domains, account verification via email link on sign-up, and a per-domain admin who can delete and promote users (these remain design intent — the `localStorage` mock does not implement them)

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fælles Skabelonløsning – administrationsgrænseflade (prototype)</title>
+  <link rel="stylesheet" href="/research-projects/design-system/v1/index.css" />
+  <link rel="stylesheet" href="/research-projects/design-system/v1/mock-banner.css" />
+  <script src="/research-projects/design-system/v1/mock-banner.js" defer
+          data-banner-text="MOCK — administrationsgrænseflade, ikke det færdige produkt."></script>
+  <style>
+    /* Layout-tillæg oven på design-systemet. Alt scopes under .ds. */
+    .ds body, body { margin: 0; }
+    .app { min-height: 100vh; display: flex; flex-direction: column; }
+    .topbar {
+      display: flex; align-items: center; gap: var(--space-4, 1rem);
+      padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--color-border, #e2e8e8);
+      background: var(--color-surface, #fff);
+    }
+    .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+      background: var(--color-primary, #00858f); color: #fff; font-size: 0.8rem; font-weight: 700;
+    }
+    .brand-sub { font-weight: 400; font-size: 0.8rem; opacity: 0.65; }
+    .layout { display: flex; flex: 1; min-height: 0; }
+    .nav { width: 230px; flex-shrink: 0; padding: 1rem 0.75rem; border-right: 1px solid var(--color-border, #e2e8e8); }
+    .nav button {
+      display: flex; align-items: center; gap: 0.6rem; width: 100%; text-align: left;
+      padding: 0.55rem 0.75rem; border: 0; background: none; border-radius: 8px; cursor: pointer;
+      font: inherit; color: inherit; margin-bottom: 0.15rem;
+    }
+    .nav button:hover { background: var(--color-surface-2, #f1f6f6); }
+    .nav button.is-active { background: var(--color-primary, #00858f); color: #fff; }
+    .nav .nav-heading { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.55; padding: 0.75rem 0.75rem 0.35rem; }
+    .main { flex: 1; min-width: 0; padding: 1.5rem 2rem; overflow: auto; }
+    .page-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .page-head h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+    .page-head p { margin: 0; opacity: 0.7; max-width: 60ch; }
+    .toolbar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; align-items: center; }
+    .toolbar .input, .toolbar .select { max-width: 240px; }
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .clickable { cursor: pointer; }
+    .clickable:hover { background: var(--color-surface-2, #f1f6f6); }
+    .muted { opacity: 0.6; }
+    .detail-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 900px) { .detail-grid { grid-template-columns: 1fr; } .nav { display: none; } }
+    .kv { display: grid; grid-template-columns: minmax(120px, auto) 1fr; gap: 0.4rem 1rem; font-size: 0.92rem; }
+    .kv dt { opacity: 0.6; }
+    .kv dd { margin: 0; }
+    .doc-preview {
+      background: #fff; border: 1px solid var(--color-border, #e2e8e8); border-radius: 8px;
+      padding: 1.5rem 1.75rem; font-size: 0.9rem; line-height: 1.5; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .doc-preview h4 { margin: 0 0 0.2rem; }
+    .doc-preview .colophon { font-size: 0.78rem; opacity: 0.7; border-bottom: 1px solid var(--color-border,#e2e8e8); padding-bottom: 0.6rem; margin-bottom: 0.8rem; }
+    .ph { background: #fff6cc; border-radius: 3px; padding: 0 2px; }
+    .field-block { padding: 0.85rem 1rem; border: 1px solid var(--color-border, #e2e8e8); border-radius: 8px; margin-bottom: 0.75rem; }
+    .field-block .field-meta { font-size: 0.78rem; opacity: 0.6; margin-bottom: 0.35rem; }
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #cbd5d5; border-top-color: var(--color-primary, #00858f); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -3px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .hidden { display: none !important; }
+    .back-link { background: none; border: 0; color: var(--color-primary, #00858f); cursor: pointer; font: inherit; padding: 0; margin-bottom: 0.75rem; }
+  </style>
+</head>
+<body class="ds">
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark">SK</span>
+        <span>Skabelonløsning<br /><span class="brand-sub">administration · prototype</span></span>
+      </div>
+    </div>
+
+    <div class="layout">
+      <nav class="nav" id="nav">
+        <div class="nav-heading">Forvaltning</div>
+        <button data-view="register" class="is-active">📄 Skabelonregister</button>
+        <button data-view="fraser">🧩 Frasebibliotek</button>
+        <div class="nav-heading">Drift</div>
+        <button data-view="motor">⚙️ Dokumentmotor</button>
+        <button data-view="governance">🛡️ Governance &amp; log</button>
+      </nav>
+
+      <main class="main" id="main"><!-- views injected here --></main>
+    </div>
+  </div>
+
+  <script>
+    // --- Illustrativt data (lorem-agtigt men realistisk). Ingen backend. ---
+    const afdelinger = ["Borgmesterens Afdeling", "Sociale Forhold og Beskæftigelse", "Sundhed og Omsorg", "Børn og Unge", "Teknik og Miljø", "Kultur og Borgerservice"];
+
+    const skabeloner = [
+      { id: "ak-notat", navn: "AK notat", frase: "Notat-frase", ejer: "ITK Sekretariatet", afdeling: "Borgmesterens Afdeling", version: "4.2", status: "publiceret", opdateret: "2026-05-21", kompleks: false,
+        beskrivelse: "Standardnotat med kolofon, modtagerfelt og fritekst. Bruges på tværs af afdelinger." },
+      { id: "forklaede", navn: "Forklæde Chefmøde", frase: "Chefmøde-frase", ejer: "Anya B. Vinstrup", afdeling: "Borgmesterens Afdeling", version: "2.0", status: "publiceret", opdateret: "2026-04-30", kompleks: true,
+        beskrivelse: "Forklæde til chefmøde med indstilling, sagsresumé og strukturerede afsnit. Bruger guidet input-flow." },
+      { id: "temadroeftelse", navn: "Temadrøftelse", frase: "Temadrøftelses-frase", ejer: "Anya B. Vinstrup", afdeling: "Borgmesterens Afdeling", version: "1.3", status: "kladde", opdateret: "2026-06-02", kompleks: true,
+        beskrivelse: "Drejebog for temadrøftelse på magistratsmøde. Gentagelige punkt-sektioner." },
+      { id: "afgoerelse", navn: "Afgørelsesbrev", frase: "Standard afgørelse", ejer: "Ydelsescenter", afdeling: "Sociale Forhold og Beskæftigelse", version: "7.1", status: "publiceret", opdateret: "2026-03-12", kompleks: false,
+        beskrivelse: "Borgerrettet afgørelse med CPR-opslag og klagevejledning." },
+      { id: "indkaldelse", navn: "Indkaldelse til samtale", frase: "Jobsamtale", ejer: "Jobcenter", afdeling: "Sociale Forhold og Beskæftigelse", version: "3.4", status: "udløbet", opdateret: "2025-11-08", kompleks: false,
+        beskrivelse: "Indkaldelse med dato/tid-felter. Erstattet af ny version — afventer arkivering." },
+      { id: "plejeplan", navn: "Plejeplan", frase: "Cura-flet", ejer: "Visitation", afdeling: "Sundhed og Omsorg", version: "5.0", status: "publiceret", opdateret: "2026-05-29", kompleks: true,
+        beskrivelse: "Fletter data fra Cura. Betingede afsnit afhængigt af visitationstype." },
+    ];
+
+    const fraser = [
+      { navn: "Klagevejledning (almindelig)", ejer: "Juridisk Kontor", version: "2.1", adgang: "Alle afdelinger", opdateret: "2026-02-10" },
+      { navn: "Klagevejledning (Ankestyrelsen)", ejer: "Juridisk Kontor", version: "1.4", adgang: "SOB, SO", opdateret: "2026-02-10" },
+      { navn: "GDPR-fodnote", ejer: "Databeskyttelse", version: "3.0", adgang: "Alle afdelinger", opdateret: "2026-01-22" },
+      { navn: "Standard hilsen (brev)", ejer: "ITK Sekretariatet", version: "1.0", adgang: "Alle afdelinger", opdateret: "2025-09-01" },
+      { navn: "Indstillingspunkt (chefmøde)", ejer: "Anya B. Vinstrup", version: "2.2", adgang: "BA", opdateret: "2026-04-30" },
+    ];
+
+    const statusBadge = (s) => {
+      const map = { publiceret: "badge-success", kladde: "badge-warning", udløbet: "badge-danger" };
+      return `<span class="badge ${map[s] || "badge-info"}">${s}</span>`;
+    };
+
+    const main = document.getElementById("main");
+
+    // --- Skabelonregister ---
+    function renderRegister() {
+      const total = skabeloner.length;
+      const publ = skabeloner.filter(s => s.status === "publiceret").length;
+      const kladder = skabeloner.filter(s => s.status === "kladde").length;
+      main.innerHTML = `
+        <div class="page-head">
+          <div>
+            <h1>Skabelonregister</h1>
+            <p>Versionering, ejerskab, gyldighed og publicering. Illustrativt udsnit — i drift ca. 2.464 skabeloner.</p>
+          </div>
+          <button class="btn btn-primary">+ Ny skabelon</button>
+        </div>
+        <div class="stat-row">
+          <div class="stat card card-soft"><div class="stat-value">${total}</div><div class="stat-label">Skabeloner (udsnit)</div></div>
+          <div class="stat card card-soft"><div class="stat-value">${publ}</div><div class="stat-label">Publiceret</div></div>
+          <div class="stat card card-soft"><div class="stat-value">${kladder}</div><div class="stat-label">Kladder</div></div>
+          <div class="stat card card-soft"><div class="stat-value">10.213</div><div class="stat-label">Fraser i alt</div></div>
+        </div>
+        <div class="toolbar">
+          <input class="input" id="reg-search" placeholder="Søg i skabeloner…" />
+          <select class="select" id="reg-afd">
+            <option value="">Alle afdelinger</option>
+            ${afdelinger.map(a => `<option>${a}</option>`).join("")}
+          </select>
+          <select class="select" id="reg-status">
+            <option value="">Alle statusser</option>
+            <option>publiceret</option><option>kladde</option><option>udløbet</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="table table-hover table-zebra">
+            <thead><tr><th>Skabelon</th><th>Afdeling</th><th>Ejer</th><th>Version</th><th>Status</th><th>Opdateret</th></tr></thead>
+            <tbody id="reg-rows"></tbody>
+          </table>
+        </div>`;
+      const rows = () => {
+        const q = (document.getElementById("reg-search").value || "").toLowerCase();
+        const afd = document.getElementById("reg-afd").value;
+        const st = document.getElementById("reg-status").value;
+        const tbody = document.getElementById("reg-rows");
+        tbody.innerHTML = skabeloner
+          .filter(s => (!q || s.navn.toLowerCase().includes(q) || s.ejer.toLowerCase().includes(q)) && (!afd || s.afdeling === afd) && (!st || s.status === st))
+          .map(s => `<tr class="clickable" data-id="${s.id}">
+            <td><strong>${s.navn}</strong> ${s.kompleks ? '<span class="badge badge-info">kompleks</span>' : ''}<br /><span class="muted" style="font-size:0.82rem">${s.frase}</span></td>
+            <td>${s.afdeling}</td><td>${s.ejer}</td><td>${s.version}</td><td>${statusBadge(s.status)}</td><td>${s.opdateret}</td>
+          </tr>`).join("") || `<tr><td colspan="6" class="muted">Ingen skabeloner matcher.</td></tr>`;
+        tbody.querySelectorAll("tr[data-id]").forEach(tr => tr.onclick = () => renderDetail(tr.dataset.id));
+      };
+      ["reg-search", "reg-afd", "reg-status"].forEach(id => document.getElementById(id).addEventListener("input", rows));
+      rows();
+    }
+
+    // --- Skabelon-detalje ---
+    function renderDetail(id) {
+      const s = skabeloner.find(x => x.id === id);
+      main.innerHTML = `
+        <button class="back-link" id="back">← Tilbage til register</button>
+        <div class="page-head">
+          <div>
+            <h1>${s.navn} ${statusBadge(s.status)}</h1>
+            <p>${s.beskrivelse}</p>
+          </div>
+          <div class="toolbar" style="margin:0">
+            <button class="btn btn-secondary">Rediger</button>
+            <button class="btn btn-primary" id="to-motor">Test &amp; generér</button>
+          </div>
+        </div>
+        <div class="detail-grid">
+          <div class="card card-bordered">
+            <div class="card-header"><strong>Indhold &amp; felter</strong></div>
+            <div class="doc-preview">
+              <div class="colophon">
+                Borgmesterens Afdeling · Aarhus Kommune · ITK Sekretariatet<br />
+                Sag: <span class="ph">{{DokID fra GO}}</span> · Sagsbehandler: <span class="ph">{{sagsbehandler}}</span>
+              </div>
+              <h4>${s.navn}</h4>
+              <p>Til: <span class="ph">{{modtager}}</span> · Til <span class="ph">{{handling}}</span></p>
+              <p>Notatets overskrift: <span class="ph">{{overskrift}}</span></p>
+              <p class="muted">Brødtekst med flettede placeholders og indsatte fraser…</p>
+            </div>
+            ${s.kompleks ? `
+            <div class="card-header" style="margin-top:1rem"><strong>Guidet input-flow</strong> <span class="badge badge-info">makro-erstatning</span></div>
+            <p class="muted" style="font-size:0.85rem">Denne skabelon kræver mere end simple placeholders. Brugeren guides gennem felterne ved oprettelse — svarer til de Word-makroer, der bruges i dag.</p>
+            <div class="field-block">
+              <div class="field-meta">Felt 1 · valg</div>
+              <label class="form-label">Mødetype</label>
+              <select class="select"><option>Chefmøde</option><option>Borgmestermøde</option><option>Direktørmøde</option></select>
+            </div>
+            <div class="field-block">
+              <div class="field-meta">Felt 2 · betinget (vises kun ved "indstilling")</div>
+              <label class="form-label">Det indstilles, at…</label>
+              <textarea class="textarea" rows="2" placeholder="Kort, præcist indstillingspunkt"></textarea>
+            </div>
+            <div class="field-block">
+              <div class="field-meta">Felt 3 · gentagelig sektion</div>
+              <label class="form-label">Sagsresumé — budskaber (2–4)</label>
+              <input class="input" placeholder="Budskab 1" style="margin-bottom:0.4rem" />
+              <input class="input" placeholder="Budskab 2" />
+              <button class="btn btn-ghost btn-sm" style="margin-top:0.4rem">+ Tilføj budskab</button>
+            </div>` : `
+            <div class="card-header" style="margin-top:1rem"><strong>Placeholders</strong></div>
+            <p class="muted" style="font-size:0.85rem">Simpel substitution — felterne flettes direkte fra data.</p>
+            <div class="kv">
+              <dt>{{modtager}}</dt><dd>Modtager af notatet</dd>
+              <dt>{{sagsbehandler}}</dt><dd>Fra organisationsdata</dd>
+              <dt>{{DokID}}</dt><dd>Fra GetOrganized</dd>
+            </div>`}
+          </div>
+          <div class="card card-bordered">
+            <div class="card-header"><strong>Metadata</strong></div>
+            <dl class="kv">
+              <dt>Version</dt><dd>${s.version}</dd>
+              <dt>Status</dt><dd>${statusBadge(s.status)}</dd>
+              <dt>Ejer</dt><dd>${s.ejer}</dd>
+              <dt>Afdeling</dt><dd>${s.afdeling}</dd>
+              <dt>Tilknyttet frase</dt><dd>${s.frase}</dd>
+              <dt>Opdateret</dt><dd>${s.opdateret}</dd>
+              <dt>Output</dt><dd>DOCX · ODT · PDF</dd>
+            </dl>
+            <div class="card-footer">
+              <button class="btn btn-secondary btn-sm">Versionshistorik</button>
+              <button class="btn btn-secondary btn-sm">Rettigheder</button>
+            </div>
+          </div>
+        </div>`;
+      document.getElementById("back").onclick = renderRegister;
+      document.getElementById("to-motor").onclick = () => switchView("motor", s.id);
+    }
+
+    // --- Frasebibliotek ---
+    function renderFraser() {
+      main.innerHTML = `
+        <div class="page-head">
+          <div><h1>Frasebibliotek</h1><p>Centrale tekstblokke med fagligt ejerskab, versionering og adgangsstyring. Genbruges på tværs af skabeloner.</p></div>
+          <button class="btn btn-primary">+ Ny frase</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table table-hover table-zebra">
+            <thead><tr><th>Frase</th><th>Fagligt ejerskab</th><th>Version</th><th>Adgang</th><th>Opdateret</th></tr></thead>
+            <tbody>${fraser.map(f => `<tr><td><strong>${f.navn}</strong></td><td>${f.ejer}</td><td>${f.version}</td><td><span class="badge badge-info">${f.adgang}</span></td><td>${f.opdateret}</td></tr>`).join("")}</tbody>
+          </table>
+        </div>`;
+    }
+
+    // --- Dokumentmotor ---
+    function renderMotor(preId) {
+      const opts = skabeloner.map(s => `<option value="${s.id}" ${s.id === preId ? "selected" : ""}>${s.navn}</option>`).join("");
+      main.innerHTML = `
+        <div class="page-head"><div><h1>Dokumentmotor</h1><p>Udfyld en skabelon med testdata og generér output. I prototypen er genereringen simuleret.</p></div></div>
+        <div class="detail-grid">
+          <div class="card card-bordered">
+            <div class="card-header"><strong>Testkørsel</strong></div>
+            <div class="form-field"><label class="form-label">Skabelon</label><select class="select" id="m-tpl">${opts}</select></div>
+            <div class="form-field"><label class="form-label">Testdata (JSON)</label>
+              <textarea class="textarea" id="m-json" rows="7">{
+  "modtager": "Magistraten",
+  "sagsbehandler": "Anya B. Vinstrup",
+  "DokID": "GO-2026-018472",
+  "overskrift": "Fælles skabelonløsning"
+}</textarea>
+            </div>
+            <div class="toolbar" style="margin:0">
+              <button class="btn btn-primary" id="gen-docx">Generér DOCX</button>
+              <button class="btn btn-secondary" id="gen-pdf">Generér PDF</button>
+            </div>
+          </div>
+          <div class="card card-bordered">
+            <div class="card-header"><strong>Resultat</strong></div>
+            <div id="m-result" class="muted">Ingen kørsel endnu.</div>
+          </div>
+        </div>`;
+      const run = (fmt) => {
+        const r = document.getElementById("m-result");
+        r.classList.remove("muted");
+        r.innerHTML = `<span class="spinner"></span> Fletter data og genererer ${fmt}…`;
+        setTimeout(() => {
+          const tpl = skabeloner.find(s => s.id === document.getElementById("m-tpl").value);
+          r.innerHTML = `<div class="alert alert-success" style="margin-bottom:0.75rem">✓ <strong>${tpl.navn}.${fmt.toLowerCase()}</strong> genereret (simuleret).</div>
+            <div class="kv"><dt>Skabelon</dt><dd>${tpl.navn} v${tpl.version}</dd><dt>Format</dt><dd>${fmt}</dd><dt>Motor</dt><dd>docxtemplater / WeasyPrint</dd></div>
+            <div class="card-footer" style="margin-top:0.75rem"><button class="btn btn-secondary btn-sm">Download</button><button class="btn btn-ghost btn-sm">Arkivér i ESDH</button></div>`;
+        }, 900);
+      };
+      document.getElementById("gen-docx").onclick = () => run("DOCX");
+      document.getElementById("gen-pdf").onclick = () => run("PDF");
+    }
+
+    // --- Governance ---
+    function renderGovernance() {
+      const log = [
+        ["2026-06-02 09:14", "Anya B. Vinstrup", "Oprettede kladde", "Temadrøftelse v1.3"],
+        ["2026-05-29 15:40", "Visitation", "Publicerede", "Plejeplan v5.0"],
+        ["2026-05-21 11:02", "ITK Sekretariatet", "Ny version", "AK notat v4.2"],
+        ["2026-05-21 10:58", "Juridisk Kontor", "Redigerede frase", "Klagevejledning (almindelig)"],
+        ["2025-11-08 13:20", "Jobcenter", "Markeret udløbet", "Indkaldelse til samtale v3.4"],
+      ];
+      main.innerHTML = `
+        <div class="page-head"><div><h1>Governance &amp; log</h1><p>Sporbarhed på ændringer, publicering og rettigheder. Grundlag for kvalitetssikring og deling via OS2.</p></div></div>
+        <div class="alert alert-info" style="margin-bottom:1.25rem">Delte skabeloner og fraser skal reviewes før publicering — fagligt ejerskab, rettigheder og korrekthed. Prototypen viser logningen, ikke selve review-flowet.</div>
+        <div class="table-wrap"><table class="table table-zebra">
+          <thead><tr><th>Tidspunkt</th><th>Aktør</th><th>Handling</th><th>Objekt</th></tr></thead>
+          <tbody>${log.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join("")}</tbody>
+        </table></div>`;
+    }
+
+    // --- Router ---
+    const views = { register: renderRegister, fraser: renderFraser, motor: renderMotor, governance: renderGovernance };
+    function switchView(name, arg) {
+      document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("is-active", b.dataset.view === name));
+      (views[name] || renderRegister)(arg);
+      main.scrollTop = 0;
+    }
+    document.querySelectorAll("#nav button").forEach(b => b.onclick = () => switchView(b.dataset.view));
+    renderRegister();
+  </script>
+</body>
+</html>

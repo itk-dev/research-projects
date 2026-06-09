@@ -50,4 +50,8 @@ features:
     details: Fælles bibliotek hvor danske myndigheder kan dele og hjemtage AI-assistenter — med katalog, søgning, modelkort, vidensopskrift og versioneret JSON-eksport, så lokale use cases kan skaleres nationalt.
     link: /projects/ai-bibliotek/
     linkText: View project
+  - title: Fælles Skabelonløsning
+    details: Analyse og oplæg til et open source-alternativ til DynamicTemplate — bygget på åbne standarder og delbart via OS2. Med løsningsbeskrivelse, faseopdelt timeestimat og en interaktiv visualisering af administrationsgrænsefladen.
+    link: /projects/skabelonloesning/
+    linkText: View project
 ---
