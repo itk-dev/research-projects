@@ -6,7 +6,7 @@
 **Projekt:** Open source-alternativ til DynamicTemplate (DSG Scenarie 3)
 **Fase:** Analyse / oplæg
 
-::: info Bemærkning
+::: warning Bemærkning
 Notatet er bevidst holdt på et overordnet niveau. Det er et oplæg, ikke et tilbud — formålet er at give en størrelsesorden og efterlade manøvrerum i den videre proces. Estimaterne er grove og afhænger af de afklaringer, der er beskrevet i [hovednotatet](./). Scenarie 3 er, jf. DSG-indstillingen, det scenarie med størst usikkerhed.
 :::
 

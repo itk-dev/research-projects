@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — Design system: flatter, white-first look (v1)
+- Surfaces go white: `--ds-bg-page` and `--ds-bg-subtle` are now `#ffffff`, with a light `--ds-bg-muted` (`#f4f6f6`) reserved for hover/disabled/neutral fills
+- Subtler hairline borders (`--ds-border-default` `#e3e8e8`, `--ds-border-subtle` `#edf0f0`) and tighter radii (`md` 4→3px, `lg` 6→4px, `xl` 10→5px, `2xl` 14→6px)
+- Tables are now flat: no header fill, no zebra striping — horizontal rules only, with a slightly stronger border under the header row
+- Button/ghost hover and disabled-input/neutral-alert fills repointed from the now-white `--ds-bg-subtle` to `--ds-bg-muted` so they stay visible; `card-elevated` keeps its opt-in shadow
+- Updated `tokens.md` reference table and radius scale to match
+
 ### Added — Fælles Skabelonløsning Project
 - Analysis and proposal for an open source alternative to DynamicTemplate (DSG Scenario 3) — built on open standards (ODF/DOCX/PDF) and shareable via OS2, addressing Aarhus Kommune's 2.464 templates and 10.000+ phrases
 - Report (`index.md`) with background, eight core components, a Mermaid architecture diagram, open-standards landscape, the team's two caveats (glidende overgang + komplekse skabeloner) as a warning callout, open questions and success criteria

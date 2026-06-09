@@ -124,9 +124,9 @@ Se [Estimeringsnotat](./estimeringsnotat) for timeestimat, tidshorisont og forbe
 
 Den interaktive prototype visualiserer **administrationsgrænsefladen** — den del fagredaktører og administratorer arbejder i. Den er klientside-only (ingen backend) og et visuelt diskussionsgrundlag, ikke en færdig løsning. Den viser:
 
-- **Skabelonregister** — liste over skabeloner med version, ejer, magistratsafdeling og status (kladde / publiceret / udløbet), med søgning og filtre. Bruger reelle Aarhus-eksempler (AK notat, Forklæde Chefmøde, Temadrøftelse).
+- **Skabelonregister** — liste over skabeloner med version, ejer, afdeling og status (kladde / publiceret / udløbet), med søgning og filtre. Indholdet er fiktivt (eksempelafdelinger og generiske dokumenttyper), kun til illustration.
 - **Frasebibliotek** — centrale tekstblokke med fagligt ejerskab, version og adgang.
-- **Skabelon-detalje og redigering** — placeholders, kolofon-data (afsender, sagsbehandler, DokID fra GetOrganized) og et eksempel på et **komplekst input-flow**, der adresserer makro-behovet.
+- **Skabelon-detalje og redigering** — placeholders, kolofon-data (afsender, sagsbehandler, DokID fra ESDH) og et eksempel på et **komplekst input-flow**, der adresserer makro-behovet.
 - **Dokumentmotor-preview** — udfyld med testdata og generér DOCX/PDF (simuleret).
 
 ## Spørgsmål der skal afklares

@@ -27,8 +27,8 @@
   white-space: nowrap;
 }
 
-.ds .btn:hover { background: var(--ds-bg-subtle); }
-.ds .btn:active { background: var(--ds-bg-muted); }
+.ds .btn:hover { background: var(--ds-bg-muted); }
+.ds .btn:active { background: var(--ds-gray-200); }
 
 .ds .btn:disabled,
 .ds .btn[aria-disabled="true"] {
@@ -62,7 +62,7 @@
   background: transparent;
   border-color: transparent;
 }
-.ds .btn-ghost:hover { background: var(--ds-bg-subtle); }
+.ds .btn-ghost:hover { background: var(--ds-bg-muted); }
 
 .ds .btn-danger {
   color: var(--ds-text-inverse);
@@ -173,7 +173,7 @@
 .ds .input:disabled,
 .ds .select:disabled,
 .ds .textarea:disabled {
-  background: var(--ds-bg-subtle);
+  background: var(--ds-bg-muted);
   color: var(--ds-text-muted);
   cursor: not-allowed;
 }
@@ -202,10 +202,13 @@
   border-bottom: 1px solid var(--ds-border-subtle);
 }
 
+/* Flat tables: no fills, horizontal rules only. The header is defined by a
+   slightly stronger bottom border rather than a background. */
 .ds .table th {
   font-weight: var(--ds-fw-semibold);
   color: var(--ds-text-secondary);
-  background: var(--ds-bg-subtle);
+  background: transparent;
+  border-bottom: 1px solid var(--ds-border-default);
   position: sticky;
   top: 0;
   z-index: 1;
@@ -213,9 +216,9 @@
 
 .ds .table tbody tr:last-child td { border-bottom: 0; }
 
-.ds .table-zebra tbody tr:nth-child(even) { background: var(--ds-bg-subtle); }
+.ds .table-zebra tbody tr:nth-child(even) { background: transparent; }
 
-.ds .table-hover tbody tr:hover { background: var(--ds-color-primary-soft); }
+.ds .table-hover tbody tr:hover { background: var(--ds-bg-muted); }
 
 /* -------------------------------------------------------------------------- */
 /* Modal                                                                      */
@@ -376,7 +379,7 @@
   padding: var(--ds-space-3) var(--ds-space-4);
   border-radius: var(--ds-radius-md);
   border-left: 4px solid var(--ds-border-default);
-  background: var(--ds-bg-subtle);
+  background: var(--ds-bg-muted);
   font-size: var(--ds-fs-sm);
 }
 

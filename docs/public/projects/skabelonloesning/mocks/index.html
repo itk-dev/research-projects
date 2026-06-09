@@ -13,24 +13,24 @@
     .ds body, body { margin: 0; }
     .app { min-height: 100vh; display: flex; flex-direction: column; }
     .topbar {
-      display: flex; align-items: center; gap: var(--space-4, 1rem);
-      padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--color-border, #e2e8e8);
-      background: var(--color-surface, #fff);
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--ds-border-default, #e3e8e8);
+      background: #fff;
     }
     .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; }
     .brand-mark {
-      width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+      width: 34px; height: 34px; border-radius: 4px; display: grid; place-items: center;
       background: var(--color-primary, #00858f); color: #fff; font-size: 0.8rem; font-weight: 700;
     }
     .brand-sub { font-weight: 400; font-size: 0.8rem; opacity: 0.65; }
     .layout { display: flex; flex: 1; min-height: 0; }
-    .nav { width: 230px; flex-shrink: 0; padding: 1rem 0.75rem; border-right: 1px solid var(--color-border, #e2e8e8); }
+    .nav { width: 230px; flex-shrink: 0; padding: 1rem 0.75rem; border-right: 1px solid var(--ds-border-default, #e3e8e8); }
     .nav button {
       display: flex; align-items: center; gap: 0.6rem; width: 100%; text-align: left;
-      padding: 0.55rem 0.75rem; border: 0; background: none; border-radius: 8px; cursor: pointer;
+      padding: 0.55rem 0.75rem; border: 0; background: none; border-radius: 4px; cursor: pointer;
       font: inherit; color: inherit; margin-bottom: 0.15rem;
     }
-    .nav button:hover { background: var(--color-surface-2, #f1f6f6); }
+    .nav button:hover { background: var(--ds-bg-muted, #f4f6f6); }
     .nav button.is-active { background: var(--color-primary, #00858f); color: #fff; }
     .nav .nav-heading { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.55; padding: 0.75rem 0.75rem 0.35rem; }
     .main { flex: 1; min-width: 0; padding: 1.5rem 2rem; overflow: auto; }
@@ -41,7 +41,7 @@
     .toolbar .input, .toolbar .select { max-width: 240px; }
     .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
     .clickable { cursor: pointer; }
-    .clickable:hover { background: var(--color-surface-2, #f1f6f6); }
+    .clickable:hover { background: var(--ds-bg-muted, #f4f6f6); }
     .muted { opacity: 0.6; }
     .detail-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.5rem; align-items: start; }
     @media (max-width: 900px) { .detail-grid { grid-template-columns: 1fr; } .nav { display: none; } }
@@ -49,18 +49,21 @@
     .kv dt { opacity: 0.6; }
     .kv dd { margin: 0; }
     .doc-preview {
-      background: #fff; border: 1px solid var(--color-border, #e2e8e8); border-radius: 8px;
-      padding: 1.5rem 1.75rem; font-size: 0.9rem; line-height: 1.5; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      background: #fff; border: 1px solid var(--ds-border-subtle, #edf0f0); border-radius: 4px;
+      padding: 1.5rem 1.75rem; font-size: 0.9rem; line-height: 1.5;
     }
     .doc-preview h4 { margin: 0 0 0.2rem; }
-    .doc-preview .colophon { font-size: 0.78rem; opacity: 0.7; border-bottom: 1px solid var(--color-border,#e2e8e8); padding-bottom: 0.6rem; margin-bottom: 0.8rem; }
-    .ph { background: #fff6cc; border-radius: 3px; padding: 0 2px; }
-    .field-block { padding: 0.85rem 1rem; border: 1px solid var(--color-border, #e2e8e8); border-radius: 8px; margin-bottom: 0.75rem; }
+    .doc-preview .colophon { font-size: 0.78rem; opacity: 0.7; border-bottom: 1px solid var(--ds-border-subtle, #edf0f0); padding-bottom: 0.6rem; margin-bottom: 0.8rem; }
+    .ph { background: var(--ds-color-primary-soft, #e5f2f4); color: var(--ds-teal-700, #036672); border-radius: 2px; padding: 0 3px; }
+    .field-block { padding: 0.85rem 1rem; border: 1px solid var(--ds-border-subtle, #edf0f0); border-radius: 4px; margin-bottom: 0.75rem; }
     .field-block .field-meta { font-size: 0.78rem; opacity: 0.6; margin-bottom: 0.35rem; }
     .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #cbd5d5; border-top-color: var(--color-primary, #00858f); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -3px; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .hidden { display: none !important; }
-    .back-link { background: none; border: 0; color: var(--color-primary, #00858f); cursor: pointer; font: inherit; padding: 0; margin-bottom: 0.75rem; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; background: none; border: 0; color: var(--color-primary, #00858f); cursor: pointer; font: inherit; padding: 0; margin-bottom: 0.75rem; }
+    .icon-flip { transform: scaleX(-1); }
+    .alert { display: flex; align-items: center; gap: 0.5rem; }
+    .nav button .ds-icon { flex-shrink: 0; }
   </style>
 </head>
 <body class="ds">
@@ -75,11 +78,11 @@
     <div class="layout">
       <nav class="nav" id="nav">
         <div class="nav-heading">Forvaltning</div>
-        <button data-view="register" class="is-active">📄 Skabelonregister</button>
-        <button data-view="fraser">🧩 Frasebibliotek</button>
+        <button data-view="register" class="is-active"><svg class="ds-icon" aria-hidden="true"><use href="/research-projects/design-system/v1/icons.svg#folder"/></svg> Skabelonregister</button>
+        <button data-view="fraser"><svg class="ds-icon" aria-hidden="true"><use href="/research-projects/design-system/v1/icons.svg#inbox"/></svg> Frasebibliotek</button>
         <div class="nav-heading">Drift</div>
-        <button data-view="motor">⚙️ Dokumentmotor</button>
-        <button data-view="governance">🛡️ Governance &amp; log</button>
+        <button data-view="motor"><svg class="ds-icon" aria-hidden="true"><use href="/research-projects/design-system/v1/icons.svg#settings"/></svg> Dokumentmotor</button>
+        <button data-view="governance"><svg class="ds-icon" aria-hidden="true"><use href="/research-projects/design-system/v1/icons.svg#check"/></svg> Governance &amp; log</button>
       </nav>
 
       <main class="main" id="main"><!-- views injected here --></main>
@@ -88,29 +91,31 @@
 
   <script>
     // --- Illustrativt data (lorem-agtigt men realistisk). Ingen backend. ---
-    const afdelinger = ["Borgmesterens Afdeling", "Sociale Forhold og Beskæftigelse", "Sundhed og Omsorg", "Børn og Unge", "Teknik og Miljø", "Kultur og Borgerservice"];
+    // Alt indhold er fiktivt og kun til illustration — ingen reelle navne,
+    // afdelinger eller medarbejdere.
+    const afdelinger = ["Eksempelafdeling A", "Eksempelafdeling B", "Eksempelafdeling C", "Eksempelafdeling D"];
 
     const skabeloner = [
-      { id: "ak-notat", navn: "AK notat", frase: "Notat-frase", ejer: "ITK Sekretariatet", afdeling: "Borgmesterens Afdeling", version: "4.2", status: "publiceret", opdateret: "2026-05-21", kompleks: false,
+      { id: "notat", navn: "Standardnotat", frase: "Notat-frase", ejer: "Sekretariat", afdeling: "Eksempelafdeling A", version: "4.2", status: "publiceret", opdateret: "2026-05-21", kompleks: false,
         beskrivelse: "Standardnotat med kolofon, modtagerfelt og fritekst. Bruges på tværs af afdelinger." },
-      { id: "forklaede", navn: "Forklæde Chefmøde", frase: "Chefmøde-frase", ejer: "Anya B. Vinstrup", afdeling: "Borgmesterens Afdeling", version: "2.0", status: "publiceret", opdateret: "2026-04-30", kompleks: true,
-        beskrivelse: "Forklæde til chefmøde med indstilling, sagsresumé og strukturerede afsnit. Bruger guidet input-flow." },
-      { id: "temadroeftelse", navn: "Temadrøftelse", frase: "Temadrøftelses-frase", ejer: "Anya B. Vinstrup", afdeling: "Borgmesterens Afdeling", version: "1.3", status: "kladde", opdateret: "2026-06-02", kompleks: true,
-        beskrivelse: "Drejebog for temadrøftelse på magistratsmøde. Gentagelige punkt-sektioner." },
-      { id: "afgoerelse", navn: "Afgørelsesbrev", frase: "Standard afgørelse", ejer: "Ydelsescenter", afdeling: "Sociale Forhold og Beskæftigelse", version: "7.1", status: "publiceret", opdateret: "2026-03-12", kompleks: false,
+      { id: "forklaede", navn: "Forklæde til møde", frase: "Møde-frase", ejer: "Eksempelteam 1", afdeling: "Eksempelafdeling A", version: "2.0", status: "publiceret", opdateret: "2026-04-30", kompleks: true,
+        beskrivelse: "Forklæde til ledelsesmøde med indstilling, sagsresumé og strukturerede afsnit. Bruger guidet input-flow." },
+      { id: "temadroeftelse", navn: "Temadrøftelse", frase: "Temadrøftelses-frase", ejer: "Eksempelteam 1", afdeling: "Eksempelafdeling A", version: "1.3", status: "kladde", opdateret: "2026-06-02", kompleks: true,
+        beskrivelse: "Drejebog for temadrøftelse på ledelsesmøde. Gentagelige punkt-sektioner." },
+      { id: "afgoerelse", navn: "Afgørelsesbrev", frase: "Standard afgørelse", ejer: "Eksempelteam 2", afdeling: "Eksempelafdeling B", version: "7.1", status: "publiceret", opdateret: "2026-03-12", kompleks: false,
         beskrivelse: "Borgerrettet afgørelse med CPR-opslag og klagevejledning." },
-      { id: "indkaldelse", navn: "Indkaldelse til samtale", frase: "Jobsamtale", ejer: "Jobcenter", afdeling: "Sociale Forhold og Beskæftigelse", version: "3.4", status: "udløbet", opdateret: "2025-11-08", kompleks: false,
+      { id: "indkaldelse", navn: "Indkaldelse til samtale", frase: "Samtale", ejer: "Eksempelteam 2", afdeling: "Eksempelafdeling B", version: "3.4", status: "udløbet", opdateret: "2025-11-08", kompleks: false,
         beskrivelse: "Indkaldelse med dato/tid-felter. Erstattet af ny version — afventer arkivering." },
-      { id: "plejeplan", navn: "Plejeplan", frase: "Cura-flet", ejer: "Visitation", afdeling: "Sundhed og Omsorg", version: "5.0", status: "publiceret", opdateret: "2026-05-29", kompleks: true,
-        beskrivelse: "Fletter data fra Cura. Betingede afsnit afhængigt af visitationstype." },
+      { id: "plejeplan", navn: "Plejeplan", frase: "Fagsystem-flet", ejer: "Eksempelteam 3", afdeling: "Eksempelafdeling C", version: "5.0", status: "publiceret", opdateret: "2026-05-29", kompleks: true,
+        beskrivelse: "Fletter data fra fagsystem. Betingede afsnit afhængigt af sagstype." },
     ];
 
     const fraser = [
-      { navn: "Klagevejledning (almindelig)", ejer: "Juridisk Kontor", version: "2.1", adgang: "Alle afdelinger", opdateret: "2026-02-10" },
-      { navn: "Klagevejledning (Ankestyrelsen)", ejer: "Juridisk Kontor", version: "1.4", adgang: "SOB, SO", opdateret: "2026-02-10" },
-      { navn: "GDPR-fodnote", ejer: "Databeskyttelse", version: "3.0", adgang: "Alle afdelinger", opdateret: "2026-01-22" },
-      { navn: "Standard hilsen (brev)", ejer: "ITK Sekretariatet", version: "1.0", adgang: "Alle afdelinger", opdateret: "2025-09-01" },
-      { navn: "Indstillingspunkt (chefmøde)", ejer: "Anya B. Vinstrup", version: "2.2", adgang: "BA", opdateret: "2026-04-30" },
+      { navn: "Klagevejledning (almindelig)", ejer: "Eksempelteam 4", version: "2.1", adgang: "Alle afdelinger", opdateret: "2026-02-10" },
+      { navn: "Klagevejledning (klageinstans)", ejer: "Eksempelteam 4", version: "1.4", adgang: "Afd. B, C", opdateret: "2026-02-10" },
+      { navn: "GDPR-fodnote", ejer: "Eksempelteam 5", version: "3.0", adgang: "Alle afdelinger", opdateret: "2026-01-22" },
+      { navn: "Standard hilsen (brev)", ejer: "Sekretariat", version: "1.0", adgang: "Alle afdelinger", opdateret: "2025-09-01" },
+      { navn: "Indstillingspunkt (møde)", ejer: "Eksempelteam 1", version: "2.2", adgang: "Afd. A", opdateret: "2026-04-30" },
     ];
 
     const statusBadge = (s) => {
@@ -119,6 +124,10 @@
     };
 
     const main = document.getElementById("main");
+
+    // Line-ikoner fra design-systemets sprite.
+    const icon = (id, cls = "") =>
+      `<svg class="ds-icon ${cls}" aria-hidden="true"><use href="/research-projects/design-system/v1/icons.svg#${id}"/></svg>`;
 
     // --- Skabelonregister ---
     function renderRegister() {
@@ -131,7 +140,7 @@
             <h1>Skabelonregister</h1>
             <p>Versionering, ejerskab, gyldighed og publicering. Illustrativt udsnit — i drift ca. 2.464 skabeloner.</p>
           </div>
-          <button class="btn btn-primary">+ Ny skabelon</button>
+          <button class="btn btn-primary">${icon("plus")} Ny skabelon</button>
         </div>
         <div class="stat-row">
           <div class="stat card card-soft"><div class="stat-value">${total}</div><div class="stat-label">Skabeloner (udsnit)</div></div>
@@ -177,7 +186,7 @@
     function renderDetail(id) {
       const s = skabeloner.find(x => x.id === id);
       main.innerHTML = `
-        <button class="back-link" id="back">← Tilbage til register</button>
+        <button class="back-link" id="back">${icon("arrow-right", "icon-flip")} Tilbage til register</button>
         <div class="page-head">
           <div>
             <h1>${s.navn} ${statusBadge(s.status)}</h1>
@@ -193,8 +202,8 @@
             <div class="card-header"><strong>Indhold &amp; felter</strong></div>
             <div class="doc-preview">
               <div class="colophon">
-                Borgmesterens Afdeling · Aarhus Kommune · ITK Sekretariatet<br />
-                Sag: <span class="ph">{{DokID fra GO}}</span> · Sagsbehandler: <span class="ph">{{sagsbehandler}}</span>
+                Eksempelafdeling · Eksempelkommune · Sekretariat<br />
+                Sag: <span class="ph">{{DokID fra ESDH}}</span> · Sagsbehandler: <span class="ph">{{sagsbehandler}}</span>
               </div>
               <h4>${s.navn}</h4>
               <p>Til: <span class="ph">{{modtager}}</span> · Til <span class="ph">{{handling}}</span></p>
@@ -219,14 +228,14 @@
               <label class="form-label">Sagsresumé — budskaber (2–4)</label>
               <input class="input" placeholder="Budskab 1" style="margin-bottom:0.4rem" />
               <input class="input" placeholder="Budskab 2" />
-              <button class="btn btn-ghost btn-sm" style="margin-top:0.4rem">+ Tilføj budskab</button>
+              <button class="btn btn-ghost btn-sm" style="margin-top:0.4rem">${icon("plus")} Tilføj budskab</button>
             </div>` : `
             <div class="card-header" style="margin-top:1rem"><strong>Placeholders</strong></div>
             <p class="muted" style="font-size:0.85rem">Simpel substitution — felterne flettes direkte fra data.</p>
             <div class="kv">
               <dt>{{modtager}}</dt><dd>Modtager af notatet</dd>
               <dt>{{sagsbehandler}}</dt><dd>Fra organisationsdata</dd>
-              <dt>{{DokID}}</dt><dd>Fra GetOrganized</dd>
+              <dt>{{DokID}}</dt><dd>Fra ESDH</dd>
             </div>`}
           </div>
           <div class="card card-bordered">
@@ -255,7 +264,7 @@
       main.innerHTML = `
         <div class="page-head">
           <div><h1>Frasebibliotek</h1><p>Centrale tekstblokke med fagligt ejerskab, versionering og adgangsstyring. Genbruges på tværs af skabeloner.</p></div>
-          <button class="btn btn-primary">+ Ny frase</button>
+          <button class="btn btn-primary">${icon("plus")} Ny frase</button>
         </div>
         <div class="table-wrap">
           <table class="table table-hover table-zebra">
@@ -276,9 +285,9 @@
             <div class="form-field"><label class="form-label">Skabelon</label><select class="select" id="m-tpl">${opts}</select></div>
             <div class="form-field"><label class="form-label">Testdata (JSON)</label>
               <textarea class="textarea" id="m-json" rows="7">{
-  "modtager": "Magistraten",
-  "sagsbehandler": "Anya B. Vinstrup",
-  "DokID": "GO-2026-018472",
+  "modtager": "Ledelsen",
+  "sagsbehandler": "[Navn fra organisationsdata]",
+  "DokID": "ESDH-0000-000000",
   "overskrift": "Fælles skabelonløsning"
 }</textarea>
             </div>
@@ -298,7 +307,7 @@
         r.innerHTML = `<span class="spinner"></span> Fletter data og genererer ${fmt}…`;
         setTimeout(() => {
           const tpl = skabeloner.find(s => s.id === document.getElementById("m-tpl").value);
-          r.innerHTML = `<div class="alert alert-success" style="margin-bottom:0.75rem">✓ <strong>${tpl.navn}.${fmt.toLowerCase()}</strong> genereret (simuleret).</div>
+          r.innerHTML = `<div class="alert alert-success" style="margin-bottom:0.75rem">${icon("check")} <strong>${tpl.navn}.${fmt.toLowerCase()}</strong> genereret (simuleret).</div>
             <div class="kv"><dt>Skabelon</dt><dd>${tpl.navn} v${tpl.version}</dd><dt>Format</dt><dd>${fmt}</dd><dt>Motor</dt><dd>docxtemplater / WeasyPrint</dd></div>
             <div class="card-footer" style="margin-top:0.75rem"><button class="btn btn-secondary btn-sm">Download</button><button class="btn btn-ghost btn-sm">Arkivér i ESDH</button></div>`;
         }, 900);
@@ -310,11 +319,11 @@
     // --- Governance ---
     function renderGovernance() {
       const log = [
-        ["2026-06-02 09:14", "Anya B. Vinstrup", "Oprettede kladde", "Temadrøftelse v1.3"],
-        ["2026-05-29 15:40", "Visitation", "Publicerede", "Plejeplan v5.0"],
-        ["2026-05-21 11:02", "ITK Sekretariatet", "Ny version", "AK notat v4.2"],
-        ["2026-05-21 10:58", "Juridisk Kontor", "Redigerede frase", "Klagevejledning (almindelig)"],
-        ["2025-11-08 13:20", "Jobcenter", "Markeret udløbet", "Indkaldelse til samtale v3.4"],
+        ["2026-06-02 09:14", "Eksempelteam 1", "Oprettede kladde", "Temadrøftelse v1.3"],
+        ["2026-05-29 15:40", "Eksempelteam 3", "Publicerede", "Plejeplan v5.0"],
+        ["2026-05-21 11:02", "Sekretariat", "Ny version", "Standardnotat v4.2"],
+        ["2026-05-21 10:58", "Eksempelteam 4", "Redigerede frase", "Klagevejledning (almindelig)"],
+        ["2025-11-08 13:20", "Eksempelteam 2", "Markeret udløbet", "Indkaldelse til samtale v3.4"],
       ];
       main.innerHTML = `
         <div class="page-head"><div><h1>Governance &amp; log</h1><p>Sporbarhed på ændringer, publicering og rettigheder. Grundlag for kvalitetssikring og deling via OS2.</p></div></div>
