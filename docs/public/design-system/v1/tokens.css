@@ -75,16 +75,16 @@
   --ds-text-link:      var(--ds-teal-600);
   --ds-text-link-hover: var(--ds-teal-700);
 
-  /* Semantic — surfaces */
-  --ds-bg-page:     #f5f4f2;
+  /* Semantic — surfaces (flat, white-first) */
+  --ds-bg-page:     #ffffff;
   --ds-bg-surface:  var(--ds-white);
-  --ds-bg-subtle:   var(--ds-gray-100);
-  --ds-bg-muted:    var(--ds-gray-200);
+  --ds-bg-subtle:   #ffffff;
+  --ds-bg-muted:    #f4f6f6;
   --ds-bg-inverse:  var(--ds-gray-900);
 
-  /* Semantic — borders */
-  --ds-border-default: var(--ds-gray-300);
-  --ds-border-subtle:  var(--ds-gray-200);
+  /* Semantic — borders (subtle hairlines) */
+  --ds-border-default: #e3e8e8;
+  --ds-border-subtle:  #edf0f0;
   --ds-border-strong:  var(--ds-gray-500);
   --ds-border-focus:   var(--ds-teal-500);
 
@@ -144,12 +144,12 @@
   --ds-space-7:  3rem;     /* 48 */
   --ds-space-8:  4rem;     /* 64 */
 
-  /* Radii */
+  /* Radii (tightened for a flatter, more modern look) */
   --ds-radius-sm:   2px;
-  --ds-radius-md:   4px;
-  --ds-radius-lg:   6px;
-  --ds-radius-xl:   10px;
-  --ds-radius-2xl:  14px;
+  --ds-radius-md:   3px;
+  --ds-radius-lg:   4px;
+  --ds-radius-xl:   5px;
+  --ds-radius-2xl:  6px;
   --ds-radius-pill: 9999px;
   --ds-radius-full: 9999px;
 

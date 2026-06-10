@@ -77,10 +77,12 @@ shifts.
 | `--ds-text-secondary` | `--ds-gray-700` |
 | `--ds-text-muted` | `--ds-gray-600` |
 | `--ds-text-link` | `--ds-teal-600` |
-| `--ds-bg-page` | `--ds-gray-50` |
+| `--ds-bg-page` | `#ffffff` |
 | `--ds-bg-surface` | `--ds-white` |
-| `--ds-bg-subtle` | `--ds-gray-100` |
-| `--ds-border-default` | `--ds-gray-300` |
+| `--ds-bg-subtle` | `#ffffff` |
+| `--ds-bg-muted` | `#f4f6f6` |
+| `--ds-border-default` | `#e3e8e8` |
+| `--ds-border-subtle` | `#edf0f0` |
 | `--ds-border-focus` | `--ds-teal-500` |
 | `--ds-color-primary` | `--ds-teal-500` |
 | `--ds-color-success` | `--ds-green-500` |
@@ -120,8 +122,8 @@ Line heights: `--ds-lh-tight` (1.25), `--ds-lh-snug` (1.4),
 
 ## Radii
 
-`--ds-radius-sm` (3px), `--ds-radius-md` (6px), `--ds-radius-lg` (10px),
-`--ds-radius-xl` (16px), `--ds-radius-2xl` (24px), `--ds-radius-pill`
+`--ds-radius-sm` (2px), `--ds-radius-md` (3px), `--ds-radius-lg` (4px),
+`--ds-radius-xl` (5px), `--ds-radius-2xl` (6px), `--ds-radius-pill`
 (fully rounded), `--ds-radius-full` (alias for `pill`).
 
 ## Shadows

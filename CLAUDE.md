@@ -52,6 +52,7 @@ Taskfile.yml                                 # Task automation (dev, build, lint
 | `roboway` | Roboway | No |
 | `dansk-viden-til-dansk-ai` | Dansk Viden til Dansk AI | No |
 | `ai-bibliotek` | AI Bibliotek | No |
+| `skabelonloesning` | Fælles Skabelonløsning | No |
 
 ## Conventions
 
