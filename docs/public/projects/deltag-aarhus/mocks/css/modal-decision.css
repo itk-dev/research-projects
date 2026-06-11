@@ -1,7 +1,7 @@
 /* Modal Decision — decision modal with related document links */
 
 .decision-modal__links {
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-subtle);
   padding-top: 24px;
   display: flex;
   flex-direction: column;

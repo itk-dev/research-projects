@@ -53,7 +53,7 @@
   /* Semantic */
   --text-primary: var(--gray-900);
   --text-secondary: var(--gray-700);
-  --text-muted: var(--gray-500);
+  --text-muted: #767676; /* WCAG 1.4.3: 4.54:1 on white (was --gray-500 #9d9d9d, 2.71:1) */
   --text-inverse: var(--white);
   --text-link: var(--petroleum);
   --text-link-hover: var(--petroleum-800);
@@ -62,9 +62,9 @@
   --bg-secondary: var(--gray-50);
   --bg-tertiary: var(--gray-200);
 
-  --border-default: var(--gray-300);
+  --border-default: #8c8c8c; /* WCAG 1.4.11: 3.36:1 on white (was --gray-300 #e6e6e6, 1.25:1) */
   --border-strong: var(--gray-900);
-  --border-subtle: var(--gray-200);
+  --border-subtle: #8c8c8c; /* WCAG 1.4.11: 3.36:1 on white (was --gray-200 #eaeaea, 1.20:1) */
 
   /* Typography */
   --font-family: arial, -apple-system, blinkmacsystemfont, "Segoe UI", roboto,
