@@ -672,17 +672,6 @@
       <div class="modal__body">
         <form class="submission-form" id="submission-form">
           <div class="submission-form__field">
-            <label for="submission-category" class="submission-form__label">Kategori</label>
-            <select id="submission-category" class="submission-form__select" aria-describedby="submission-category-hint" required>
-              <option value="">Vælg kategori...</option>
-              <option value="miljoe">Miljø/Natur</option>
-              <option value="stoej">Støj/Sundhed</option>
-              <option value="landskab">Landskab/Visuel</option>
-              <option value="proces">Proces/Andet</option>
-            </select>
-            <span class="submission-form__hint" id="submission-category-hint">Vælg hvilken kategori dit høringssvar passer til</span>
-          </div>
-          <div class="submission-form__field">
             <label for="submission-name" class="submission-form__label">Dit navn</label>
             <input type="text" id="submission-name" class="submission-form__input" value="Maria Jensen" readonly>
             <span class="submission-form__hint">Udfyldt automatisk via MitID</span>
@@ -694,6 +683,17 @@
           <div class="submission-form__field">
             <label for="submission-body" class="submission-form__label">Dit høringssvar</label>
             <textarea id="submission-body" class="submission-form__textarea" rows="8" required placeholder="Beskriv dine synspunkter, bekymringer eller forslag vedrørende planen..."></textarea>
+          </div>
+          <div class="submission-form__field">
+            <label for="submission-category" class="submission-form__label">Kategori</label>
+            <select id="submission-category" class="submission-form__select" aria-describedby="submission-category-hint" required>
+              <option value="">Vælg kategori...</option>
+              <option value="miljoe">Miljø/Natur</option>
+              <option value="stoej">Støj/Sundhed</option>
+              <option value="landskab">Landskab/Visuel</option>
+              <option value="proces">Proces/Andet</option>
+            </select>
+            <span class="submission-form__hint" id="submission-category-hint">Vælg hvilken kategori dit høringssvar passer til</span>
           </div>
           <div class="submission-form__notice">
             <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
