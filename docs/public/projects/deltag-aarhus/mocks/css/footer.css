@@ -58,11 +58,11 @@
 
 .footer__bottom-links {
   font-size: var(--fs-small);
-  color: var(--gray-600);
+  color: var(--gray-350); /* WCAG 1.4.3: 9.48:1 on dark footer (was --gray-600 #858585, 3.42:1) */
 }
 
 .footer__bottom-links a {
-  color: var(--gray-600);
+  color: var(--gray-350);
   text-decoration: none;
 }
 

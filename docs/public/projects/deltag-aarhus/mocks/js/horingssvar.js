@@ -33,6 +33,11 @@ DM.formatNumber = function(num) {
   return num.toLocaleString("da-DK");
 };
 
+/* "Enig" vote label — singular "enig" for one, plural "enige" otherwise */
+DM.enigeLabel = function(num) {
+  return DM.formatNumber(num) + (num === 1 ? " er enig" : " er enige");
+};
+
 function createCard(item, index) {
   var card = document.createElement("article");
   card.className = "horingssvar-card";
@@ -54,8 +59,9 @@ function createCard(item, index) {
         DM.formatNumber(item.comments) + ' kommentarer' +
       '</span>' +
       '<' + likeTag + ' class="' + likeClass + '" data-item-id="' + item.id + '">' +
-        '<i class="fa-regular fa-thumbs-up" aria-hidden="true"></i> ' +
-        '<span class="horingssvar-card__like-count">' + DM.formatNumber(item.likes) + '</span> synes om' +
+        '<i class="fa-regular fa-handshake" aria-hidden="true"></i> ' +
+        '<span class="horingssvar-card__like-count">' + DM.formatNumber(item.likes) + '</span>' +
+        ' <span class="horingssvar-card__like-suffix">' + (item.likes === 1 ? "er enig" : "er enige") + '</span>' +
       '</' + likeTag + '>' +
     '</div>';
 
@@ -65,6 +71,7 @@ function createCard(item, index) {
       e.stopPropagation();
       item.likes++;
       likeBtn.querySelector(".horingssvar-card__like-count").textContent = DM.formatNumber(item.likes);
+      likeBtn.querySelector(".horingssvar-card__like-suffix").textContent = item.likes === 1 ? "er enig" : "er enige";
       likeBtn.classList.add("horingssvar-card__like-btn--liked");
       likeBtn.disabled = true;
     });

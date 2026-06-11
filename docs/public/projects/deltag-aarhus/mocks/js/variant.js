@@ -41,19 +41,22 @@ DM.initVariant = function() {
     bodyDeleteDate.textContent = deadline;
   }
 
-  /* Submit button — disabled when closed, active when open */
-  var submitBtn = document.getElementById("submit-horingssvar-btn");
-  if (submitBtn) {
+  /* Submit triggers — disabled when closed, active when open.
+     Several buttons share the .js-submit-horingssvar class (header outline,
+     above-list primary, below-list primary). The header outline button is
+     hidden via CSS on the closed variant. */
+  var submitBtns = document.querySelectorAll(".js-submit-horingssvar");
+  submitBtns.forEach(function(btn) {
     if (isOpen) {
-      submitBtn.disabled = false;
-      submitBtn.addEventListener("click", function(e) {
+      btn.disabled = false;
+      btn.addEventListener("click", function(e) {
         e.preventDefault();
         if (DM.openMitIDModal) DM.openMitIDModal();
       });
     } else {
-      submitBtn.disabled = true;
+      btn.disabled = true;
     }
-  }
+  });
 
   /* Highlight active variant link in mock banner */
   var variantLinks = document.querySelectorAll(".mock-banner__link--variant");

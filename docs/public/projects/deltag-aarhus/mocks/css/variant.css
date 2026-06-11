@@ -55,6 +55,22 @@ body.variant--open .hearing-header {
   display: block;
 }
 
+/* Header call-to-action only appears while the hearing accepts answers */
+body.variant--closed .hearing-header .btn-outline {
+  display: none;
+}
+
+/* Tip pointing to the statistics — only meaningful once answers are in */
+.horingssvar-tip {
+  display: none;
+}
+
+body.variant--closed .horingssvar-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 640px) {
   .btn-primary-wrapper {
     margin-left: 0;

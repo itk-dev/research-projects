@@ -123,7 +123,7 @@
   align-items: center;
   gap: 13px;
   padding: 10px 0;
-  border-bottom: 1px solid var(--gray-350);
+  border-bottom: 1px solid var(--border-subtle);
   font-size: var(--fs-small);
 }
 

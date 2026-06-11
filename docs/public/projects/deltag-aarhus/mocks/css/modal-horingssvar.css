@@ -4,7 +4,7 @@
   display: flex;
   gap: 24px;
   padding-top: 16px;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-subtle);
   font-family: var(--font-family-inter);
   font-size: var(--fs-small);
   color: var(--text-primary);
@@ -30,7 +30,7 @@
 }
 
 .modal__comments-section {
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-subtle);
   padding-top: 24px;
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@
   flex-direction: column;
   gap: 10px;
   padding-top: 16px;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-subtle);
   margin-top: 8px;
 }
 

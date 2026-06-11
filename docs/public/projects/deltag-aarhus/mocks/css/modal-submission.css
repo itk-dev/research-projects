@@ -53,8 +53,7 @@
 .submission-form__hint {
   font-family: var(--font-family-inter);
   font-size: var(--fs-xs);
-  color: var(--gray-650);
-  font-style: italic;
+  color: var(--text-secondary); /* gray-700, 7.81:1 — readable at this small size (was --gray-650 italic) */
 }
 
 .submission-form__notice {
@@ -66,13 +65,14 @@
   font-family: var(--font-family-inter);
   font-size: var(--fs-xs);
   line-height: 1.5;
-  color: var(--gray-650);
+  color: var(--text-secondary); /* gray-700, 7.17:1 on the notice background */
 }
 
+/* Icon follows the notice text color instead of the near-invisible gray */
 .submission-form__notice i {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--gray-400);
+  color: inherit;
 }
 
 .submission-form__actions {

@@ -16,7 +16,7 @@ DM.updateModalContent = function() {
   document.getElementById("modal-comments-count").textContent = DM.formatNumber(item.comments) + " kommentarer";
 
   var likesEl = document.getElementById("modal-likes-count");
-  likesEl.textContent = DM.formatNumber(item.likes) + " synes om";
+  likesEl.textContent = DM.enigeLabel(item.likes);
 
   /* Make the likes stat clickable in the open variant */
   var likeStat = likesEl.parentElement;
@@ -29,7 +29,7 @@ DM.updateModalContent = function() {
     var likeHandler = function(e) {
       e.preventDefault();
       item.likes++;
-      likesEl.textContent = DM.formatNumber(item.likes) + " synes om";
+      likesEl.textContent = DM.enigeLabel(item.likes);
       likeStat.classList.add("modal__stat--liked");
       likeStat.removeEventListener("click", likeHandler);
       likeStat.removeEventListener("keydown", likeKeyHandler);

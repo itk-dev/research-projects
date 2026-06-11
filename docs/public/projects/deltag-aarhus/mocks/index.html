@@ -97,6 +97,7 @@
       <div class="hearing-header__main">
         <h1 class="hearing-header__title">Forslag til Lokalplan nr. 1237 med miljøvurderingsrapport — Vindmøller ved Vosnæs</h1>
         <p class="hearing-header__lead">Planen udlægger området til tekniske anlæg og giver mulighed for opstilling af tre vindmøller med en totalhøjde på op til 150 meter samt tilhørende arbejdsarealer, veje og nettilslutningsanlæg.</p>
+        <button class="btn-outline js-submit-horingssvar">Skriv et høringssvar</button>
       </div>
       <aside class="hearing-header__sidebar" aria-label="Høringsdetaljer">
         <div class="hearing-header__meta-item">
@@ -223,7 +224,7 @@
           <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </button>
         <div class="dropdown__menu" role="listbox">
-          <button class="dropdown__item" role="option" data-value="likes">Flest synes om</button>
+          <button class="dropdown__item" role="option" data-value="likes">Flest enige</button>
           <button class="dropdown__item" role="option" data-value="newest">Nyeste først</button>
           <button class="dropdown__item" role="option" data-value="oldest">Ældste først</button>
           <button class="dropdown__item dropdown__item--active" role="option" aria-selected="true" data-value="comments">Flest kommentarer</button>
@@ -245,10 +246,15 @@
       </div>
 
       <div class="btn-primary-wrapper">
-        <button class="btn-primary" id="submit-horingssvar-btn" disabled aria-describedby="submit-tooltip">Skriv et høringssvar</button>
+        <button class="btn-primary js-submit-horingssvar" id="submit-horingssvar-btn" disabled aria-describedby="submit-tooltip">Skriv et høringssvar</button>
         <span class="btn-primary__tooltip" id="submit-tooltip" role="tooltip">Svarfristen er overskredet — der kan ikke længere indsendes høringssvar eller kommentarer.</span>
       </div>
     </div>
+
+    <a class="horingssvar-tip" href="#statistik">
+      <i class="fa-regular fa-lightbulb" aria-hidden="true"></i>
+      <span>Tip: Se længere nede hvordan høringssvarene har fordelt sig.</span>
+    </a>
 
     <div class="horingssvar-grid" id="horingssvar-grid" aria-label="Liste af høringssvar">
       <!-- Cards inserted by JS -->
@@ -258,10 +264,15 @@
       <span class="horingssvar-pagination__count" id="pagination-count">Viser 1 - 16</span>
       <button class="horingssvar-pagination__show-all" id="show-all-btn">Vis alle</button>
     </div>
+
+    <div class="btn-primary-wrapper btn-primary-wrapper--below">
+      <button class="btn-primary js-submit-horingssvar" disabled aria-describedby="submit-tooltip-below">Skriv et høringssvar</button>
+      <span class="btn-primary__tooltip" id="submit-tooltip-below" role="tooltip">Svarfristen er overskredet — der kan ikke længere indsendes høringssvar eller kommentarer.</span>
+    </div>
   </section>
 
   <!-- Statistics -->
-  <section class="statistics-section" aria-label="Statistik">
+  <section class="statistics-section" id="statistik" aria-label="Statistik">
     <h2 class="statistics-section__heading">Statistik</h2>
     <div class="statistics">
       <div class="statistics__header">
@@ -503,7 +514,7 @@
             <span id="modal-comments-count"></span>
           </span>
           <span class="modal__stat">
-            <i class="fa-regular fa-thumbs-up" aria-hidden="true"></i>
+            <i class="fa-regular fa-handshake" aria-hidden="true"></i>
             <span id="modal-likes-count"></span>
           </span>
         </div>
@@ -662,13 +673,14 @@
         <form class="submission-form" id="submission-form">
           <div class="submission-form__field">
             <label for="submission-category" class="submission-form__label">Kategori</label>
-            <select id="submission-category" class="submission-form__select" required>
+            <select id="submission-category" class="submission-form__select" aria-describedby="submission-category-hint" required>
               <option value="">Vælg kategori...</option>
               <option value="miljoe">Miljø/Natur</option>
               <option value="stoej">Støj/Sundhed</option>
               <option value="landskab">Landskab/Visuel</option>
               <option value="proces">Proces/Andet</option>
             </select>
+            <span class="submission-form__hint" id="submission-category-hint">Vælg hvilken kategori dit høringssvar passer til</span>
           </div>
           <div class="submission-form__field">
             <label for="submission-name" class="submission-form__label">Dit navn</label>

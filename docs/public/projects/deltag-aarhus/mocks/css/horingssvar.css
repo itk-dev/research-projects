@@ -29,6 +29,29 @@
   margin-bottom: 32px;
 }
 
+/* Tip linking to the statistics section (shown only on the closed variant — see variant.css) */
+.horingssvar-tip {
+  margin: 0 0 32px;
+  padding: 12px 16px;
+  background: var(--petroleum-100);
+  border-left: 3px solid var(--petroleum);
+  border-radius: 4px;
+  color: var(--petroleum-800);
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-small);
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+
+.horingssvar-tip:hover {
+  background: var(--petroleum-200);
+}
+
+.horingssvar-tip:focus-visible {
+  outline: 2px solid var(--petroleum);
+  outline-offset: 2px;
+}
+
 /* Dropdown */
 .dropdown {
   position: relative;
@@ -116,6 +139,42 @@
   color: var(--white);
 }
 
+/* Outline variant — used as a header call-to-action */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--petroleum-800); /* WCAG 1.4.3: 5.0:1 on white */
+  font-family: var(--font-family-inter);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  padding: 8px 24px;
+  border: 1px solid var(--petroleum);
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  line-height: 24px;
+}
+
+.btn-outline:hover {
+  background: var(--petroleum);
+  color: var(--white);
+}
+
+/* Second submit button placed below the answers list */
+.btn-primary-wrapper--below {
+  margin: 24px auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Reset the auto-left margin the base .btn-primary uses above the list */
+.btn-primary-wrapper--below .btn-primary {
+  margin-left: 0;
+}
+
 /* Card Grid */
 .horingssvar-grid {
   display: grid;
@@ -127,7 +186,7 @@
 /* Horingssvar Card */
 .horingssvar-card {
   background: var(--white);
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--border-subtle);
   border-radius: 4px;
   padding: 24px 20px;
   min-height: 240px;
@@ -215,7 +274,7 @@
 
 .horingssvar-card__divider {
   height: 1px;
-  background: var(--gray-200);
+  background: var(--border-subtle);
   margin-top: auto;
 }
 
@@ -229,7 +288,7 @@
   font-size: 18px;
   font-weight: var(--fw-semibold);
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .horingssvar-pagination__count {
