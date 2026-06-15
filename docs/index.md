@@ -54,4 +54,8 @@ features:
     details: Analyse og oplæg til et open source-alternativ til DynamicTemplate — bygget på åbne standarder og delbart via OS2. Med løsningsbeskrivelse, faseopdelt timeestimat og en interaktiv visualisering af administrationsgrænsefladen.
     link: /projects/skabelonloesning/
     linkText: View project
+  - title: Arbejdsmiljøhandleplan
+    details: Klikbar prototype af en digital arbejdsmiljøhandleplan for Aarhus Kommune — baseret på BA's Word-skabelon. Dashboard med advis-stribe, opret/redigér plan med live risikofarver og 4×4 risikomatrix, automatisk log og deling. Bruger localStorage som backend.
+    link: /projects/arbejdsmiljo-handleplan/
+    linkText: View project
 ---
