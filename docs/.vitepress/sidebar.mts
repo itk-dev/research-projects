@@ -130,6 +130,16 @@ const skabelonloesning: DefaultTheme.SidebarItem[] = [
   },
 ]
 
+const arbejdsmiljoHandleplan: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Arbejdsmiljøhandleplan',
+    items: [
+      { text: 'Overview', link: '/projects/arbejdsmiljo-handleplan/' },
+      { text: 'Interactive Mocks', link: '/projects/arbejdsmiljo-handleplan/mocks' },
+    ],
+  },
+]
+
 const designSystem: DefaultTheme.SidebarItem[] = [
   {
     text: 'Design System',
@@ -158,6 +168,7 @@ export function sidebar(): DefaultTheme.Sidebar {
     '/projects/dansk-viden-til-dansk-ai/': danskVidenTilDanskAi,
     '/projects/ai-bibliotek/': aiBibliotek,
     '/projects/skabelonloesning/': skabelonloesning,
+    '/projects/arbejdsmiljo-handleplan/': arbejdsmiljoHandleplan,
     '/projects/design-system/': designSystem,
   }
 }

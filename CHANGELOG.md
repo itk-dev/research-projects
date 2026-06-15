@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Arbejdsmiljøhandleplan Project
+- Clickable prototype of a digital work-environment action plan for Aarhus Kommune, based on Borgmesterens Afdeling's Word template — copied from the `arbejdsmiljo-handleplan` concept
+- Minimal overview (`index.md`) with background, purpose, what the prototype shows and demo logins, plus a `mocks.md` listing page
+- Multi-file vanilla HTML/JS/CSS mock at `docs/public/projects/arbejdsmiljo-handleplan/mocks/` — dashboard with revision-due advis strip, create/edit plan with live risk colours and a 4×4 risk matrix, automatic change log, simulated sharing with read-only recipient view; uses `localStorage` as backend
+- Wired into the sidebar, home feature cards, and the shared mock banner
+
 ### Changed — Accessibility and call-to-action experiment in Vosnæs hearing detail mock (deltag-aarhus)
 - Raised card, input, dropdown and divider borders to a WCAG 1.4.11-compliant `#8c8c8c` (3.36:1 on white, up from ~1.2:1) via the `--border-default`/`--border-subtle` tokens; repointed the structural separator borders that hardcoded `--gray-200`/`--gray-350` at `--border-subtle`
 - Fixed muted text contrast: `--text-muted` now `#767676` (4.54:1 on white); the dark-footer bottom links use `--gray-350` (9.48:1 on `#333`) instead of the failing `--gray-600` (3.42:1)
