@@ -1,16 +1,14 @@
 ---
-protected: true
-passwordHash: "92b0332dda228edf8ebd0208937b772f02625380fbb04a63d90b97662b183661"
-passwordGroup: "salary-negotiation"
+title: Lønforhandlingssystem — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/salary-negotiation' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/salary-negotiation' }]
 ---
 
-<small>**Project:** Lønforhandlingssystem</small>
+# Indholdet er flyttet
 
-# Interaktive Mocks
+Dette projekt findes nu på vores nye platform.
 
-Interaktive HTML-prototyper der demonstrerer den foreslåede løsning. Åbn dem for at afprøve interaktionerne direkte i browseren.
+**[Gå til Lønforhandlingssystem →](https://workspace.itkdev.dk/concept/salary-negotiation)**
 
----
-
-**<a href="/research-projects/projects/salary-negotiation/mocks/salary-negotiation.html" target="_blank">Lønforhandling — Komplet workflow ↗</a>**
-Personalelederens hovedvisning med budgetoverblik, medarbejdertabel med løndata, indstillingsformular med engangsbeløb, fast tillæg, begrundelse og prioritet. Restbudgettet opdateres automatisk. Skift mellem faner for at se HR-behandling og chefgodkendelse.
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

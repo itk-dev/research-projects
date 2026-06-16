@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — Site converted to a redirect shell pointing at the new platform
+- Content has moved to the new platform at **workspace.itkdev.dk**. This site is now an archived redirect shell.
+- The landing page (`docs/index.md`) shows a "moved" notice with a link to the new platform and direct links to each project's `/concept/<slug>` page (no auto-redirect — visitors choose where to go); `docs/about.md` forwards to the new platform.
+- Every project page under `docs/projects/<slug>/` (overview, mocks, and sub-pages) now does a client-side meta-refresh redirect (0s) to its `/concept/<slug>` page on the new platform. `dansk-viden-til-dansk-ai` forwards to the renamed `/concept/dansk-viden`; `salary-negotiation`'s password gate was removed (the new platform has its own auth).
+- The `design-system/` docs and `about` page forward to the platform homepage (no concept equivalent).
+- Emptied the sidebar and nav and disabled local search in the VitePress config, since there is no in-site navigation left.
+- Old prototype HTML under `docs/public/projects/<slug>/mocks/` and the `docs/public/design-system/` assets are left in place (harmless static files no longer linked from the shell); removing them is a separate cleanup.
+
 ### Changed — Accessibility and call-to-action experiment in Vosnæs hearing detail mock (deltag-aarhus)
 - Raised card, input, dropdown and divider borders to a WCAG 1.4.11-compliant `#8c8c8c` (3.36:1 on white, up from ~1.2:1) via the `--border-default`/`--border-subtle` tokens; repointed the structural separator borders that hardcoded `--gray-200`/`--gray-350` at `--border-subtle`
 - Fixed muted text contrast: `--text-muted` now `#767676` (4.54:1 on white); the dark-footer bottom links use `--gray-350` (9.48:1 on `#333`) instead of the failing `--gray-600` (3.42:1)

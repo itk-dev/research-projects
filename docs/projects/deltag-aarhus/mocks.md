@@ -1,13 +1,14 @@
-<small>**Project:** deltag.aarhus.dk</small>
-
-# Interaktive Mocks
-
-Interaktive HTML-prototyper der demonstrerer den foreslåede høringsdetalje-side. Åbn dem for at afprøve interaktionerne direkte i browseren.
-
+---
+title: deltag.aarhus.dk — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/deltag-aarhus' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/deltag-aarhus' }]
 ---
 
-**<a href="/research-projects/projects/deltag-aarhus/mocks/index.html" target="_blank">Høringsdetalje — Vindmøller ved Vosnæs ↗</a>**
-Komplet høringsdetalje-side med 784 simulerede høringssvar, filtrering, sortering, MitID-login, indsendelsesformular, statistik, kort, ordforklaringer og afgørelsesmodal. Skift mellem åben og afsluttet variant via mock-banneret.
+# Indholdet er flyttet
 
-**<a href="/research-projects/projects/deltag-aarhus/mocks/uniparken/index.html" target="_blank">Høringsdetalje — Solceller i Universitetsparken ↗</a>**
-Samme høringsdetalje-skabelon anvendt på en anden sag: forslag om at placere et solcelleanlæg på fællesplænen i Universitetsparken. Genbruger CSS- og JS-komponenterne fra Vosnæs-prototypen via et per-mock config-lag, så indhold, datasæt og kortcentrum kan udskiftes uden at duplikere koden.
+Dette projekt findes nu på vores nye platform.
+
+**[Gå til deltag.aarhus.dk →](https://workspace.itkdev.dk/concept/deltag-aarhus)**
+
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

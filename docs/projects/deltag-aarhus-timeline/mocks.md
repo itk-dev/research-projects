@@ -1,8 +1,14 @@
-<small>**Project:** Deltag Aarhus — Projekttidslinje</small>
-
-# Interaktive Mocks
-
+---
+title: Deltag Aarhus — Projekttidslinje — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/deltag-aarhus-timeline' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/deltag-aarhus-timeline' }]
 ---
 
-**<a href="/research-projects/projects/deltag-aarhus-timeline/mocks/index.html" target="_blank">Projekttidslinje — Stationspladsen i Hjortshøj ↗</a>**
-Interaktiv tidslinje for et borgerinddragelsesprojekt med milepæle fra 2023 til 2027. Responsivt layout med vertikal (desktop) og horisontal (mobil) visning, statusfarver og navigerbar mini-tidslinje.
+# Indholdet er flyttet
+
+Dette projekt findes nu på vores nye platform.
+
+**[Gå til Deltag Aarhus — Projekttidslinje →](https://workspace.itkdev.dk/concept/deltag-aarhus-timeline)**
+
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

@@ -41,10 +41,6 @@ export default withMermaid(
         },
       },
 
-      search: {
-        provider: 'local',
-      },
-
       editLink: {
         pattern: 'https://github.com/itk-dev/research-projects/tree/main/docs/:path',
         text: 'View source on Github',

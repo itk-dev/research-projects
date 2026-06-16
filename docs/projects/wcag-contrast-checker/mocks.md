@@ -1,8 +1,14 @@
-<small>**Project:** WCAG Contrast Checker</small>
-
-# Interactive Mocks
-
+---
+title: WCAG Contrast Checker — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/wcag-contrast-checker' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/wcag-contrast-checker' }]
 ---
 
-**<a href="/research-projects/projects/wcag-contrast-checker/mocks/index.html" target="_blank">WCAG Contrast Checker ↗</a>**
-Accessibility tool for analyzing color contrast ratios. Upload CSV, add colors manually, or load sample data with Danish municipal color palettes. Shows WCAG AA/AAA compliance with brightness adjustment sliders.
+# Indholdet er flyttet
+
+Dette projekt findes nu på vores nye platform.
+
+**[Gå til WCAG Contrast Checker →](https://workspace.itkdev.dk/concept/wcag-contrast-checker)**
+
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

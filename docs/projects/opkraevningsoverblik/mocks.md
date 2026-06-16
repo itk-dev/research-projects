@@ -1,8 +1,14 @@
-<small>**Project:** Opkrævningsoverblik</small>
-
-# Interaktive Mocks
-
+---
+title: Opkrævningsoverblik — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/opkraevningsoverblik' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/opkraevningsoverblik' }]
 ---
 
-**<a href="/research-projects/projects/opkraevningsoverblik/mocks/index.html" target="_blank">Opkrævningsoverblik — Kommunale opkrævninger ↗</a>**
-Samlet overblik over kommunale opkrævninger med statusindikator, opkrævningsliste, filtrering, detaljevisning og 5-års historisk udvikling. Inkluderer en BBR-baseret **beregner** for rottebekæmpelse, renovation, skorstensfejer og ejendomsskat — med editerbare BBR-felter og hvad-hvis-scenarier. Tre testbrugere med forskellige statuser.
+# Indholdet er flyttet
+
+Dette projekt findes nu på vores nye platform.
+
+**[Gå til Opkrævningsoverblik →](https://workspace.itkdev.dk/concept/opkraevningsoverblik)**
+
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

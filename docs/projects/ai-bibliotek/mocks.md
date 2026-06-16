@@ -1,8 +1,14 @@
-<small>**Project:** AI Bibliotek</small>
-
-# Interaktive Mocks
-
+---
+title: AI Bibliotek — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/ai-bibliotek' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/ai-bibliotek' }]
 ---
 
-**<a href="/research-projects/projects/ai-bibliotek/mocks/index.html" target="_blank">AI Bibliotek — prototype ↗</a>**
-Single-page prototype hvor danske myndigheder kan dele og hjemtage AI-assistenter. Katalog med søgning og facetter (kommune, sprogmodel, rammeværk, datafølsomhed), assistent-side med modelkort, readme, vidensopskrift og versioneret JSON-eksport, samt et flow til at dele en assistent. Bruger `localStorage` som backend.
+# Indholdet er flyttet
+
+Dette projekt findes nu på vores nye platform.
+
+**[Gå til AI Bibliotek →](https://workspace.itkdev.dk/concept/ai-bibliotek)**
+
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

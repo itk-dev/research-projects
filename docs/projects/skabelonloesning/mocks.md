@@ -1,8 +1,14 @@
-<small>**Project:** Fælles Skabelonløsning</small>
-
-# Interaktive Mocks
-
+---
+title: Fælles Skabelonløsning — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/skabelonloesning' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/skabelonloesning' }]
 ---
 
-**<a href="/research-projects/projects/skabelonloesning/mocks/index.html" target="_blank">Administrationsgrænseflade — prototype ↗</a>**
-Visualisering af administrationsgrænsefladen til en åben skabelonløsning. Viser skabelonregister med version, ejer, afdeling og status, frasebibliotek med fagligt ejerskab, en skabelon-detalje med kolofon-data og et komplekst input-flow (makro-erstatning), samt en simuleret dokumentmotor-preview (udfyld testdata → generér DOCX/PDF). Klientside-only, fiktivt illustrativt indhold.
+# Indholdet er flyttet
+
+Dette projekt findes nu på vores nye platform.
+
+**[Gå til Fælles Skabelonløsning →](https://workspace.itkdev.dk/concept/skabelonloesning)**
+
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

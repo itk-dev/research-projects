@@ -1,92 +1,14 @@
-<small>**Project:** Opkrævningsoverblik · **Status:** Prototype · **Date:** February 2026</small>
-
-# Opkrævningsoverblik
-
-**Samlet overblik over kommunale opkrævninger for borgere i Aarhus Kommune.**
-
+---
+title: Opkrævningsoverblik — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/opkraevningsoverblik' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/opkraevningsoverblik' }]
 ---
 
-## Baggrund
+# Indholdet er flyttet
 
-Borgere i Aarhus Kommune modtager opkrævninger for en række kommunale ydelser — ejendomsskat, daginstitution, renovation m.fl. Disse oplysninger er i dag spredt over flere systemer og kanaler, hvilket gør det svært for borgere at få et samlet overblik over hvad de skylder, hvad der er betalt, og hvad der er på vej.
+Dette projekt findes nu på vores nye platform.
 
-Borgerservice har desuden et behov for at borgeren kan se *hvordan* gebyrerne er beregnet — ikke blot beløbet. Det giver gennemsigtighed og gør det muligt at opdage fejl i fx BBR-registreringen.
+**[Gå til Opkrævningsoverblik →](https://workspace.itkdev.dk/concept/opkraevningsoverblik)**
 
-## Formål
-
-Formålet er at skabe ét samlet overblik hvor borgere hurtigt og intuitivt kan se alle deres kommunale opkrævninger — både den aktuelle status og udviklingen over tid. Overblikket skal skabe gennemsigtighed og gøre det nemt at forstå sin økonomiske situation i forhold til kommunen.
-
-Hertil kommer en **beregningsfunktion** der ud fra BBR-træk viser hvordan kommunale bidrag fremkommer, og som lader borgeren simulere hvordan ændringer (tilbygning, ny brændeovn osv.) påvirker beløbet.
-
-**Succeskriterium:** Borgeren kan danne sig et overblik over sin samlede status og eventuelle restancer på under ét minut — uden vejledning.
-
----
-
-## Hvad prototypen viser
-
-### Login og testbrugere
-
-Prototypen inkluderer tre testbrugere med forskellige statuser:
-- **Anders** — alle opkrævninger betalt, ingen restancer
-- **Maria** — kommende forfaldsdatoer inden for 30 dage
-- **Lars** — ubetalte opkrævninger der har overskredet forfaldsdato
-
-### Dashboard med statusindikator
-
-En visuel statusindikator der giver borgeren øjeblikkeligt overblik:
-- **Alt i orden** (grøn) — alle opkrævninger er betalt
-- **Kommende forfald** (gul) — opkrævninger forfalder inden for 30 dage
-- **Restance** (rød) — ubetalte opkrævninger der har overskredet forfaldsdato
-
-Indikatoren bruger kombination af farve, ikon og tekst for tilgængelighed.
-
-### Opkrævningsliste
-
-- Alle aktive opkrævninger med beløb, forfaldsdato og status
-- Filtrering efter ydelsestype (ejendomsskat, daginstitution, renovation m.fl.)
-- Samlet restancebeløb
-- Detaljevisning for den enkelte opkrævning
-
-### Historisk udvikling (5 år)
-
-- Linjediagram (Chart.js) der viser opkrævet vs. betalt beløb over tid
-- Mulighed for at se udviklingen per ydelsestype
-- Tydelig markering af perioder med restancer
-
-### Beregningsfunktion (BBR)
-
-En ny "Beregner"-fane viser hvordan fire kommunale bidrag fremkommer, baseret på automatisk hentede BBR-oplysninger:
-
-- **Rottebekæmpelse** — fast gebyr pr. ejendom + sats pr. bebygget m² (halveret sats over 250 m²)
-- **Renovation** — grundgebyr + tillæg pr. boligbygning afhængig af type
-- **Skorstensfejer** — fast beløb pr. registreret ildsted
-- **Ejendomsskat (grundskyld)** — promille af grundværdi
-
-Hver beregning vises som et kort med totalbeløb og en linje-for-linje opdeling af hvordan beløbet er fremkommet.
-
-**BBR-felterne er redigerbare**, så borgeren kan:
-- Rette en forkert BBR-registrering og se hvordan opkrævningen ændres
-- Simulere "hvad-hvis"-scenarier (fx tilbygning, ny brændeovn, ændret grundværdi) — totalen og delta-en mod den nuværende BBR-værdi opdateres live
-- Nulstille ændringer pr. felt eller for hele BBR-panelet
-
-::: warning Demo-takster
-Satserne i prototypen er fiktive demo-værdier baseret på offentligt tilgængelige niveauer for 2025/2026. Den endelige opkrævning afgøres af kommunens takstblad og BBR-registreringen.
-:::
-
----
-
-## Krav
-
-- WCAG 2.1 Level AA tilgængelighed
-- Responsivt design (desktop, tablet, mobil)
-- NemLog-in autentifikation
-- Nær-realtid datahentning
-- Overblikket dækker kun kommunale opkrævninger — ikke regionale eller nationale
-
----
-
-## Interaktiv prototype
-
-<a href="/research-projects/projects/opkraevningsoverblik/mocks/index.html" class="mock-button" target="_blank">Åbn prototypen ↗</a>
-
-Vælg en testbruger for at se forskellige statuser (alt i orden, kommende forfald, restance). Brug fanen "Beregner" for at se hvordan BBR-baserede gebyrer beregnes — og leg med felterne for at se hvad-hvis-effekter live.
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

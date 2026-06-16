@@ -1,15 +1,12 @@
-# About
+---
+title: About — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk' }]
+---
 
-This site hosts research projects from ITKdev.
+# Indholdet er flyttet
 
-## Purpose
+ITKdevs research-projekter findes nu på [workspace.itkdev.dk](https://workspace.itkdev.dk).
 
-We publish research, findings, and evaluations on topics relevant to our work. Projects cover a range of subjects — from responsible AI usage to developer tooling and beyond.
-
-## Approach
-
-We work iteratively: research, ideate, prototype, evaluate. All findings are published openly so others can build on them.
-
-## Contact
-
-For questions or collaboration, reach out through [GitHub](https://github.com/itk-dev).
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.

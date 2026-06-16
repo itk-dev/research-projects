@@ -1,8 +1,14 @@
-<small>**Project:** Roboway</small>
-
-# Interaktive Mocks
-
+---
+title: Roboway — Flyttet
+head:
+  - ['meta', { 'http-equiv': 'refresh', content: '0;url=https://workspace.itkdev.dk/concept/roboway' }]
+  - ['link', { rel: 'canonical', href: 'https://workspace.itkdev.dk/concept/roboway' }]
 ---
 
-**<a href="/research-projects/projects/roboway/mocks/index.html" target="_blank">Roboway — Robotflådestyring ↗</a>**
-Single-page prototype med syv sider: dashboard, livekort over Aarhus, flådeoversigt, zoneadministration, hændelser, analyse og operatørportal. Understøtter dansk/engelsk og er responsiv.
+# Indholdet er flyttet
+
+Dette projekt findes nu på vores nye platform.
+
+**[Gå til Roboway →](https://workspace.itkdev.dk/concept/roboway)**
+
+Bliver du ikke sendt videre automatisk, så klik på linket ovenfor.
