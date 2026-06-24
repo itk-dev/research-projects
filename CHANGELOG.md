@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added — Explainer video in "Høring" glossary tooltip (deltag-aarhus)
+- The "Høring" glossary tooltip now shows an embedded explainer video above the existing definition text, so readers can watch or read. The player is a self-contained mock poster frame (no external video host); clicking play swaps it for a "mock" note.
+
 ### Added — Arbejdsmiljøhandleplan Project
 - Clickable prototype of a digital work-environment action plan for Aarhus Kommune, based on Borgmesterens Afdeling's Word template — copied from the `arbejdsmiljo-handleplan` concept
 - Minimal overview (`index.md`) with background, purpose, what the prototype shows and demo logins, plus a `mocks.md` listing page
