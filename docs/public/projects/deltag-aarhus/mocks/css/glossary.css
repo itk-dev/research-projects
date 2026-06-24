@@ -34,6 +34,7 @@
   border: 1px solid var(--border-default);
   box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
   padding: 16px;
+  padding-right: 36px; /* room for the close button */
   width: 320px;
   font-family: var(--font-family-inter);
   font-size: var(--fs-small);
@@ -50,13 +51,48 @@
   font-weight: var(--fw-semibold);
 }
 
+/* Close (X) button — top-right of every tooltip */
+.glossary-term__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.glossary-term__close:hover {
+  background: var(--gray-100);
+  color: var(--text-primary);
+}
+
+.glossary-term__close:focus-visible {
+  outline: 2px solid var(--petroleum);
+  outline-offset: 1px;
+}
+
 .glossary-term--open > .glossary-term__tooltip {
   display: block;
 }
 
-/* Tooltip with an embedded explainer video — wider so the 16:9 frame is legible */
+/* Tooltip with an embedded explainer video — wider so the 16:9 frame is legible.
+   Anchored below the term: the video makes it tall, and the glossary terms sit
+   near the top of the body text where there isn't room to open upward. */
 .glossary-term__tooltip--video {
   width: 360px;
+  bottom: auto;
+  top: calc(100% + 8px);
 }
 
 .glossary-video {
@@ -128,7 +164,15 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Shown when the mock "video" is activated */
+/* Definition text under the video — keep it clearly separated and readable.
+   A <span> (block via CSS) because the tooltip itself is an inline <span>,
+   which cannot legally contain block elements like <p>. */
+.glossary-video__text {
+  display: block;
+}
+
+/* Mock "playing" note — appears under the poster when play is clicked.
+   The poster stays in place; this just signals it's a mock. */
 .glossary-video__note {
   display: none;
   margin: 0 0 12px;
@@ -142,10 +186,6 @@
 
 .glossary-video__note i {
   margin-right: 6px;
-}
-
-.glossary-term--video-played .glossary-video {
-  display: none;
 }
 
 .glossary-term--video-played .glossary-video__note {
